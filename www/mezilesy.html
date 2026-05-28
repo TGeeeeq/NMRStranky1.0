@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Spolu Mezi Lesy · 12–14. 6. 2026</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,600;1,9..144,300;1,9..144,400&family=Caveat:wght@400;600;700&family=DM+Sans:ital,wght@0,300;0,400;1,300&display=swap" rel="stylesheet">
+  <style>
+    /* ── TOKENS ────────────────────────────────── */
+    :root {
+      --cream:   #e9dfc9;
+      --cream2:  #d9cebc;
+      --green:   #3b4a2c;
+      --green2:  #4f6235;
+      --gold:    #8b6914;
+      --gold2:   #b38a22;
+      --sand:    #c9b98a;
+      --white:   #f5f0e8;
+      --ink:     #2a3318;
+      --ff-display: 'Fraunces', Georgia, serif;
+      --ff-hand:    'Caveat', cursive;
+      --ff-body:    'DM Sans', sans-serif;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      background-color: var(--cream);
+      background-image:
+        radial-gradient(ellipse at 20% 10%,  rgba(180,160,110,.18) 0%, transparent 60%),
+        radial-gradient(ellipse at 80% 30%,  rgba(100,120,60,.12)  0%, transparent 55%),
+        radial-gradient(ellipse at 50% 70%,  rgba(180,160,110,.15) 0%, transparent 65%),
+        radial-gradient(ellipse at 10% 90%,  rgba(80,100,50,.10)   0%, transparent 50%),
+        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='400'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.65' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='400' height='400' filter='url(%23n)' opacity='.04'/%3E%3C/svg%3E");
+      color: var(--ink);
+      font-family: var(--ff-body);
+      font-size: 16px;
+      line-height: 1.65;
+      overflow-x: hidden;
+    }
+
+    /* ── HERO ───────────────────────────────────── */
+    .hero {
+      min-height: 100svh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 60px 24px 80px;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::before, .hero::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      width: 220px;
+      height: 260px;
+      background: var(--green);
+      clip-path: polygon(50% 0%, 15% 55%, 30% 55%, 10% 80%, 25% 80%, 5% 100%, 95% 100%, 75% 80%, 90% 80%, 70% 55%, 85% 55%);
+      opacity: .18;
+    }
+    .hero::before { left: -60px; transform: scale(1.4) rotate(-5deg); }
+    .hero::after  { right: -60px; transform: scale(1.4) rotate(5deg); }
+
+    .hero-tagline {
+      font-family: var(--ff-hand);
+      font-size: clamp(1rem, 3vw, 1.25rem);
+      color: var(--gold);
+      letter-spacing: .12em;
+      margin-bottom: 32px;
+      opacity: 0;
+      animation: fadeUp .8s .2s forwards;
+    }
+
+    /* === 3D LOGO PLACEHOLDER (for logo_original.png) === */
+    .logo-wrapper {
+      width: min(280px, 75vw);
+      margin: 0 auto 32px;
+      opacity: 0;
+      animation: fadeUp .9s .4s forwards;
+      perspective: 800px;
+    }
+    
+    /* This class applies the 3D hover effect to the image */
+    .logo-3d {
+      display: block;
+      width: 100%;
+      height: auto;
+      border-radius: 24px;
+      background: var(--green); /* Fallback background while loading */
+      box-shadow: 
+        0 20px 30px -10px rgba(0, 0, 0, 0.35),
+        0 6px 0 0 var(--gold),
+        inset 0 1px 4px rgba(255, 255, 255, 0.1);
+      border: 1px solid var(--gold2);
+      transition: transform 0.3s cubic-bezier(0.23, 1, 0.32, 1), box-shadow 0.3s ease;
+      transform: rotateX(2deg) rotateY(-1deg) translateZ(0);
+      will-change: transform;
+    }
+
+    /* 3D hover effect */
+    .logo-wrapper:hover .logo-3d {
+      transform: rotateX(6deg) rotateY(5deg) translateY(-8px) scale(1.01);
+      box-shadow: 
+        0 35px 45px -15px rgba(0, 0, 0, 0.4),
+        0 8px 0 0 var(--gold2),
+        inset 0 1px 6px rgba(255, 255, 255, 0.15);
+    }
+
+    /* Subtle glow on hover */
+    .logo-wrapper:hover .logo-3d {
+      filter: drop-shadow(0 0 8px rgba(139, 105, 20, 0.2));
+    }
+    /* === end logo placeholder === */
+
+    .hero-date {
+      font-family: var(--ff-hand);
+      font-size: clamp(2.4rem, 8vw, 4rem);
+      color: var(--gold2);
+      line-height: 1.1;
+      opacity: 0;
+      animation: fadeUp .8s .6s forwards;
+    }
+    .hero-date span {
+      display: block;
+      font-family: var(--ff-hand);
+      font-size: clamp(1rem, 3.5vw, 1.5rem);
+      color: var(--green2);
+      letter-spacing: .2em;
+      margin-top: 4px;
+    }
+    .hero-sub {
+      margin-top: 24px;
+      font-family: var(--ff-display);
+      font-style: italic;
+      font-size: clamp(.9rem, 2.5vw, 1.1rem);
+      color: var(--green);
+      max-width: 360px;
+      opacity: 0;
+      animation: fadeUp .8s .8s forwards;
+    }
+    .hero-cta {
+      margin-top: 40px;
+      opacity: 0;
+      animation: fadeUp .8s 1s forwards;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 14px;
+    }
+    .btn {
+      display: inline-block;
+      background: var(--green);
+      color: var(--cream);
+      font-family: var(--ff-hand);
+      font-size: 1.2rem;
+      letter-spacing: .08em;
+      padding: 14px 36px;
+      border-radius: 100px;
+      text-decoration: none;
+      border: 2px solid transparent;
+      transition: background .25s, color .25s, border-color .25s, transform .2s;
+    }
+    .btn:hover {
+      background: transparent;
+      color: var(--green);
+      border-color: var(--green);
+      transform: translateY(-2px);
+    }
+    .btn-fb {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: var(--cream2);
+      color: var(--green);
+      font-family: var(--ff-hand);
+      font-size: 1.2rem;
+      letter-spacing: .08em;
+      padding: 14px 28px;
+      border-radius: 100px;
+      text-decoration: none;
+      border: 2px solid var(--green);
+      transition: background .25s, color .25s, border-color .25s, transform .2s, box-shadow .25s;
+    }
+    .btn-fb:hover {
+      background: var(--green);
+      color: var(--cream);
+      transform: translateY(-2px);
+      box-shadow: 0 10px 24px -10px rgba(60,75,40,.4);
+    }
+    .btn-fb svg { width: 18px; height: 18px; flex-shrink: 0; }
+    .scroll-hint {
+      position: absolute;
+      bottom: 28px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+      opacity: 0;
+      animation: fadeIn 1s 1.4s forwards;
+    }
+    .scroll-hint span {
+      font-family: var(--ff-hand);
+      font-size: .85rem;
+      color: var(--gold);
+      letter-spacing: .1em;
+    }
+    .scroll-arrow {
+      width: 20px; height: 20px;
+      border-right: 2px solid var(--gold);
+      border-bottom: 2px solid var(--gold);
+      transform: rotate(45deg);
+      animation: bounce 1.6s ease-in-out infinite;
+    }
+
+    /* ── SHARED SECTIONS ───────────────────────── */
+    section {
+      padding: 80px 24px;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+    .section-label {
+      font-family: var(--ff-hand);
+      font-size: 1rem;
+      color: var(--gold2);
+      letter-spacing: .25em;
+      text-transform: uppercase;
+      margin-bottom: 12px;
+    }
+    h2 {
+      font-family: var(--ff-display);
+      font-size: clamp(2rem, 5vw, 3rem);
+      font-weight: 300;
+      color: var(--green);
+      line-height: 1.15;
+      margin-bottom: 32px;
+    }
+    h2 em { font-style: italic; color: var(--gold); }
+
+    .about {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 48px 64px;
+      align-items: start;
+    }
+    @media (max-width: 640px) { .about { grid-template-columns: 1fr; } }
+    .about-text p { color: var(--ink); margin-bottom: 16px; font-size: .975rem; }
+    .about-cards { display: flex; flex-direction: column; gap: 20px; }
+    .card {
+      background: var(--green); color: var(--cream);
+      border-radius: 20px; padding: 24px 28px;
+      position: relative; overflow: hidden;
+    }
+    .card::before {
+      content: ''; position: absolute; top: -30px; right: -30px;
+      width: 100px; height: 100px; border-radius: 50%;
+      background: rgba(255,255,255,.04);
+    }
+    .card-icon { font-size: 1.6rem; margin-bottom: 8px; }
+    .card h3 {
+      font-family: var(--ff-hand); font-size: 1.2rem;
+      color: var(--gold2); margin-bottom: 6px; font-weight: 600;
+    }
+    .card p { font-size: .875rem; color: rgba(233,223,201,.85); line-height: 1.55; }
+
+    .divider {
+      width: 100%; height: 2px;
+      background: linear-gradient(to right, transparent, var(--sand), transparent);
+      margin: 0 auto; max-width: 900px;
+    }
+
+    .program-wrap {
+      background: var(--green); padding: 80px 24px;
+      position: relative; overflow: hidden;
+    }
+    .program-wrap::before {
+      content: 'PROGRAM'; position: absolute; top: 30px; left: 50%;
+      transform: translateX(-50%); font-family: var(--ff-hand);
+      font-size: clamp(3rem, 10vw, 6rem); color: rgba(255,255,255,.04);
+      letter-spacing: .3em; white-space: nowrap; pointer-events: none;
+    }
+    .program-inner { max-width: 900px; margin: 0 auto; }
+    .program-inner h2 { color: var(--cream); }
+    .program-inner h2 em { color: var(--gold2); }
+    .program-inner .section-label { color: var(--sand); }
+    .days-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+    @media (max-width: 720px) { .days-grid { grid-template-columns: 1fr; } }
+    .day-card {
+      background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.1);
+      border-radius: 20px; padding: 28px 24px; backdrop-filter: blur(4px);
+    }
+    .day-name { font-family: var(--ff-hand); font-size: 1.4rem; color: var(--gold2); margin-bottom: 4px; }
+    .day-date {
+      font-family: var(--ff-body); font-size: .78rem; color: var(--sand);
+      letter-spacing: .12em; text-transform: uppercase; margin-bottom: 20px;
+      padding-bottom: 16px; border-bottom: 1px solid rgba(255,255,255,.08);
+    }
+    .event-list { list-style: none; }
+    .event-list li {
+      display: flex; gap: 12px; margin-bottom: 12px; font-size: .875rem;
+      color: rgba(233,223,201,.9); line-height: 1.4;
+    }
+    .event-list li .time { flex-shrink: 0; font-family: var(--ff-hand); font-size: 1rem; color: var(--gold2); width: 42px; }
+    .event-list li.separator { border-top: 1px dashed rgba(255,255,255,.08); margin: 8px 0; padding-top: 8px; }
+    .program-note {
+      margin-top: 32px; background: rgba(255,255,255,.05);
+      border-left: 3px solid var(--gold); border-radius: 0 12px 12px 0;
+      padding: 16px 20px; font-size: .875rem; color: rgba(233,223,201,.8); font-style: italic;
+    }
+    .food-section { text-align: center; }
+    .food-grid { display: flex; flex-wrap: wrap; justify-content: center; gap: 16px; margin-top: 32px; }
+    .food-tag {
+      background: var(--cream2); border: 1px solid var(--sand); border-radius: 100px;
+      padding: 10px 22px; font-family: var(--ff-hand); font-size: 1.1rem;
+      color: var(--green); display: flex; align-items: center; gap: 8px;
+    }
+    .price-band {
+      background: linear-gradient(135deg, var(--green) 0%, #2a3d1e 100%);
+      padding: 72px 24px; text-align: center; position: relative; overflow: hidden;
+    }
+    .price-band::before, .price-band::after {
+      content: '✦'; position: absolute; font-size: 8rem; color: rgba(255,255,255,.03);
+      top: 50%; transform: translateY(-50%);
+    }
+    .price-band::before { left: -20px; } .price-band::after { right: -20px; }
+    .price-inner { max-width: 600px; margin: 0 auto; position: relative; }
+    .price-label { font-family: var(--ff-hand); font-size: 1rem; color: var(--sand); letter-spacing: .2em; text-transform: uppercase; margin-bottom: 16px; }
+    .price-amount { font-family: var(--ff-display); font-size: clamp(4rem, 12vw, 7rem); font-weight: 300; color: var(--gold2); line-height: 1; }
+    .price-amount sup { font-size: .4em; vertical-align: super; opacity: .7; }
+    .price-desc { margin-top: 20px; color: rgba(233,223,201,.75); font-size: .9rem; line-height: 1.7; }
+    .price-badge {
+      display: inline-block; margin-top: 24px; background: rgba(255,255,255,.08);
+      border: 1px solid rgba(255,255,255,.15); border-radius: 100px;
+      padding: 10px 24px; font-family: var(--ff-hand); font-size: 1rem; color: var(--cream);
+    }
+    .contact-section { text-align: center; padding-bottom: 100px; }
+    .contact-section h2 { margin-bottom: 8px; }
+    .contact-sub { color: var(--green2); font-style: italic; font-family: var(--ff-display); font-size: 1.05rem; margin-bottom: 40px; }
+    .contact-cards { display: flex; flex-wrap: wrap; justify-content: center; gap: 20px; margin-bottom: 40px; }
+    .contact-card {
+      background: var(--cream2); border: 1px solid var(--sand); border-radius: 16px;
+      padding: 24px 32px; min-width: 220px; transition: transform .2s, box-shadow .2s;
+    }
+    .contact-card:hover { transform: translateY(-4px); box-shadow: 0 12px 32px rgba(60,75,40,.12); }
+    .contact-card .c-icon { font-size: 1.8rem; margin-bottom: 8px; }
+    .contact-card .c-label { font-family: var(--ff-hand); font-size: .9rem; color: var(--gold); letter-spacing: .1em; text-transform: uppercase; margin-bottom: 6px; }
+    .contact-card a, .contact-card span { font-size: .95rem; color: var(--green); text-decoration: none; font-family: var(--ff-body); }
+    .contact-card a:hover { text-decoration: underline; }
+    .love-note { font-family: var(--ff-display); font-style: italic; font-size: clamp(1rem, 3vw, 1.3rem); color: var(--green2); max-width: 480px; margin: 0 auto 32px; line-height: 1.7; }
+    footer {
+      background: var(--ink); padding: 40px 24px; text-align: center;
+      display: flex; flex-direction: column; align-items: center; gap: 12px;
+    }
+    footer img { width: 80px; opacity: .85; filter: brightness(1.1); }
+    footer p { font-family: var(--ff-body); font-size: .8rem; color: rgba(233,223,201,.45); letter-spacing: .05em; }
+    footer a { color: var(--gold); text-decoration: none; }
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 16px 32px; background: rgba(233,223,201,.0);
+      backdrop-filter: blur(0px); transition: background .3s, backdrop-filter .3s;
+    }
+    nav.scrolled { background: rgba(233,223,201,.92); backdrop-filter: blur(12px); box-shadow: 0 2px 20px rgba(60,75,40,.08); }
+    .nav-logo { font-family: var(--ff-hand); font-size: 1.1rem; color: var(--green); text-decoration: none; letter-spacing: .05em; }
+    .nav-links { display: flex; gap: 28px; list-style: none; }
+    .nav-links a { font-family: var(--ff-hand); font-size: 1rem; color: var(--green); text-decoration: none; letter-spacing: .05em; transition: color .2s; }
+    .nav-links a:hover { color: var(--gold); }
+    @media (max-width: 540px) { .nav-links { display: none; } }
+    .reveal { opacity: 0; transform: translateY(32px); transition: opacity .7s ease, transform .7s ease; }
+    .reveal.visible { opacity: 1; transform: none; }
+    .blob-divider { width: 100%; overflow: hidden; line-height: 0; }
+    .blob-divider svg { display: block; width: 100%; }
+    .footer-logo { width: 100px; opacity: .9; }
+
+    @keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: none; } }
+    @keyframes fadeIn { to { opacity: .6; } }
+    @keyframes bounce { 0%,100%{ transform: rotate(45deg) translateY(0); } 50%{ transform: rotate(45deg) translateY(6px); } }
+  </style>
+</head>
+<body>
+
+<nav id="main-nav">
+  <a href="#" class="nav-logo">✦ Spolu Mezi Lesy</a>
+  <ul class="nav-links">
+    <li><a href="#o-akci">O akci</a></li>
+    <li><a href="#program">Program</a></li>
+    <li><a href="#cena">Cena</a></li>
+    <li><a href="#kontakt">Kontakt</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<header class="hero">
+  <p class="hero-tagline">zážitkový víkend na Louce &nbsp;✦&nbsp; nech mě růst z.s.</p>
+
+  <!-- 3D Logo Placeholder: Insert your 'logo_original.png' here -->
+  <div class="logo-wrapper">
+    <img src="assets/logo_original.png" alt="Spolu Mezi Lesy Logo" class="logo-3d">
+  </div>
+
+  <div class="hero-date">
+    12 – 14. 6.
+    <span>2026</span>
+  </div>
+  <p class="hero-sub">Víkend na pomezí retreatu a festivalu · Louka Nech Mě Růst</p>
+  <div class="hero-cta">
+    <a href="#kontakt" class="btn">Mám zájem ✦</a>
+    <a href="https://fb.me/e/3Eqy9wHLN" target="_blank" rel="noopener" class="btn-fb" aria-label="Facebook událost Spolu Mezi Lesy">
+      <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.99 22 12z"/></svg>
+      Facebook událost
+    </a>
+  </div>
+  <div class="scroll-hint">
+    <span>zjistit více</span>
+    <div class="scroll-arrow"></div>
+  </div>
+</header>
+
+<!-- Rest of the HTML remains exactly the same as the original structure -->
+<div class="blob-divider">
+  <svg viewBox="0 0 1200 80" preserveAspectRatio="none">
+    <path d="M0,40 C200,80 400,0 600,40 C800,80 1000,10 1200,40 L1200,80 L0,80 Z" fill="#e9dfc9"/>
+  </svg>
+</div>
+
+<section id="o-akci">
+  <div class="reveal"><p class="section-label">✦ co je Spolu Mezi Lesy?</p><h2>Louka plná <em>zvířat,</em><br>hudby a propojení</h2></div>
+  <div class="about reveal">
+    <div class="about-text">
+      <p>Mezi lesy se nachází louka plná zvířat — a mezi lesy roste azyl <strong>Nech Mě Růst</strong>. Spolu Mezi Lesy je název naší jedinečné akce na Louce, která vznikla na podporu tohoto zvířecího azylu v srdci České republiky.</p>
+      <p>Přijeď na třídenní pobyt, kde se prolíná příroda, zvířata, intuitivní umění, pohyb a živá hudba. Budeš mít šanci poznat jedinečné místo i jeho obyvatele — včetně těch zvířecích.</p>
+      <p>Program je dobrovolný. Pokud se ti něco nebude zamlouvat, můžeš místo toho mazlit zvířátka, ležet v trávě nebo lézt po stromech.</p>
+      <p style="font-family:var(--ff-display);font-style:italic;color:var(--green2);margin-top:24px;">Ze srdcí dvou Kateřin a dalších bytostí, které mají Louku v lásce</p>
+    </div>
+    <div class="about-cards">
+      <div class="card"><div class="card-icon">🌿</div><h3>Retreat & festival</h3><p>Víkend na pomezí klidného retreatu a živého festivalu — v přírodě, se zvířaty, s lidmi.</p></div>
+      <div class="card"><div class="card-icon">🐮</div><h3>Zvířata & azyl</h3><p>Výdělek z akce jde z velké části na rozvoj azylu Nech Mě Růst. Tvoje účast pomáhá.</p></div>
+      <div class="card"><div class="card-icon">🏕️</div><h3>Stany & komorní atmosféra</h3><p>Kapacita je záměrně omezená, aby se tu každý cítil komfortně a měl svůj prostor.</p></div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<div class="program-wrap" id="program">
+  <div class="program-inner">
+    <div class="reveal"><p class="section-label">✦ co tě čeká</p><h2>Tři dny <em>na Louce</em></h2></div>
+    <div class="days-grid reveal">
+      <div class="day-card"><div class="day-name">Pátek</div><div class="day-date">12. června 2026</div><ul class="event-list"><li><span class="time">16–18</span><span>Příjezd, zabydlení stanů</span></li><li><span class="time">18:30</span><span>Společný kruh u ohně</span></li><li><span class="time">20:30</span><span>Mari písně &amp; společný jam u ohně</span></li></ul></div>
+      <div class="day-card"><div class="day-name">Sobota</div><div class="day-date">13. června 2026</div><ul class="event-list"><li><span class="time">8:00</span><span>Pohybová meditace s&nbsp;Inkou</span></li><li><span class="time">9:00</span><span>Jóga s&nbsp;Kateřinou</span></li><li><span class="time">11:00</span><span>Brunch</span></li><li class="separator"></li><li><span class="time">12:30</span><span>Inka &amp; Rézie: autorské čtení a pění</span></li><li><span class="time">14:00</span><span>Louka.dění s&nbsp;Tomášem</span></li><li><span class="time">16:00</span><span>Kakao &amp; společné tvoření – nech se překvapit!</span></li><li class="separator"></li><li><span class="time">18:00</span><span>Večeře</span></li><li><span class="time">19:30</span><span>Muzikoterapie s&nbsp;Rézií</span></li><li><span class="time">20:30</span><span>Společný jam u ohně</span></li></ul></div>
+      <div class="day-card"><div class="day-name">Neděle</div><div class="day-date">14. června 2026</div><ul class="event-list"><li><span class="time">9:00</span><span>Meditace s&nbsp;Inkou</span></li><li><span class="time">10:00</span><span>Jóga s&nbsp;Kateřinou</span></li><li><span class="time">11:30</span><span>Brunch</span></li><li><span class="time">12:30</span><span>Čajování s&nbsp;Jelenou</span></li><li><span class="time">15:00</span><span>Tvoření s&nbsp;Mari</span></li><li class="separator"></li><li><span class="time"></span><span style="color:rgba(233,223,201,.6);font-style:italic;">spontánní dění…</span></li><li><span class="time">18:00</span><span>Odjezd</span></li></ul></div>
+    </div>
+    <div class="program-note reveal">Program je orientační a může se změnit, protože louka má svoje kouzlo přítomnosti a jejího louka.dění!</div>
+  </div>
+</div>
+
+<div class="blob-divider" style="background:var(--green);">
+  <svg viewBox="0 0 1200 80" preserveAspectRatio="none"><path d="M0,40 C300,0 600,80 900,30 C1050,10 1150,50 1200,40 L1200,80 L0,80 Z" fill="#e9dfc9"/></svg>
+</div>
+
+<section class="food-section" id="jidlo">
+  <div class="reveal"><p class="section-label" style="text-align:center;">✦ pohostíme tě</p><h2>Co tě na <em>Louce</em> čeká</h2><p style="max-width:520px;margin:0 auto;color:var(--green2);font-size:.95rem;">Mezi Lesy tě pohostíme vydatným brunchem v sobotu i v neděli dopoledne, v sobotu připravíme i večeři — plus nějaký snack či ovoce přes den.</p>
+  <div class="food-grid"><span class="food-tag">Sobotní brunch</span><span class="food-tag">Sobotní večeře</span><span class="food-tag">Nedělní brunch</span><span class="food-tag">Snacky přes den</span><span class="food-tag">Čajování s&nbsp;Jelenou</span></div></div>
+</section>
+
+<div class="price-band" id="cena">
+  <div class="price-inner reveal"><p class="price-label">✦ výměna energie</p><div class="price-amount">2 470<sup>Kč</sup></div><p class="price-desc">Cena zahrnuje třídenní pobyt na Louce, sobotní brunch, večeři a nedělní brunch.<br>Výdělek z akce jde z velké části na rozvoj azylu Nech Mě Růst.</p><div class="price-badge">Kapacita je omezená — přihlásit se vyplatí brzy</div></div>
+</div>
+
+<section id="kontakt" class="contact-section">
+  <div class="reveal"><p class="section-label" style="text-align:center;">✦ těšíme se na tebe</p><h2>Sejdeme se<br><em>Mezi Lesy</em></h2><p class="contact-sub">12.–14. 6. 2026 · Louka Nech Mě Růst</p></div>
+  <div class="contact-cards reveal">
+    <div class="contact-card"><div class="c-icon">✉️</div><div class="c-label">Přihlášky &amp; dotazy</div><a href="mailto:kvalesova64@gmail.com">kvalesova64@gmail.com</a></div>
+    <div class="contact-card"><div class="c-icon">📸</div><div class="c-label">Instagram</div><span><a href="https://instagram.com/kater.inkae" target="_blank">@kater.inkae</a><br><a href="https://instagram.com/kat_luna__" target="_blank">@kat_luna__</a></span></div>
+    <div class="contact-card"><div class="c-icon">🌿</div><div class="c-label">Azyl</div><a href="https://nechmerust.org" target="_blank">nechmerust.org</a><br><a href="https://instagram.com/nech_me_rust" target="_blank">@nech_me_rust</a></div>
+  </div>
+  <p class="love-note reveal">„Těšíme se na nová setkání, přátelství a propojení Životů."<br>S láskou Kateřina &amp; Kateřina</p>
+  <div class="reveal"><a href="mailto:kvalesova64@gmail.com" class="btn">Napsat nám ✦</a></div>
+</section>
+
+<footer>
+  <img src="assets/logo.png" alt="Nech mě růst logo" class="footer-logo" onerror="this.style.display='none'">
+  <p style="font-family:var(--ff-hand);font-size:1.1rem;color:var(--gold);opacity:.9;">nech mě růst z.s.</p>
+  <p>Spolu Mezi Lesy · 12.–14. 6. 2026</p>
+  <p><a href="https://nechmerust.org">nechmerust.org</a></p>
+</footer>
+
+<script>
+  const nav = document.getElementById('main-nav');
+  window.addEventListener('scroll', () => nav.classList.toggle('scrolled', window.scrollY > 60));
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if(e.isIntersecting){ e.target.classList.add('visible'); observer.unobserve(e.target); } });
+  }, { threshold: 0.12 });
+  reveals.forEach(el => observer.observe(el));
+  document.querySelectorAll('.days-grid.reveal, .about.reveal, .contact-cards.reveal').forEach(grid => {
+    [...grid.children].forEach((child, i) => { child.style.transitionDelay = `${i*0.12}s`; child.classList.add('reveal'); observer.observe(child); });
+  });
+</script>
+</body>
+</html>

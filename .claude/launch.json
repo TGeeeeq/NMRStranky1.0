@@ -1,0 +1,17 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "udalosti-static",
+      "runtimeExecutable": "python3",
+      "runtimeArgs": ["-m", "http.server", "8765", "--directory", "www"],
+      "port": 8765
+    },
+    {
+      "name": "nechmerust-php",
+      "runtimeExecutable": "python3",
+      "runtimeArgs": ["dev_server.py"],
+      "port": 8767
+    }
+  ]
+}

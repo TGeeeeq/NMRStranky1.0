@@ -1,0 +1,32 @@
+# --- Secrets (NEVER commit) ---
+.env.deploy
+.env
+.env.local
+.env.*.local
+www/.env
+www/.env.local
+www/.env.*.local
+
+# PHP deps (installed on server only)
+vendor/
+www/vendor/
+
+# Node (dead Next.js scaffolding — not built here)
+node_modules/
+
+# Python build cache
+__pycache__/
+*.pyc
+
+# IDE / OS
+.idea/
+.vscode/
+*.swp
+.DS_Store
+Thumbs.db
+
+# Logs & uploads
+logs/
+*.log
+uploads/
+www/uploads/

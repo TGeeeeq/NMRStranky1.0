@@ -1,0 +1,154 @@
+<?php
+$page_title = 'Putování se zvířaty';
+$page_slug = 'putovani-se-zviraty';
+$active = 'putovani-se-zviraty';
+$page_description = 'Dvoudenní putování středočeskou krajinou v doprovodu psů, osla, muflona a dalších zvířecích přátel.';
+$og_image = '/assets/hero-image.webp';
+require __DIR__ . '/partials/head.php';
+?>
+
+<?php require __DIR__ . '/partials/navbar.php'; ?>
+
+<main id="main-content">
+<!-- Hero Section -->
+    <section class="page-hero">
+        <div class="hero-content">
+            <h1 class="page-title" data-cs="Putování se zvířaty" data-en="Journey with Animals">Putování se zvířaty</h1>
+            <p class="page-description" data-cs="Třídenní dobrodružství, které vám poskytne prostor pro sdílení a plynutí života." data-en="A three-day adventure that provides space for sharing and the flow of life.">Třídenní dobrodružství, které vám poskytne prostor pro sdílení a plynutí života.</p>
+        </div>
+        <div class="hero-image">
+            <img src="assets/hero-image.webp" alt="Putování se zvířaty" class="hero-bg">
+        </div>
+    </section>
+
+    <!-- Journey Details -->
+    <section class="journey-details">
+        <div class="container">
+            <div class="journey-grid">
+                <div class="journey-content">
+                    <h2 data-cs="O čem putování je?" data-en="What is the journey about?">O čem putování je?</h2>
+                    <p data-cs="Ahoj přátelé, na Toulkách se zvířaty se vydáme na dvoudenní putování středočeskou krajinou kolem naší Louky. Na Toulky se k nám přidají psi, osel, muflon a možná i nějaká ovčí banda? 😂" data-en="Hello friends, on our Wanderings with Animals, we will set out on a two-day journey through the Central Bohemian landscape around our Meadow. Dogs, a donkey, a mouflon, and maybe even a sheep gang will join us? 😂">Ahoj přátelé, na Toulkách se zvířaty se vydáme na dvoudenní putování středočeskou krajinou kolem naší Louky. Na Toulky se k nám přidají psi, osel, muflon a možná i nějaká ovčí banda? 😂</p>
+                    <p data-cs="Tohle krásné dobrodružství nám poskytne nádherný čas a prostor pro sdílení a plynutí života. Půjdeme na lehko a spát budeme pod širým nebem ve společnosti našich zvířecích spoluputovníků :)" data-en="This beautiful adventure will provide us with wonderful time and space for sharing and the flow of life. We will travel light and sleep under the open sky in the company of our animal fellow travelers :)">Tohle krásné dobrodružství nám poskytne nádherný čas a prostor pro sdílení a plynutí života. Půjdeme na lehko a spát budeme pod širým nebem ve společnosti našich zvířecích spoluputovníků :)</p>
+                    <p data-cs="Večer bude zajištěna večeře na ohni s hudebním doprovodem:) Ráno možnost rozcvičky v duchu kung-fu. No nezní to opravdu báječně?" data-en="In the evening, dinner by the fire with musical accompaniment will be provided :) In the morning, there is the possibility of a warm-up in the spirit of kung-fu. Doesn't that sound truly wonderful?">Večer bude zajištěna večeře na ohni s hudebním doprovodem:) Ráno možnost rozcvičky v duchu kung-fu. No nezní to opravdu báječně?</p>
+                    <p data-cs="Pokud tě to zaujalo, budeme se na tebe těšit 24. na Louce při zahajovacím kruhu seznámení, večeře jasná :) Po zahájení přespíme na Louce a následující den brzy vyrazíme na cestu. Naši pouť zakončíme v neděli k večeru. Dáme si na rozloučenou něco dobrého, uděláme si kruh sdílení a rozloučíme se." data-en="If you are interested, we look forward to seeing you on the 24th at the Meadow during the opening circle of introductions, dinner is a given :) After the opening, we will sleep at the Meadow and set off early the next day. We will end our pilgrimage on Sunday evening. We'll have something good for a farewell, have a sharing circle, and say goodbye.">Pokud tě to zaujalo, budeme se na tebe těšit 24. na Louce při zahajovacím kruhu seznámení, večeře jasná :) Po zahájení přespíme na Louce a následující den brzy vyrazíme na cestu. Naši pouť zakončíme v neděli k večeru. Dáme si na rozloučenou něco dobrého, uděláme si kruh sdílení a rozloučíme se.</p>
+                </div>
+                
+                <div class="journey-info-card">
+                    <div class="info-item">
+                        <i class="fas fa-calendar-alt"></i>
+                        <div class="info-text">
+                            <h4 data-cs="Kdy" data-en="When">Kdy</h4>
+                            <p data-cs="24. - 26. dubna" data-en="April 24th - 26th">24. - 26. dubna</p>
+                        </div>
+                    </div>
+                    <div class="info-item">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <div class="info-text">
+                            <h4 data-cs="Kde" data-en="Where">Kde</h4>
+                            <p data-cs="Nová Ves u Leštiny 32, Středočeský kraj" data-en="Nová Ves u Leštiny 32, Central Bohemia">Nová Ves u Leštiny 32, Středočeský kraj</p>
+                        </div>
+                    </div>
+                    <div class="info-item">
+                        <i class="fas fa-hiking"></i>
+                        <div class="info-text">
+                            <h4 data-cs="Náročnost" data-en="Difficulty">Náročnost</h4>
+                            <p data-cs="Střední, jdeme na lehko" data-en="Moderate, traveling light">Střední, jdeme na lehko</p>
+                        </div>
+                    </div>
+                    <div class="info-item">
+                        <i class="fas fa-bed"></i>
+                        <div class="info-text">
+                            <h4 data-cs="Ubytování" data-en="Accommodation">Ubytování</h4>
+                            <p data-cs="Pod širým nebem" data-en="Under the open sky">Pod širým nebem</p>
+                        </div>
+                    </div>
+                    
+                    <div class="price-box">
+                        <span class="price-tag" data-cs="1 800 Kč" data-en="1 800 CZK">1 800 Kč</span>
+                        <p class="price-note" data-cs="Doporučený příspěvek." data-en="Recommended contribution.">Doporučený příspěvek.</p>
+                    </div>
+                    
+                    <button class="adopt-btn" style="width: 100%; margin-top: 20px; border: none; cursor: pointer; font-size: 1.1rem;" onclick="openModal()" data-cs="Registrovat se" data-en="Register Now">Registrovat se</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gallery -->
+    <section class="journey-gallery">
+        <div class="container">
+            <h2 class="section-title" data-cs="Fotky z našich cest" data-en="Photos from our trips">Fotky z našich cest</h2>
+            <div class="gallery-grid">
+                <div class="gallery-item"><img src="assets/toulky1.webp" alt="Putování 1"></div>
+                <div class="gallery-item"><img src="assets/toulky4.webp" alt="Putování 2"></div>
+                <div class="gallery-item"><img src="assets/toulky3.webp" alt="Putování 3"></div>
+            </div>
+        </div>
+    </section>
+
+<!-- Social Media -->
+    <section class="social-section">
+        <div class="container">
+            <h2 class="section-title" data-cs="Sledujte nás" data-en="Follow Us">Sledujte nás</h2>
+            <div class="social-media large">
+                <a href="https://www.instagram.com/nech_me_rust" class="social-link">
+                    <i class="fab fa-instagram"></i>
+                    <span>Instagram</span>
+                </a>
+                <a href="https://www.facebook.com/share/1BDFbAxfFf/" class="social-link">
+                    <i class="fab fa-facebook"></i>
+                    <span>Facebook</span>
+                </a>
+
+                <a href="mailto:info@nechmerust.org" class="social-link">
+                    <i class="fas fa-envelope"></i>
+                    <span>Email</span>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Payment Modal -->
+    <div id="paymentModal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal" onclick="closeModal()">&times;</span>
+            <h2 style="color: var(--primary-color); margin-bottom: 15px;" data-cs="Registrace a platba" data-en="Registration & Payment">Registrace a platba</h2>
+            <p data-cs="Pro dokončení registrace je potřeba uhradit zálohu 500kč předem na náš transparentní účet." data-en="To complete your registration, a deposit 500kč must be paid in advance to our transparent account.">Pro dokončení registrace je potřeba uhradit zálohu předem na náš transparentní účet.</p>
+            
+            <div class="qr-code">
+                <!-- QR platba pro zálohu 500 Kč (příklad) -->
+                <img src="assets/qr-toulky.webp" alt="QR Kód pro platbu zálohy">
+            </div>
+            
+            <div class="payment-info">
+                <p><strong data-cs="Důležité informace:" data-en="Important information:">Důležité informace:</strong></p>
+                <ul>
+                    <li data-cs="Záloha 500kč se platí dopředu přímo na transparentní účet. 2002645872 / 2010 | CZ49 2010 2002 6400 0000 5872 | SWIFT: FIOBCZPP" data-en="The deposit 500kč is paid in advance directly to the transparent account. 2002645872 / 2010 | CZ49 2010 2002 6400 0000 5872 | SWIFT: FIOBCZPP">Záloha 500kč se platí dopředu přímo na transparentní účet.</li>
+                    <li data-cs="Zbytek částky se platí buď na místě v hotovosti, nebo po domluvě." data-en="The rest of the amount is paid either on-site in cash or by arrangement.">Zbytek částky se platí buď na místě v hotovosti, nebo po domluvě.</li>
+                    <li data-cs="Pro individuální domluvu nás kontaktujte na info@nechmerust.org." data-en="For individual arrangements, contact us at info@nechmerust.org.">Pro individuální domluvu nás kontaktujte na info@nechmerust.org.</li>
+                </ul>
+            </div>
+            
+            <button class="adopt-btn" style="margin-top: 25px; border: none; cursor: pointer;" onclick="closeModal()" data-cs="Rozumím" data-en="I understand">Rozumím</button>
+        </div>
+    </div>
+
+    <script>
+        function openModal() {
+            document.getElementById('paymentModal').classList.add('show');
+            document.body.style.overflow = 'hidden';
+        }
+        function closeModal() {
+            document.getElementById('paymentModal').classList.remove('show');
+            document.body.style.overflow = 'auto';
+        }
+        window.onclick = function(event) {
+            const modal = document.getElementById('paymentModal');
+            if (event.target == modal) {
+                closeModal();
+            }
+        }
+    </script>
+</main>
+
+<?php require __DIR__ . '/partials/footer.php'; ?>

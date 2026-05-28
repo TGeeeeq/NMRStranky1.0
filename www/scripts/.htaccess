@@ -1,0 +1,7 @@
+# Zákaz stahování SQL/markdown/textových souborů přes web (jen serverside).
+# setup-admin.php nechtěně zveřejněn — chráněn SETUP_TOKEN v URL.
+<FilesMatch "\.(sql|md|txt|env|bak|sample)$">
+    Require all denied
+</FilesMatch>
+
+Options -Indexes

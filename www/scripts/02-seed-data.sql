@@ -1,0 +1,13 @@
+-- =====================================================================
+-- Tento soubor je ZÁMĚRNĚ PRÁZDNÝ.
+--
+-- Admin uživatel se NEVYTVÁŘÍ přes SQL (kvůli bezpečnosti), ale přes
+-- PHP skript, který vygeneruje silné heslo a uloží správný bcrypt hash:
+--
+--     https://nechmerust.org/scripts/setup-admin.php?token=<SETUP_TOKEN>
+--
+-- Postup je v INSTALL.md.
+--
+-- Produkty se přidávají přes administraci na /admin/products.php
+-- po prvním přihlášení.
+-- =====================================================================
