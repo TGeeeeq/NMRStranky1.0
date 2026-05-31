@@ -76,6 +76,12 @@
     position: sticky;
     top: 70px;
     z-index: 10;
+    transition: top 0.3s ease;
+}
+
+/* Navbar hides on scroll-down — close the gap above the sticky filter bar */
+.navbar.is-hidden ~ .filters {
+    top: 0;
 }
 
 .filters-bar {
@@ -244,10 +250,69 @@
     flex-direction: column;
 }
 
+@media (min-width: 501px) and (max-width: 768px) {
+    .filters {
+        padding: 0.75rem 0;
+    }
+
+    .filters-bar {
+        gap: 1rem;
+    }
+
+    .category-filters {
+        gap: 0.5rem;
+    }
+
+    .filter-btn {
+        padding: 0.35rem 0.7rem;
+        font-size: 0.85rem;
+    }
+
+    .search-box {
+        min-width: 180px;
+    }
+
+    .search-box input {
+        padding: 0.6rem 1rem 0.6rem 2.4rem;
+        font-size: 0.95rem;
+    }
+}
+
 @media (max-width: 500px) {
     .cart-sidebar {
         width: 100%;
         right: -100%;
+    }
+
+    .filters {
+        padding: 0.5rem 0;
+    }
+
+    .filters-bar {
+        gap: 0.6rem;
+    }
+
+    .category-filters {
+        gap: 0.4rem;
+    }
+
+    .filter-btn {
+        padding: 0.3rem 0.6rem;
+        font-size: 0.8rem;
+        border-radius: 12px;
+    }
+
+    .search-box {
+        min-width: 100%;
+    }
+
+    .search-box input {
+        padding: 0.5rem 0.9rem 0.5rem 2.2rem;
+        font-size: 0.9rem;
+    }
+
+    .search-box i {
+        left: 0.85rem;
     }
 }
 

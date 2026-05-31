@@ -1,4 +1,4 @@
-const CACHE_NAME = 'nech-me-rust-v5.8';
+const CACHE_NAME = 'nech-me-rust-v5.9';
 
 const CORE_FILES = [
     '/',
