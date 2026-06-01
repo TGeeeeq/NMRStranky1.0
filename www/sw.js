@@ -1,4 +1,4 @@
-const CACHE_NAME = 'nech-me-rust-v5.9';
+const CACHE_NAME = 'nech-me-rust-v6.0';
 
 const CORE_FILES = [
     '/',
@@ -36,6 +36,7 @@ const HTML_PAGES = [
 
 const ASSETS = [
     // Logos and core images
+    'favicon.ico',
     'assets/logo.png',
     'assets/logo-circle.png',
     'assets/about-hero.webp',
