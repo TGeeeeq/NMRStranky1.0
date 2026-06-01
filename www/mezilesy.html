@@ -153,6 +153,33 @@
       justify-content: center;
       gap: 14px;
     }
+    .spots-badge {
+      margin: 28px auto 0;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: rgba(179,138,34,.12);
+      border: 1.5px solid var(--gold2);
+      color: var(--gold);
+      font-family: var(--ff-hand);
+      font-size: clamp(1rem, 3vw, 1.25rem);
+      letter-spacing: .04em;
+      padding: 10px 24px;
+      border-radius: 100px;
+      opacity: 0;
+      animation: fadeUp .8s .9s forwards;
+    }
+    .spots-badge .dot {
+      width: 10px; height: 10px; border-radius: 50%;
+      background: var(--gold2); flex-shrink: 0;
+      box-shadow: 0 0 0 0 rgba(179,138,34,.6);
+      animation: spotsPulse 1.8s infinite;
+    }
+    @keyframes spotsPulse {
+      0%   { box-shadow: 0 0 0 0 rgba(179,138,34,.55); }
+      70%  { box-shadow: 0 0 0 12px rgba(179,138,34,0); }
+      100% { box-shadow: 0 0 0 0 rgba(179,138,34,0); }
+    }
     .btn {
       display: inline-block;
       background: var(--green);
@@ -410,6 +437,7 @@
     <span>2026</span>
   </div>
   <p class="hero-sub">Víkend na pomezí retreatu a festivalu · Louka Nech Mě Růst</p>
+  <div class="spots-badge"><span class="dot"></span>Zbývá posledních 5 míst</div>
   <div class="hero-cta">
     <a href="#kontakt" class="btn">Mám zájem ✦</a>
     <a href="https://fb.me/e/3Eqy9wHLN" target="_blank" rel="noopener" class="btn-fb" aria-label="Facebook událost Spolu Mezi Lesy">
@@ -453,9 +481,9 @@
   <div class="program-inner">
     <div class="reveal"><p class="section-label">✦ co tě čeká</p><h2>Tři dny <em>na Louce</em></h2></div>
     <div class="days-grid reveal">
-      <div class="day-card"><div class="day-name">Pátek</div><div class="day-date">12. června 2026</div><ul class="event-list"><li><span class="time">16–18</span><span>Příjezd, zabydlení stanů</span></li><li><span class="time">18:30</span><span>Společný kruh u ohně</span></li><li><span class="time">20:30</span><span>Mari písně &amp; společný jam u ohně</span></li></ul></div>
-      <div class="day-card"><div class="day-name">Sobota</div><div class="day-date">13. června 2026</div><ul class="event-list"><li><span class="time">8:00</span><span>Pohybová meditace s&nbsp;Inkou</span></li><li><span class="time">9:00</span><span>Jóga s&nbsp;Kateřinou</span></li><li><span class="time">11:00</span><span>Brunch</span></li><li class="separator"></li><li><span class="time">12:30</span><span>Inka &amp; Rézie: autorské čtení a pění</span></li><li><span class="time">14:00</span><span>Louka.dění s&nbsp;Tomášem</span></li><li><span class="time">16:00</span><span>Kakao &amp; společné tvoření – nech se překvapit!</span></li><li class="separator"></li><li><span class="time">18:00</span><span>Večeře</span></li><li><span class="time">19:30</span><span>Muzikoterapie s&nbsp;Rézií</span></li><li><span class="time">20:30</span><span>Společný jam u ohně</span></li></ul></div>
-      <div class="day-card"><div class="day-name">Neděle</div><div class="day-date">14. června 2026</div><ul class="event-list"><li><span class="time">9:00</span><span>Meditace s&nbsp;Inkou</span></li><li><span class="time">10:00</span><span>Jóga s&nbsp;Kateřinou</span></li><li><span class="time">11:30</span><span>Brunch</span></li><li><span class="time">12:30</span><span>Čajování s&nbsp;Jelenou</span></li><li><span class="time">15:00</span><span>Tvoření s&nbsp;Mari</span></li><li class="separator"></li><li><span class="time"></span><span style="color:rgba(233,223,201,.6);font-style:italic;">spontánní dění…</span></li><li><span class="time">18:00</span><span>Odjezd</span></li></ul></div>
+      <div class="day-card"><div class="day-name">Pátek</div><div class="day-date">12. června 2026</div><ul class="event-list"><li><span class="time">16–18</span><span>Příjezd, zabydlení svých stanů</span></li><li><span class="time">18:30</span><span>Společný kruh u ohně</span></li><li><span class="time">20:30</span><span>Mari písně</span></li></ul></div>
+      <div class="day-card"><div class="day-name">Sobota</div><div class="day-date">13. června 2026</div><ul class="event-list"><li><span class="time">8:00</span><span>Dynamická meditace s&nbsp;Inkou</span></li><li><span class="time">9:00</span><span>Jóga s&nbsp;Kateřinou</span></li><li><span class="time">11:00</span><span>Brunch</span></li><li class="separator"></li><li><span class="time">12:30</span><span>Inka &amp; Rézie: autorské čtení a zpěv</span></li><li><span class="time">14:00</span><span>Arteterapie s&nbsp;Mari</span></li><li><span class="time">16:00</span><span>Kakao &amp; společné tvoření – nech se překvapit!</span></li><li class="separator"></li><li><span class="time">18:00</span><span>Večeře</span></li><li><span class="time">19:00</span><span>Rytmy s&nbsp;prvky muzikoterapie s&nbsp;Rézií a&nbsp;Dalim</span></li><li><span class="time">20:30</span><span>Společný jam u ohně</span></li></ul></div>
+      <div class="day-card"><div class="day-name">Neděle</div><div class="day-date">14. června 2026</div><ul class="event-list"><li><span class="time">9:00</span><span>Jóga s&nbsp;Kateřinou</span></li><li><span class="time">10:00</span><span>Otevírání hlasu a&nbsp;zvířecí zvuky s&nbsp;Daliborem Neuwirtem</span></li><li class="separator"></li><li><span class="time">12:00</span><span>Brunch</span></li><li><span class="time">13:00</span><span>Louka.dění s&nbsp;Tomášem</span></li><li><span class="time">15:00</span><span>Čajování s&nbsp;Jelenou</span></li><li class="separator"></li><li><span class="time"></span><span style="color:rgba(233,223,201,.6);font-style:italic;">spontánní dění ~ odjezd do 18:00</span></li></ul></div>
     </div>
     <div class="program-note reveal">Program je orientační a může se změnit, protože louka má svoje kouzlo přítomnosti a jejího louka.dění!</div>
   </div>
@@ -471,7 +499,7 @@
 </section>
 
 <div class="price-band" id="cena">
-  <div class="price-inner reveal"><p class="price-label">✦ výměna energie</p><div class="price-amount">2 470<sup>Kč</sup></div><p class="price-desc">Cena zahrnuje třídenní pobyt na Louce, sobotní brunch, večeři a nedělní brunch.<br>Výdělek z akce jde z velké části na rozvoj azylu Nech Mě Růst.</p><div class="price-badge">Kapacita je omezená — přihlásit se vyplatí brzy</div></div>
+  <div class="price-inner reveal"><p class="price-label">✦ výměna energie</p><div class="price-amount">2 470<sup>Kč</sup></div><p class="price-desc">Cena zahrnuje třídenní pobyt na Louce, sobotní brunch, večeři a nedělní brunch.<br>Výdělek z akce jde z velké části na rozvoj azylu Nech Mě Růst.</p><div class="price-badge">Kapacita je omezená — zbývá posledních 5 míst</div></div>
 </div>
 
 <section id="kontakt" class="contact-section">
