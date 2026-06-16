@@ -143,7 +143,13 @@ function renderProductCard(product) {
 
   const desc = document.createElement("p")
   desc.className = "product-description"
-  desc.textContent = product.description || ""
+  // Popis může obsahovat odkazy (HTML, např. na výrobce). Na kartě v seznamu
+  // ukážeme jen čistý text — odkazy zůstávají klikací na detailu produktu.
+  const descTmp = document.createElement("div")
+  descTmp.innerHTML = (product.description || "")
+    .replace(/<br\s*\/?>/gi, " ")
+    .replace(/<\/(p|div|li)>/gi, " ")
+  desc.textContent = (descTmp.textContent || "").replace(/\s+/g, " ").trim()
   info.appendChild(desc)
 
   const footer = document.createElement("div")
