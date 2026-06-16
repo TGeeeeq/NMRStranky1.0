@@ -33,7 +33,7 @@ require __DIR__ . '/partials/head.php';
                     🌲 Blíží se Spolu Mezi Lesy — letní víkend na Louce
                 </h2>
                 <a href="mezilesy" class="news-card__hero">
-                    <img src="assets/mezilesy.jpg" alt="Spolu Mezi Lesy — víkend na Louce 12.–14. 6. 2026" loading="lazy">
+                    <img src="assets/loukada1.webp" alt="Spolu Mezi Lesy — víkend na Louce" loading="lazy">
                 </a>
                 <div class="news-card__body">
                     <p data-cs="Už 12.–14. června 2026 nás čeká Spolu Mezi Lesy — třídenní víkend na pomezí retreatu a festivalu přímo na naší Louce. Prolíná se v něm příroda, zvířata, intuitivní umění, pohyb a živá hudba." data-en="On June 12–14, 2026, we are hosting Spolu Mezi Lesy — a three-day weekend on the border of a retreat and a festival, right here at our Meadow. It blends nature, animals, intuitive art, movement, and live music.">

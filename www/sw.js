@@ -1,4 +1,4 @@
-const CACHE_NAME = 'nech-me-rust-v6.0';
+const CACHE_NAME = 'nech-me-rust-v6.1';
 
 const CORE_FILES = [
     '/',
@@ -27,8 +27,8 @@ const HTML_PAGES = [
     '/gdpr',
     '/vop',
     '/galerie',
-    '/putovani-se-zviraty',
-    '/mezilesy',
+    
+    
     '/obchod/',
     '/obchod/checkout',
     '/obchod/product-detail'
