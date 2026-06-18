@@ -271,3 +271,35 @@ html.lenis body {
 .lenis.lenis-smooth iframe {
   pointer-events: none;
 }
+
+/* --- Floating particles: gentle drifting pollen/seeds (see
+   components/FloatingParticles.tsx). Per-particle variation via CSS vars set
+   inline. Static (invisible) under reduced motion. ----------------------- */
+.particle {
+  position: absolute;
+  border-radius: 9999px;
+  opacity: 0;
+  will-change: transform, opacity;
+}
+@media (prefers-reduced-motion: no-preference) {
+  .particle {
+    animation: float-up var(--p-dur, 18s) ease-in-out var(--p-delay, 0s) infinite;
+  }
+}
+@keyframes float-up {
+  0% {
+    transform: translate3d(0, 0, 0) scale(0.8);
+    opacity: 0;
+  }
+  15% {
+    opacity: var(--p-opacity, 0.4);
+  }
+  85% {
+    opacity: var(--p-opacity, 0.4);
+  }
+  100% {
+    transform: translate3d(var(--p-sway, 24px), calc(-1 * var(--p-rise, 160px)), 0)
+      scale(1);
+    opacity: 0;
+  }
+}

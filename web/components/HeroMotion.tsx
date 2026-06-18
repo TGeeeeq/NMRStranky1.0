@@ -6,6 +6,7 @@ import { motion, useScroll, useTransform } from "motion/react";
 import { ChevronDown } from "lucide-react";
 import { cn } from "@/lib/cn";
 import { staggerContainer, staggerItem, underlineReveal } from "@/lib/variants";
+import { FloatingParticles } from "@/components/FloatingParticles";
 
 const OVERLAY_GRADIENT =
   "bg-gradient-to-br from-moss-deep/80 via-moss-deep/55 to-moss/40";
@@ -91,6 +92,9 @@ export function HeroMotion({
       {/* Aurora mesh + moss gradient */}
       <div aria-hidden className="bg-aurora absolute inset-0 -z-10 opacity-55" />
       <div aria-hidden className={cn("absolute inset-0 -z-10", gradientClassName)} />
+
+      {/* Drifting pollen */}
+      <FloatingParticles />
 
       {/* Staggered content */}
       <motion.div

@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import Image from "next/image";
 import { X, ChevronLeft, ChevronRight } from "lucide-react";
 import { galleryAnimals, galleryImages } from "@/lib/animals";
@@ -11,6 +11,13 @@ export function Gallery() {
   const [filter, setFilter] = useState<string>("Vše");
   const [query, setQuery] = useState("");
   const [active, setActive] = useState<number | null>(null);
+  const touchStart = useRef<{ x: number; y: number } | null>(null);
+
+  // Deep link from an animal card: /galerie?zvire=Karel pre-selects the filter.
+  useEffect(() => {
+    const zvire = new URLSearchParams(window.location.search).get("zvire");
+    if (zvire && galleryAnimals.some((a) => a.name === zvire)) setFilter(zvire);
+  }, []);
 
   const filtered = useMemo(() => {
     const q = query.trim().toLowerCase();
@@ -20,6 +27,11 @@ export function Gallery() {
         (q === "" || img.animal.toLowerCase().includes(q)),
     );
   }, [filter, query]);
+
+  const next = () =>
+    setActive((i) => (i === null ? i : (i + 1) % filtered.length));
+  const prev = () =>
+    setActive((i) => (i === null ? i : (i - 1 + filtered.length) % filtered.length));
 
   // Keyboard navigation for the lightbox
   useEffect(() => {
@@ -107,11 +119,27 @@ export function Gallery() {
       {/* Lightbox */}
       {current ? (
         <div
-          className="fixed inset-0 z-[100] flex items-center justify-center bg-moss-deep/90 p-4"
+          className="fixed inset-0 z-[100] flex touch-pan-y items-center justify-center bg-moss-deep/90 p-4"
           role="dialog"
           aria-modal="true"
           aria-label={`Fotka: ${current.animal}`}
           onClick={() => setActive(null)}
+          onTouchStart={(e) => {
+            const t = e.touches[0];
+            touchStart.current = { x: t.clientX, y: t.clientY };
+          }}
+          onTouchEnd={(e) => {
+            if (!touchStart.current) return;
+            const t = e.changedTouches[0];
+            const dx = t.clientX - touchStart.current.x;
+            const dy = t.clientY - touchStart.current.y;
+            touchStart.current = null;
+            // Horizontal swipe (and clearly not a vertical scroll) → navigate.
+            if (Math.abs(dx) > 50 && Math.abs(dx) > Math.abs(dy) * 1.5) {
+              if (dx < 0) next();
+              else prev();
+            }
+          }}
         >
           <button
             type="button"
@@ -126,7 +154,7 @@ export function Gallery() {
             aria-label="Předchozí"
             onClick={(e) => {
               e.stopPropagation();
-              setActive((i) => (i === null ? i : (i - 1 + filtered.length) % filtered.length));
+              prev();
             }}
             className="absolute left-3 flex h-12 w-12 items-center justify-center rounded-pill bg-cream/15 text-cream hover:bg-cream/25 sm:left-6"
           >
@@ -147,7 +175,7 @@ export function Gallery() {
             aria-label="Další"
             onClick={(e) => {
               e.stopPropagation();
-              setActive((i) => (i === null ? i : (i + 1) % filtered.length));
+              next();
             }}
             className="absolute right-3 flex h-12 w-12 items-center justify-center rounded-pill bg-cream/15 text-cream hover:bg-cream/25 sm:right-6"
           >

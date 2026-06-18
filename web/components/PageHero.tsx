@@ -33,7 +33,7 @@ export function PageHero({
           </HeroItem>
         ) : null}
         <HeroItem>
-          <h1 className="max-w-3xl text-balance font-serif text-4xl font-semibold leading-[1.1] sm:text-5xl lg:text-6xl">
+          <h1 className="max-w-3xl text-balance font-serif text-4xl font-semibold leading-[1.1] text-cream sm:text-5xl lg:text-6xl">
             {title}
           </h1>
         </HeroItem>
