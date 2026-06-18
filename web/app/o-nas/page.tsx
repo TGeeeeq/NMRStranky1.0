@@ -7,6 +7,7 @@ import { SectionHeader } from "@/components/SectionHeader";
 import { Reveal } from "@/components/Reveal";
 import { PageHero } from "@/components/PageHero";
 import { SocialSection } from "@/components/SocialSection";
+import { LogoMarquee } from "@/components/LogoMarquee";
 import { SITE } from "@/lib/site";
 
 export const metadata: Metadata = {
@@ -104,7 +105,7 @@ export default function ONas() {
           <div className="mx-auto grid max-w-3xl gap-6 sm:grid-cols-2">
             {team.map((m, i) => (
               <Reveal key={m.name} delay={i * 0.08}>
-                <article className="h-full rounded-lg border border-border bg-surface p-7 text-center shadow-soft">
+                <article className="h-full rounded-lg border border-border bg-surface p-7 text-center shadow-soft transition-[box-shadow,border-color,transform] duration-300 hover:-translate-y-1 hover:border-accent hover:shadow-lift">
                   <Image
                     src={m.image}
                     alt={`Portrét – ${m.name}`}
@@ -173,24 +174,8 @@ export default function ONas() {
               description="Velice si vážíme podpory našich partnerů, díky kterým můžeme realizovat naše projekty a dosahovat stanovených cílů. Jejich důvěra a podpora jsou pro nás klíčové."
             />
           </Reveal>
-          <Reveal className="flex flex-wrap items-center justify-center gap-8">
-            {partners.map((p) => (
-              <a
-                key={p.name}
-                href={p.href}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex h-24 w-44 items-center justify-center rounded-lg border border-border bg-surface p-5 shadow-soft transition-transform hover:-translate-y-0.5"
-              >
-                <Image
-                  src={p.logo}
-                  alt={`Logo ${p.name}`}
-                  width={150}
-                  height={70}
-                  className="max-h-14 w-auto object-contain"
-                />
-              </a>
-            ))}
+          <Reveal>
+            <LogoMarquee logos={partners} />
           </Reveal>
         </Container>
       </section>

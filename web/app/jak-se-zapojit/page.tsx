@@ -112,7 +112,7 @@ export default function JakSeZapojit() {
           <div className="grid gap-6 lg:grid-cols-3">
             {financial.map((c, i) => (
               <Reveal key={c.title} delay={i * 0.06}>
-                <article className="flex h-full flex-col rounded-lg border border-border bg-surface p-7 shadow-soft">
+                <article className="group flex h-full flex-col rounded-lg border border-border bg-surface p-7 shadow-soft transition-[box-shadow,border-color,transform] duration-300 hover:-translate-y-1 hover:border-accent hover:shadow-lift">
                   <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-pill bg-moss/10 p-3 text-moss">
                     <c.icon size={24} aria-hidden />
                   </div>
@@ -158,7 +158,7 @@ export default function JakSeZapojit() {
           <div className="mx-auto grid max-w-3xl gap-6 sm:grid-cols-2">
             {longterm.map((c, i) => (
               <Reveal key={c.title} delay={i * 0.06}>
-                <article className="flex h-full flex-col rounded-lg border border-border bg-surface p-7 shadow-soft">
+                <article className="group flex h-full flex-col rounded-lg border border-border bg-surface p-7 shadow-soft transition-[box-shadow,border-color,transform] duration-300 hover:-translate-y-1 hover:border-accent hover:shadow-lift">
                   <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-pill bg-moss/10 p-3 text-moss">
                     <c.icon size={24} aria-hidden />
                   </div>
@@ -185,7 +185,7 @@ export default function JakSeZapojit() {
           <div className="grid gap-6 lg:grid-cols-3">
             {partners.map((c, i) => (
               <Reveal key={c.title} delay={i * 0.06}>
-                <article className="flex h-full flex-col rounded-lg border border-border bg-surface p-7 shadow-soft">
+                <article className="group flex h-full flex-col rounded-lg border border-border bg-surface p-7 shadow-soft transition-[box-shadow,border-color,transform] duration-300 hover:-translate-y-1 hover:border-accent hover:shadow-lift">
                   <div className="flex h-16 items-center justify-start">
                     <Image src={c.logo} alt={`Logo ${c.title}`} width={140} height={64} className="max-h-14 w-auto object-contain" />
                   </div>

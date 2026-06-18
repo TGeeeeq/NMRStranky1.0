@@ -2,6 +2,9 @@ import type { Metadata } from "next";
 import "./globals.css";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
+import { SmoothScroll } from "@/components/SmoothScroll";
+import { Cursor } from "@/components/Cursor";
+import { MotionProvider } from "@/components/MotionProvider";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://nechmerust.org"),
@@ -43,17 +46,21 @@ export default function RootLayout({
         />
       </head>
       <body className="flex min-h-full flex-col">
-        <a
-          href="#main-content"
-          className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-[100] focus:rounded-md focus:bg-moss focus:px-4 focus:py-2 focus:text-cream"
-        >
-          Přeskočit na obsah
-        </a>
-        <Navbar />
-        <main id="main-content" className="flex-1">
-          {children}
-        </main>
-        <Footer />
+        <MotionProvider>
+          <SmoothScroll />
+          <Cursor />
+          <a
+            href="#main-content"
+            className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-[100] focus:rounded-md focus:bg-moss focus:px-4 focus:py-2 focus:text-cream"
+          >
+            Přeskočit na obsah
+          </a>
+          <Navbar />
+          <main id="main-content" className="flex-1">
+            {children}
+          </main>
+          <Footer />
+        </MotionProvider>
       </body>
     </html>
   );

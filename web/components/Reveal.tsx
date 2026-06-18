@@ -1,9 +1,11 @@
 "use client";
 
-import { motion, useReducedMotion } from "motion/react";
+import { motion } from "motion/react";
 import type { ReactNode } from "react";
 
-/** Scroll-into-view fade + rise. Renders statically when reduced motion is preferred. */
+/** Scroll-into-view fade + rise. Honors reduced motion via the app-wide
+ *  MotionConfig (transform dropped, opacity kept) — no render branch, so SSR
+ *  hydration stays consistent. */
 export function Reveal({
   children,
   className,
@@ -13,8 +15,6 @@ export function Reveal({
   className?: string;
   delay?: number;
 }) {
-  const reduce = useReducedMotion();
-  if (reduce) return <div className={className}>{children}</div>;
   return (
     <motion.div
       className={className}

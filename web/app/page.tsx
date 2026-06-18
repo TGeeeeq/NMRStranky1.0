@@ -6,6 +6,10 @@ import { Container } from "@/components/Container";
 import { SectionHeader } from "@/components/SectionHeader";
 import { Reveal } from "@/components/Reveal";
 import { VideoFacade } from "@/components/VideoFacade";
+import { HeroMotion, HeroItem, HeroUnderline } from "@/components/HeroMotion";
+import { StatsBand } from "@/components/StatsBand";
+import { SectionDivider } from "@/components/SectionDivider";
+import { ValueCard } from "@/components/ValueCard";
 import { InstagramIcon, FacebookIcon } from "@/components/BrandIcons";
 
 export const metadata: Metadata = {
@@ -48,49 +52,52 @@ export default function Home() {
   return (
     <>
       {/* Hero */}
-      <section className="relative isolate overflow-hidden">
-        <Image
-          src="/assets/hero-image.webp"
-          alt="Lidé se zvířaty na louce"
-          fill
-          priority
-          sizes="100vw"
-          className="-z-10 object-cover"
-        />
-        <div className="absolute inset-0 -z-10 bg-gradient-to-br from-moss-deep/85 via-moss-deep/70 to-moss/55" />
-        <Container className="flex min-h-[86vh] items-center py-24">
+      <HeroMotion
+        image="/assets/hero-image.webp"
+        imageAlt="Lidé se zvířaty na louce"
+        parallax={130}
+        scrollCue
+        className="min-h-[86vh]"
+        innerClassName="flex min-h-[86vh] items-center"
+      >
+        <Container className="py-24">
           <div className="grid w-full items-center gap-10 lg:grid-cols-[1.4fr_1fr]">
             <div className="text-cream">
-              <p className="mb-4 text-sm font-semibold uppercase tracking-[0.2em] text-accent">
-                Nech mě růst z.s.
-              </p>
-              <h1 className="text-balance font-serif text-4xl font-semibold leading-[1.1] text-cream sm:text-5xl lg:text-6xl">
-                Tvoříme prostor pro růst duše,{" "}
-                <span className="relative whitespace-nowrap">
-                  srdce i přírody
-                  <span className="absolute -bottom-1 left-0 -z-10 h-3 w-full rounded-pill bg-accent/40" />
-                </span>
-              </h1>
-              <p className="mt-6 max-w-xl text-lg text-cream/90">
-                Nech Mě Růst z.s. je nezisková organizace s vizí tvorby rodového
-                statku, kde žijeme v harmonii s přírodou, zvířaty i sebou navzájem.
-              </p>
-              <div className="mt-8 flex flex-wrap gap-4">
-                <Link
-                  href="/jak-se-zapojit"
-                  className="rounded-pill bg-accent px-7 py-3 font-semibold text-moss-deep shadow-lift transition-transform hover:-translate-y-0.5"
-                >
-                  Jak se zapojit
-                </Link>
-                <Link
-                  href="/o-nas"
-                  className="rounded-pill border border-cream/40 px-7 py-3 font-medium text-cream transition-colors hover:bg-cream/10"
-                >
-                  Více o nás
-                </Link>
-              </div>
+              <HeroItem>
+                <p className="mb-4 text-sm font-semibold uppercase tracking-[0.2em] text-accent">
+                  Nech mě růst z.s.
+                </p>
+              </HeroItem>
+              <HeroItem>
+                <h1 className="text-balance font-serif text-4xl font-semibold leading-[1.1] text-cream sm:text-5xl lg:text-6xl">
+                  Tvoříme prostor pro růst duše,{" "}
+                  <HeroUnderline>srdce i přírody</HeroUnderline>
+                </h1>
+              </HeroItem>
+              <HeroItem>
+                <p className="mt-6 max-w-xl text-lg text-cream/90">
+                  Nech Mě Růst z.s. je nezisková organizace s vizí tvorby rodového
+                  statku, kde žijeme v harmonii s přírodou, zvířaty i sebou navzájem.
+                </p>
+              </HeroItem>
+              <HeroItem>
+                <div className="mt-8 flex flex-wrap gap-4">
+                  <Link
+                    href="/jak-se-zapojit"
+                    className="rounded-pill bg-accent px-7 py-3 font-semibold text-moss-deep shadow-lift transition-transform hover:-translate-y-0.5"
+                  >
+                    Jak se zapojit
+                  </Link>
+                  <Link
+                    href="/o-nas"
+                    className="rounded-pill border border-cream/40 px-7 py-3 font-medium text-cream transition-colors hover:bg-cream/10"
+                  >
+                    Více o nás
+                  </Link>
+                </div>
+              </HeroItem>
             </div>
-            <div className="hidden justify-self-center lg:block">
+            <HeroItem className="hidden justify-self-center lg:block">
               <div className="rounded-pill bg-cream/10 p-4 ring-1 ring-cream/20 backdrop-blur-sm">
                 <Image
                   src="/assets/logo-circle.png"
@@ -101,13 +108,17 @@ export default function Home() {
                   className="h-64 w-64 rounded-pill object-cover"
                 />
               </div>
-            </div>
+            </HeroItem>
           </div>
         </Container>
-      </section>
+      </HeroMotion>
 
       {/* About */}
-      <section className="bg-surface py-20 sm:py-24">
+      <section className="relative isolate overflow-hidden bg-surface py-20 sm:py-24">
+        <div
+          aria-hidden
+          className="blob blob-accent blob-morph -left-32 top-10 h-80 w-80 opacity-30"
+        />
         <Container>
           <Reveal>
             <SectionHeader eyebrow="Kdo jsme" title="O projektu" />
@@ -146,8 +157,19 @@ export default function Home() {
         </Container>
       </section>
 
+      <SectionDivider from="bg-surface" to="fill-moss-deep" />
+
+      {/* Impact stats */}
+      <StatsBand />
+
+      <SectionDivider from="bg-moss-deep" to="fill-surface-alt" flip />
+
       {/* Values */}
-      <section className="bg-surface-alt py-20 sm:py-24">
+      <section className="relative isolate overflow-hidden bg-surface-alt py-20 sm:py-24">
+        <div
+          aria-hidden
+          className="blob blob-moss blob-morph -right-40 -bottom-20 h-96 w-96 opacity-20"
+        />
         <Container>
           <Reveal>
             <SectionHeader eyebrow="Co nás vede" title="Naše hodnoty" />
@@ -155,20 +177,18 @@ export default function Home() {
           <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
             {values.map((v, i) => (
               <Reveal key={v.title} delay={i * 0.06}>
-                <article className="h-full rounded-lg border border-border bg-surface p-7 text-center shadow-soft transition-transform hover:-translate-y-1">
-                  <div className="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-pill bg-moss/10 text-moss">
-                    <v.icon size={26} aria-hidden />
-                  </div>
-                  <h3 className="font-serif text-xl font-semibold text-moss-deep">
-                    {v.title}
-                  </h3>
-                  <p className="mt-2 text-text-muted">{v.text}</p>
-                </article>
+                <ValueCard
+                  icon={<v.icon size={26} aria-hidden />}
+                  title={v.title}
+                  text={v.text}
+                />
               </Reveal>
             ))}
           </div>
         </Container>
       </section>
+
+      <SectionDivider from="bg-surface-alt" to="fill-moss-deep" />
 
       {/* Video */}
       <section id="video-section" className="bg-moss-deep py-20 sm:py-24">
@@ -184,6 +204,8 @@ export default function Home() {
           </Reveal>
         </Container>
       </section>
+
+      <SectionDivider from="bg-moss-deep" to="fill-surface" flip />
 
       {/* Social */}
       <section className="bg-surface py-20 sm:py-24">

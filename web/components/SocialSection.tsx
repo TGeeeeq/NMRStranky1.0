@@ -4,6 +4,7 @@ import { SectionHeader } from "@/components/SectionHeader";
 import { Reveal } from "@/components/Reveal";
 import { InstagramIcon, FacebookIcon } from "@/components/BrandIcons";
 import { SOCIAL } from "@/lib/site";
+import { cn } from "@/lib/cn";
 
 const links = [
   { icon: InstagramIcon, label: "Instagram", href: SOCIAL.instagram, external: true },
@@ -14,7 +15,16 @@ const links = [
 /** Reusable "Sledujte nás" block used at the bottom of every page. */
 export function SocialSection({ tone = "light" }: { tone?: "light" | "alt" }) {
   return (
-    <section className={tone === "alt" ? "bg-surface-alt py-20 sm:py-24" : "bg-surface py-20 sm:py-24"}>
+    <section
+      className={cn(
+        "relative isolate overflow-hidden py-20 sm:py-24",
+        tone === "alt" ? "bg-surface-alt" : "bg-surface",
+      )}
+    >
+      <div
+        aria-hidden
+        className="blob blob-accent blob-morph left-1/2 top-1/2 h-72 w-72 -translate-x-1/2 -translate-y-1/2 opacity-20"
+      />
       <Container>
         <Reveal>
           <SectionHeader eyebrow="Buďte v kontaktu" title="Sledujte nás" />
