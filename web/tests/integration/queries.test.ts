@@ -1,7 +1,7 @@
 import { describe, it, expect, afterAll } from "vitest";
 import { db, schema } from "../../lib/db";
 import { eq } from "drizzle-orm";
-import { getActiveProducts, getProductBySlug, getCategoriesWithCounts } from "../../lib/db/queries";
+import { getActiveProducts, getProductBySlug, getCategoriesWithCounts, getProductsByIds } from "../../lib/db/queries";
 
 const SLUG = "test-prod-" + Date.now();
 
@@ -19,6 +19,14 @@ describe("queries", () => {
   it("getProductBySlug returns the product", async () => {
     const p = await getProductBySlug(SLUG);
     expect(p?.slug).toBe(SLUG);
+  });
+
+  it("getProductsByIds returns active products for the given ids (cart-data)", async () => {
+    const p = await getProductBySlug(SLUG);
+    expect(p).toBeTruthy();
+    const rows = await getProductsByIds([p!.id]);
+    expect(rows.map((r) => r.id)).toContain(p!.id);
+    expect(await getProductsByIds([])).toEqual([]);
   });
 
   it("getCategoriesWithCounts returns an array", async () => {

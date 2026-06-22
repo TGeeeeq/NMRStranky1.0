@@ -1,6 +1,6 @@
 import "server-only";
 import { db, schema } from "./index";
-import { and, eq, desc, sql, asc } from "drizzle-orm";
+import { and, eq, desc, sql, asc, inArray } from "drizzle-orm";
 
 const { products, categories, productImages, orders, orderItems } = schema;
 
@@ -35,7 +35,7 @@ export async function getProductImages(productId: number) {
 export async function getProductsByIds(ids: number[]) {
   if (ids.length === 0) return [];
   return db.select().from(products)
-    .where(and(eq(products.isActive, true), sql`${products.id} = ANY(${ids})`));
+    .where(and(eq(products.isActive, true), inArray(products.id, ids)));
 }
 
 export async function getCategoriesWithCounts() {
