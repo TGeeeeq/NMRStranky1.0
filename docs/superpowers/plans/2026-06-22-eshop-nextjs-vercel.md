@@ -131,7 +131,7 @@ Run from `web/`:
 ```bash
 cd web
 npm install drizzle-orm @neondatabase/serverless @netlify/blobs iron-session bcryptjs nodemailer zod
-npm install -D drizzle-kit @types/bcryptjs @types/nodemailer vitest @vitejs/plugin-react @playwright/test dotenv
+npm install -D drizzle-kit @types/bcryptjs @types/nodemailer vitest @vitejs/plugin-react @playwright/test dotenv tsx
 npx playwright install chromium
 ```
 Expected: installs succeed, `package.json` updated.
@@ -146,8 +146,8 @@ In `web/package.json` `"scripts"`, add:
 "db:generate": "drizzle-kit generate",
 "db:migrate": "drizzle-kit migrate",
 "db:studio": "drizzle-kit studio",
-"migrate:forpsi": "node --env-file=.env.local --experimental-strip-types scripts/migrate-from-forpsi.ts",
-"admin:create": "node --env-file=.env.local --experimental-strip-types scripts/create-admin.ts"
+"migrate:forpsi": "node --env-file=.env.local --import tsx scripts/migrate-from-forpsi.ts",
+"admin:create": "node --env-file=.env.local --import tsx scripts/create-admin.ts"
 ```
 
 - [ ] **Step 3: Create `web/vitest.config.ts`**

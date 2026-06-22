@@ -13,6 +13,7 @@ import {
 import { Menu, X, Heart } from "lucide-react";
 import { navItems } from "@/lib/nav";
 import { cn } from "@/lib/cn";
+import { CartButton } from "@/components/shop/CartButton";
 
 export function Navbar() {
   const pathname = usePathname();
@@ -84,6 +85,7 @@ export function Navbar() {
         </ul>
 
         <div className="flex items-center gap-3">
+          <CartButton />
           <Link
             href="/virtualni-adopce"
             className="hidden items-center gap-2 rounded-pill bg-moss px-5 py-2 text-sm font-medium text-cream shadow-soft transition-transform hover:-translate-y-0.5 sm:inline-flex"

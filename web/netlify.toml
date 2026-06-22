@@ -1,0 +1,4 @@
+# Netlify reads this from the site's base directory (set base = "web" during `netlify init`).
+# @netlify/plugin-nextjs is auto-installed when Netlify detects Next.js.
+[build]
+  command = "npm run build"
