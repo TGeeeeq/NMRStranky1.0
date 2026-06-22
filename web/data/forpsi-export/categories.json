@@ -1,0 +1,53 @@
+{
+  "success": true,
+  "categories": [
+    {
+      "id": 1,
+      "name": "Dřevovýroba",
+      "slug": "drevovyroba",
+      "description": "Ručně vyráběné dřevěné výrobky z místních zdrojů",
+      "display_order": 1,
+      "product_count": 3
+    },
+    {
+      "id": 2,
+      "name": "Bylinkárna",
+      "slug": "bylinkarna",
+      "description": "Bylinkové produkty a přírodní přípravky",
+      "display_order": 2,
+      "product_count": 0
+    },
+    {
+      "id": 3,
+      "name": "Šperky",
+      "slug": "sperky",
+      "description": "Náramky, náušnice a přívěsky",
+      "display_order": 3,
+      "product_count": 10
+    },
+    {
+      "id": 4,
+      "name": "Plakáty",
+      "slug": "plakaty",
+      "description": "Plakáty s motivy z Louky",
+      "display_order": 4,
+      "product_count": 0
+    },
+    {
+      "id": 5,
+      "name": "Textil",
+      "slug": "textil",
+      "description": "Tašky, batohy a textilní výrobky",
+      "display_order": 5,
+      "product_count": 0
+    },
+    {
+      "id": 6,
+      "name": "Výrobky našich přátel",
+      "slug": "vyrobky-nasich-pratel",
+      "description": "Produkty od místních výrobců a přátel",
+      "display_order": 6,
+      "product_count": 13
+    }
+  ]
+}
