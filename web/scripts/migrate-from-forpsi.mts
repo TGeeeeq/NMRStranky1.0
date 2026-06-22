@@ -5,30 +5,25 @@ import { join } from "node:path";
 import { Pool } from "@neondatabase/serverless";
 import { drizzle } from "drizzle-orm/neon-serverless";
 import { eq } from "drizzle-orm";
-import { getStore } from "@netlify/blobs";
 import * as schema from "../lib/db/schema.ts";
 
 const DIR = join(import.meta.dirname, "../data/forpsi-export");
 const db = drizzle(new Pool({ connectionString: process.env.DATABASE_URL! }), { schema });
-const store = getStore({ name: "product-images", siteID: process.env.NETLIFY_SITE_ID!, token: process.env.NETLIFY_AUTH_TOKEN! });
 
 const readJson = (f: string) => JSON.parse(readFileSync(join(DIR, f), "utf-8"));
-const EXT_TYPE: Record<string, string> = { webp: "image/webp", jpg: "image/jpeg", jpeg: "image/jpeg", png: "image/png" };
 
+// Existing product images ship as committed static files in public/products/ (copied
+// from data/forpsi-export/images/). Admin-uploaded NEW images use Netlify Blobs at runtime.
 async function uploadLocal(imagePath: string): Promise<string | null> {
   if (!imagePath) return null;
   const filename = imagePath.split("/").pop()!;
-  let bytes: Buffer;
   try {
-    bytes = readFileSync(join(DIR, "images", filename));
+    readFileSync(join(DIR, "images", filename));
   } catch {
     console.warn(`! missing image file ${filename}`);
     return null;
   }
-  const ext = filename.split(".").pop()!.toLowerCase();
-  const key = `${Date.now()}-${filename.replace(/[^a-zA-Z0-9._-]/g, "_")}`;
-  await store.set(key, bytes, { metadata: { contentType: EXT_TYPE[ext] ?? "application/octet-stream" } });
-  return `/img/${key}`;
+  return `/products/${filename}`;
 }
 
 // 1) categories
