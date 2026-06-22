@@ -1,4 +1,9 @@
-# Netlify reads this from the site's base directory (set base = "web" during `netlify init`).
-# @netlify/plugin-nextjs is auto-installed when Netlify detects Next.js.
+# Netlify reads this from the site's base directory (set Base directory = "web").
+# The Next.js Runtime must be declared explicitly — server-side builds did NOT
+# auto-attach it, so no SSR function was bundled and every route 404'd.
 [build]
   command = "npm run build"
+  publish = ".next"
+
+[[plugins]]
+  package = "@netlify/plugin-nextjs"
