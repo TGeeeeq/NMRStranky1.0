@@ -1,0 +1,326 @@
+@import "tailwindcss";
+
+/* =========================================================
+   Self-hosted variable fonts (Plus Jakarta Sans + Fraunces)
+   Basic latin + latin-ext (Czech diacritics) split by unicode-range.
+   ========================================================= */
+@font-face {
+  font-family: "Plus Jakarta Sans";
+  src: url("/fonts/plus-jakarta-sans-var-latin-ext.woff2") format("woff2");
+  font-weight: 200 800;
+  font-style: normal;
+  font-display: swap;
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+@font-face {
+  font-family: "Plus Jakarta Sans";
+  src: url("/fonts/plus-jakarta-sans-var-latin.woff2") format("woff2");
+  font-weight: 200 800;
+  font-style: normal;
+  font-display: swap;
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: "Fraunces";
+  src: url("/fonts/fraunces-var-latin-ext.woff2") format("woff2");
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+@font-face {
+  font-family: "Fraunces";
+  src: url("/fonts/fraunces-var-latin.woff2") format("woff2");
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+/* =========================================================
+   Brand design tokens → Tailwind v4 theme
+   (ported from legacy www/styles.css :root)
+   ========================================================= */
+@theme {
+  /* Brand palette */
+  --color-moss-deep: #1f3d2a;
+  --color-moss: #2d5a3d;
+  --color-moss-soft: #6b8e6e;
+  --color-cream: #f7f2e7;
+  --color-sand: #e8dfc8;
+  --color-accent: #f0e892;
+  --color-terracotta: #b85c3c;
+  --color-amber: #c89858;
+
+  /* Neutrals */
+  --color-ink: #1a1f1c;
+  --color-text: #2a3530;
+  --color-text-muted: #5a6660;
+  --color-surface: #ffffff;
+  --color-surface-alt: #faf7f0;
+  --color-border: #e6e1d3;
+
+  /* Status */
+  --color-success: #4a7c4e;
+  --color-warning: #c68b3a;
+  --color-danger: #a4422c;
+
+  /* Typography */
+  --font-sans: "Plus Jakarta Sans", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --font-serif: "Fraunces", Georgia, "Times New Roman", serif;
+
+  /* Radii */
+  --radius-sm: 8px;
+  --radius: 14px;
+  --radius-lg: 22px;
+  --radius-pill: 999px;
+
+  /* Shadows */
+  --shadow-soft: 0 6px 24px -8px rgba(31, 61, 42, 0.18);
+  --shadow-lift: 0 20px 50px -16px rgba(31, 61, 42, 0.22);
+
+  /* Motion */
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+
+  /* shadcn-style semantic tokens — used by the hidden /studio tool
+     (Karusel studio) and its UI components. Mapped onto the brand palette
+     so the tool stays visually consistent with the rest of the site. */
+  --color-background: var(--color-surface);
+  --color-foreground: var(--color-text);
+  --color-card: var(--color-surface);
+  --color-card-foreground: var(--color-text);
+  --color-popover: var(--color-surface);
+  --color-popover-foreground: var(--color-text);
+  --color-primary: var(--color-moss);
+  --color-primary-foreground: var(--color-cream);
+  --color-secondary: var(--color-sand);
+  --color-secondary-foreground: var(--color-ink);
+  --color-muted: var(--color-surface-alt);
+  --color-muted-foreground: var(--color-text-muted);
+  --color-accent-foreground: var(--color-ink);
+  --color-destructive: var(--color-danger);
+  --color-destructive-foreground: var(--color-cream);
+  --color-input: var(--color-border);
+  --color-ring: var(--color-moss);
+}
+
+@layer base {
+  body {
+    background-color: var(--color-surface);
+    color: var(--color-text);
+    font-family: var(--font-sans);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+  h1, h2, h3, h4 {
+    font-family: var(--font-serif);
+    line-height: 1.15;
+    color: var(--color-ink);
+  }
+  a {
+    color: var(--color-moss);
+  }
+  ::selection {
+    background-color: var(--color-accent);
+    color: var(--color-ink);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* =========================================================
+   AF signature — creator credit stamp (see AFLogo.tsx).
+   transform-box: view-box keeps 50% 50% on the SVG viewBox centre (50,50),
+   so the rings rotate around their true centre instead of wobbling.
+   ========================================================= */
+.af-spin-slow,
+.af-spin-rev {
+  transform-box: view-box;
+  transform-origin: 50% 50%;
+}
+@keyframes af-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+@keyframes af-spin-rev {
+  to {
+    transform: rotate(-360deg);
+  }
+}
+@media (prefers-reduced-motion: no-preference) {
+  .af-spin-slow {
+    animation: af-spin 34s linear infinite;
+  }
+  .af-spin-rev {
+    animation: af-spin-rev 27s linear infinite;
+  }
+}
+
+/* =========================================================
+   Atmosphere & motion utilities ($5000 polish layer)
+   Defined as plain top-level classes (same convention as the
+   AF signature above) so they don't depend on Tailwind layer order.
+   Every animated variant is gated behind prefers-reduced-motion.
+   ========================================================= */
+
+/* --- Film grain overlay: inline SVG turbulence, no asset, no request.
+   Apply to a `relative` parent; the ::after fills it. ---------------- */
+.grain-overlay {
+  position: relative;
+}
+.grain-overlay::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  opacity: 0.06;
+  mix-blend-mode: soft-light;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size: 180px 180px;
+}
+/* Darker context (moss-deep sections) needs a touch more grain. */
+.grain-strong::after {
+  opacity: 0.1;
+}
+
+/* --- Aurora: drifting multi-stop gradient mesh in brand colors.
+   Use as a low-opacity overlay layer or section background. -------- */
+.bg-aurora {
+  background-image:
+    radial-gradient(at 18% 28%, color-mix(in oklab, var(--color-moss) 45%, transparent) 0px, transparent 55%),
+    radial-gradient(at 82% 18%, color-mix(in oklab, var(--color-accent) 38%, transparent) 0px, transparent 50%),
+    radial-gradient(at 72% 82%, color-mix(in oklab, var(--color-moss-deep) 55%, transparent) 0px, transparent 55%),
+    radial-gradient(at 30% 75%, color-mix(in oklab, var(--color-moss-soft) 35%, transparent) 0px, transparent 50%);
+  background-size: 180% 180%;
+  background-position: 0% 50%;
+}
+@media (prefers-reduced-motion: no-preference) {
+  .bg-aurora {
+    animation: aurora-drift 22s ease-in-out infinite alternate;
+  }
+}
+@keyframes aurora-drift {
+  0% {
+    background-position: 0% 50%;
+  }
+  100% {
+    background-position: 100% 50%;
+  }
+}
+
+/* --- Organic blurred "blob" decorations. Place inside a
+   `relative isolate overflow-hidden` parent, behind content. ------- */
+.blob {
+  position: absolute;
+  z-index: -10;
+  pointer-events: none;
+  border-radius: 42% 58% 63% 37% / 41% 44% 56% 59%;
+  filter: blur(52px);
+  opacity: 0.55;
+}
+.blob-accent {
+  background: var(--color-accent);
+}
+.blob-moss {
+  background: var(--color-moss);
+}
+.blob-soft {
+  background: var(--color-moss-soft);
+}
+@media (prefers-reduced-motion: no-preference) {
+  .blob-morph {
+    animation: blob-morph 26s ease-in-out infinite alternate;
+  }
+}
+@keyframes blob-morph {
+  0% {
+    border-radius: 42% 58% 63% 37% / 41% 44% 56% 59%;
+    transform: rotate(0deg) scale(1);
+  }
+  50% {
+    border-radius: 58% 42% 37% 63% / 56% 59% 41% 44%;
+    transform: rotate(8deg) scale(1.06);
+  }
+  100% {
+    border-radius: 42% 58% 63% 37% / 41% 44% 56% 59%;
+    transform: rotate(0deg) scale(1);
+  }
+}
+
+/* --- Infinite logo marquee. Track has two identical halves;
+   translating -50% loops seamlessly. Hover pauses. ---------------- */
+@keyframes marquee {
+  to {
+    transform: translateX(-50%);
+  }
+}
+@media (prefers-reduced-motion: no-preference) {
+  .animate-marquee {
+    animation: marquee 30s linear infinite;
+  }
+  .marquee-track:hover .animate-marquee {
+    animation-play-state: paused;
+  }
+}
+
+/* --- Lenis smooth scroll (see components/SmoothScroll.tsx). Recommended
+   baseline CSS so Lenis doesn't fight native/CSS smooth scrolling. --------- */
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+.lenis.lenis-smooth iframe {
+  pointer-events: none;
+}
+
+/* --- Floating particles: gentle drifting pollen/seeds (see
+   components/FloatingParticles.tsx). Per-particle variation via CSS vars set
+   inline. Static (invisible) under reduced motion. ----------------------- */
+.particle {
+  position: absolute;
+  border-radius: 9999px;
+  opacity: 0;
+  will-change: transform, opacity;
+}
+@media (prefers-reduced-motion: no-preference) {
+  .particle {
+    animation: float-up var(--p-dur, 18s) ease-in-out var(--p-delay, 0s) infinite;
+  }
+}
+@keyframes float-up {
+  0% {
+    transform: translate3d(0, 0, 0) scale(0.8);
+    opacity: 0;
+  }
+  15% {
+    opacity: var(--p-opacity, 0.4);
+  }
+  85% {
+    opacity: var(--p-opacity, 0.4);
+  }
+  100% {
+    transform: translate3d(var(--p-sway, 24px), calc(-1 * var(--p-rise, 160px)), 0)
+      scale(1);
+    opacity: 0;
+  }
+}

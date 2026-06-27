@@ -1,0 +1,67 @@
+{
+  "version": 1,
+  "topic": "Nech mě růst — proč nesekat",
+  "format": "4:5",
+  "theme": "meadow",
+  "fontScale": 1,
+  "align": "left",
+  "branding": { "csopLogo": true, "publicita": false },
+  "slides": [
+    {
+      "type": "cover",
+      "eyebrow": "Nech mě růst",
+      "title": "Nesekej a uvidíš, kdo se vrátí.",
+      "subtitle": "Když trávník chvíli necháme být, promění se v pestrou louku plnou života. UPRAV TEXT podle kampaně."
+    },
+    {
+      "type": "fact",
+      "eyebrow": "Proč to děláme",
+      "title": "Méně sekání, více života",
+      "body": "Pravidelně sečený trávník je pro hmyz i ptáky téměř poušť. Stačí vynechat pár sečí a vrátí se květy, motýli i divoké včely. UPRAV TEXT / DOPLŇ ČÍSLA."
+    },
+    {
+      "type": "plant",
+      "status": "Domácí druh",
+      "name": "Kopretina bílá",
+      "latin": "Leucanthemum vulgare",
+      "fact": "Typická louková kytka, která z poseraného trávníku zmizí jako první. Při méně časté seči se rychle vrací. UPRAV TEXT.",
+      "use": "Vydatná pastva pro motýly a samotářské včely. DOPLŇ DALŠÍ.",
+      "warning": null
+    },
+    {
+      "type": "photo",
+      "imageData": "",
+      "imageCaption": "Kopretina bílá (Leucanthemum vulgare)"
+    },
+    {
+      "type": "tip",
+      "eyebrow": "Tip",
+      "title": "Sekej mozaikovitě",
+      "body": "Nech vždy část plochy nesečenou, ať má hmyz kam utéct. Příště posekej jinou část. UPRAV TEXT."
+    },
+    {
+      "type": "outro",
+      "eyebrow": "Přidej se",
+      "title": "Nech kus zahrady růst",
+      "body": "I malý nesečený kout pomáhá. Vyfoť svou louku a označ nás. UPRAV TEXT.",
+      "cta": "Sleduj Nech mě růst"
+    }
+  ],
+  "captions": [
+    {
+      "label": "Varianta A — edukativní",
+      "text": "🌼 Nech mě růst! Když trávník chvíli nesekáme, vrátí se do něj život.\n\nUPRAV TEXT podle kampaně — vysvětli, proč méně sekat a co tím získáme.\n\nA jak je to u vás? 👇",
+      "hashtags": ["#nechmerust", "#nesekej", "#louka", "#biodiverzita", "#priroda", "#zahrada", "#hmyz", "#ochranaprirody"]
+    },
+    {
+      "label": "Varianta B — vyprávěcí",
+      "text": "Stačí přestat sekat a začnou se dít věci. 🦋\n\nUPRAV TEXT — příběh proměny trávníku v louku.\n\nNech to růst s námi. 🌿",
+      "hashtags": ["#nechmerust", "#louka", "#motyli", "#divokevcely", "#priroda", "#nesekej", "#biodiverzita"]
+    },
+    {
+      "label": "Varianta C — výzva k akci",
+      "text": "💚 Necháš kus zahrady růst?\n\nUPRAV TEXT — vyzvi lidi, ať vynechají seč a zapojí se.\n\nNapiš nám a přidej se! 🌼",
+      "hashtags": ["#nechmerust", "#nesekej", "#zahrada", "#louka", "#priroda", "#biodiverzita", "#pomocprirode"]
+    }
+  ]
+}
