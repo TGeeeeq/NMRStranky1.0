@@ -84,7 +84,7 @@ export function HeroMotion({
             fill
             priority={priority}
             sizes="100vw"
-            className="object-cover"
+            className="hero-kenburns object-cover"
           />
         </div>
       </motion.div>

@@ -219,6 +219,26 @@
   }
 }
 
+/* --- Hero "Ken Burns": pomalý kinematický nájezd na hero fotku. Doplňuje
+   parallax (ten je na dotykových zařízeních vypnutý), takže hero žije i na
+   mobilu. Ctí reduced-motion — animace běží jen pod no-preference. -------- */
+.hero-kenburns {
+  transform-origin: 50% 50%;
+}
+@media (prefers-reduced-motion: no-preference) {
+  .hero-kenburns {
+    animation: hero-kenburns 24s ease-in-out infinite alternate;
+  }
+}
+@keyframes hero-kenburns {
+  0% {
+    transform: scale(1);
+  }
+  100% {
+    transform: scale(1.09);
+  }
+}
+
 /* --- Organic blurred "blob" decorations. Place inside a
    `relative isolate overflow-hidden` parent, behind content. ------- */
 .blob {
