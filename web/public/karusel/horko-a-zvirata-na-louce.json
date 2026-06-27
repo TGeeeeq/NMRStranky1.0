@@ -4,7 +4,6 @@
   "kind": "animals",
   "format": "4:5",
   "theme": "meadow",
-  "accent": "#c0701c",
   "fontScale": 1,
   "align": "left",
   "branding": { "csopLogo": true, "publicita": false },

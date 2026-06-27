@@ -270,8 +270,8 @@ function OutroBody({
 
 /** Fotografie v herbářové kartičce (světlá karta, okraj v akcentu, popisek). */
 function PhotoBody({ slide, palette, fs }: { slide: Slide; palette: Palette; fs: number }) {
-  const card = "#f6f1e2"
-  const ink = "#27372a"
+  const card = "#faf7f0" // --color-surface-alt
+  const ink = "#2a3530" // --color-text
   return (
     <div
       style={{
@@ -439,8 +439,8 @@ function Warning({ children, palette, fs }: { children: React.ReactNode; palette
         display: "flex",
         gap: 22,
         alignItems: "flex-start",
-        borderLeft: "5px solid #c0492f",
-        background: "rgba(192,73,47,0.12)",
+        borderLeft: "5px solid #a4422c",
+        background: "rgba(164,66,44,0.12)",
         borderRadius: "0 12px 12px 0",
         padding: "24px 30px",
       }}
@@ -449,7 +449,7 @@ function Warning({ children, palette, fs }: { children: React.ReactNode; palette
       <div>
         <div
           style={{
-            color: "#e08a72",
+            color: "#d98b6f",
             fontSize: 23 * fs,
             fontWeight: 800,
             textTransform: "uppercase",

@@ -64,7 +64,7 @@ export function DesignPanel({
           <Input
             type="color"
             className="h-10 w-16 cursor-pointer p-1"
-            value={carousel.accent ?? "#e8b04b"}
+            value={carousel.accent ?? "#c89858"}
             onChange={(e) => onChange({ accent: e.target.value })}
           />
           <Input
