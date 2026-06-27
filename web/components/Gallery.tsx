@@ -56,26 +56,26 @@ export function Gallery() {
     <section className="bg-surface py-16 sm:py-20">
       <Container>
         {/* Search */}
-        <div className="mx-auto mb-6 max-w-md">
+        <div className="mx-auto mb-5 max-w-md sm:mb-6">
           <input
             type="search"
             value={query}
             onChange={(e) => setQuery(e.target.value)}
             placeholder="Hledat zvíře..."
             aria-label="Hledat zvíře"
-            className="w-full rounded-pill border border-border bg-surface px-5 py-3 text-text shadow-soft outline-none focus:border-moss focus:ring-2 focus:ring-moss/30"
+            className="w-full rounded-pill border border-border bg-surface px-4 py-2.5 text-sm text-text shadow-soft outline-none focus:border-moss focus:ring-2 focus:ring-moss/30 sm:px-5 sm:py-3 sm:text-base"
           />
         </div>
 
-        {/* Filters */}
-        <div className="mb-8 flex flex-wrap justify-center gap-2">
+        {/* Filters — vodorovně rolovatelné na mobilu, zalomené a vycentrované na větších displejích */}
+        <div className="mb-8 -mx-4 flex gap-1.5 overflow-x-auto px-4 pb-1 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden sm:mx-0 sm:flex-wrap sm:justify-center sm:gap-2 sm:overflow-visible sm:px-0 sm:pb-0">
           {["Vše", ...galleryAnimals.map((a) => a.name)].map((name) => (
             <button
               key={name}
               type="button"
               onClick={() => setFilter(name)}
               className={cn(
-                "rounded-pill border px-4 py-1.5 text-sm font-medium transition-colors",
+                "shrink-0 whitespace-nowrap rounded-pill border px-3 py-1 text-xs font-medium transition-colors sm:px-4 sm:py-1.5 sm:text-sm",
                 filter === name
                   ? "border-moss bg-moss text-cream"
                   : "border-border bg-surface text-text hover:bg-surface-alt",

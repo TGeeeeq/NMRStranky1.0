@@ -125,8 +125,10 @@ export function Navbar() {
                     onClick={() => setOpen(false)}
                     aria-current={isActive(item.href) ? "page" : undefined}
                     className={cn(
-                      "block py-2.5 text-base font-medium text-text",
-                      isActive(item.href) && "text-moss",
+                      "block rounded-lg px-3 py-2.5 text-base font-medium transition-colors",
+                      isActive(item.href)
+                        ? "border-l-4 border-moss bg-moss/10 pl-2 font-semibold text-moss"
+                        : "border-l-4 border-transparent pl-2 text-text hover:bg-surface-alt",
                     )}
                   >
                     {item.label}

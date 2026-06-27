@@ -5,7 +5,6 @@ import { Heart, Sprout, Users, Leaf, Mail } from "lucide-react";
 import { Container } from "@/components/Container";
 import { SectionHeader } from "@/components/SectionHeader";
 import { Reveal } from "@/components/Reveal";
-import { VideoFacade } from "@/components/VideoFacade";
 import { HeroMotion, HeroItem, HeroUnderline } from "@/components/HeroMotion";
 import { StatsBand } from "@/components/StatsBand";
 import { SectionDivider } from "@/components/SectionDivider";
@@ -188,24 +187,7 @@ export default function Home() {
         </Container>
       </section>
 
-      <SectionDivider from="bg-surface-alt" to="fill-moss-deep" />
-
-      {/* Video */}
-      <section id="video-section" className="bg-moss-deep py-20 sm:py-24">
-        <Container>
-          <Reveal>
-            <VideoFacade
-              poster="/assets/video-poster.webp"
-              title="Naše společné procházky"
-            />
-            <p className="mt-5 text-center text-cream/85">
-              Naše společné procházky
-            </p>
-          </Reveal>
-        </Container>
-      </section>
-
-      <SectionDivider from="bg-moss-deep" to="fill-surface" flip />
+      <SectionDivider from="bg-surface-alt" to="fill-surface" />
 
       {/* Social */}
       <section className="bg-surface py-20 sm:py-24">

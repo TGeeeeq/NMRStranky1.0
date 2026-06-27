@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { PageHero } from "@/components/PageHero";
 import { Gallery } from "@/components/Gallery";
+import { GalleryVideos } from "@/components/GalleryVideos";
 import { SocialSection } from "@/components/SocialSection";
 
 export const metadata: Metadata = {
@@ -20,7 +21,8 @@ export default function Galerie() {
         subtitle="Nahlédněte do života obyvatel Louky skrze objektiv fotoaparátu."
       />
       <Gallery />
-      <SocialSection tone="alt" />
+      <GalleryVideos />
+      <SocialSection tone="light" />
     </>
   );
 }
