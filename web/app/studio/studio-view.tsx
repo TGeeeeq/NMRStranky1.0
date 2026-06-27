@@ -227,7 +227,7 @@ export default function StudioView() {
 
             <TabsContent value="obsah" className="mt-4">
               {activeSlide ? (
-                <EditorPanel slide={activeSlide} onChange={patchSlide} />
+                <EditorPanel slide={activeSlide} kind={carousel.kind} onChange={patchSlide} />
               ) : (
                 <p className="text-sm text-muted-foreground">Vyberte slajd.</p>
               )}

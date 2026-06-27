@@ -1,6 +1,6 @@
 "use client"
 
-import type { Carousel, Theme } from "@/lib/carousel-schema"
+import { KIND_LABELS, type Carousel, type Kind, type Theme } from "@/lib/carousel-schema"
 import { Label } from "@/components/ui/label"
 import { Input } from "@/components/ui/input"
 import { Switch } from "@/components/ui/switch"
@@ -23,6 +23,25 @@ export function DesignPanel({
 }) {
   return (
     <div className="space-y-6">
+      <div className="space-y-2">
+        <Label>Typ obsahu</Label>
+        <Select value={carousel.kind} onValueChange={(v) => onChange({ kind: v as Kind })}>
+          <SelectTrigger>
+            <SelectValue />
+          </SelectTrigger>
+          <SelectContent>
+            {(Object.keys(KIND_LABELS) as Kind[]).map((k) => (
+              <SelectItem key={k} value={k}>
+                {KIND_LABELS[k]}
+              </SelectItem>
+            ))}
+          </SelectContent>
+        </Select>
+        <p className="text-xs text-muted-foreground">
+          Přizpůsobí popisky kartičky druhu (rostliny / živočichové / jiné).
+        </p>
+      </div>
+
       <div className="space-y-2">
         <Label>Barevné téma</Label>
         <Select value={carousel.theme} onValueChange={(v) => onChange({ theme: v as Theme })}>

@@ -17,6 +17,14 @@ export const SLIDE_H = 1350 // formát 4:5
 export const themeSchema = z.enum(["forest", "meadow", "bark"])
 export type Theme = z.infer<typeof themeSchema>
 
+/**
+ * Druh obsahu karuselu – řídí popisky kartičky „druh" (slide type `plant`),
+ * aby seděly na rostliny, živočichy nebo libovolné jiné téma.
+ * Výchozí „plants" kvůli zpětné kompatibilitě se staršími JSON soubory.
+ */
+export const kindSchema = z.enum(["plants", "animals", "other"])
+export type Kind = z.infer<typeof kindSchema>
+
 export const slideTypeSchema = z.enum(["cover", "plant", "fact", "tip", "outro", "photo"])
 export type SlideType = z.infer<typeof slideTypeSchema>
 
@@ -61,6 +69,8 @@ export type Branding = z.infer<typeof brandingSchema>
 export const carouselSchema = z.object({
   version: z.literal(1).catch(1).default(1),
   topic: z.string().catch("Nový karusel").default("Nový karusel"),
+  /** Druh obsahu (rostliny / živočichové / jiné) – přizpůsobí popisky kartiček. */
+  kind: kindSchema.catch("plants").default("plants"),
   format: z.literal("4:5").catch("4:5").default("4:5"),
   theme: themeSchema.catch("forest").default("forest"),
   /** Volitelný přebíjející akcent (hex), jinak akcent dle theme */
@@ -94,6 +104,73 @@ export function parseCarousel(input: unknown): ParseResult {
     ok: false,
     error: `Soubor neodpovídá očekávanému formátu karuselu:\n${issues}`,
   }
+}
+
+/* ----------------------------- popisky dle druhu obsahu ----------------------------- */
+
+/** Lidský název druhu obsahu (do přepínače v panelu Design). */
+export const KIND_LABELS: Record<Kind, string> = {
+  plants: "Rostliny",
+  animals: "Živočichové",
+  other: "Jiná témata",
+}
+
+/** Popisky kartičky „druh" (slide type `plant`), přizpůsobené druhu obsahu. */
+export type SpeciesLabels = {
+  /** Název typu slajdu v editoru / náhledech */
+  typeName: string
+  /** Editor: štítek stavu */
+  status: string
+  /** Editor + náhledy: hlavní název */
+  name: string
+  /** Editor: druhotný (latinský) řádek */
+  latin: string
+  /** Editor: pole „zajímavost" */
+  fact: string
+  /** Editor: pole „use" */
+  use: string
+  /** Slajd: nadpis bloku se zajímavostí */
+  cardFact: string
+  /** Slajd: nadpis bloku „use" */
+  cardUse: string
+}
+
+export const SPECIES_LABELS: Record<Kind, SpeciesLabels> = {
+  plants: {
+    typeName: "Druh / rostlina",
+    status: "Štítek stavu (např. „Invazní druh“)",
+    name: "Název druhu",
+    latin: "Latinský název",
+    fact: "Zajímavost",
+    use: "K čemu je dobrá?",
+    cardFact: "Zajímavost",
+    cardUse: "K čemu je dobrá",
+  },
+  animals: {
+    typeName: "Druh / živočich",
+    status: "Štítek (např. „Kráva“, „Obyvatel od 2021“)",
+    name: "Jméno / druh",
+    latin: "Druh / plemeno",
+    fact: "Zajímavost",
+    use: "Povaha / jak mu pomáháme",
+    cardFact: "Zajímavost",
+    cardUse: "Povaha",
+  },
+  other: {
+    typeName: "Kartička",
+    status: "Štítek",
+    name: "Název",
+    latin: "Podtitulek",
+    fact: "Zajímavost",
+    use: "Detail",
+    cardFact: "Zajímavost",
+    cardUse: "Detail",
+  },
+}
+
+/** Vrátí popisky kartičky pro daný druh obsahu (fallback rostliny). */
+export function speciesLabels(kind: Kind): SpeciesLabels {
+  return SPECIES_LABELS[kind] ?? SPECIES_LABELS.plants
 }
 
 /** Prázdný (výchozí) karusel pro start bez nahraného souboru. */

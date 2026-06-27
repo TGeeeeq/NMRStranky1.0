@@ -1,7 +1,7 @@
 "use client"
 
 import { ChevronUp, ChevronDown, Trash2, Plus } from "lucide-react"
-import type { Carousel } from "@/lib/carousel-schema"
+import { speciesLabels, type Carousel, type Kind } from "@/lib/carousel-schema"
 import { Button } from "@/components/ui/button"
 import { cn } from "@/lib/utils"
 import { ScaledSlide } from "./scaled-slide"
@@ -53,9 +53,9 @@ export function SlideThumbnails({
             <div className="flex flex-1 flex-col justify-between py-0.5">
               <button type="button" onClick={() => onSelect(i)} className="text-left">
                 <div className="text-xs font-semibold">
-                  {i + 1}. {slide.title || slide.name || slide.eyebrow || typeLabel(slide.type)}
+                  {i + 1}. {slide.title || slide.name || slide.eyebrow || typeLabel(slide.type, carousel.kind)}
                 </div>
-                <div className="text-[11px] capitalize text-muted-foreground">{typeLabel(slide.type)}</div>
+                <div className="text-[11px] capitalize text-muted-foreground">{typeLabel(slide.type, carousel.kind)}</div>
               </button>
 
               <div className="flex items-center gap-0.5 opacity-60 transition-opacity group-hover:opacity-100">
@@ -83,11 +83,11 @@ export function SlideThumbnails({
   )
 }
 
-function typeLabel(type: string): string {
+function typeLabel(type: string, kind: Kind): string {
   return (
     {
       cover: "Úvodní",
-      plant: "Druh / bylina",
+      plant: speciesLabels(kind).typeName,
       fact: "Zajímavost",
       tip: "Tip",
       outro: "Závěr",
