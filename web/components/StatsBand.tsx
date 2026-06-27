@@ -1,19 +1,15 @@
 import { Container } from "@/components/Container";
 import { Reveal } from "@/components/Reveal";
 import { CountUp } from "@/components/CountUp";
-import { residents } from "@/lib/animals";
 
 /**
  * Impact strip with count-up numbers.
- *
- * `value` for the animal count is derived from the real data (lib/animals.ts).
- * The other three are marketing figures — CONFIRM with the client and edit here.
+ * Client-confirmed marketing figures — edit here.
  */
 const stats: { to: number; suffix?: string; prefix?: string; label: string }[] = [
-  { to: residents.length, suffix: "+", label: "zvířecích obyvatel v péči" },
-  // TODO(klient): doplnit reálná čísla
+  { to: 100, suffix: "+", label: "zvířecích lučních obyvatel" },
   { to: 5, suffix: "", label: "let na Louce" },
-  { to: 30, suffix: "+", label: "společných procházek" },
+  { to: 60, suffix: "+", label: "společných procházek, festivalů a Loukád" },
   { to: 100, suffix: " %", label: "transparentní financování" },
 ];
 
