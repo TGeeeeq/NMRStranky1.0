@@ -1,0 +1,95 @@
+{
+  "version": 1,
+  "topic": "Horko a zvířata na louce",
+  "format": "4:5",
+  "theme": "meadow",
+  "accent": "#c0701c",
+  "fontScale": 1,
+  "align": "left",
+  "branding": { "csopLogo": true, "publicita": false },
+  "slides": [
+    {
+      "type": "cover",
+      "eyebrow": "Nech mě růst",
+      "title": "Když louka hoří horkem",
+      "subtitle": "Tropické dny přes 40 °C jsou zkouškou i pro zvířata na naší louce. Jak to zvládají — a jak jim můžeme ulevit?"
+    },
+    {
+      "type": "fact",
+      "eyebrow": "Proč o tom mluvíme",
+      "title": "Louka v tropickém dni",
+      "body": "Při teplotách přes 40 °C se půda vysušuje, kaluže mizí a kvetoucí rostliny vadnou. Hmyz, ptáci i drobní savci ztrácejí vodu i stín a zoufale hledají, kam se schovat."
+    },
+    {
+      "type": "photo",
+      "imageData": "",
+      "imageCaption": "Naše rozpálená louka v poledním žáru — sem doplň vlastní fotku"
+    },
+    {
+      "type": "plant",
+      "status": "Opylovači louky",
+      "name": "Divoké včely a čmeláci",
+      "latin": "Apoidea / Bombus",
+      "fact": "Čmeláci nosí hustý „kožíšek\" a v horku se snadno přehřejí. V největším parnu přestávají létat, schovávají se ve stínu a vějířováním křídel chladí hnízdo. Bez vody a kvetoucích rostlin rychle slábnou.",
+      "warning": null
+    },
+    {
+      "type": "plant",
+      "status": "Noční obyvatel",
+      "name": "Ježek západní",
+      "latin": "Erinaceus europaeus",
+      "fact": "Přes den se ukrývá v hromadě listí a trávy. Za dlouhého sucha nenajde dost vody ani žížal a brouků, kterými se živí — a vysílený a dehydrovaný pak vychází ven i za bílého dne.",
+      "warning": null
+    },
+    {
+      "type": "plant",
+      "status": "Zpěvci a hnízdící druhy",
+      "name": "Ptáci na louce",
+      "latin": "Aves",
+      "fact": "Ptáci se nepotí — chladí se zrychleným dýcháním a koupelí. V parnu potřebují mělkou vodu k pití i ke koupání a stín, kam se schovají před poledním sluncem.",
+      "warning": null
+    },
+    {
+      "type": "tip",
+      "eyebrow": "Jak pomoct · 1",
+      "title": "Nech jim vodu",
+      "body": "Postav do stínu mělkou misku s vodou a vlož do ní pár kamínků nebo větvičku — hmyz tak má kde přistát a neutopí se. Vodu denně měň. Pomůžeš ptákům, ježkům i opylovačům naráz."
+    },
+    {
+      "type": "tip",
+      "eyebrow": "Jak pomoct · 2",
+      "title": "Nesekej a nech růst",
+      "body": "Vysoká tráva a kvetoucí louka drží vlhkost, dávají stín a úkryt. Posekaný trávník se v parnu mění v rozpálenou poušť. Nech aspoň kus plochy růst — pro hmyz i drobné savce je to záchrana."
+    },
+    {
+      "type": "tip",
+      "eyebrow": "Jak pomoct · 3",
+      "title": "Nech je odpočívat",
+      "body": "Najdeš-li za vedra vysíleného ježka nebo mládě venku přes den, dej mu vodu a klid — nikdy ne mléko. Pokud je v přímém ohrožení, ozvi se nejbližší záchranné stanici."
+    },
+    {
+      "type": "outro",
+      "eyebrow": "Přidej se",
+      "title": "Malá miska, velká pomoc",
+      "body": "I trocha stínu a vody rozhoduje o tom, kdo vedro přečká. Vyfoť svůj koutek pro zvířata a označ nás.",
+      "cta": "Sleduj Nech mě růst"
+    }
+  ],
+  "captions": [
+    {
+      "label": "Varianta A — edukativní",
+      "text": "🔥 Přes 40 °C ve stínu. Vedro, které prověří i zvířata na naší louce.\n\nČmeláci přestávají létat, ježci marně hledají vodu, ptáci lapají po dechu. Pár jednoduchých věcí jim ale dokáže zachránit den:\n\n💧 mělká miska s vodou a kamínky ve stínu\n🌿 nesekat — vysoká tráva drží vlhko a stín\n🦔 vysílené zvíře nekrmit mlékem, zavolat záchrannou stanici\n\nA jak pomáháte zvířatům v horku vy? 👇",
+      "hashtags": ["#nechmerust", "#horko", "#vedro", "#zvirata", "#louka", "#priroda", "#biodiverzita", "#pomoczviratum", "#ochranaprirody", "#jezek"]
+    },
+    {
+      "label": "Varianta B — vyprávěcí",
+      "text": "Poledne, přes 40 °C, a louka ztichne. 🌾\n\nVčely se choulí ve stínu, ptáci se neukážou, ježek čeká na noc, až přijde trochu chladu. V takovém vedru rozhoduje každá miska vody a každý kus neposekané trávy.\n\nNech kus louky růst a postav zvířatům pítko. Příroda ti to vrátí. 💚",
+      "hashtags": ["#nechmerust", "#vedro", "#horko", "#louka", "#divokevcely", "#cmelaci", "#ptaci", "#priroda", "#nesekej"]
+    },
+    {
+      "label": "Varianta C — výzva k akci",
+      "text": "💧 Pomoz zvířatům přežít vedro — zabere to pět minut.\n\n1️⃣ Mělká miska vody s kamínky do stínu\n2️⃣ Nech kus zahrady nebo louky nesekaný\n3️⃣ Sdílej tenhle příspěvek dál\n\nKdo se přidá? Napiš nám do komentářů. 🌼",
+      "hashtags": ["#nechmerust", "#horko", "#vedro", "#pomoczviratum", "#zahrada", "#louka", "#priroda", "#biodiverzita", "#ochranaprirody"]
+    }
+  ]
+}
