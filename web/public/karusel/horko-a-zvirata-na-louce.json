@@ -1,0 +1,101 @@
+{
+  "version": 1,
+  "topic": "Horko a naši zvířecí obyvatelé",
+  "kind": "animals",
+  "format": "4:5",
+  "theme": "meadow",
+  "fontScale": 1,
+  "align": "left",
+  "branding": { "csopLogo": true, "publicita": false },
+  "slides": [
+    {
+      "type": "cover",
+      "eyebrow": "Nech mě růst",
+      "title": "Když Louka praží přes 40 °C",
+      "subtitle": "Tropické dny jsou zkouškou i pro naše zvířecí obyvatele. Jak vedro zvládají — a jak jim spolu ulevujeme?"
+    },
+    {
+      "type": "fact",
+      "eyebrow": "Co to obnáší",
+      "title": "Léto na Louce",
+      "body": "Při teplotách přes 40 °C se každé zvíře schovává do stínu a hledá vodu. My doplňujeme napajedla několikrát denně, přesouváme pastvu na ráno a večer a hlídáme, aby měl každý kam se schovat před sluncem."
+    },
+    {
+      "type": "plant",
+      "status": "Krávy",
+      "name": "Avala a Květa",
+      "latin": "Naše dámy ze stáda",
+      "fact": "Avala miluje běhání po Louce, klidná Květa je její věrná společnice. V parnu ale i ony zpomalí — krávy se těžko ochlazují a vedro je vyčerpává víc, než to vypadá.",
+      "use": "Stín, vydatné napajedlo a klid v poledním žáru. Pastvu necháváme na chladnější ráno a podvečer.",
+      "warning": null
+    },
+    {
+      "type": "plant",
+      "status": "Prasata",
+      "name": "Princezna a Flíček",
+      "latin": "Mistři bláta",
+      "fact": "Prasata se neumí potit, takže se v horku přehřejí nejrychleji z celé Louky. Princezna i Flíček (milovník drbání na bříšku) to řeší po svém — válením v chladivém blátě.",
+      "use": "Stinné bahniště a kaliště je pro ně životně důležité — bláto je jejich „opalovací krém\" i klimatizace zároveň.",
+      "warning": null
+    },
+    {
+      "type": "plant",
+      "status": "Osel",
+      "name": "Karel",
+      "latin": "Hravý oslík s velkým srdcem",
+      "fact": "Osli pocházejí z teplých krajů, sucho jim tedy svědčí víc než zima. I Karel ale potřebuje stín a stálý přísun vody — a v dešti přístřešek, protože oslí srst na rozdíl od koní vodu nedrží.",
+      "use": "Stín, čistá voda a kopýtka v suchu. Za parna ocení i klidné drbání ve stínu místo procházek.",
+      "warning": null
+    },
+    {
+      "type": "plant",
+      "status": "Ovce",
+      "name": "Pogo a Lucinka",
+      "latin": "Energická kamarádka a ovčí babička",
+      "fact": "Hustá vlna ovce v zimě hřeje, v létě ale drží horko. Po jarním stříhání se Pogo i Lucinka v parnu cítí mnohem líp a tráví poledne odpočinkem ve stínu.",
+      "use": "Včasné stříhání, stín a voda. Hlídáme i mouchy a parazity, kteří v horku zvířata nejvíc trápí.",
+      "warning": null
+    },
+    {
+      "type": "fact",
+      "eyebrow": "Jak jim pomáháme",
+      "title": "Stín, voda, klid",
+      "body": "Čistá voda v každém výběhu a denně doplňovaná. Stinné přístřešky a stromy. Minerální liz na doplnění solí ztracených v horku. A přesunutý režim dne — práce i pastva v chladnějších hodinách."
+    },
+    {
+      "type": "tip",
+      "eyebrow": "Jak můžeš pomoct ty",
+      "title": "Přidej se k péči",
+      "body": "Provoz Louky v horku stojí víc vody, krmení i péče. Můžeš si některého z obyvatel virtuálně adoptovat nebo přispět přes Click & Feed — i malá pomoc jim pomůže přečkat léto ve zdraví."
+    },
+    {
+      "type": "photo",
+      "imageData": "",
+      "imageCaption": "Naši obyvatelé ve stínu za parného dne — sem doplň vlastní fotku"
+    },
+    {
+      "type": "outro",
+      "eyebrow": "Děkujeme",
+      "title": "Společně to léto zvládneme",
+      "body": "Díky vám má každý obyvatel Louky stín, vodu a klid i v největším vedru. Vyfoť, jak pomáháš zvířatům v horku ty, a označ nás.",
+      "cta": "Sleduj Nech mě růst"
+    }
+  ],
+  "captions": [
+    {
+      "label": "Varianta A — edukativní",
+      "text": "🔥 Přes 40 °C ve stínu. Vedro prověří i naše zvířecí obyvatele.\n\nKrávy Avala a Květa zpomalí, prasata Princezna a Flíček se válí v blátě, ovce Pogo a Lucinka jsou rády za jarní stříhání. Každý to zvládá po svém — a my jim pomáháme:\n\n💧 čerstvá voda několikrát denně\n🌳 stín a přístřešky v každém výběhu\n🧂 minerální liz a pastva v chladnějších hodinách\n\nA jak pomáháte zvířatům v horku vy? 👇",
+      "hashtags": ["#nechmerust", "#horko", "#vedro", "#zvireciobyvatele", "#louka", "#zachrana", "#farma", "#adopce", "#priroda", "#pomoczviratum"]
+    },
+    {
+      "label": "Varianta B — vyprávěcí",
+      "text": "Poledne, přes 40 °C, a Louka ztichne. 🌾\n\nKarel oslík podřimuje ve stínu, Princezna se spokojeně válí v blátě, krávy přežvykují u napajedla. V takovém vedru rozhoduje každá kapka vody a každý kus stínu.\n\nStaráme se, aby měl každý obyvatel, co potřebuje. Díky, že nám v tom pomáháte. 💚",
+      "hashtags": ["#nechmerust", "#vedro", "#horko", "#louka", "#osel", "#kravy", "#prasatka", "#ovce", "#priroda"]
+    },
+    {
+      "label": "Varianta C — výzva k akci",
+      "text": "💧 Pomoz našim zvířatům přežít vedro.\n\nLéto na Louce znamená víc vody, krmení i péče. Můžeš:\n1️⃣ virtuálně adoptovat některého obyvatele\n2️⃣ přispět přes Click & Feed\n3️⃣ sdílet tenhle příspěvek dál\n\nKdo se přidá? 🌼",
+      "hashtags": ["#nechmerust", "#horko", "#vedro", "#adopce", "#clickandfeed", "#pomoczviratum", "#louka", "#priroda", "#ochranaprirody"]
+    }
+  ]
+}

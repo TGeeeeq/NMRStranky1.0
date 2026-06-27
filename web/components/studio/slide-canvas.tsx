@@ -1,5 +1,13 @@
 import type { CSSProperties } from "react"
-import { SLIDE_H, SLIDE_W, type Branding, type Carousel, type Slide } from "@/lib/carousel-schema"
+import {
+  SLIDE_H,
+  SLIDE_W,
+  speciesLabels,
+  type Branding,
+  type Carousel,
+  type Slide,
+  type SpeciesLabels,
+} from "@/lib/carousel-schema"
 import { resolvePalette, type Palette } from "./theme"
 
 // Mapováno na self-hostované fonty webu „Nech mě růst" (viz app/globals.css):
@@ -24,6 +32,7 @@ export function SlideCanvas({ slide, carousel, index, total }: Props) {
   const palette = resolvePalette(carousel.theme, carousel.accent)
   const align = slide.align ?? carousel.align
   const fs = carousel.fontScale
+  const sLabels = speciesLabels(carousel.kind)
 
   const root: CSSProperties = {
     position: "relative",
@@ -57,7 +66,7 @@ export function SlideCanvas({ slide, carousel, index, total }: Props) {
           alignItems: align === "center" ? "center" : "flex-start",
         }}
       >
-        <SlideBody slide={slide} palette={palette} fs={fs} align={align} />
+        <SlideBody slide={slide} palette={palette} fs={fs} align={align} sLabels={sLabels} />
       </div>
 
       <Footer palette={palette} branding={carousel.branding} />
@@ -72,17 +81,19 @@ function SlideBody({
   palette,
   fs,
   align,
+  sLabels,
 }: {
   slide: Slide
   palette: Palette
   fs: number
   align: "left" | "center"
+  sLabels: SpeciesLabels
 }) {
   switch (slide.type) {
     case "cover":
       return <CoverBody slide={slide} palette={palette} fs={fs} />
     case "plant":
-      return <PlantBody slide={slide} palette={palette} fs={fs} align={align} />
+      return <PlantBody slide={slide} palette={palette} fs={fs} align={align} sLabels={sLabels} />
     case "tip":
       return <FactBody slide={slide} palette={palette} fs={fs} tip />
     case "outro":
@@ -136,11 +147,13 @@ function PlantBody({
   palette,
   fs,
   align,
+  sLabels,
 }: {
   slide: Slide
   palette: Palette
   fs: number
   align: "left" | "center"
+  sLabels: SpeciesLabels
 }) {
   return (
     <>
@@ -155,12 +168,12 @@ function PlantBody({
       ) : null}
 
       {slide.fact ? (
-        <Block palette={palette} fs={fs} label="Zajímavost">
+        <Block palette={palette} fs={fs} label={sLabels.cardFact}>
           {slide.fact}
         </Block>
       ) : null}
       {slide.use ? (
-        <Block palette={palette} fs={fs} label="K čemu je dobrá" accentLabel>
+        <Block palette={palette} fs={fs} label={sLabels.cardUse} accentLabel>
           {slide.use}
         </Block>
       ) : null}
@@ -257,8 +270,8 @@ function OutroBody({
 
 /** Fotografie v herbářové kartičce (světlá karta, okraj v akcentu, popisek). */
 function PhotoBody({ slide, palette, fs }: { slide: Slide; palette: Palette; fs: number }) {
-  const card = "#f6f1e2"
-  const ink = "#27372a"
+  const card = "#faf7f0" // --color-surface-alt
+  const ink = "#2a3530" // --color-text
   return (
     <div
       style={{
@@ -426,8 +439,8 @@ function Warning({ children, palette, fs }: { children: React.ReactNode; palette
         display: "flex",
         gap: 22,
         alignItems: "flex-start",
-        borderLeft: "5px solid #c0492f",
-        background: "rgba(192,73,47,0.12)",
+        borderLeft: "5px solid #a4422c",
+        background: "rgba(164,66,44,0.12)",
         borderRadius: "0 12px 12px 0",
         padding: "24px 30px",
       }}
@@ -436,7 +449,7 @@ function Warning({ children, palette, fs }: { children: React.ReactNode; palette
       <div>
         <div
           style={{
-            color: "#e08a72",
+            color: "#d98b6f",
             fontSize: 23 * fs,
             fontWeight: 800,
             textTransform: "uppercase",

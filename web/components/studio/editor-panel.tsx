@@ -1,6 +1,6 @@
 "use client"
 
-import type { Slide, SlideType } from "@/lib/carousel-schema"
+import { speciesLabels, type Kind, type Slide, type SlideType } from "@/lib/carousel-schema"
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
 import { Label } from "@/components/ui/label"
@@ -13,13 +13,16 @@ import {
 } from "@/components/ui/select"
 import { Switch } from "@/components/ui/switch"
 
-const TYPE_LABELS: Record<SlideType, string> = {
-  cover: "Úvodní (cover)",
-  plant: "Druh / bylina",
-  fact: "Zajímavost",
-  tip: "Tip",
-  outro: "Závěr / výzva",
-  photo: "Fotografie",
+/** Popisky typů slajdů; `plant` je dynamický podle druhu obsahu (viz níže). */
+function typeLabels(kind: Kind): Record<SlideType, string> {
+  return {
+    cover: "Úvodní (cover)",
+    plant: speciesLabels(kind).typeName,
+    fact: "Zajímavost",
+    tip: "Tip",
+    outro: "Závěr / výzva",
+    photo: "Fotografie",
+  }
 }
 
 /** Která pole se zobrazují pro který typ slajdu. */
@@ -32,32 +35,40 @@ const FIELDS: Record<SlideType, (keyof Slide)[]> = {
   photo: ["imageData", "imageCaption"],
 }
 
-const LABELS: Partial<Record<keyof Slide, string>> = {
-  eyebrow: "Nadpisek (malý nahoře)",
-  title: "Nadpis",
-  subtitle: "Podtitulek",
-  body: "Text",
-  status: "Štítek stavu (např. „Invazní druh“)",
-  name: "Název druhu",
-  latin: "Latinský název",
-  fact: "Zajímavost",
-  use: "K čemu je dobrá?",
-  warning: "Bezpečnostní varování",
-  cta: "Výzva k akci (tlačítko)",
-  imageData: "Fotografie",
-  imageCaption: "Popisek fotky",
+/** Popisky polí; pole kartičky „druh" se přizpůsobují druhu obsahu (kind). */
+function fieldLabels(kind: Kind): Partial<Record<keyof Slide, string>> {
+  const s = speciesLabels(kind)
+  return {
+    eyebrow: "Nadpisek (malý nahoře)",
+    title: "Nadpis",
+    subtitle: "Podtitulek",
+    body: "Text",
+    status: s.status,
+    name: s.name,
+    latin: s.latin,
+    fact: s.fact,
+    use: s.use,
+    warning: "Bezpečnostní varování",
+    cta: "Výzva k akci (tlačítko)",
+    imageData: "Fotografie",
+    imageCaption: "Popisek fotky",
+  }
 }
 
 const MULTILINE: (keyof Slide)[] = ["subtitle", "body", "fact", "use", "warning"]
 
 export function EditorPanel({
   slide,
+  kind,
   onChange,
 }: {
   slide: Slide
+  kind: Kind
   onChange: (patch: Partial<Slide>) => void
 }) {
   const fields = FIELDS[slide.type] ?? FIELDS.fact
+  const TYPE_LABELS = typeLabels(kind)
+  const LABELS = fieldLabels(kind)
 
   return (
     <div className="space-y-5">
