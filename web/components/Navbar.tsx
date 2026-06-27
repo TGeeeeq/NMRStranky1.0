@@ -85,9 +85,9 @@ export function Navbar() {
         </ul>
 
         <div className="flex items-center gap-3">
-          <CartButton />
+          {pathname.startsWith("/obchod") ? <CartButton /> : null}
           <Link
-            href="/virtualni-adopce"
+            href="/jak-se-zapojit"
             className="hidden items-center gap-2 rounded-pill bg-moss px-5 py-2 text-sm font-medium text-cream shadow-soft transition-transform hover:-translate-y-0.5 sm:inline-flex"
           >
             <Heart size={16} aria-hidden /> Přispět
@@ -137,7 +137,7 @@ export function Navbar() {
               ))}
               <li className="pt-3">
                 <Link
-                  href="/virtualni-adopce"
+                  href="/jak-se-zapojit"
                   onClick={() => setOpen(false)}
                   className="inline-flex w-full items-center justify-center gap-2 rounded-pill bg-moss px-5 py-3 font-medium text-cream"
                 >

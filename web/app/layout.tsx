@@ -6,6 +6,7 @@ import { SmoothScroll } from "@/components/SmoothScroll";
 import { Cursor } from "@/components/Cursor";
 import { MotionProvider } from "@/components/MotionProvider";
 import { CartProvider } from "@/components/shop/CartProvider";
+import { LeaveCartGuard } from "@/components/LeaveCartGuard";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://nechmerust.org"),
@@ -62,6 +63,7 @@ export default function RootLayout({
               {children}
             </main>
             <Footer />
+            <LeaveCartGuard />
           </CartProvider>
         </MotionProvider>
       </body>
