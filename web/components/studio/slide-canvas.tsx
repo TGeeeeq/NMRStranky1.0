@@ -50,7 +50,9 @@ export function SlideCanvas({ slide, carousel, index, total }: Props) {
     <div style={root}>
       <PaperGrain palette={palette} />
       <Vignette palette={palette} />
-      <BotanicalSprig palette={palette} />
+      <CornerSprig palette={palette} corner="top-right" />
+      <CornerSprig palette={palette} corner="bottom-left" />
+      <PlateFrame palette={palette} />
 
       <TopMarker palette={palette} index={index} total={total} fs={fs} />
 
@@ -392,7 +394,7 @@ function SpecimenTag({
         borderRadius: 4,
       }}
     >
-      <span style={{ width: 9, height: 9, borderRadius: 999, background: palette.accent }} />
+      <LeafMark palette={palette} size={22 * fs} />
       {children}
     </span>
   )
@@ -415,6 +417,9 @@ function Block({
     <div style={{ marginTop: 44, maxWidth: 880, borderTop: `1px solid ${palette.line}`, paddingTop: 28 }}>
       <div
         style={{
+          display: "flex",
+          alignItems: "center",
+          gap: 12,
           color: accentLabel ? palette.accent : palette.muted,
           fontSize: 24 * fs,
           fontWeight: 700,
@@ -423,6 +428,7 @@ function Block({
           marginBottom: 14,
         }}
       >
+        <LeafMark palette={palette} color={accentLabel ? palette.accent : palette.muted} size={22 * fs} />
         {label}
       </div>
       <p style={{ fontSize: 40 * fs, lineHeight: 1.4, color: palette.text, margin: 0 }}>{children}</p>
@@ -479,7 +485,8 @@ function Swipe({ palette, fs }: { palette: Palette; fs: number }) {
         fontSize: 28 * fs,
       }}
     >
-      <span style={{ width: 72, height: 2, background: palette.accent }} />
+      <span style={{ width: 56, height: 2, background: palette.accent }} />
+      <LeafMark palette={palette} size={28 * fs} />
       <span style={{ textTransform: "uppercase", letterSpacing: "0.22em" }}>Listujte →</span>
     </div>
   )
@@ -520,27 +527,153 @@ function Vignette({ palette }: { palette: Palette }) {
   )
 }
 
-/** Elegantní jednotahová botanická perokresba v rohu (přetéká okraj). */
-function BotanicalSprig({ palette }: { palette: Palette }) {
+/**
+ * Jeden herbářový lístek s obrysem a žilnatinou.
+ * Základna v počátku (0,0), špička míří nahoru (0,−L); umísťuje se přes
+ * `transform: translate(x y) rotate(rot)`. Volitelná jemná výplň dodává
+ * dojem lisované rostliny, žilky zůstávají vždy jen obrysové.
+ */
+function Leaf({
+  x,
+  y,
+  rot,
+  L = 70,
+  stroke,
+  fill = "none",
+  sw = 2.6,
+  fillOpacity = 1,
+}: {
+  x: number
+  y: number
+  rot: number
+  L?: number
+  stroke: string
+  fill?: string
+  sw?: number
+  fillOpacity?: number
+}) {
+  const w = L * 0.36
+  return (
+    <g transform={`translate(${x} ${y}) rotate(${rot})`} stroke={stroke} strokeLinecap="round" strokeLinejoin="round">
+      <path
+        d={`M0 0 C ${w} ${-L * 0.26} ${w * 0.62} ${-L * 0.82} 0 ${-L} C ${-w * 0.62} ${-L * 0.82} ${-w} ${-L * 0.26} 0 0 Z`}
+        fill={fill}
+        fillOpacity={fillOpacity}
+        strokeWidth={sw}
+      />
+      {/* středová žilka + boční žilky */}
+      <path d={`M0 ${-L * 0.08} L0 ${-L * 0.9}`} fill="none" strokeWidth={sw * 0.7} />
+      <path d={`M0 ${-L * 0.34} L ${w * 0.48} ${-L * 0.5}`} fill="none" strokeWidth={sw * 0.5} />
+      <path d={`M0 ${-L * 0.34} L ${-w * 0.48} ${-L * 0.5}`} fill="none" strokeWidth={sw * 0.5} />
+      <path d={`M0 ${-L * 0.56} L ${w * 0.4} ${-L * 0.69}`} fill="none" strokeWidth={sw * 0.5} />
+      <path d={`M0 ${-L * 0.56} L ${-w * 0.4} ${-L * 0.69}`} fill="none" strokeWidth={sw * 0.5} />
+    </g>
+  )
+}
+
+/**
+ * Botanická snítka v rohu — zakřivený stonek s pravidelně střídanými listy
+ * (obrys + žilnatina) a poupětem na špičce. Přetéká okraj jako lisovaná
+ * rostlina. Vykresluje se v obou protilehlých rozích pro vyvážení plochy.
+ */
+function CornerSprig({ palette, corner }: { palette: Palette; corner: "top-right" | "bottom-left" }) {
+  const isBottom = corner === "bottom-left"
+  const pos: CSSProperties = isBottom
+    ? { left: -64, bottom: -84, transform: "scaleX(-1) rotate(176deg)" }
+    : { right: -58, top: -72 }
+  const tint = palette.decor
+  const leafFill = palette.dark ? "rgba(255,255,255,0.05)" : "rgba(42,53,48,0.05)"
   return (
     <svg
-      width="560"
-      height="720"
-      viewBox="0 0 280 360"
-      style={{ position: "absolute", right: -90, top: -70, opacity: 0.16, pointerEvents: "none" }}
+      width="320"
+      height="420"
+      viewBox="0 0 300 400"
+      style={{ position: "absolute", opacity: isBottom ? 0.13 : 0.2, pointerEvents: "none", ...pos }}
       aria-hidden
       fill="none"
-      stroke={palette.decor}
-      strokeWidth={2.4}
-      strokeLinecap="round"
     >
-      <path d="M150 360 C 150 280 150 210 168 150 C 182 100 210 60 250 30" />
-      {/* listy podél stonku */}
-      <path d="M160 300 C 120 296 96 270 92 232 C 132 234 158 260 160 300 Z" />
-      <path d="M158 258 C 196 250 222 222 224 184 C 186 190 160 218 158 258 Z" />
-      <path d="M166 214 C 128 206 106 178 106 142 C 144 150 168 178 166 214 Z" />
-      <path d="M178 168 C 214 158 236 128 234 92 C 200 102 178 132 178 168 Z" />
-      <path d="M198 122 C 168 110 152 82 156 50 C 188 64 204 92 198 122 Z" />
+      {/* hlavní stonek */}
+      <path
+        d="M256 22 C 214 60 184 112 168 168 C 152 226 150 292 160 384"
+        stroke={tint}
+        strokeWidth={3}
+        strokeLinecap="round"
+      />
+      {/* listy střídavě po obou stranách stonku */}
+      <Leaf x={232} y={58} rot={58} L={86} stroke={tint} fill={leafFill} />
+      <Leaf x={206} y={104} rot={-52} L={78} stroke={tint} />
+      <Leaf x={184} y={150} rot={64} L={94} stroke={tint} fill={leafFill} />
+      <Leaf x={170} y={202} rot={-58} L={86} stroke={tint} />
+      <Leaf x={162} y={256} rot={70} L={80} stroke={tint} fill={leafFill} />
+      <Leaf x={159} y={312} rot={-62} L={70} stroke={tint} />
+    </svg>
+  )
+}
+
+/**
+ * Herbářový rámeček (obrys) — tenká dvojlinka okolo desky s drobnými
+ * lístkovými ozdobníky ve dvou protilehlých rozích. Sjednocuje slajdy
+ * do dojmu sady lisovaných tabulí.
+ */
+function PlateFrame({ palette }: { palette: Palette }) {
+  const inset = 44
+  return (
+    <div aria-hidden style={{ position: "absolute", inset: 0, pointerEvents: "none" }}>
+      <div
+        style={{
+          position: "absolute",
+          inset,
+          border: `1px solid ${palette.line}`,
+          borderRadius: 6,
+        }}
+      />
+      <div
+        style={{
+          position: "absolute",
+          inset: inset + 7,
+          border: `1px solid ${palette.line}`,
+          borderRadius: 3,
+          opacity: 0.6,
+        }}
+      />
+      {/* lístkové ozdobníky v rozích rámečku */}
+      <svg
+        width="120"
+        height="120"
+        viewBox="0 0 120 120"
+        style={{ position: "absolute", left: inset - 10, top: inset - 10, opacity: 0.5 }}
+        fill="none"
+      >
+        <Leaf x={20} y={20} rot={-45} L={40} stroke={palette.accent} sw={2.4} />
+        <Leaf x={20} y={20} rot={-105} L={28} stroke={palette.accent} sw={2.2} />
+      </svg>
+      <svg
+        width="120"
+        height="120"
+        viewBox="0 0 120 120"
+        style={{ position: "absolute", right: inset - 10, bottom: inset - 10, opacity: 0.5, transform: "rotate(180deg)" }}
+        fill="none"
+      >
+        <Leaf x={20} y={20} rot={-45} L={40} stroke={palette.accent} sw={2.4} />
+        <Leaf x={20} y={20} rot={-105} L={28} stroke={palette.accent} sw={2.2} />
+      </svg>
+    </div>
+  )
+}
+
+/** Drobný lístkový ozdobník pro inline použití (oddělovače, štítky). */
+function LeafMark({ palette, color, size = 26 }: { palette: Palette; color?: string; size?: number }) {
+  const stroke = color ?? palette.accent
+  return (
+    <svg
+      width={size}
+      height={size}
+      viewBox="-22 -46 44 50"
+      aria-hidden
+      style={{ display: "block", flex: "none" }}
+      fill="none"
+    >
+      <Leaf x={0} y={0} rot={0} L={40} stroke={stroke} sw={3} />
     </svg>
   )
 }
