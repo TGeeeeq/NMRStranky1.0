@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { Container } from "./Container";
 import AFLogo from "./AFLogo";
+import { CookieSettingsButton } from "./CookieSettingsButton";
 
 export function Footer() {
   return (
@@ -26,6 +27,10 @@ export function Footer() {
           >
             Obchodní podmínky
           </Link>
+          <span aria-hidden="true" className="text-cream/40">
+            •
+          </span>
+          <CookieSettingsButton />
         </p>
         <p className="mt-6">
           <a

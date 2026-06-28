@@ -7,6 +7,7 @@ import { Cursor } from "@/components/Cursor";
 import { MotionProvider } from "@/components/MotionProvider";
 import { CartProvider } from "@/components/shop/CartProvider";
 import { LeaveCartGuard } from "@/components/LeaveCartGuard";
+import { CookieConsent } from "@/components/CookieConsent";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://nechmerust.org"),
@@ -64,6 +65,7 @@ export default function RootLayout({
             </main>
             <Footer />
             <LeaveCartGuard />
+            <CookieConsent />
           </CartProvider>
         </MotionProvider>
       </body>
