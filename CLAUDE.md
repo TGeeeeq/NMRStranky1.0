@@ -4,7 +4,9 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Git workflow
 
-**Default: commit and push everything straight to `main`** unless the user explicitly says otherwise. Don't create or push to feature branches by default, and don't wait for a separate "merge to main" step — main is the working branch here.
+**Everything goes to `main`. Always.** `main` is the single source of truth and is connected to **production on Vercel** — pushing to `main` ships the site. Commit and push every change straight to `main`; never create, keep, or push to feature branches, and don't wait for a separate "merge to main" step.
+
+If a task/harness forces work onto a `claude/*` (or any non-`main`) branch, treat that branch as throwaway: when the work is done, fast-forward/merge it into `main`, push `main`, and **delete the feature branch both locally and on the remote**. The end state must always be: only `main` exists, and it holds the newest version of everything.
 
 ## What this repo is
 
