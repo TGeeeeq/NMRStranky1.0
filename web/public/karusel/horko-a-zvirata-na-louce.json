@@ -30,6 +30,11 @@
       "warning": null
     },
     {
+      "type": "photo",
+      "imageData": "/assets/avala.webp",
+      "imageCaption": "Naše krávy tráví parné dny u stromů, kde najdou stín i klid."
+    },
+    {
       "type": "plant",
       "status": "Prasata",
       "name": "Princezna a Flíček",
@@ -37,6 +42,11 @@
       "fact": "Prasata se neumí potit, takže se v horku přehřejí nejrychleji z celé Louky. Princezna i Flíček (milovník drbání na bříšku) to řeší po svém — válením v chladivém blátě.",
       "use": "Stinné bahniště a kaliště je pro ně životně důležité — bláto je jejich „opalovací krém\" i klimatizace zároveň.",
       "warning": null
+    },
+    {
+      "type": "photo",
+      "imageData": "/assets/flicek.webp",
+      "imageCaption": "Flíček na pastvě — v největším horku ale prasata raději zalehnou do chladivého bláta."
     },
     {
       "type": "plant",
@@ -48,6 +58,11 @@
       "warning": null
     },
     {
+      "type": "photo",
+      "imageData": "/assets/karel.webp",
+      "imageCaption": "Karel v létě na vyprahlé louce. Suché teplo mu svědčí, stín a voda ale musí být vždy po ruce."
+    },
+    {
       "type": "plant",
       "status": "Ovce",
       "name": "Pogo a Lucinka",
@@ -55,6 +70,11 @@
       "fact": "Hustá vlna ovce v zimě hřeje, v létě ale drží horko. Po jarním stříhání se Pogo i Lucinka v parnu cítí mnohem líp a tráví poledne odpočinkem ve stínu.",
       "use": "Včasné stříhání, stín a voda. Hlídáme i mouchy a parazity, kteří v horku zvířata nejvíc trápí.",
       "warning": null
+    },
+    {
+      "type": "photo",
+      "imageData": "/assets/pogo2.webp",
+      "imageCaption": "Pogo v husté vlně, která v zimě hřeje a v létě drží horko — proto je jarní stříhání tak důležité."
     },
     {
       "type": "fact",
@@ -67,11 +87,6 @@
       "eyebrow": "Jak můžeš pomoct ty",
       "title": "Přidej se k péči",
       "body": "Provoz Louky v horku stojí víc vody, krmení i péče. Můžeš si některého z obyvatel virtuálně adoptovat nebo přispět přes Click & Feed — i malá pomoc jim pomůže přečkat léto ve zdraví."
-    },
-    {
-      "type": "photo",
-      "imageData": "",
-      "imageCaption": "Naši obyvatelé ve stínu za parného dne — sem doplň vlastní fotku"
     },
     {
       "type": "outro",
