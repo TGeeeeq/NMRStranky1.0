@@ -2,6 +2,10 @@
 
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
+## Git workflow
+
+**Default: commit and push everything straight to `main`** unless the user explicitly says otherwise. Don't create or push to feature branches by default, and don't wait for a separate "merge to main" step — main is the working branch here.
+
 ## What this repo is
 
 Website for **Nech mě růst z.s.**, a Czech non-profit (nechmerust.org). The deployable site lives entirely in `www/`. It is a **static multi-page HTML site with a PHP+MySQL backend** for an e-shop, admin panel, event registration, and newsletter signup. Hosted on Forpsi shared hosting (Apache + PHP 7.1+ + MySQL 5.7+).
