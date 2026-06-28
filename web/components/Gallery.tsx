@@ -11,6 +11,8 @@ export function Gallery() {
   const [filter, setFilter] = useState<string>("Vše");
   const [query, setQuery] = useState("");
   const [active, setActive] = useState<number | null>(null);
+  // Fotky, které se nepodařilo načíst (chybějící soubor), z galerie vyřadíme.
+  const [broken, setBroken] = useState<Set<string>>(new Set());
   const touchStart = useRef<{ x: number; y: number } | null>(null);
 
   // Deep link from an animal card: /galerie?zvire=Karel pre-selects the filter.
@@ -23,10 +25,11 @@ export function Gallery() {
     const q = query.trim().toLowerCase();
     return galleryImages.filter(
       (img) =>
+        !broken.has(img.src) &&
         (filter === "Vše" || img.animal === filter) &&
         (q === "" || img.animal.toLowerCase().includes(q)),
     );
-  }, [filter, query]);
+  }, [filter, query, broken]);
 
   const next = () =>
     setActive((i) => (i === null ? i : (i + 1) % filtered.length));
@@ -106,6 +109,9 @@ export function Gallery() {
                   loading="lazy"
                   sizes="(min-width: 1024px) 25vw, (min-width: 640px) 33vw, 50vw"
                   className="object-cover transition-transform duration-300 group-hover:scale-105"
+                  onError={() =>
+                    setBroken((b) => new Set(b).add(img.src))
+                  }
                 />
                 <span className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-moss-deep/70 to-transparent p-2 text-left text-xs font-medium text-cream opacity-0 transition-opacity group-hover:opacity-100">
                   {img.animal}
