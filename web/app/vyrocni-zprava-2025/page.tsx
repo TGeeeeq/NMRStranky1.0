@@ -183,6 +183,9 @@ const months: Month[] = [
         text: "Dýňová sezóna. Jako každý rok jsme se účastnili Dýňového světa ve statku u Pipků — naše každoročně nabité období, kdy brigádničíme, prodáváme se stánkem a současně udržujeme chod louky. Byla to fuška, ale společně jsme to dali. Přidala se k nám Maria i obě Kateřinky. Na závěr jsme naplnili sklad dýněmi pro zvířátka.",
       },
     ],
+    links: [
+      { label: "Statek u Pipků – Dýňový svět", href: "https://www.dynovysvet.cz/" },
+    ],
   },
   {
     name: "Září",
@@ -210,6 +213,10 @@ const months: Month[] = [
         text: "Koncem října jsme jeli na operaci do Prahy s Princeznou (naší prasinkou). Již nějakou dobu se zhoršoval její stav a měla bolesti. Nakonec jí vyoperovali obrovský nádor z dělohy. Vše ale skvěle zvládla a brzy se začala zocelovat — teď je opět ve svém živlu. Pravděpodobně ji ale bude čekat další operace. Už ta první byla náročná, proto jsme nesmírně vděční za podporu všech dobrých lidí.",
       },
     ],
+    links: [
+      { label: "Běh pro útulky", href: "https://www.behproutulky.cz/" },
+      { label: "Instagram Běh pro útulky", href: "https://www.instagram.com/behproutulky/" },
+    ],
   },
   {
     name: "Listopad",
@@ -227,6 +234,9 @@ const months: Month[] = [
         type: "p",
         text: "Rozšířili a vylepšili jsme domečky pro zvířátka, opravili kuchyň a zakryli její terasu. Nadále spolupracujeme s organizací Nakrm nás, díky které nám přicházejí dary pro zvířátka od našich podporovatelů, a koncem roku se znovu zapojujeme do iniciativy Click and Feed.",
       },
+    ],
+    links: [
+      { label: "Click and Feed", href: "https://clickandfeed.cz/" },
     ],
   },
   {
