@@ -17,7 +17,7 @@ export function LogoMarquee({ logos }: { logos: PartnerLogo[] }) {
     <div
       className="marquee-track relative overflow-hidden py-2 [mask-image:linear-gradient(to_right,transparent,black_10%,black_90%,transparent)] [-webkit-mask-image:linear-gradient(to_right,transparent,black_10%,black_90%,transparent)]"
     >
-      <ul className="animate-marquee flex w-max items-center gap-6">
+      <ul className="animate-marquee flex w-max items-center gap-10">
         {loop.map((p, i) => {
           const decorative = seen.has(p.name);
           seen.add(p.name);
@@ -29,14 +29,14 @@ export function LogoMarquee({ logos }: { logos: PartnerLogo[] }) {
                 rel="noopener noreferrer"
                 aria-hidden={decorative || undefined}
                 tabIndex={decorative ? -1 : undefined}
-                className="flex h-24 w-44 items-center justify-center rounded-lg border border-border bg-surface p-5 shadow-soft transition-transform hover:-translate-y-1 hover:border-accent hover:shadow-lift"
+                className="flex h-28 w-48 items-center justify-center rounded-lg border border-border bg-surface p-5 shadow-soft transition-transform hover:-translate-y-1 hover:border-accent hover:shadow-lift"
               >
                 <Image
                   src={p.logo}
                   alt={decorative ? "" : `Logo ${p.name}`}
-                  width={150}
-                  height={70}
-                  className="max-h-14 w-auto object-contain"
+                  width={160}
+                  height={80}
+                  className="max-h-16 w-auto max-w-[150px] object-contain"
                 />
               </a>
             </li>

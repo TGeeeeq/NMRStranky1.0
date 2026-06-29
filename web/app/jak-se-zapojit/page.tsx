@@ -68,7 +68,7 @@ const partners = [
   },
   {
     title: "Farma Jamboz",
-    logo: "/assets/jamboz.webp",
+    logo: "/assets/jamboz.png",
     text: "Rodinná farma Jamboz z Čáslavi nám pravidelně věnuje vyřazenou zeleninu a ovoce, která putuje přímo do tlapek, zobáčků a zubů našich zvířátek. Jedete nás navštívit? Stavte se cestou u Jamboz a přivezte nějakou dobrotu – zvířátka vás za to odmění nadšeným přivítáním! 🐾",
     cta: { label: "Navštívit Jamboz", href: "https://www.jamboz.cz" },
   },

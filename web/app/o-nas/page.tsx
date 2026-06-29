@@ -40,9 +40,13 @@ const team = [
 ];
 
 const partners = [
-  { name: "Nakrmnas.cz", logo: "/assets/nakrmnas.png", href: "https://www.nakrmnas.cz/nech-me-rust/" },
-  { name: "clickandfeed.cz", logo: "/assets/click-and-feed.png", href: "https://www.clickandfeed.cz" },
-  { name: "jamboz.cz", logo: "/assets/jamboz.webp", href: "https://www.jamboz.cz" },
+  { name: "Petra Kubicová", logo: "/assets/petra-kubicova.png", href: "https://www.petrakubicova.cz/" },
+  { name: "ČSOP Trosečníci", logo: "/assets/csop-trosecnici.png", href: "https://csoptrosecnici.cz" },
+  { name: "Kolodějové", logo: "/assets/kolodejove.png", href: "https://kolodejove.cz" },
+  { name: "Škola pokojný bojovník", logo: "/assets/skola-pokojny-bojovnik.png", href: "https://skolapokojnybojovnik.cz" },
+  { name: "Farma Jamboz", logo: "/assets/jamboz.png", href: "https://www.jamboz.cz" },
+  { name: "Nakrm nás", logo: "/assets/nakrmnas.png", href: "https://www.nakrmnas.cz/nech-me-rust/" },
+  { name: "Click and Feed", logo: "/assets/click-and-feed.png", href: "https://www.clickandfeed.cz" },
 ];
 
 export default function ONas() {
@@ -180,8 +184,8 @@ export default function ONas() {
           <Reveal>
             <SectionHeader
               eyebrow="Děkujeme"
-              title="Naši partneři"
-              description="Velice si vážíme podpory našich partnerů, díky kterým můžeme realizovat naše projekty a dosahovat stanovených cílů. Jejich důvěra a podpora jsou pro nás klíčové."
+              title="Naši partneři, přátelé a podporovatelé"
+              description="Velice si vážíme podpory našich partnerů, přátel a podporovatelů, díky kterým můžeme realizovat naše projekty a dosahovat stanovených cílů. Jejich důvěra a pomoc jsou pro nás klíčové."
             />
           </Reveal>
           <Reveal>
