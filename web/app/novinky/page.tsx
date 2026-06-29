@@ -34,19 +34,32 @@ type Article = {
 
 const articles: Article[] = [
   {
-    title: "🌲 Blíží se Spolu Mezi Lesy — letní víkend na Louce",
-    date: "1. 6. 2026",
-    image: "/assets/mezilesy.jpg",
-    imageAlt: "Spolu Mezi Lesy — víkend na Louce 12.–14. 6. 2026",
-    badge: "⏳ Posledních 5 míst",
+    title: "📖 Výroční zpráva 2025 je tu",
+    date: "29. 6. 2026",
+    image: "/assets/louka1.webp",
+    imageAlt: "Maria a Tomáš na Louce",
+    imageHref: "/vyrocni-zprava-2025",
+    badge: "Novinka",
     blocks: [
-      { type: "p", text: "Už 12.–14. června 2026 nás čeká Spolu Mezi Lesy — třídenní víkend na pomezí retreatu a festivalu přímo na naší Louce. Prolíná se v něm příroda, zvířata, intuitivní umění, pohyb a živá hudba." },
-      { type: "p", text: "Na programu jsou ranní meditace a jóga, autorské čtení a zpěv, arteterapie, společné tvoření, muzikoterapie, večerní jamy u ohně i otevírání hlasu se zvířecími zvuky. Program je dobrovolný — kdykoli si můžeš místo toho jen mazlit zvířátka, ležet v trávě nebo lézt po stromech." },
-      { type: "p", text: "Cena 2 470 Kč zahrnuje třídenní pobyt na Louce, sobotní brunch, večeři a nedělní brunch. Výdělek z akce jde z velké části na rozvoj azylu Nech Mě Růst." },
-      { type: "alert", title: "⏳ Zbývá posledních 5 míst!", text: "Kapacita je záměrně omezená, aby se tu každý cítil komfortně a měl svůj prostor. Pokud váháš, ozvi se nám raději brzy — místa rychle mizí." },
+      { type: "p", text: "Sepsali jsme, jaký byl rok 2025 na Louce — měsíc po měsíci, se vším, co k životu na azylu patří. Příchody nových obyvatel i bolestná loučení, brigády, sbírky, dýňová sezóna i nové naděje do dalšího roku." },
+      { type: "p", text: "Provázíme vás celým rokem tak, jak jsme ho prožívali. Přečtěte si naši první výroční zprávu přímo tady na webu — a potěšte se i novými fotkami ze života na Louce." },
     ],
     links: [
-      { label: "Facebook událost", href: "https://www.facebook.com/share/1BDFbAxfFf/", external: true },
+      { label: "Přečíst výroční zprávu 2025 →", href: "/vyrocni-zprava-2025" },
+    ],
+  },
+  {
+    title: "🌲 Spolu Mezi Lesy se přesouvá na nový termín",
+    date: "29. 6. 2026",
+    image: "/assets/mezilesy.jpg",
+    imageAlt: "Spolu Mezi Lesy — víkend na Louce",
+    badge: "Nový termín",
+    blocks: [
+      { type: "p", text: "Náš víkend Spolu Mezi Lesy — třídenní setkání na pomezí retreatu a festivalu přímo na Louce — se přesouvá na nový termín. Nově se potkáme 11.–13. září 2026." },
+      { type: "p", text: "Podrobný program i možnost přihlášení najdete na naší facebookové události. Těšíme se na společný čas mezi lesy, zvířaty a dobrými lidmi." },
+    ],
+    links: [
+      { label: "Více info na Facebooku", href: "https://facebook.com/events/s/spolu-mezi-lesy-presunuto-na-z/2298157060995232/", external: true },
     ],
   },
   {

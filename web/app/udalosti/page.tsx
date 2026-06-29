@@ -13,7 +13,27 @@ export const metadata: Metadata = {
   alternates: { canonical: "/udalosti" },
 };
 
-const events = [
+type Event = {
+  title: string;
+  badge: string;
+  kind: string;
+  location: string;
+  description: string;
+  href: string;
+  date?: string;
+};
+
+const events: Event[] = [
+  {
+    title: "Spolu Mezi Lesy",
+    badge: "Nový termín",
+    kind: "Festival na Louce",
+    location: "Louka — azyl Nech mě růst",
+    date: "11.–13. 9. 2026",
+    description:
+      "Třídenní víkend na pomezí retreatu a festivalu přímo na Louce — příroda, zvířata, intuitivní umění, pohyb a živá hudba. Akce se přesunula na nový zářijový termín. Podrobný program a přihlášení najdete na facebookové události.",
+    href: "https://facebook.com/events/s/spolu-mezi-lesy-presunuto-na-z/2298157060995232/",
+  },
   {
     title: "Toulky se zvířaty",
     badge: "Termín upřesníme",
@@ -59,7 +79,7 @@ export default function Udalosti() {
                   <h2 className="mt-3 font-serif text-2xl font-semibold text-moss-deep">{e.title}</h2>
                   <div className="mt-3 flex flex-wrap gap-x-6 gap-y-1.5 text-sm text-text-muted">
                     <span className="inline-flex items-center gap-1.5">
-                      <CalendarDays size={16} aria-hidden /> Termín bude upřesněn
+                      <CalendarDays size={16} aria-hidden /> {e.date ?? "Termín bude upřesněn"}
                     </span>
                     <span className="inline-flex items-center gap-1.5">
                       <MapPin size={16} aria-hidden /> {e.location}
