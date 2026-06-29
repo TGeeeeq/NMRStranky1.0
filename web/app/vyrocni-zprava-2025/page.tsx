@@ -243,7 +243,7 @@ const months: Month[] = [
     name: "Prosinec",
     emoji: "✨",
     images: [
-      { src: "/assets/prochazka.webp", alt: "Závěrečná procházka se zvířaty", w: 1080, h: 1920 },
+      { src: "/assets/report-couple.webp", alt: "Maria a Tomáš se zvířaty — těší se na miminko", w: 1600, h: 1065 },
     ],
     blocks: [
       {

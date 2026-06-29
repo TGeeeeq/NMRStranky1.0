@@ -61,7 +61,8 @@ export type GalleryAnimal = {
  * grid never points at a missing image).
  */
 export const galleryAnimals: GalleryAnimal[] = [
-  { name: "Procházky", base: "walk", count: 2 },
+  { name: "Život na Louce", base: "louka", count: 15 },
+  { name: "Procházky", base: "walk", count: 3 },
   { name: "Karel", base: "karel", count: 3 },
   { name: "Yakul", base: "yakul", count: 4 },
   { name: "Avala", base: "avala", count: 5 },

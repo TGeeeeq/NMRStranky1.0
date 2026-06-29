@@ -49,8 +49,8 @@ export default function ONas() {
   return (
     <>
       <PageHero
-        image="/assets/about-hero.webp"
-        imageAlt="Komunita lidí a zvířat"
+        image="/assets/o-nas-hero.webp"
+        imageAlt="Maria a Tomáš na Louce mezi zvířaty"
         eyebrow="Kdo jsme"
         title="Náš příběh a vize"
         subtitle="Jsme spolek nadšenců, kteří věří v harmoničtější soužití s přírodou a zvířaty. Pojďte se s námi seznámit."

@@ -14,8 +14,8 @@ export default function Galerie() {
   return (
     <>
       <PageHero
-        image="/assets/animals-hero.webp"
-        imageAlt="Galerie zvířat"
+        image="/assets/galerie-hero.webp"
+        imageAlt="Muflon ve zlatém světle Louky"
         eyebrow="Život na Louce"
         title="Galerie našich zvířat"
         subtitle="Nahlédněte do života obyvatel Louky skrze objektiv fotoaparátu."
