@@ -21,11 +21,12 @@ type Block =
   | { type: "quote"; text: string }
   | { type: "list"; intro?: string; items: string[] };
 
+type ReportImage = { src: string; alt: string; w: number; h: number };
+
 type Month = {
   name: string;
   emoji: string;
-  image?: string;
-  imageAlt?: string;
+  images?: ReportImage[];
   blocks: Block[];
   links?: MonthLink[];
 };
@@ -34,8 +35,9 @@ const months: Month[] = [
   {
     name: "Leden",
     emoji: "🐾",
-    image: "/assets/eda.webp",
-    imageAlt: "Beran Eda, nový obyvatel Louky",
+    images: [
+      { src: "/assets/eda.webp", alt: "Beran Eda, nový obyvatel Louky", w: 1200, h: 1168 },
+    ],
     blocks: [
       {
         type: "p",
@@ -136,8 +138,9 @@ const months: Month[] = [
   {
     name: "Červenec",
     emoji: "🌙",
-    image: "/assets/lucinka.webp",
-    imageAlt: "Ovečka Lucinka, nová průzkumnice Louky",
+    images: [
+      { src: "/assets/lucinka.webp", alt: "Ovečka Lucinka, nová průzkumnice Louky", w: 800, h: 934 },
+    ],
     blocks: [
       {
         type: "p",
@@ -165,8 +168,10 @@ const months: Month[] = [
   {
     name: "Srpen",
     emoji: "🎃",
-    image: "/assets/anaya.webp",
-    imageAlt: "Ovečka Anaya, nová parťačka Louky",
+    images: [
+      { src: "/assets/anaya.webp", alt: "Ovečka Anaya, nová parťačka Louky", w: 1771, h: 1000 },
+      { src: "/assets/yakul.webp", alt: "Malý muflonek Yakkul", w: 3468, h: 4624 },
+    ],
     blocks: [
       { type: "p", text: "Druhá loukáda ve znamení tvoření zásob dřeva." },
       {
@@ -192,8 +197,9 @@ const months: Month[] = [
   {
     name: "Říjen",
     emoji: "🐷",
-    image: "/assets/princezna.webp",
-    imageAlt: "Prasinka Princezna",
+    images: [
+      { src: "/assets/princezna.webp", alt: "Prasinka Princezna", w: 6048, h: 4024 },
+    ],
     blocks: [
       {
         type: "p",
@@ -226,8 +232,9 @@ const months: Month[] = [
   {
     name: "Prosinec",
     emoji: "✨",
-    image: "/assets/prochazka.webp",
-    imageAlt: "Závěrečná procházka se zvířaty",
+    images: [
+      { src: "/assets/prochazka.webp", alt: "Závěrečná procházka se zvířaty", w: 1080, h: 1920 },
+    ],
     blocks: [
       {
         type: "p",
@@ -297,20 +304,57 @@ function MonthBlock({ block }: { block: Block }) {
   return <p className="leading-relaxed">{block.text}</p>;
 }
 
+/** Photos for a month. A single landscape photo fills a 16/9 frame; portrait
+ *  (or near-square) photos are shown whole on a soft backdrop so nothing gets
+ *  cropped. Multiple photos render as an even gallery, each kept whole. */
+function MonthMedia({ images }: { images: ReportImage[] }) {
+  if (images.length === 1) {
+    const img = images[0];
+    const landscape = img.w / img.h >= 1.2;
+    return landscape ? (
+      <div className="relative aspect-[16/9] overflow-hidden">
+        <Image
+          src={img.src}
+          alt={img.alt}
+          fill
+          sizes="(min-width: 768px) 680px, 100vw"
+          className="object-cover"
+        />
+      </div>
+    ) : (
+      <div className="relative h-[24rem] bg-surface-alt sm:h-[28rem]">
+        <Image
+          src={img.src}
+          alt={img.alt}
+          fill
+          sizes="(min-width: 768px) 680px, 100vw"
+          className="object-contain"
+        />
+      </div>
+    );
+  }
+
+  return (
+    <div className="grid gap-3 bg-surface-alt p-3 sm:grid-cols-2">
+      {images.map((img) => (
+        <div key={img.src} className="relative h-60 sm:h-64">
+          <Image
+            src={img.src}
+            alt={img.alt}
+            fill
+            sizes="(min-width: 768px) 340px, 100vw"
+            className="rounded-md object-contain"
+          />
+        </div>
+      ))}
+    </div>
+  );
+}
+
 function MonthCard({ month }: { month: Month }) {
   return (
     <article className="overflow-hidden rounded-lg border border-border bg-surface shadow-soft">
-      {month.image ? (
-        <div className="relative aspect-[16/9] overflow-hidden">
-          <Image
-            src={month.image}
-            alt={month.imageAlt ?? month.name}
-            fill
-            sizes="(min-width: 768px) 680px, 100vw"
-            className="object-cover"
-          />
-        </div>
-      ) : null}
+      {month.images?.length ? <MonthMedia images={month.images} /> : null}
       <div className="p-6 sm:p-8">
         <h2 className="font-serif text-2xl font-semibold text-moss-deep">
           <span className="mr-2" aria-hidden>
