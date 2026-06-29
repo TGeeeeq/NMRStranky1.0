@@ -4,111 +4,82 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Git workflow
 
-**Everything goes to `main`. Always.** `main` is the single source of truth and is connected to **production on Vercel** — pushing to `main` ships the site. Commit and push every change straight to `main`; never create, keep, or push to feature branches, and don't wait for a separate "merge to main" step.
+**Everything goes to `main`. Always.** `main` is the single source of truth and is connected to **production** — pushing to `main` ships the site. Commit and push every change straight to `main`; never create, keep, or push to feature branches, and don't wait for a separate "merge to main" step.
 
 If a task/harness forces work onto a `claude/*` (or any non-`main`) branch, treat that branch as throwaway: when the work is done, fast-forward/merge it into `main`, push `main`, and **delete the feature branch both locally and on the remote**. The end state must always be: only `main` exists, and it holds the newest version of everything.
 
 ## What this repo is
 
-Website for **Nech mě růst z.s.**, a Czech non-profit (nechmerust.org). The deployable site lives entirely in `www/`. It is a **static multi-page HTML site with a PHP+MySQL backend** for an e-shop, admin panel, event registration, and newsletter signup. Hosted on Forpsi shared hosting (Apache + PHP 7.1+ + MySQL 5.7+).
+Website for **Nech mě růst z.s.**, a Czech non-profit (nechmerust.org) — an animal sanctuary ("the Louka"). It includes public marketing pages, an e-shop, an admin panel, and an Instagram-carousel "studio" tool.
 
-There is no git repo, no test suite, and no package manager for the live site. There IS a tiny build step: `python3 build.py` (repo root) renders `www/*.php` source pages → `www/*.html` artifacts that ship to production. Forpsi serves the static HTML; PHP partials don't execute there.
+The site is a **Next.js 16 (App Router) application written in TypeScript and React 19**, styled with **Tailwind CSS v4**. The whole app lives in `web/`. Data is stored in **PostgreSQL (Neon)** via **Drizzle ORM**, product images live in **Netlify Blobs**, and the site is **deployed to Netlify** (base directory `web`, `@netlify/plugin-nextjs`).
 
-## Critical: dead Next.js scaffolding
+> **History:** This used to be a static HTML + PHP/MySQL site served from a `www/` directory on Forpsi shared hosting. **That PHP site no longer exists** — it has been fully rewritten as the Next.js app described here. There is no `www/`, no PHP, no Apache `.htaccess`, and no `build.py` step anymore. If you find references to any of that (in old skills, comments, or memory), they are stale.
 
-`www/` contains a v0.dev-generated Next.js skeleton that is **not used** by the live site. Do NOT edit or rely on these unless the user explicitly asks to migrate to Next.js:
+## Layout
 
-- `www/app/` (`layout.tsx`, `page.tsx`, `globals.css`)
-- `www/components/`, `www/hooks/`, `www/lib/`
-- `www/styles/globals.css`
-- `www/public/`
-- `www/assets/package.json`, `www/assets/next.config.mjs`
-- `www/components.json` (shadcn config)
+Everything is under `web/`. Run all commands from there.
 
-The live site is the **flat `.html` files at `www/` root** + `www/api/` + `www/admin/` + `www/obchod/` + `www/config*.php`. `www/assets/` itself **is used** — it holds the real `.webp` images and self-hosted fonts.
-
-**The 13 `*.html` pages at `www/` root are build artifacts.** Edit `www/*.php` sources (which `require` `www/partials/*.php`) and run `python3 build.py` from the repo root to regenerate. Editing `*.html` directly works but is overwritten on the next build. Five partials live in `www/partials/`: `head.php`, `navbar.php`, `footer.php`, `social.php`, `newsletter.php`. PHP is the source-of-truth language; Forpsi serves the rendered HTML.
+- `web/app/` — App Router pages and routes. One folder per route segment with a `page.tsx`.
+- `web/components/` — shared React components (`Container`, `PageHero`, `Reveal`, `SectionHeader`, `SocialSection`, …), plus subfolders `admin/`, `shop/`, `studio/`, and `ui/` (small Radix-based primitives).
+- `web/lib/` — server/runtime helpers. Notably `db/` (Drizzle), `auth.ts`, `env.ts`, `storage.ts`, `email.ts`, `payment.ts`, `orders.ts`, `cart.ts`, `validation.ts`, `site.ts`, `nav.ts`, `cn.ts`.
+- `web/lib/db/` — `schema.ts` (Drizzle tables), `queries.ts` (typed query helpers), `index.ts` (the `db` singleton).
+- `web/drizzle/` — generated SQL migrations (`db:generate` writes here).
+- `web/scripts/` — one-off Node/Python scripts: `create-admin.mts` (create an admin user), `migrate-from-forpsi.mts` + `export-forpsi.py` (the original data migration).
+- `web/data/forpsi-export/` — JSON + image snapshot of the old shop data, used by the migration script.
+- `web/public/assets/` — `.webp` images for animals, heroes, partners, etc.
+- `web/tests/` — Vitest unit/integration tests and Playwright e2e specs.
 
 ## Architecture
 
-### Routing
-`www/.htaccess` rewrites `/foo` → `/foo.html` internally, sets a `/404.html` error doc, and denies web access to `.env`, `composer.*`, `package*.json`, `README.md`, `CLAUDE.md`, etc. Apache modules required: `mod_rewrite`, `mod_headers`, `mod_deflate`, `mod_expires`.
+### Public site
+- Pages are **React Server Components** by default. Add `"use client"` only where interactivity needs it (e.g. `Reveal`, cart, forms).
+- Shared layout/chrome lives in `app/layout.tsx` (+ `template.tsx` for per-page transitions). The global stylesheet and design tokens are in `app/globals.css` — colors are CSS custom properties (`--color-moss`, `--color-cream`, `--color-terracotta`, `--color-accent`, `--color-surface`, …) consumed through Tailwind classes like `bg-moss`, `text-cream`, `border-border`.
+- Compose pages from the shared components rather than hand-rolling markup. A typical inner page is `PageHero` → one or more `<section>`s wrapped in `Container` + `Reveal`, ending with `SocialSection`. See `app/o-nas/page.tsx` and `app/vyrocni-zprava-2025/page.tsx` for the pattern.
+- Site-wide constants (name, address, IČ, bank, social links) live in `lib/site.ts` — import `SITE` / `BANK` / `SOCIAL`, don't hard-code.
+- SEO: every page exports `metadata` with a `title`, `description`, and `alternates.canonical`. New public routes must also be added to `app/sitemap.ts`. Navigation lives in `lib/nav.ts`.
+- The site is Czech-first. Copy is written directly in the JSX in Czech (there is **no** `data-cs`/`data-en` switching anymore).
 
-### Frontend
-- One stylesheet for the public site: [www/styles.css](www/styles.css). `www/css/` has shop/admin-specific CSS (`shop.css`, `admin.css`, `checkout.css`, `product-detail.css`, `notifications.css`).
-- One main JS entry: [www/script.js](www/script.js) defines `WebsiteManager` (navigation, animations, cookie consent, conditional Google Analytics load, **cs/en language switching** via `data-cs` / `data-en` attributes + `localStorage.language`).
-- Gallery: [www/gallery.js](www/gallery.js). Animal list is **hardcoded** (30 animals × up to 8 images each, file paths derived by accent-stripping the Czech name).
-- Shop frontend: `www/js/shop.js`, `www/js/product-detail.js`, `www/js/checkout.js`. Cart lives in `localStorage`.
-- PWA: [www/sw.js](www/sw.js) + [www/manifest.json](www/manifest.json). Cache version is bumped in `sw.js` — update it when shipping new static assets.
+### E-shop
+- Catalog, cart, checkout under `app/obchod/`; shop UI in `components/shop/` (cart state via `CartProvider`, persisted in `localStorage`). Cart logic helpers are in `lib/cart.ts`.
+- Orders are placed through **Server Actions** (`app/obchod/actions.ts`), which use `db.transaction()`.
+- **Order prices, names, and stock are read from the DB server-side** — never trust amounts coming from the client cart. The client sends product ids + quantities only. Keep this invariant.
+- Payment is **bank transfer only** (variable-symbol generation in `lib/payment.ts`); there is no payment gateway.
 
-### Backend (PHP)
-Every PHP entry point begins with `require_once __DIR__ . '/config.php'` (or the equivalent relative path). That file is the security hub — do not bypass it.
+### Admin panel
+- Under `app/admin/`. `app/admin/login/` is public; everything under `app/admin/(panel)/` is gated.
+- Auth uses **`iron-session`** (encrypted cookie `nmr_admin`) with **bcrypt**-hashed passwords. `lib/auth.ts` exposes `getSession()` and `requireAdmin()` (which `redirect`s to `/admin/login`). Every protected page/action must call `requireAdmin()`.
+- Admin mutations are Server Actions (`app/admin/actions.ts`). Validate input with the Zod schemas in `lib/validation.ts`.
+- Product images are uploaded to Netlify Blobs via `lib/storage.ts` and served same-origin through the `app/img/[...key]/route.ts` handler (stored as `/img/<key>`).
 
-- [www/config.php](www/config.php) — session bootstrap (secure cookies, 30-min ID rotation, 1h idle GC), `csrf_token()` / `verify_csrf_token()` / `csrf_field()`, admin auth (`isAdminLoggedIn()`, `requireAdmin()`, `adminLogin()`, `adminLogout()` — IP-bound, 4h idle timeout, regenerates session ID on login), `check_rate_limit($key, $limit, $window)` (session-backed, per-browser), `sanitize_input()` (`strip_tags` + `htmlspecialchars`), `get_client_ip()` (honors `X-Forwarded-For` for Forpsi proxy).
-- [www/config/env.php](www/config/env.php) — `.env` parser.
-- [www/config/database.php](www/config/database.php) — PDO singleton + `app_config()` getter (SMTP, bank, order prefix).
-- [www/config/payment.php](www/config/payment.php) — variable-symbol generation for bank transfers (no payment gateway; bank transfer only).
-- [www/config/session.php](www/config/session.php) — legacy shim, just re-includes `config.php`.
+### Studio
+- `app/studio/` is an internal tool for generating Instagram-carousel slides (client-side canvas + `html-to-image`/`jszip` export). Components in `components/studio/`.
 
-Top-level API endpoints:
-- [www/nechmerust_api.php](www/nechmerust_api.php) — event registration (POST). PHPMailer sends admin notification + user confirmation.
-- [www/newsletter_signup_api.php](www/newsletter_signup_api.php) — newsletter signup (POST). Personalizes the [www/newsletter-email.html](www/newsletter-email.html) template.
-
-Shop API ([www/api/](www/api/)): `products.php`, `categories.php`, `product-detail.php`, `product-detail-with-images.php`, `product-images.php`, `product-images-add.php` (admin), `product-images-delete.php` (admin), `admin-upload-image.php` (admin), `create-order.php`, `create-payment.php`, `payment-notify.php` (currently a stub).
-
-Admin panel ([www/admin/](www/admin/)): `login.php`, `logout.php`, `dashboard.php`, `products.php`, `product-edit.php`, `categories.php`, `orders.php`, `order-detail.php`. All non-login pages must call `requireAdmin()`.
-
-### Security invariants — preserve these when editing
-- All user input goes through `sanitize_input()`; all DB writes use PDO prepared statements.
-- All admin POST forms include `csrf_field()` and call `verify_csrf_token($_POST['csrf_token'])`.
-- **Shop order prices are read from the DB inside `api/create-order.php`** — never trust prices, names, or stock counts coming from the client cart payload. The client sends `{product_id, quantity}` only.
-- `.env` (SMTP creds, DB creds, bank account, `ADMIN_NOTIFICATION_EMAIL`, `ORDER_PREFIX`) is gitignored and Apache-blocked. Don't print, log, or commit its contents.
-- PHPMailer is loaded from `vendor/autoload.php` — there is no `composer.json` committed, so the vendor dir must be installed manually on the server.
-
-## Czech filename → meaning
-
-| File | Meaning |
-|---|---|
-| `index.html` | Home |
-| `landing.html` | Landing page variant |
-| `o-nas.html` | About us |
-| `novinky.html` | News |
-| `udalosti.html` | Events |
-| `galerie.html` | Gallery |
-| `jak-se-zapojit.html` | Get involved |
-| `kontakt.html` | Contact |
-| `obchod/` | Shop (e-commerce) |
-| `virtualni-adopce.html` | Virtual adoption |
-| `zvireci-obyvatele.html` | Animal residents |
-| `prispet-kryptem.html` | Donate with crypto |
-| `putovani-se-zviraty.html` | Hiking with animals |
-| `mezilesy.html` | "Mezilesy" project page |
-| `vop.html` | Terms & conditions |
-| `gdpr.html` | Privacy policy |
-
-The site is Czech-first; English strings live in `data-en` attributes alongside `data-cs` and are swapped client-side by `WebsiteManager` (`www/script.js`). There is no `/en/` directory.
+### Config & secrets
+- All env access goes through `lib/env.ts` (`req()` throws if a required var is missing; `opt()` has fallbacks). Don't read `process.env` directly elsewhere.
+- Required: `DATABASE_URL`, `SESSION_SECRET`. Optional/with-fallbacks: `SMTP_*`, `BANK_*`, `ORDER_PREFIX`, `ADMIN_NOTIFICATION_EMAIL`, `NETLIFY_SITE_ID`, `NETLIFY_AUTH_TOKEN`.
+- Secrets live in `web/.env.local` (gitignored). Never print, log, or commit them. `lib/db/`, `lib/auth.ts`, `lib/env.ts`, `lib/storage.ts` are all `import "server-only"` — keep secret-touching code server-side.
 
 ## Database
 
-MySQL, `utf8mb4`. Schema and seed live in `www/scripts/`:
-- `www/scripts/01-create-tables.sql` — products, categories, orders, admins, product images.
-- `www/scripts/02-seed-data.sql` — initial categories/products + admin user. Check this file to learn how the first admin account is created (password is hashed with `password_hash()`).
+PostgreSQL on Neon, accessed with Drizzle ORM (`@neondatabase/serverless` Pool driver so transactions work).
+- Schema: `lib/db/schema.ts` (categories, products, product images, orders, order items, admins).
+- After editing the schema: `npm run db:generate` (writes SQL to `drizzle/`) then `npm run db:migrate`. `npm run db:studio` opens Drizzle Studio.
+- Create an admin: `npm run admin:create`.
 
-## Develop & deploy
+## Develop, test, deploy
 
-There is no linter or test runner. The build step is intentionally minimal — a single Python file with no dependencies.
-
-- **Local dev (page preview)**: `python3 dev_server.py` from the repo root → `http://localhost:8767`. Renders `*.php` live (no PHP CLI needed). The renderer supports a constrained PHP subset; avoid logical AND/OR, ternary-with-concat, PHPDoc comments, mixing `foreach` declarations with body statements in one `<?php ?>` tag.
-- **Local dev (PHP backends)**: the API endpoints, admin panel, and shop need real PHP and MySQL. Point Apache or `php -S localhost:8000 -t www/` at `www/`, create a local MySQL DB, import `www/scripts/01-create-tables.sql` + `02-seed-data.sql`, and write `www/.env` with the production keys (`DB_*`, `SMTP_*`, `BANK_*`, `ADMIN_NOTIFICATION_EMAIL`, `ORDER_PREFIX`).
-- **Install PHPMailer** on the server: `composer require phpmailer/phpmailer` inside `www/` (no `composer.json` is committed).
-- **Build before deploy**: `python3 build.py` (repo root) — renders `www/*.php` → `www/*.html`.
-- **Cache-bust PWA**: increment `CACHE_NAME` at the top of `www/sw.js` after any CSS/JS/HTML change or returning visitors will see stale assets.
-- **Deploy**: rsync `www/` to the Forpsi web root. `.env` and `vendor/` must already exist on the server.
-
-For step-by-step deploy guidance see the `nechmerust-deploy` skill.
+All from `web/`:
+- **Install**: `npm install`.
+- **Dev server**: `npm run dev` → http://localhost:3000. Needs `web/.env.local` (at minimum `DATABASE_URL`, `SESSION_SECRET`) for DB-backed routes; static marketing pages render without it.
+- **Lint**: `npm run lint`. **Typecheck**: `npx tsc --noEmit`.
+- **Tests**: `npm test` (Vitest unit/integration), `npm run test:e2e` (Playwright). Add/maintain tests for shop, cart, payment, validation, and order logic.
+- **Build**: `npm run build`. Note: the production build collects page data and will fail without `DATABASE_URL` set (e.g. on `/obchod/cart-data`) — that's an env requirement, not a code error.
+- **Deploy**: push to `main`; Netlify builds from base directory `web` (see `netlify.toml`).
 
 ## Conventions when adding pages or endpoints
 
-- New public pages: drop `slug.html` at `www/` root. `.htaccess` makes it reachable at `/slug`. Add bilingual strings with `data-cs` / `data-en`. Link the new file from `www/sw.js`'s precache list if it should work offline. Add it to `www/sitemap.xml`.
-- New admin pages: place in `www/admin/`, call `requireAdmin()` at the top, embed `csrf_field()` in any form, verify with `verify_csrf_token()` on POST.
-- New API endpoints: `require_once` `config.php`, set `Content-Type: application/json`, validate input with `sanitize_input()`, return `{"success": bool, ...}`. Same-origin only — do not add wildcard CORS.
+- **New public page**: create `app/<slug>/page.tsx` as a Server Component, export `metadata` (title/description/canonical), build it from the shared components (`PageHero`, `Container`, `Reveal`, `SectionHeader`, `SocialSection`), write copy in Czech, and add the route to `app/sitemap.ts` (and `lib/nav.ts` if it belongs in the menu).
+- **New admin page/action**: place under `app/admin/(panel)/`, call `requireAdmin()` first, validate input with Zod (`lib/validation.ts`), do DB work via `lib/db`.
+- **New API route handler**: keep it same-origin (no wildcard CORS), validate input, and access secrets only through `lib/env.ts`.
+- Reuse the design tokens and components; match the surrounding code's style.
