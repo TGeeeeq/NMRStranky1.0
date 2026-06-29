@@ -5,6 +5,7 @@ const BASE = "https://nechmerust.org";
 const routes = [
   "",
   "/o-nas",
+  "/vyrocni-zprava-2025",
   "/jak-se-zapojit",
   "/novinky",
   "/zvireci-obyvatele",

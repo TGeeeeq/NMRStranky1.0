@@ -145,13 +145,19 @@ export default function ONas() {
               </div>
             </dl>
             <div className="mt-6 flex flex-wrap gap-3">
+              <Link
+                href="/vyrocni-zprava-2025"
+                className="rounded-pill bg-moss px-5 py-2.5 text-sm font-medium text-cream transition-colors hover:bg-moss-deep"
+              >
+                Výroční zpráva 2025
+              </Link>
               <a
                 href="https://or.justice.cz/ias/ui/vypis-sl-detail?dokument=78166435&subjektId=1213154&spis=1361387"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="rounded-pill bg-moss px-5 py-2.5 text-sm font-medium text-cream transition-colors hover:bg-moss-deep"
+                className="rounded-pill border border-border px-5 py-2.5 text-sm font-medium text-moss-deep transition-colors hover:bg-surface-alt"
               >
-                Stanovy spolku
+                Starší zprávy a stanovy
               </a>
               <Link
                 href="/gdpr"
@@ -160,6 +166,10 @@ export default function ONas() {
                 GDPR
               </Link>
             </div>
+            <p className="mt-4 text-sm text-text-muted">
+              Všechny výroční zprávy i stanovy spolku jsou dostupné také ve sbírce
+              listin na portálu Justice.cz.
+            </p>
           </Reveal>
         </Container>
       </section>
