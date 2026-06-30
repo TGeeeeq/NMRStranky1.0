@@ -29,14 +29,14 @@ export function LogoMarquee({ logos }: { logos: PartnerLogo[] }) {
                 rel="noopener noreferrer"
                 aria-hidden={decorative || undefined}
                 tabIndex={decorative ? -1 : undefined}
-                className="flex h-28 w-48 items-center justify-center rounded-lg border border-border bg-surface p-5 shadow-soft transition-transform hover:-translate-y-1 hover:border-accent hover:shadow-lift"
+                className="flex h-28 w-48 items-center justify-center rounded-lg border border-border bg-surface p-3 shadow-soft transition-transform hover:-translate-y-1 hover:border-accent hover:shadow-lift"
               >
                 <Image
                   src={p.logo}
                   alt={decorative ? "" : `Logo ${p.name}`}
-                  width={160}
-                  height={80}
-                  className="max-h-16 w-auto max-w-[150px] object-contain"
+                  width={170}
+                  height={88}
+                  className="max-h-[5.5rem] w-auto max-w-[150px] object-contain"
                 />
               </a>
             </li>
