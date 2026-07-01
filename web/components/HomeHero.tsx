@@ -147,12 +147,12 @@ export function HomeHero() {
               transition={{ duration: 1.3, ease: EASE }}
             >
               <Image
-                src="/assets/animals-hero.webp"
-                alt="Husy, slepice a ovce na louce ve večerním světle"
+                src="/assets/home-hero.webp"
+                alt="Pár se zvířaty na louce – osel, dva psi a muflon ve večerním světle"
                 fill
                 preload
                 sizes="100vw"
-                className="object-cover"
+                className="object-cover object-[50%_46%]"
               />
             </motion.div>
             {fx ? (

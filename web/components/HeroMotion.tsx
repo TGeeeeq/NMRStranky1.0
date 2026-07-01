@@ -23,6 +23,8 @@ type HeroMotionProps = {
   innerClassName?: string;
   /** Override the moss gradient overlay. */
   gradientClassName?: string;
+  /** Tailwind object-position class for the photo focal point (e.g. "object-[72%_50%]"). Defaults to centered. */
+  objectPosition?: string;
   /** Show the bouncing scroll-down chevron. */
   scrollCue?: boolean;
   children: ReactNode;
@@ -42,6 +44,7 @@ export function HeroMotion({
   className,
   innerClassName,
   gradientClassName = OVERLAY_GRADIENT,
+  objectPosition,
   scrollCue = false,
   children,
 }: HeroMotionProps) {
@@ -84,7 +87,7 @@ export function HeroMotion({
             fill
             priority={priority}
             sizes="100vw"
-            className="hero-kenburns object-cover"
+            className={cn("hero-kenburns object-cover", objectPosition)}
           />
         </div>
       </motion.div>

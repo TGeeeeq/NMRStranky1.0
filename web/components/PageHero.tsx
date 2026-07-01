@@ -9,18 +9,22 @@ export function PageHero({
   eyebrow,
   title,
   subtitle,
+  objectPosition,
 }: {
   image: string;
   imageAlt: string;
   eyebrow?: string;
   title: string;
   subtitle?: string;
+  /** Tailwind object-position class for the photo focal point (e.g. "object-[72%_50%]"). */
+  objectPosition?: string;
 }) {
   return (
     <HeroMotion
       image={image}
       imageAlt={imageAlt}
       parallax={64}
+      objectPosition={objectPosition}
       className="min-h-[48vh] sm:min-h-[52vh]"
       innerClassName="flex min-h-[48vh] flex-col justify-center sm:min-h-[52vh]"
     >

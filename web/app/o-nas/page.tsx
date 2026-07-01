@@ -55,6 +55,7 @@ export default function ONas() {
       <PageHero
         image="/assets/o-nas-hero.webp"
         imageAlt="Maria a Tomáš na Louce mezi zvířaty"
+        objectPosition="object-[72%_50%]"
         eyebrow="Kdo jsme"
         title="Náš příběh a vize"
         subtitle="Jsme spolek nadšenců, kteří věří v harmoničtější soužití s přírodou a zvířaty. Pojďte se s námi seznámit."
