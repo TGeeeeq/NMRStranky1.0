@@ -1,13 +1,14 @@
 "use client";
 
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState, type ReactNode } from "react";
 import Image from "next/image";
-import { X, ChevronLeft, ChevronRight } from "lucide-react";
+import { X, ChevronLeft, ChevronRight, Camera, Video } from "lucide-react";
 import { galleryAnimals, galleryImages } from "@/lib/animals";
 import { Container } from "@/components/Container";
 import { cn } from "@/lib/cn";
 
-export function Gallery() {
+export function Gallery({ videos }: { videos?: ReactNode }) {
+  const [view, setView] = useState<"fotky" | "video">("fotky");
   const [filter, setFilter] = useState<string>("Vše");
   const [query, setQuery] = useState("");
   const [active, setActive] = useState<number | null>(null);
@@ -58,6 +59,46 @@ export function Gallery() {
   return (
     <section className="bg-surface py-16 sm:py-20">
       <Container>
+        {videos ? (
+          <div className="mb-8 flex justify-center">
+            <div className="inline-flex gap-1 rounded-pill border border-border bg-surface-alt p-1 shadow-soft">
+              <button
+                type="button"
+                onClick={() => setView("fotky")}
+                aria-pressed={view === "fotky"}
+                className={cn(
+                  "inline-flex items-center gap-2 rounded-pill px-5 py-2 text-sm font-semibold transition-colors",
+                  view === "fotky"
+                    ? "bg-moss text-cream shadow-soft"
+                    : "text-text hover:text-moss-deep",
+                )}
+              >
+                <Camera size={16} aria-hidden /> Fotky
+              </button>
+              <button
+                type="button"
+                onClick={() => {
+                  setView("video");
+                  setActive(null);
+                }}
+                aria-pressed={view === "video"}
+                className={cn(
+                  "inline-flex items-center gap-2 rounded-pill px-5 py-2 text-sm font-semibold transition-colors",
+                  view === "video"
+                    ? "bg-moss text-cream shadow-soft"
+                    : "text-text hover:text-moss-deep",
+                )}
+              >
+                <Video size={16} aria-hidden /> Video
+              </button>
+            </div>
+          </div>
+        ) : null}
+
+        {view === "video" && videos ? (
+          videos
+        ) : (
+          <>
         {/* Search */}
         <div className="mx-auto mb-5 max-w-md sm:mb-6">
           <input
@@ -119,6 +160,8 @@ export function Gallery() {
               </button>
             ))}
           </div>
+        )}
+          </>
         )}
       </Container>
 

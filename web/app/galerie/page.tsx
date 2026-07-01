@@ -20,8 +20,7 @@ export default function Galerie() {
         title="Galerie našich zvířat"
         subtitle="Nahlédněte do života obyvatel Louky skrze objektiv fotoaparátu."
       />
-      <Gallery />
-      <GalleryVideos />
+      <Gallery videos={<GalleryVideos embedded />} />
       <SocialSection tone="light" />
     </>
   );

@@ -22,9 +22,32 @@ const videos: GalleryVideo[] = [
   },
 ];
 
-export function GalleryVideos() {
+export function GalleryVideos({ embedded = false }: { embedded?: boolean }) {
   if (videos.length === 0) return null;
   const single = videos.length === 1;
+
+  const grid = (
+    <div
+      className={cn(
+        "mx-auto grid gap-8",
+        single ? "max-w-xl" : "max-w-5xl sm:grid-cols-2 lg:grid-cols-3",
+      )}
+    >
+      {videos.map((v) => (
+        <Reveal key={v.youtubeId}>
+          <figure>
+            <VideoFacade youtubeId={v.youtubeId} poster={v.poster} title={v.title} />
+            <figcaption className="mt-3 text-center text-sm font-medium text-text">
+              {v.title}
+            </figcaption>
+          </figure>
+        </Reveal>
+      ))}
+    </div>
+  );
+
+  // Embedded in the gallery tabs: no own section/header — the toggle labels it.
+  if (embedded) return grid;
 
   return (
     <section className="bg-surface-alt py-16 sm:py-20">
@@ -36,23 +59,7 @@ export function GalleryVideos() {
             description="Pusťte si, jak to u nás na Louce žije."
           />
         </Reveal>
-        <div
-          className={cn(
-            "mx-auto grid gap-8",
-            single ? "max-w-md" : "max-w-5xl sm:grid-cols-2 lg:grid-cols-3",
-          )}
-        >
-          {videos.map((v) => (
-            <Reveal key={v.youtubeId}>
-              <figure>
-                <VideoFacade youtubeId={v.youtubeId} poster={v.poster} title={v.title} />
-                <figcaption className="mt-3 text-center text-sm font-medium text-text">
-                  {v.title}
-                </figcaption>
-              </figure>
-            </Reveal>
-          ))}
-        </div>
+        {grid}
       </Container>
     </section>
   );
