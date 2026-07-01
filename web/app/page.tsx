@@ -1,11 +1,10 @@
 import type { Metadata } from "next";
 import Image from "next/image";
-import Link from "next/link";
 import { Heart, Sprout, Users, Leaf, Mail } from "lucide-react";
 import { Container } from "@/components/Container";
 import { SectionHeader } from "@/components/SectionHeader";
 import { Reveal } from "@/components/Reveal";
-import { HeroMotion, HeroItem, HeroUnderline } from "@/components/HeroMotion";
+import { HomeHero } from "@/components/HomeHero";
 import { StatsBand } from "@/components/StatsBand";
 import { SectionDivider } from "@/components/SectionDivider";
 import { ValueCard } from "@/components/ValueCard";
@@ -51,66 +50,7 @@ export default function Home() {
   return (
     <>
       {/* Hero */}
-      <HeroMotion
-        image="/assets/hero-image.webp"
-        imageAlt="Lidé se zvířaty na louce"
-        parallax={130}
-        scrollCue
-        className="min-h-[86vh]"
-        innerClassName="flex min-h-[86vh] items-center"
-      >
-        <Container className="py-24">
-          <div className="grid w-full items-center gap-10 lg:grid-cols-[1.4fr_1fr]">
-            <div className="text-cream">
-              <HeroItem>
-                <p className="mb-4 text-sm font-semibold uppercase tracking-[0.2em] text-accent">
-                  Nech mě růst z.s.
-                </p>
-              </HeroItem>
-              <HeroItem>
-                <h1 className="text-balance font-serif text-4xl font-semibold leading-[1.1] text-cream sm:text-5xl lg:text-6xl">
-                  Tvoříme prostor pro růst duše,{" "}
-                  <HeroUnderline>srdce i přírody</HeroUnderline>
-                </h1>
-              </HeroItem>
-              <HeroItem>
-                <p className="mt-6 max-w-xl text-lg text-cream/90">
-                  Nech Mě Růst z.s. je nezisková organizace s vizí tvorby rodového
-                  statku, kde žijeme v harmonii s přírodou, zvířaty i sebou navzájem.
-                </p>
-              </HeroItem>
-              <HeroItem>
-                <div className="mt-8 flex flex-wrap gap-4">
-                  <Link
-                    href="/jak-se-zapojit"
-                    className="rounded-pill bg-accent px-7 py-3 font-semibold text-moss-deep shadow-lift transition-transform hover:-translate-y-0.5"
-                  >
-                    Jak se zapojit
-                  </Link>
-                  <Link
-                    href="/o-nas"
-                    className="rounded-pill border border-cream/40 px-7 py-3 font-medium text-cream transition-colors hover:bg-cream/10"
-                  >
-                    Více o nás
-                  </Link>
-                </div>
-              </HeroItem>
-            </div>
-            <HeroItem className="hidden justify-self-center lg:block">
-              <div className="rounded-pill bg-cream/10 p-4 ring-1 ring-cream/20 backdrop-blur-sm">
-                <Image
-                  src="/assets/logo-circle.png"
-                  alt="Logo Nech mě růst"
-                  width={300}
-                  height={300}
-                  priority
-                  className="h-64 w-64 rounded-pill object-cover"
-                />
-              </div>
-            </HeroItem>
-          </div>
-        </Container>
-      </HeroMotion>
+      <HomeHero />
 
       {/* About */}
       <section className="relative isolate overflow-hidden bg-surface py-20 sm:py-24">
