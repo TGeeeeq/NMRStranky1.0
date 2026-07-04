@@ -19,11 +19,29 @@ type Event = {
   kind: string;
   location: string;
   description: string;
-  href: string;
+  href?: string;
   date?: string;
 };
 
 const events: Event[] = [
+  {
+    title: "Loukáda",
+    badge: "Novinka",
+    kind: "Víkend na Louce",
+    location: "Louka — azyl Nech mě růst",
+    date: "21.–23. 8. 2026",
+    description:
+      "Loukáda je náš společný víkend přímo na Louce — čas strávený mezi zvířaty, přírodou a dobrými lidmi. Přijďte poznat každodenní život na azylu, potkat se se zvířecími obyvateli a načerpat klid v souznění s přírodou. Podrobnosti k programu upřesníme.",
+  },
+  {
+    title: "Loukáda",
+    badge: "Novinka",
+    kind: "Víkend na Louce",
+    location: "Louka — azyl Nech mě růst",
+    date: "4.–6. 9. 2026",
+    description:
+      "Další zářijový termín naší Loukády — víkendu plného setkání se zvířaty, společné práce i odpočinku přímo na Louce. Srdečně zveme všechny, kdo si chtějí užít čas v přírodě a poznat život na azylu. Podrobnosti k programu upřesníme.",
+  },
   {
     title: "Spolu Mezi Lesy",
     badge: "Nový termín",
@@ -33,6 +51,15 @@ const events: Event[] = [
     description:
       "Třídenní víkend na pomezí retreatu a festivalu přímo na Louce — příroda, zvířata, intuitivní umění, pohyb a živá hudba. Akce se přesunula na nový zářijový termín. Podrobný program a přihlášení najdete na facebookové události.",
     href: "https://facebook.com/events/s/spolu-mezi-lesy-presunuto-na-z/2298157060995232/",
+  },
+  {
+    title: "Společná procházka",
+    badge: "Novinka",
+    kind: "Procházka se zvířaty",
+    location: "Louka — azyl Nech mě růst",
+    date: "26.–27. 9. 2026",
+    description:
+      "Vydejte se s námi na společnou procházku ve společnosti našich zvířecích přátel. Užijeme si čas v přírodě, mazlení se zvířaty i příjemnou atmosféru mezi dobrými lidmi. Sraz a podrobnosti upřesníme.",
   },
   {
     title: "Toulky se zvířaty",
@@ -86,14 +113,16 @@ export default function Udalosti() {
                     </span>
                   </div>
                   <p className="mt-4 leading-relaxed text-text">{e.description}</p>
-                  <a
-                    href={e.href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="mt-6 inline-flex items-center rounded-pill bg-moss px-5 py-2.5 text-sm font-medium text-cream transition-colors hover:bg-moss-deep"
-                  >
-                    Facebook událost
-                  </a>
+                  {e.href ? (
+                    <a
+                      href={e.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="mt-6 inline-flex items-center rounded-pill bg-moss px-5 py-2.5 text-sm font-medium text-cream transition-colors hover:bg-moss-deep"
+                    >
+                      Facebook událost
+                    </a>
+                  ) : null}
                 </article>
               </Reveal>
             ))}

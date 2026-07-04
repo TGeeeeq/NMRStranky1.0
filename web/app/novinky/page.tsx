@@ -34,6 +34,22 @@ type Article = {
 
 const articles: Article[] = [
   {
+    title: "📅 Nadcházející akce na Louce jsou venku!",
+    date: "4. 7. 2026",
+    image: "/assets/louka1.webp",
+    imageAlt: "Léto a podzim na Louce",
+    imageHref: "/udalosti",
+    badge: "Novinka",
+    blocks: [
+      { type: "p", text: "Máme pro vás skvělou zprávu — vyhlašujeme termíny nadcházejících akcí na Louce! Léto a podzim u nás budou nabité společnými setkáními, na která už teď srdečně zveme každého, kdo se chce zapojit a strávit čas mezi zvířaty, přírodou a dobrými lidmi." },
+      { type: "p", text: "Těšit se můžete na Loukádu ve dnech 21.–23. srpna a znovu 4.–6. září, na festival Spolu Mezi Lesy 11.–13. září a na společnou procházku 26.–27. září. Všechny termíny najdete přehledně v našich událostech." },
+      { type: "p", text: "Podrobnosti k programu budeme postupně doplňovat, tak nás sledujte, ať vám nic neunikne. Budeme se na vás moc těšit!" },
+    ],
+    links: [
+      { label: "Zobrazit události →", href: "/udalosti" },
+    ],
+  },
+  {
     title: "📖 Výroční zpráva 2025 je tu",
     date: "29. 6. 2026",
     image: "/assets/louka1.webp",
