@@ -1,0 +1,72 @@
+{
+  "version": 1,
+  "topic": "Svoboda za plotem — kontrast",
+  "kind": "animals",
+  "format": "4:5",
+  "theme": "forest",
+  "fontScale": 1,
+  "align": "left",
+  "branding": { "csopLogo": true, "publicita": false },
+  "slides": [
+    {
+      "type": "cover",
+      "eyebrow": "Zamyšlení z Louky",
+      "title": "Dáváme jim svobodu. A přesto ji nemají.",
+      "subtitle": "O tichém rozporu, se kterým tady na Louce žijeme každý den."
+    },
+    {
+      "type": "fact",
+      "eyebrow": "Jak by měli žít",
+      "title": "Volně. Bez plotů.",
+      "body": "V přírodě by se pásli tam, kam by je nohy zanesly. Šli by za stádem, za vodou, za klidným místem ke spánku. Žádná brána, žádná hranice — jen krajina a jejich vlastní rozhodnutí."
+    },
+    {
+      "type": "fact",
+      "eyebrow": "Jak žijí u nás",
+      "title": "Volně — jen po naši mez.",
+      "body": "Dáváme jim tolik prostoru, kolik vůbec dokážeme. A přesto tu musí být elektrický ohradník. Musí tu být brány. Musí tu být ploty. Snažíme se jim dát svobodu, ale tu úplnou jim dát neumíme."
+    },
+    {
+      "type": "fact",
+      "eyebrow": "Lidé nám říkají",
+      "title": "„U vás je to krása. Všichni si tu spokojeně žijou pospolu.“",
+      "body": "A je to pravda — je tu klid, bezpečí i společnost. Zvířata se tu mají dobře. Ale je to jen jedna strana mince."
+    },
+    {
+      "type": "fact",
+      "eyebrow": "Druhá strana",
+      "title": "Pořád jsou ale zavření.",
+      "body": "Pořád nad nimi někdo dohlíží. I když láskyplně, i když jen pro jejich dobro — přirozené to není. Svoboda za plotem zůstává svobodou, kterou jim někdo vyměřil."
+    },
+    {
+      "type": "fact",
+      "eyebrow": "Proč to jinak nejde",
+      "title": "Tenhle svět jim ji dát neumí.",
+      "body": "Ne proto, že bychom nechtěli. Ale tak, jak máme dnes svět zařízený, úplnou svobodu zvířatům nabídnout nedokážeme. Můžeme jen dělat maximum uvnitř těch hranic."
+    },
+    {
+      "type": "outro",
+      "eyebrow": "Za co jsme vděční",
+      "title": "Aspoň tolik. A s láskou.",
+      "body": "Nedáme jim celý svět. Dáme jim ale bezpečí, klid a život beze strachu — nejvíc svobody, kolik jí v téhle době jde dopřát.",
+      "cta": "Sleduj Nech mě růst"
+    }
+  ],
+  "captions": [
+    {
+      "label": "Varianta A — reflektivní",
+      "text": "Dáváme jim maximální volnost, jakou tady můžou mít. A přesto tu musí být plot, brána, elektrický ohradník. 🌿\n\nLidi nám říkají, že je u nás krása a že si všichni spokojeně žijou pospolu. A je to pravda. Ale pořád jsou to zvířata za plotem, nad kterými někdo — byť láskyplně — dohlíží.\n\nTakovou svobodu, jakou by měla v přírodě, jim tenhle svět dát neumí. My jim dáváme aspoň tu největší, jaká dnes jde. 💚",
+      "hashtags": ["#nechmerust", "#svoboda", "#zvirata", "#utulek", "#louka", "#respekt", "#zamysleni", "#zviratamajipravo"]
+    },
+    {
+      "label": "Varianta B — otázka",
+      "text": "Může být zvíře za plotem opravdu svobodné? 🤔\n\nSnažíme se jim dát tolik volnosti, kolik jen dokážeme. Ale pořád tu jsou brány, ploty a ohradníky. Pořád nad nimi někdo dohlíží.\n\nDěláme to s láskou a pro jejich bezpečí — ale přirozené to není. A možná ani v tomhle světě nemůže být.\n\nJak to vnímáš ty? 👇",
+      "hashtags": ["#nechmerust", "#svoboda", "#zvirata", "#priroda", "#louka", "#zamysleni", "#pravazvirat"]
+    },
+    {
+      "label": "Varianta C — vyprávěcí",
+      "text": "V přírodě by šli, kam by chtěli. Za stádem, za vodou, za klidem. 🐾\n\nTady u nás mají klid, bezpečí i společnost — a přesto ploty, brány a někoho, kdo nad nimi bdí.\n\nJe to kontrast, se kterým žijeme každý den: dáváme jim maximum svobody, a přesto to není ta pravá. Aspoň ji dáváme s láskou. 💚",
+      "hashtags": ["#nechmerust", "#louka", "#zvirata", "#svoboda", "#utulek", "#priroda", "#respektkzivotu"]
+    }
+  ]
+}
