@@ -26,6 +26,8 @@ type Article = {
   image?: string;
   imageAlt?: string;
   imageHref?: string;
+  /** CSS object-position for the cropped card image (defaults to center). */
+  imagePosition?: string;
   badge?: string;
   blocks: Block[];
   links?: CtaLink[];
@@ -39,6 +41,7 @@ const articles: Article[] = [
     image: "/assets/malvina-rozarka.webp",
     imageAlt: "Ovečky Malvína a Rozárka",
     imageHref: "/zvireci-obyvatele",
+    imagePosition: "center 30%",
     badge: "Nové obyvatelky",
     blocks: [
       { type: "p", text: "Máme velkou radost — dnes k nám přijely dvě nové obyvatelky! Jsou to dvě dvouměsíční ovečky, které se jmenují Malvína a Rozárka. Už teď se u nás krásně sžívají s celou naší ovčí partou a roztomile bečí. Věříme, že se u nás budou cítit jako doma." },
@@ -233,7 +236,7 @@ function ArticleCard({ a }: { a: Article }) {
     <article className="overflow-hidden rounded-lg border border-border bg-surface shadow-soft">
       {a.image ? (
         <div className="relative aspect-[16/9] overflow-hidden">
-          <Image src={a.image} alt={a.imageAlt ?? a.title} fill sizes="(min-width: 768px) 720px, 100vw" className="object-cover" />
+          <Image src={a.image} alt={a.imageAlt ?? a.title} fill sizes="(min-width: 768px) 720px, 100vw" className="object-cover" style={a.imagePosition ? { objectPosition: a.imagePosition } : undefined} />
         </div>
       ) : null}
       <div className="p-6 sm:p-8">
