@@ -37,6 +37,7 @@ export const residents: Resident[] = [
   { name: "Končí", image: "/assets/konci.webp", description: "Zvědavý a aktivní člen naší komunity." },
   { name: "Lucinka", image: "/assets/lucinka2.webp", description: "Veselá a přátelská ovčí babička." },
   { name: "Anaya", image: "/assets/anaya.webp", description: "Veselá a přátelská ovčí obyvatelka." },
+  { name: "Malvína a Rozárka", image: "/assets/malvina-rozarka.webp", description: "Roztomilé malé ovečky." },
   { name: "Roman", image: "/assets/roman.webp", description: "Nejsvalnatější kocour na celém světě." },
   { name: "Denis", image: "/assets/denis.webp", description: "Velký průzkumník a velký mazel." },
   { name: "Hanička", image: "/assets/hanicka.webp", description: "Třínohá kočka samotářka." },

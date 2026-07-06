@@ -34,6 +34,21 @@ type Article = {
 
 const articles: Article[] = [
   {
+    title: "🐑 Vítejte, Malvíno a Rozárko!",
+    date: "6. 7. 2026",
+    image: "/assets/malvina-rozarka.webp",
+    imageAlt: "Ovečky Malvína a Rozárka",
+    imageHref: "/zvireci-obyvatele",
+    badge: "Nové obyvatelky",
+    blocks: [
+      { type: "p", text: "Máme velkou radost — dnes k nám přijely dvě nové obyvatelky! Jsou to dvě dvouměsíční ovečky, které se jmenují Malvína a Rozárka. Už teď se u nás krásně sžívají s celou naší ovčí partou a roztomile bečí. Věříme, že se u nás budou cítit jako doma." },
+      { type: "alert", title: "🏡 Kapacita Louky je zatím naplněná", text: "Z kapacitních důvodů momentálně bohužel nemůžeme přijímat nové zvířecí obyvatele. Jedinou výjimkou zůstává oslík — kamarád pro našeho Karla — a případně několik slepiček, kterým ještě dokážeme dát domov." },
+    ],
+    links: [
+      { label: "Poznejte naše obyvatele →", href: "/zvireci-obyvatele" },
+    ],
+  },
+  {
     title: "📅 Nadcházející akce na Louce jsou venku!",
     date: "4. 7. 2026",
     image: "/assets/louka1.webp",
