@@ -120,6 +120,7 @@ function CoverBody({ slide, palette, fs }: { slide: Slide; palette: Palette; fs:
           fontWeight: 600,
           margin: "22px 0 0",
           letterSpacing: -1.5,
+          color: palette.text,
         }}
       >
         {slide.title}
@@ -160,7 +161,7 @@ function PlantBody({
   return (
     <>
       {slide.status ? <SpecimenTag palette={palette} fs={fs} align={align}>{slide.status}</SpecimenTag> : null}
-      <h2 style={{ fontFamily: FONT_SERIF, fontSize: 94 * fs, lineHeight: 1.02, fontWeight: 600, margin: "28px 0 0" }}>
+      <h2 style={{ fontFamily: FONT_SERIF, fontSize: 94 * fs, lineHeight: 1.02, fontWeight: 600, margin: "28px 0 0", color: palette.text }}>
         {slide.name}
       </h2>
       {slide.latin ? (
@@ -203,7 +204,7 @@ function FactBody({
         <Eyebrow palette={palette} fs={fs}>{slide.eyebrow}</Eyebrow>
       ) : null}
       {slide.title ? (
-        <h2 style={{ fontFamily: FONT_SERIF, fontSize: 86 * fs, lineHeight: 1.06, fontWeight: 600, margin: "22px 0 0", letterSpacing: -0.5 }}>
+        <h2 style={{ fontFamily: FONT_SERIF, fontSize: 86 * fs, lineHeight: 1.06, fontWeight: 600, margin: "22px 0 0", letterSpacing: -0.5, color: palette.text }}>
           {slide.title}
         </h2>
       ) : null}
@@ -230,7 +231,7 @@ function OutroBody({
   return (
     <>
       {slide.eyebrow ? <Eyebrow palette={palette} fs={fs}>{slide.eyebrow}</Eyebrow> : null}
-      <h2 style={{ fontFamily: FONT_SERIF, fontSize: 90 * fs, lineHeight: 1.04, fontWeight: 600, margin: "22px 0 0", letterSpacing: -1 }}>
+      <h2 style={{ fontFamily: FONT_SERIF, fontSize: 90 * fs, lineHeight: 1.04, fontWeight: 600, margin: "22px 0 0", letterSpacing: -1, color: palette.text }}>
         {slide.title}
       </h2>
       {slide.body ? (
