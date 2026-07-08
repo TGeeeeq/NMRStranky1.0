@@ -24,7 +24,7 @@ export const residents: Resident[] = [
   { name: "List", image: "/assets/list.webp", description: "Rozverné štěně, které moc rádo zkoumá a ochutnává.", status: "Stále se pohřešuje" },
   { name: "Atila", image: "/assets/atila.webp", description: "Věrná kamarádka a velká milovnice jídla." },
   {
-    name: "Kesy",
+    name: "Kesu",
     image: "/assets/kesy.webp",
     description:
       "Vypadá jako obří chlupatý medvěd a má rozvážnost zenového mistra. Dává jasně najevo, že povely jsou pouze doporučení, kterými se bude řídit, až bude mít čas a náladu.",
@@ -72,7 +72,7 @@ export const galleryAnimals: GalleryAnimal[] = [
   { name: "Riky", base: "riky", count: 1 },
   { name: "Flíček", base: "flicek", count: 3 },
   { name: "Atila", base: "atila", count: 3 },
-  { name: "Kesy", base: "kesy", count: 3 },
+  { name: "Kesu", base: "kesy", count: 3 },
   { name: "Pogo", base: "pogo", count: 4 },
   { name: "Kulich", base: "kulich", count: 3 },
   { name: "Eduard", base: "eduard", count: 1 },
