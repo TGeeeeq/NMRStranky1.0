@@ -13,6 +13,7 @@ const routes = [
   "/udalosti",
   "/kontakt",
   "/galerie",
+  "/loukarun",
   "/obchod",
   "/virtualni-adopce",
   "/prispet-kryptem",

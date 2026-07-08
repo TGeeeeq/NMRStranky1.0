@@ -11,6 +11,7 @@ export function AdminNav({ username }: { username?: string }) {
         <Link href="/admin/products" className={link}>Produkty</Link>
         <Link href="/admin/categories" className={link}>Kategorie</Link>
         <Link href="/admin/orders" className={link}>Objednávky</Link>
+        <Link href="/admin/hra" className={link}>Hra</Link>
         <form action={logoutAction} className="ml-auto flex items-center gap-3">
           {username ? <span className="text-sm text-text-muted">{username}</span> : null}
           <button type="submit" className="rounded-md px-3 py-2 text-sm font-medium text-terracotta hover:bg-surface-alt">Odhlásit</button>

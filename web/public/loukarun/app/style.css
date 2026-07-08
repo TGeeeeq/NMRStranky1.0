@@ -1,0 +1,854 @@
+/* =========================================================
+   LOUKA RUN – styly UI
+   ========================================================= */
+
+/* Baloo 2 hostované z vlastního webu (proměnná tloušťka 400–800) */
+@font-face {
+  font-family: "Baloo 2";
+  font-style: normal;
+  font-weight: 400 800;
+  font-display: swap;
+  src: url("assets/fonts/baloo2-latin.woff2") format("woff2");
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: "Baloo 2";
+  font-style: normal;
+  font-weight: 400 800;
+  font-display: swap;
+  src: url("assets/fonts/baloo2-latin-ext.woff2") format("woff2");
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+
+html, body {
+  height: 100%;
+  overflow: hidden;
+  font-family: "Baloo 2", system-ui, sans-serif;
+  background: #8ed4f7;
+  touch-action: none;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+#game {
+  position: fixed;
+  inset: 0;
+  display: block;
+}
+
+/* ---------- obecné prvky ---------- */
+.btn {
+  font-family: inherit;
+  font-weight: 800;
+  font-size: 1.05rem;
+  color: #4a3220;
+  background: linear-gradient(180deg, #ffe08a, #ffc94a);
+  border: none;
+  border-radius: 999px;
+  padding: 12px 28px;
+  cursor: pointer;
+  box-shadow: 0 4px 0 #d89b26, 0 8px 18px rgba(0,0,0,0.18);
+  transition: transform .08s, box-shadow .08s;
+}
+.btn:active { transform: translateY(3px); box-shadow: 0 1px 0 #d89b26, 0 4px 10px rgba(0,0,0,0.15); }
+.btn.big { font-size: 1.5rem; padding: 16px 44px; }
+.btn.small { font-size: 0.95rem; padding: 9px 20px; }
+.btn.tiny { font-size: 0.85rem; padding: 7px 16px; box-shadow: 0 3px 0 #d89b26, 0 5px 12px rgba(0,0,0,0.15); }
+.btn.round {
+  width: 46px; height: 46px; padding: 0;
+  font-size: 1.3rem; line-height: 46px; text-align: center;
+}
+.btn.buy { background: linear-gradient(180deg, #b0e89a, #7ac95e); box-shadow: 0 4px 0 #55a13c, 0 8px 18px rgba(0,0,0,0.18); color: #234a12; }
+.btn.cant { filter: grayscale(.55) brightness(.92); }
+.btn:disabled { cursor: default; }
+a.btn { text-decoration: none; display: inline-block; }
+
+.privacy-link { color: rgba(255,255,255,0.9); }
+
+.hud-chip {
+  display: flex; align-items: center; gap: 6px;
+  background: rgba(255,255,255,0.85);
+  border-radius: 999px;
+  padding: 6px 16px;
+  font-weight: 800;
+  color: #4a3220;
+  box-shadow: 0 3px 10px rgba(0,0,0,0.12);
+}
+.hud-chip.lucky {
+  background: rgba(214, 245, 190, 0.92);
+  color: #2c5e1e;
+  animation: pulse .6s infinite alternate;
+}
+
+/* ---------- HUD ---------- */
+#hud {
+  position: fixed;
+  top: env(safe-area-inset-top, 0);
+  left: 0; right: 0;
+  display: none;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 14px 16px;
+  pointer-events: none;
+}
+#hud.visible { display: flex; }
+#hud .hud-left, #hud .hud-right { display: flex; gap: 10px; align-items: center; }
+#hud button { pointer-events: auto; }
+
+#hud-energy { display: flex; align-items: center; gap: 8px; }
+.energy-icon { font-size: 1.4rem; filter: drop-shadow(0 2px 3px rgba(0,0,0,0.25)); }
+.energy-bar {
+  width: min(34vw, 220px); height: 20px;
+  background: rgba(255,255,255,0.5);
+  border: 2px solid rgba(255,255,255,0.9);
+  border-radius: 999px;
+  overflow: hidden;
+  box-shadow: inset 0 2px 5px rgba(0,0,0,0.15);
+}
+#hud-energy-fill {
+  height: 100%; width: 100%;
+  background: linear-gradient(90deg, #ffb24a, #f28c28);
+  border-radius: 999px;
+  transition: width .25s;
+}
+#hud-energy-fill.low { background: linear-gradient(90deg, #ff7a5a, #e5533a); animation: pulse .6s infinite alternate; }
+@keyframes pulse { from { filter: brightness(1); } to { filter: brightness(1.35); } }
+
+#hud-dist {
+  font-size: 1.6rem; font-weight: 800; color: #fff;
+  text-shadow: 0 2px 0 rgba(0,0,0,0.25), 0 4px 12px rgba(0,0,0,0.2);
+}
+
+/* tlačítko Pokračovat – jediná cesta, jak rozjet zastavenou lekci
+   (školu běhu i představení novinky na trase) */
+#btn-tut-continue {
+  position: fixed;
+  left: 50%;
+  bottom: max(28px, env(safe-area-inset-bottom));
+  transform: translateX(-50%);
+  animation: contPulse 1.6s ease-in-out infinite;
+}
+@keyframes contPulse {
+  0%, 100% { transform: translateX(-50%) scale(1); }
+  50% { transform: translateX(-50%) scale(1.07); }
+}
+
+/* ---------- obrazovky ---------- */
+.screen {
+  position: fixed; inset: 0;
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  padding: max(20px, env(safe-area-inset-top)) 20px max(20px, env(safe-area-inset-bottom));
+  overflow-y: auto;
+}
+.screen.visible { display: flex; }
+
+/* menu */
+#screen-menu { justify-content: space-between; background: linear-gradient(180deg, rgba(0,0,0,0.08), rgba(0,0,0,0) 30%); }
+/* plynulé objevení menu po intru */
+#screen-menu.fade-in { animation: menuFadeIn .7s ease both; }
+@keyframes menuFadeIn {
+  from { opacity: 0; transform: translateY(16px); }
+  to { opacity: 1; transform: none; }
+}
+.menu-top { text-align: center; margin-top: 4vh; }
+
+/* přepínač jazyka – viditelný v rohu úvodní obrazovky */
+.lang-switch {
+  position: absolute;
+  top: max(14px, env(safe-area-inset-top));
+  right: max(14px, env(safe-area-inset-right, 14px));
+  display: flex;
+  gap: 4px;
+  padding: 4px;
+  background: rgba(255,255,255,0.28);
+  border: 1px solid rgba(255,255,255,0.45);
+  border-radius: 999px;
+  backdrop-filter: blur(6px);
+  box-shadow: 0 4px 14px rgba(0,0,0,0.18);
+  z-index: 5;
+}
+.lang-btn {
+  font-family: inherit;
+  font-weight: 800;
+  font-size: 0.82rem;
+  color: #fff;
+  background: transparent;
+  border: none;
+  border-radius: 999px;
+  padding: 6px 14px;
+  cursor: pointer;
+  text-shadow: 0 1px 3px rgba(0,0,0,0.35);
+  transition: background .15s, color .15s, transform .1s;
+}
+.lang-btn:active { transform: scale(0.95); }
+.lang-btn.active {
+  background: linear-gradient(180deg, #ffe08a, #ffc94a);
+  color: #4a3220;
+  text-shadow: none;
+  box-shadow: 0 2px 0 #d89b26, 0 3px 8px rgba(0,0,0,0.2);
+}
+.game-title {
+  font-size: clamp(3rem, 11vw, 5.5rem);
+  font-weight: 800;
+  letter-spacing: 2px;
+  color: #fff;
+  text-shadow: 0 4px 0 #55a13c, 0 8px 0 rgba(0,0,0,0.15), 0 14px 30px rgba(0,0,0,0.3);
+  line-height: 0.95;
+}
+.game-title span { color: #ffe08a; text-shadow: 0 4px 0 #d89b26, 0 8px 0 rgba(0,0,0,0.15), 0 14px 30px rgba(0,0,0,0.3); }
+.subtitle {
+  margin-top: 12px;
+  font-weight: 700;
+  color: #fff;
+  text-shadow: 0 2px 6px rgba(0,0,0,0.35);
+  font-size: 1.05rem;
+}
+.subtitle a { color: #ffe08a; }
+
+/* druhý jazyk pod titulkem – úvodní obrazovka je dvojjazyčná */
+.subtitle-alt {
+  margin-top: 4px;
+  font-weight: 600;
+  font-size: 0.85rem;
+  color: rgba(255,255,255,0.75);
+  text-shadow: 0 1px 4px rgba(0,0,0,0.35);
+  font-style: italic;
+}
+.subtitle-alt a { color: rgba(255,224,138,0.85); }
+
+.menu-mid { display: flex; flex-direction: column; align-items: center; gap: 14px; }
+.menu-actions { display: flex; flex-direction: column; align-items: center; gap: 14px; }
+
+/* zvýrazněné hlavní tlačítko – jemné pulzování */
+.btn.play { animation: playPulse 2.2s ease-in-out infinite; }
+@keyframes playPulse {
+  0%, 100% { box-shadow: 0 4px 0 #d89b26, 0 8px 18px rgba(0,0,0,0.18), 0 0 0 0 rgba(255,224,138,0.55); }
+  50%      { box-shadow: 0 4px 0 #d89b26, 0 8px 22px rgba(0,0,0,0.22), 0 0 0 12px rgba(255,224,138,0); }
+}
+
+/* jemný nástup prvků menu */
+#screen-menu.visible .menu-top   { animation: menuDrop .5s cubic-bezier(.2,.9,.3,1.2) both; }
+#screen-menu.visible .menu-mid   { animation: menuRise .5s .08s cubic-bezier(.2,.9,.3,1.2) both; }
+#screen-menu.visible .menu-bottom{ animation: menuRise .5s .16s cubic-bezier(.2,.9,.3,1.2) both; }
+@keyframes menuDrop { from { opacity: 0; transform: translateY(-18px); } to { opacity: 1; transform: none; } }
+@keyframes menuRise { from { opacity: 0; transform: translateY(14px); }  to { opacity: 1; transform: none; } }
+.menu-char-info {
+  text-align: center; color: #fff;
+  background: rgba(0,0,0,0.28);
+  padding: 10px 26px;
+  border-radius: 18px;
+  backdrop-filter: blur(4px);
+}
+.menu-char-info .charname { font-size: 1.3rem; font-weight: 800; }
+.menu-char-info .perk { font-size: 0.9rem; opacity: 0.9; }
+
+.menu-bottom { display: flex; flex-direction: column; align-items: center; gap: 10px; }
+.menu-stats, .menu-settings { display: flex; gap: 10px; }
+.controls-hint {
+  font-size: 0.78rem; font-weight: 600;
+  color: rgba(255,255,255,0.9);
+  text-shadow: 0 1px 4px rgba(0,0,0,0.4);
+  text-align: center;
+}
+
+/* obchod – karusel karet od nejlevnější (vlevo) po nejdražší (vpravo) */
+#screen-shop {
+  background: linear-gradient(180deg, #7cc4b8, #dff3e8);
+  justify-content: center;
+  padding: max(12px, env(safe-area-inset-top)) 0 max(10px, env(safe-area-inset-bottom));
+  overflow-y: auto;
+}
+.shop-head {
+  width: 100%; max-width: 1040px;
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 12px;
+  padding: 0 20px;
+  flex: 0 0 auto;
+}
+.shop-head h2 { color: #2d4a3a; font-size: 1.5rem; }
+.shop-note {
+  margin: 4px 0 0; padding: 0 20px;
+  color: #2d4a3a; font-weight: 600; opacity: 0.75; font-size: 0.85rem;
+  text-align: center; flex: 0 0 auto;
+}
+#shop-grid {
+  display: flex;
+  align-items: stretch;
+  gap: 16px;
+  width: 100%;
+  max-width: 1040px;
+  padding: 14px 28px 16px;
+  overflow-x: auto;
+  overflow-y: hidden;
+  scroll-snap-type: x proximity;
+  touch-action: pan-x;
+  cursor: grab;
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 26px, #000 calc(100% - 26px), transparent);
+  mask-image: linear-gradient(90deg, transparent, #000 26px, #000 calc(100% - 26px), transparent);
+  scrollbar-width: thin;
+  scrollbar-color: rgba(45,74,58,0.35) transparent;
+}
+#shop-grid::-webkit-scrollbar { height: 8px; }
+#shop-grid::-webkit-scrollbar-track { background: transparent; }
+#shop-grid::-webkit-scrollbar-thumb { background: rgba(45,74,58,0.3); border-radius: 999px; }
+#shop-grid.dragging { scroll-snap-type: none; cursor: grabbing; }
+#shop-grid.dragging .char-card { pointer-events: none; }
+.char-card {
+  flex: 0 0 auto;
+  width: min(70vw, 236px);
+  scroll-snap-align: center;
+  background: rgba(255,255,255,0.94);
+  border-radius: 20px;
+  padding: 10px 12px 12px;
+  text-align: center;
+  box-shadow: 0 8px 22px rgba(0,0,0,0.14);
+  display: flex; flex-direction: column; align-items: center; gap: 6px;
+  border: 3px solid transparent;
+  transition: transform .12s, box-shadow .12s;
+}
+.char-card:hover { transform: translateY(-3px); }
+.char-card.selected { border-color: #7ac95e; box-shadow: 0 10px 24px rgba(85,161,60,0.4); }
+.char-card.locked canvas { filter: grayscale(0.8) opacity(0.75); }
+.char-card h3 {
+  color: #4a3220; font-size: 1.1rem; line-height: 1.15; margin: 2px 0 0;
+  min-height: 1.4rem; display: flex; align-items: center; justify-content: center;
+}
+.char-card .tagline {
+  font-size: 0.78rem; color: #6a5a48; font-weight: 600; line-height: 1.3;
+  display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;
+  /* vždy rezervuj dva řádky, ať perk i statistiky lícují napříč všemi kartami */
+  min-height: 2.04rem;
+}
+.char-card .perk {
+  width: 100%;
+  /* perk vyplní zbytek karty → statistiky i tlačítko sedí ve stejné výšce na všech kartách */
+  flex: 1 1 auto;
+  min-height: 3.6rem;
+  display: flex; align-items: center; justify-content: center; text-align: center;
+  font-size: 0.78rem; color: #245018; font-weight: 700; line-height: 1.4;
+  background: rgba(122,201,94,0.2);
+  border: 1px solid rgba(122,201,94,0.42);
+  border-radius: 12px;
+  padding: 8px 12px;
+}
+/* celý popisek perku je vidět – žádné ořezávání */
+.char-card .perk-text { display: block; }
+.char-card .btn { margin-top: auto; }
+/* portrét na trávě, cenovka v rohu */
+.portrait-wrap {
+  position: relative;
+  width: 100%;
+  border-radius: 14px;
+  background:
+    radial-gradient(120% 90% at 50% 108%, #a5cd6f 0 38%, rgba(165,205,111,0) 39%),
+    linear-gradient(180deg, #bfe4f7, #ddf2cf);
+  display: flex; justify-content: center; align-items: flex-end;
+  overflow: hidden;
+}
+.portrait-wrap canvas { height: 118px; width: auto; display: block; }
+.card-badge {
+  position: absolute; top: 7px; right: 7px;
+  font-size: 0.72rem; font-weight: 800;
+  padding: 3px 10px;
+  border-radius: 999px;
+  background: linear-gradient(180deg, #ffe08a, #ffc94a);
+  color: #4a3220;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.18);
+}
+.card-badge.sel { background: linear-gradient(180deg, #b0e89a, #7ac95e); color: #234a12; }
+/* statistiky – rychlost / skok / výdrž */
+.stat-rows { width: 100%; display: grid; gap: 4px; padding: 0 2px; }
+.stat-row { display: grid; grid-template-columns: 62px 1fr; align-items: center; gap: 8px; }
+.stat-row span {
+  font-size: 0.6rem; font-weight: 800; letter-spacing: 0.05em; text-transform: uppercase;
+  color: #8a7a66; text-align: left; white-space: nowrap;
+}
+.stat-track { height: 7px; background: #ece4d4; border-radius: 999px; overflow: hidden; }
+.stat-fill { height: 100%; border-radius: 999px; }
+.stat-fill.speed { background: linear-gradient(90deg, #ffb24a, #f28c28); }
+.stat-fill.jump { background: linear-gradient(90deg, #8fc7e8, #4a9fd8); }
+.stat-fill.stamina { background: linear-gradient(90deg, #b0e89a, #7ac95e); }
+/* nižší displeje (mobil na šířku) – karty se zkrátí, ať se nikam nescrolluje svisle */
+@media (max-height: 560px) {
+  .shop-note { display: none; }
+  .shop-head h2 { font-size: 1.2rem; }
+  .char-card { width: min(58vw, 208px); gap: 5px; }
+  .char-card .tagline { display: none; }
+  .portrait-wrap canvas { height: 88px; }
+  #shop-grid { padding: 10px 28px 12px; }
+}
+@media (max-height: 420px) {
+  .stat-rows { display: none; }
+  .char-card .perk { font-size: 0.72rem; padding: 6px 10px; }
+  .portrait-wrap canvas { height: 72px; }
+}
+/* pozvánková karta na konci karuselu – ať zve poznat zvířata naživo */
+.cta-card {
+  justify-content: center;
+  gap: 10px;
+  background: linear-gradient(180deg, #ffffff, #eafbe0);
+  border: 3px dashed #7ac95e;
+}
+.cta-card .cta-art {
+  font-size: 2.9rem; line-height: 1; margin-top: 6px;
+  filter: drop-shadow(0 4px 8px rgba(85,161,60,0.28));
+}
+.cta-card h3 { color: #2c5e1e; }
+.cta-card .cta-text {
+  font-size: 0.82rem; color: #3a5a2a; font-weight: 600; line-height: 1.45;
+  padding: 0 4px;
+}
+.cta-card .btn { margin-top: 6px; }
+
+/* konec běhu / pauza */
+#screen-over, #screen-pause { justify-content: center; background: rgba(20, 30, 25, 0.45); backdrop-filter: blur(3px); }
+.over-card {
+  background: linear-gradient(180deg, #fffdf5, #f5ecd8);
+  border-radius: 28px;
+  padding: 26px 30px;
+  max-width: 460px;
+  width: 100%;
+  text-align: center;
+  display: flex; flex-direction: column; align-items: center; gap: 12px;
+  box-shadow: 0 24px 60px rgba(0,0,0,0.4);
+}
+.over-card.small { max-width: 340px; }
+.over-card h2 { color: #4a3220; font-size: 1.7rem; }
+.over-card .story {
+  color: #5a4a38; font-weight: 600; font-size: 1rem; line-height: 1.45;
+  background: rgba(255, 210, 74, 0.18);
+  border-radius: 14px;
+  padding: 12px 14px;
+}
+#over-portrait { width: 150px; height: 118px; }
+.over-stats {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 8px 20px; width: 100%;
+}
+.stat { display: flex; justify-content: space-between; font-weight: 700; color: #6a5a48; }
+.stat-val { color: #4a3220; }
+.stat-val.gold { color: #d89b26; }
+.over-buttons { display: flex; flex-direction: column; gap: 10px; width: 100%; align-items: center; }
+.over-buttons .row { display: flex; gap: 10px; }
+
+/* ---------- odznaky (achievementy) ---------- */
+.ach-chip { border: none; cursor: pointer; font-family: inherit; font-size: inherit; transition: transform .12s; }
+.ach-chip:hover { transform: translateY(-2px); }
+.ach-chip:active { transform: translateY(0); }
+.ach-card { max-width: 460px; }
+.ach-head { display: flex; align-items: center; justify-content: space-between; width: 100%; gap: 10px; }
+.ach-head h2 { margin: 0; font-size: 1.5rem; }
+#ach-list { display: flex; flex-direction: column; gap: 8px; width: 100%; max-height: 60vh; overflow-y: auto; }
+.ach-row {
+  display: flex; align-items: center; gap: 12px;
+  background: rgba(0,0,0,0.05);
+  border-radius: 14px;
+  padding: 10px 14px;
+  opacity: 0.55;
+}
+.ach-row.got {
+  opacity: 1;
+  background: rgba(255, 207, 77, 0.22);
+  box-shadow: inset 0 0 0 2px rgba(255, 207, 77, 0.5);
+}
+.ach-ico { font-size: 1.5rem; width: 30px; text-align: center; flex-shrink: 0; }
+.ach-name { flex: 1; text-align: left; font-weight: 700; color: #5a4a38; }
+.ach-row.got .ach-name { color: #4a3220; }
+.ach-mark { color: #d89b26; font-weight: 800; font-size: 1.1rem; width: 18px; }
+
+/* ---------- vývojářské menu (skryté) ---------- */
+.over-card.dev-card {
+  max-width: 540px;
+  background: linear-gradient(180deg, #2b2f38, #20242c);
+  color: #dfe6ef;
+  gap: 14px;
+  max-height: 90vh;
+  overflow-y: auto;
+}
+.dev-head { display: flex; align-items: center; justify-content: space-between; width: 100%; }
+.dev-head h2 { color: #7fe0c0 !important; font-size: 1.4rem; margin: 0; }
+.dev-head .btn.round { background: #3a4150; box-shadow: 0 4px 0 #171b22; color: #dfe6ef; }
+#dev-body { display: flex; flex-direction: column; gap: 16px; width: 100%; }
+.dev-section { display: flex; flex-direction: column; gap: 8px; width: 100%; text-align: left; }
+.dev-section > h3 {
+  font-size: 0.8rem; text-transform: uppercase; letter-spacing: .08em;
+  color: #8a94a3; margin: 0; font-weight: 800;
+}
+.dev-row { display: flex; flex-wrap: wrap; gap: 8px; }
+.dev-btn {
+  flex: 1 1 auto;
+  font-family: inherit; font-weight: 700; font-size: 0.9rem;
+  padding: 10px 14px; border: none; border-radius: 12px; cursor: pointer;
+  background: #3a4150; color: #dfe6ef;
+  box-shadow: 0 3px 0 #171b22;
+  transition: transform .05s, filter .1s;
+}
+.dev-btn:active { transform: translateY(2px); box-shadow: 0 1px 0 #171b22; }
+.dev-btn.on { background: linear-gradient(180deg, #7ee0a6, #4bc47e); color: #10301c; box-shadow: 0 3px 0 #2f7a4d; }
+.dev-btn.off { filter: none; }
+.dev-btn.danger { background: linear-gradient(180deg, #f0866a, #d6543a); color: #3a1208; box-shadow: 0 3px 0 #8f2f1c; }
+.dev-btn.wide { flex-basis: 100%; }
+.dev-note { font-size: 0.78rem; color: #8a94a3; margin: 0; }
+
+/* toast */
+#toast {
+  position: fixed;
+  bottom: max(30px, env(safe-area-inset-bottom));
+  left: 50%;
+  transform: translateX(-50%) translateY(20px);
+  background: rgba(40, 34, 26, 0.92);
+  color: #ffe08a;
+  font-weight: 700;
+  padding: 12px 24px;
+  border-radius: 999px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity .25s, transform .25s;
+  z-index: 30;
+  max-width: 90vw;
+  text-align: center;
+}
+#toast.visible { opacity: 1; transform: translateX(-50%) translateY(0); }
+
+/* =========================================================
+   Výzva k otočení telefonu (jen mobil na výšku)
+   – noční louka se světluškami a telefonem, který se sám otočí
+   ========================================================= */
+#rotate-overlay {
+  position: fixed; inset: 0;
+  z-index: 100;
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: max(24px, env(safe-area-inset-top)) 24px max(24px, env(safe-area-inset-bottom));
+  background:
+    radial-gradient(95% 60% at 50% -12%, rgba(255, 224, 138, 0.16), rgba(255, 224, 138, 0) 62%),
+    linear-gradient(180deg, #12332a 0%, #22563a 55%, #35804a 100%);
+  color: #fff;
+  text-align: center;
+  overflow: hidden;
+}
+@media (orientation: portrait) and (pointer: coarse) {
+  #rotate-overlay { display: flex; }
+}
+
+/* tmavé kopce louky u spodního okraje */
+.rotate-meadow {
+  position: absolute;
+  left: -8vw; right: -8vw; bottom: -10vh;
+  height: 26vh;
+  pointer-events: none;
+  background:
+    radial-gradient(58% 100% at 20% 100%, rgba(9, 38, 22, 0.9) 57%, transparent 58%),
+    radial-gradient(66% 112% at 80% 102%, rgba(12, 47, 27, 0.85) 55%, transparent 56%);
+}
+
+/* poletující světlušky */
+.rotate-fireflies i {
+  position: absolute;
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: #ffe08a;
+  filter: blur(1px);
+  box-shadow: 0 0 12px 3px rgba(255, 224, 138, 0.45);
+  opacity: 0;
+  animation: fireflyFloat 6s ease-in-out infinite;
+}
+.rotate-fireflies i:nth-child(1) { left: 12%; top: 24%; animation-delay: 0s;    animation-duration: 6.4s; }
+.rotate-fireflies i:nth-child(2) { left: 84%; top: 18%; animation-delay: 1.2s;  animation-duration: 7.6s; }
+.rotate-fireflies i:nth-child(3) { left: 22%; top: 72%; animation-delay: 2.6s;  animation-duration: 5.8s; }
+.rotate-fireflies i:nth-child(4) { left: 76%; top: 66%; animation-delay: 0.8s;  animation-duration: 8.2s; }
+.rotate-fireflies i:nth-child(5) { left: 50%; top: 10%; animation-delay: 3.4s;  animation-duration: 7s;   }
+.rotate-fireflies i:nth-child(6) { left: 8%;  top: 52%; animation-delay: 4.4s;  animation-duration: 6.6s; }
+@keyframes fireflyFloat {
+  0%, 100% { opacity: 0; transform: translateY(8px); }
+  25%      { opacity: 0.9; }
+  55%      { opacity: 0.3; transform: translateY(-16px); }
+  80%      { opacity: 0.75; transform: translateY(-4px); }
+}
+
+/* skleněná karta s obsahem */
+.rotate-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: min(86vw, 360px);
+  padding: 26px 30px 24px;
+  background: rgba(7, 27, 17, 0.38);
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  border-radius: 30px;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  box-shadow: 0 26px 60px rgba(0, 0, 0, 0.35);
+  animation: rotateCardIn .6s cubic-bezier(.2, .9, .3, 1.15) both;
+}
+@keyframes rotateCardIn {
+  from { opacity: 0; transform: translateY(18px) scale(0.96); }
+  to   { opacity: 1; transform: none; }
+}
+
+/* telefon s mini loukou na displeji + šipka otočení */
+.rotate-stage {
+  position: relative;
+  width: 136px; height: 136px;
+  margin-bottom: 14px;
+  display: grid;
+  place-items: center;
+}
+.rotate-arc {
+  position: absolute; inset: 0;
+  width: 100%; height: 100%;
+  animation: arcPulse 3.6s ease-in-out infinite;
+}
+@keyframes arcPulse {
+  0%, 100% { opacity: 0.55; }
+  30%      { opacity: 1; }
+}
+.rotate-device {
+  position: relative;
+  width: 56px; height: 100px;
+  border-radius: 14px;
+  background: #0d2418;
+  border: 3px solid #f6f2e7;
+  box-shadow: 0 10px 26px rgba(0, 0, 0, 0.35);
+  animation: deviceTurn 3.6s cubic-bezier(.65, -0.1, .3, 1.2) infinite;
+}
+@keyframes deviceTurn {
+  0%, 16%   { transform: rotate(0deg); }
+  38%       { transform: rotate(96deg); }
+  46%, 76%  { transform: rotate(90deg); }
+  94%, 100% { transform: rotate(0deg); }
+}
+.rotate-notch {
+  position: absolute;
+  top: 5px; left: 50%;
+  width: 16px; height: 3px;
+  margin-left: -8px;
+  border-radius: 999px;
+  background: rgba(246, 242, 231, 0.8);
+  z-index: 1;
+}
+.rotate-screen {
+  position: absolute; inset: 6px;
+  border-radius: 8px;
+  overflow: hidden;
+  background: linear-gradient(180deg, #8ed4f7 0%, #cdeef7 54%, #a5cd6f 55%, #7ab84e 100%);
+}
+.rs-sun {
+  position: absolute; top: 8px; right: 8px;
+  width: 13px; height: 13px;
+  border-radius: 50%;
+  background: #ffe08a;
+  box-shadow: 0 0 10px 3px rgba(255, 224, 138, 0.75);
+}
+.rs-hill {
+  position: absolute; bottom: -8px; left: -10px;
+  width: 46px; height: 24px;
+  border-radius: 50%;
+  background: #55a13c;
+}
+
+/* texty výzvy */
+.rotate-title {
+  font-size: clamp(1.35rem, 6.2vw, 1.7rem);
+  font-weight: 800;
+  color: #fff;
+  text-shadow: 0 2px 0 rgba(0, 0, 0, 0.18), 0 6px 18px rgba(0, 0, 0, 0.25);
+}
+.rotate-sub {
+  margin-top: 4px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.9);
+}
+.rotate-rule {
+  width: 76px; height: 1px;
+  margin: 15px auto 12px;
+  background: linear-gradient(90deg, transparent, rgba(255, 224, 138, 0.65), transparent);
+}
+.rotate-en {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.6);
+  line-height: 1.45;
+}
+.rotate-en strong {
+  display: block;
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: rgba(255, 255, 255, 0.78);
+}
+
+/* šetrný režim – bez točení a poletování, telefon rovnou naležato */
+@media (prefers-reduced-motion: reduce) {
+  .rotate-device { animation: none; transform: rotate(90deg); }
+  .rotate-fireflies i, .rotate-arc { animation: none; opacity: 0.6; }
+  .rotate-card { animation: none; }
+}
+
+/* =========================================================
+   AF signatura – filmová znělka autora před spuštěním hry
+   (logo se vynoří ze tmy, pod ním web, pak se vše prolne do hry)
+   ========================================================= */
+#af-splash {
+  position: fixed; inset: 0;
+  z-index: 200;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background:
+    radial-gradient(52% 42% at 50% 45%, rgba(212, 164, 90, 0.08), rgba(212, 164, 90, 0) 70%),
+    #0a0908;
+  transition: opacity 1s ease .35s; /* pozadí odchází jako poslední */
+  /* pojistka: kdyby JS selhal, znělka se po chvíli sama uklidí */
+  animation: afSafety 1s ease 9s forwards;
+}
+@keyframes afSafety { to { opacity: 0; visibility: hidden; } }
+#af-splash.af-leave { opacity: 0; pointer-events: none; }
+#af-splash.af-leave .af-inner { animation: afInnerOut .85s ease forwards; }
+@keyframes afInnerOut {
+  to { opacity: 0; transform: translateY(-2vmin) scale(1.035); }
+}
+
+.af-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: clamp(16px, 3vmin, 26px);
+  transform: translateY(-2vmin);
+}
+.af-mark {
+  width: clamp(150px, 32vmin, 250px);
+  height: auto;
+  opacity: 0;
+  filter: drop-shadow(0 0 28px rgba(212, 164, 90, 0.16));
+  animation: afMarkIn 2.1s cubic-bezier(.22, .6, .2, 1) .45s forwards;
+}
+@keyframes afMarkIn {
+  from { opacity: 0; transform: scale(0.93); }
+  to   { opacity: 1; transform: scale(1); }
+}
+.af-rule {
+  width: 64px; height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(212, 164, 90, 0.7), transparent);
+  opacity: 0;
+  animation: afFadeIn 1.2s ease 1.75s forwards;
+}
+@keyframes afFadeIn { to { opacity: 1; } }
+.af-site {
+  font-family: "Cormorant Garamond", "Times New Roman", Georgia, serif;
+  font-size: clamp(0.9rem, 2.8vmin, 1.1rem);
+  letter-spacing: 0.32em;
+  text-indent: 0.32em; /* vyrovnává mezeru za posledním znakem – text sedí opticky na středu */
+  color: #f1e9d8;
+  opacity: 0;
+  animation: afSiteIn 1.5s ease 2s forwards;
+}
+@keyframes afSiteIn {
+  from { opacity: 0; transform: translateY(9px); }
+  to   { opacity: 0.85; transform: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .af-mark  { animation: afFadeIn 1s ease .3s forwards; transform: none; }
+  .af-site  { animation: afFadeIn 1s ease 1s forwards; transform: none; opacity: 0; }
+  #af-splash.af-leave .af-inner { animation: none; opacity: 0; transition: opacity .8s ease; }
+}
+
+/* =========================================================
+   Nízké displeje (telefon na šířku) – všechno se musí vejít
+   na obrazovku bez rolování
+   ========================================================= */
+@media (max-height: 560px) {
+  .screen { padding: max(8px, env(safe-area-inset-top)) 16px max(8px, env(safe-area-inset-bottom)); }
+
+  /* menu na šířku – vymazlená verze */
+  #screen-menu {
+    background:
+      linear-gradient(180deg, rgba(0,0,0,0.14), rgba(0,0,0,0) 34%),
+      linear-gradient(0deg, rgba(0,0,0,0.22), rgba(0,0,0,0) 30%);
+  }
+  .lang-switch { top: max(8px, env(safe-area-inset-top)); right: max(10px, env(safe-area-inset-right, 10px)); }
+  .lang-btn { font-size: 0.74rem; padding: 5px 11px; }
+}
+
+/* na úzkém displeji na šířku zbydou z přepínače jen vlaječky, ať nekolidují s titulem */
+@media (max-height: 560px) and (max-width: 740px) {
+  .lang-label { display: none; }
+  .lang-btn { font-size: 0.95rem; padding: 4px 10px; }
+}
+
+@media (max-height: 560px) {
+
+  .menu-top { margin-top: 0; }
+  .game-title {
+    font-size: clamp(1.9rem, 14vh, 3.4rem);
+    text-shadow: 0 3px 0 #55a13c, 0 6px 0 rgba(0,0,0,0.15), 0 10px 22px rgba(0,0,0,0.3);
+  }
+  .game-title span { text-shadow: 0 3px 0 #d89b26, 0 6px 0 rgba(0,0,0,0.15), 0 10px 22px rgba(0,0,0,0.3); }
+  .subtitle { margin-top: 2px; font-size: 0.85rem; }
+  .subtitle-alt { margin-top: 0; font-size: 0.72rem; }
+
+  /* karta postavy + tlačítka vedle sebe ve skleněném panelu;
+     panel uhne doprava, ať je vybrané zvířátko vidět, jak běhá */
+  .menu-mid {
+    flex-direction: row;
+    align-items: stretch;
+    align-self: flex-end;
+    margin-right: max(3vw, env(safe-area-inset-right, 0px));
+    gap: 14px;
+    background: rgba(0,0,0,0.18);
+    border: 1px solid rgba(255,255,255,0.22);
+    border-radius: 22px;
+    padding: 12px 18px;
+    backdrop-filter: blur(6px);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.18);
+  }
+  .menu-char-info {
+    display: flex; flex-direction: column; justify-content: center;
+    background: rgba(0,0,0,0.22);
+    padding: 6px 18px; border-radius: 16px;
+    max-width: 46vw;
+  }
+  .menu-char-info .charname { font-size: 1.05rem; }
+  .menu-char-info .perk { font-size: 0.76rem; }
+  .menu-actions { flex-direction: column; justify-content: center; gap: 8px; }
+
+  .btn { font-size: 0.92rem; padding: 8px 20px; }
+  .btn.big { font-size: 1.15rem; padding: 10px 32px; }
+  .btn.tiny { font-size: 0.76rem; padding: 6px 12px; }
+  .btn.round { width: 40px; height: 40px; line-height: 40px; font-size: 1.1rem; }
+  .hud-chip { padding: 4px 12px; font-size: 0.85rem; }
+  .menu-bottom { flex-direction: row; flex-wrap: wrap; justify-content: center; gap: 8px; }
+  .controls-hint { width: 100%; font-size: 0.68rem; opacity: 0.9; }
+
+  /* karta po doběhnutí – přeskládaná na šířku */
+  #screen-over { padding: 8px 12px; }
+  .over-card {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    grid-template-areas:
+      "title title"
+      "pic   story"
+      "stats story"
+      "btns  btns";
+    align-items: center;
+    gap: 6px 16px;
+    max-width: min(680px, 96vw);
+    padding: 12px 20px;
+  }
+  .over-card h2 { grid-area: title; font-size: 1.25rem; }
+  #over-portrait { grid-area: pic; width: 112px; height: 88px; justify-self: center; }
+  .over-card .story { grid-area: story; align-self: start; font-size: 0.88rem; line-height: 1.35; padding: 8px 12px; }
+  .over-stats { grid-area: stats; grid-template-columns: 1fr; gap: 2px; font-size: 0.85rem; }
+  .over-stats .stat { gap: 14px; }
+  .over-buttons { grid-area: btns; flex-direction: row; flex-wrap: wrap; justify-content: center; gap: 8px; }
+
+  /* pauza zůstává jednoduchá */
+  .over-card.small { display: flex; padding: 16px 22px; gap: 10px; }
+  .over-card.small h2 { font-size: 1.25rem; }
+}

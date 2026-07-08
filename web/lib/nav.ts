@@ -10,5 +10,6 @@ export const navItems: NavItem[] = [
   { href: "/udalosti", label: "Události" },
   { href: "/kontakt", label: "Kontakt" },
   { href: "/galerie", label: "Galerie" },
+  { href: "/loukarun", label: "Hra" },
   { href: "/obchod", label: "Obchod" },
 ];

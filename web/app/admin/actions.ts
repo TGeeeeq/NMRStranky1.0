@@ -10,6 +10,7 @@ import { getSession, requireAdmin } from "@/lib/auth";
 import { saveImage } from "@/lib/storage";
 import { productSchema, categorySchema } from "@/lib/validation";
 import { rateLimit } from "@/lib/rate-limit";
+import { generateInviteCode } from "@/lib/game-access";
 
 // ============================ auth ============================
 export type LoginState = { error?: string };
@@ -192,4 +193,25 @@ export async function updateOrderStatus(formData: FormData): Promise<void> {
     })
     .where(eq(schema.orders.id, id));
   redirect(`/admin/orders/${id}`);
+}
+
+// ============================ hra (Louka Run) ============================
+export async function createGameInvites(formData: FormData): Promise<void> {
+  await requireAdmin();
+  const count = Math.min(Math.max(Number(formData.get("count")) || 1, 1), 50);
+  const note = String(formData.get("note") ?? "").trim().slice(0, 200) || null;
+  const values = Array.from({ length: count }, () => ({ code: generateInviteCode(), note }));
+  await db.insert(schema.gameInvites).values(values);
+  redirect("/admin/hra");
+}
+
+export async function revokeGameInvite(formData: FormData): Promise<void> {
+  await requireAdmin();
+  const id = Number(formData.get("id"));
+  if (id) {
+    await db.update(schema.gameInvites)
+      .set({ revokedAt: new Date() })
+      .where(eq(schema.gameInvites.id, id));
+  }
+  redirect("/admin/hra");
 }

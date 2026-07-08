@@ -77,3 +77,13 @@ export const admins = pgTable("admins", {
   lastLoginAt: timestamp("last_login_at"),
   lastLoginIp: varchar("last_login_ip", { length: 45 }),
 });
+
+export const gameInvites = pgTable("game_invites", {
+  id: serial("id").primaryKey(),
+  code: varchar("code", { length: 20 }).notNull().unique(),
+  note: varchar("note", { length: 200 }),
+  redeemCount: integer("redeem_count").default(0).notNull(),
+  createdAt: timestamp("created_at").defaultNow().notNull(),
+  lastRedeemedAt: timestamp("last_redeemed_at"),
+  revokedAt: timestamp("revoked_at"),
+});
