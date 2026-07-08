@@ -35,7 +35,7 @@ const characters: Character[] = [
   {
     id: "pogo",
     name: "Ovečka Pogo",
-    image: "/assets/pogo.webp",
+    image: "/assets/pogo3.webp",
     tagline: "Energická ovčí kamarádka, která skáče jako na pružině.",
     perk: "Vlněný polštář — náraz jí ubere jen půlku energie a skáče o kousek výš.",
   },
@@ -101,9 +101,11 @@ export default async function LoukaRunPage({
               <>
                 <h2 className="font-serif text-3xl font-semibold text-moss-deep">Hra za dar zvířatům</h2>
                 <p className="mx-auto mt-4 max-w-xl text-text-muted">
-                  Louka Run není na prodej — je na pozvání. Podpoř azyl{" "}
-                  <strong>libovolným darem</strong> a my ti pošleme pozvánkový kód.
-                  Každá koruna jde na krmení a péči o zvířata, která ve hře potkáš.
+                  Louka Run brzy vyjde jako aplikace — u nás na webu ji ale získáš
+                  na pozvání. Podpoř azyl <strong>darem od 200 Kč</strong> a my ti
+                  pošleme pozvánkový kód. Hra pak běží v prohlížeči na všech tvých
+                  zařízeních a každá koruna jde na krmení a péči o zvířata, která
+                  ve hře potkáš.
                 </p>
 
                 {/* dřevěná cedule s návodem */}
@@ -114,7 +116,7 @@ export default async function LoukaRunPage({
                     <div className="rounded-md border border-[#5c4534] bg-cream p-5 text-left text-sm">
                       <p className="font-serif text-base font-semibold text-moss-deep">Jak získat kód:</p>
                       <ol className="mt-2 list-decimal space-y-1 pl-5 text-text-muted">
-                        <li>Pošli dar na účet <strong className="whitespace-nowrap">{BANK.account}</strong>.</li>
+                        <li>Pošli dar aspoň 200 Kč na účet <strong className="whitespace-nowrap">{BANK.account}</strong>.</li>
                         <li>Napiš nám na <a className="text-moss underline" href="mailto:info@nechmerust.org?subject=Louka%20Run%20—%20kód">info@nechmerust.org</a>.</li>
                         <li>Obratem ti pošleme kód — platí napořád, na všech tvých zařízeních.</li>
                       </ol>
@@ -204,8 +206,9 @@ export default async function LoukaRunPage({
                 Brzy i jako aplikace na Google Play
               </h2>
               <p className="mt-4 text-text-muted">
-                Připravujeme plnou verzi pro Android — jednorázově za 150 Kč, bez reklam,
+                Už velmi brzy vyjde plná verze pro Android — jednorázově za 150 Kč, bez reklam,
                 bez sledování a bez nákupů ve hře. Celý výtěžek jde zvířatům.
+                Verze pro iPhone (App Store) bude následovat, schvalování tam trvá déle.
               </p>
               <p className="mt-3 text-sm text-text-muted">
                 Chceš pomoct s testováním? Napiš nám na{" "}
