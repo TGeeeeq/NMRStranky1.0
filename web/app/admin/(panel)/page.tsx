@@ -2,10 +2,12 @@ import Link from "next/link";
 import { sql, desc, eq } from "drizzle-orm";
 import { db, schema } from "@/lib/db";
 import { formatCzk } from "@/lib/money";
+import { requireAdmin } from "@/lib/auth";
 
 export const dynamic = "force-dynamic";
 
 export default async function Dashboard() {
+  await requireAdmin();
   const [[products], [active], [orderCount], recent] = await Promise.all([
     db.select({ n: sql<number>`count(*)::int` }).from(schema.products),
     db.select({ n: sql<number>`count(*)::int` }).from(schema.products).where(eq(schema.products.isActive, true)),

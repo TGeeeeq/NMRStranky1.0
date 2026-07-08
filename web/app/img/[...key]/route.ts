@@ -8,6 +8,10 @@ export async function GET(_req: Request, { params }: { params: Promise<{ key: st
   if (!blob) return new Response("Not found", { status: 404 });
   const contentType = (blob.metadata?.contentType as string) || "application/octet-stream";
   return new Response(blob.data, {
-    headers: { "Content-Type": contentType, "Cache-Control": "public, max-age=31536000, immutable" },
+    headers: {
+      "Content-Type": contentType,
+      "Cache-Control": "public, max-age=31536000, immutable",
+      "X-Content-Type-Options": "nosniff",
+    },
   });
 }

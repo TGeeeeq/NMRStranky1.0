@@ -9,13 +9,17 @@ export interface SessionData {
   username?: string;
 }
 
+const SESSION_TTL = 60 * 60 * 12; // 12 hodin
+
 export const sessionOptions: SessionOptions = {
   password: env.sessionSecret(),
   cookieName: "nmr_admin",
+  ttl: SESSION_TTL,
   cookieOptions: {
     secure: process.env.NODE_ENV === "production",
     httpOnly: true,
     sameSite: "lax",
+    maxAge: SESSION_TTL,
   },
 };
 

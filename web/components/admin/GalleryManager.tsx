@@ -18,8 +18,10 @@ export function GalleryManager({ productId, initial }: { productId: number; init
     fd.append("file", file);
     const res = await uploadImage(fd);
     if ("url" in res) {
-      await addProductImage(productId, res.url);
-      setImages((cur) => [...cur, { id: Date.now(), imageUrl: res.url }]);
+      const added = await addProductImage(productId, res.url);
+      if ("id" in added) {
+        setImages((cur) => [...cur, { id: added.id, imageUrl: res.url }]);
+      }
     }
     setBusy(false);
     e.target.value = "";

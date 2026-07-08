@@ -4,12 +4,16 @@ import { db, schema } from "@/lib/db";
 import { ProductForm } from "@/components/admin/ProductForm";
 import { GalleryManager } from "@/components/admin/GalleryManager";
 import { getProductImages } from "@/lib/db/queries";
+import { requireAdmin } from "@/lib/auth";
 
 export const dynamic = "force-dynamic";
 
 export default async function EditProduct({ params }: { params: Promise<{ id: string }> }) {
+  await requireAdmin();
   const { id } = await params;
-  const rows = await db.select().from(schema.products).where(eq(schema.products.id, Number(id)));
+  const numId = Number(id);
+  if (!Number.isInteger(numId)) notFound();
+  const rows = await db.select().from(schema.products).where(eq(schema.products.id, numId));
   const product = rows[0];
   if (!product) notFound();
 

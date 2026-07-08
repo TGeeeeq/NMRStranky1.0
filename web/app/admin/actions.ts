@@ -9,17 +9,33 @@ import { db, schema } from "@/lib/db";
 import { getSession, requireAdmin } from "@/lib/auth";
 import { saveImage } from "@/lib/storage";
 import { productSchema, categorySchema } from "@/lib/validation";
+import { rateLimit } from "@/lib/rate-limit";
 
 // ============================ auth ============================
 export type LoginState = { error?: string };
+
+// Dummy hash pro porovnání, když uživatel neexistuje — sjednotí dobu odpovědi
+// (jinak by neexistující jméno vracelo mnohem rychleji a prozradilo platná jména).
+const DUMMY_HASH = "$2b$12$MWG5Kh.9L4IxUEx4TbEv5uXBZVdGJLj0i533YrLryr90dpb4OG30m";
 
 export async function loginAction(_prev: LoginState, formData: FormData): Promise<LoginState> {
   const username = String(formData.get("username") ?? "").trim();
   const password = String(formData.get("password") ?? "");
 
+  const h = await headers();
+  const clientIp = (h.get("x-nf-client-connection-ip") ?? h.get("x-forwarded-for") ?? "").split(",")[0].trim() || "unknown";
+
+  // Brute-force / credential-stuffing throttle: per IP i per jméno.
+  const ipLimit = rateLimit(`login:ip:${clientIp}`, 10, 300);
+  const userLimit = rateLimit(`login:user:${username.toLowerCase()}`, 5, 300);
+  if (!ipLimit.allowed || !userLimit.allowed) {
+    return { error: "Příliš mnoho pokusů o přihlášení. Zkuste to prosím za pár minut." };
+  }
+
   const rows = await db.select().from(schema.admins).where(eq(schema.admins.username, username));
   const admin = rows[0];
-  if (!admin || !(await bcrypt.compare(password, admin.passwordHash))) {
+  const passwordOk = await bcrypt.compare(password, admin?.passwordHash ?? DUMMY_HASH);
+  if (!admin || !passwordOk) {
     return { error: "Nesprávné jméno nebo heslo." };
   }
 
@@ -28,9 +44,7 @@ export async function loginAction(_prev: LoginState, formData: FormData): Promis
   session.username = admin.username;
   await session.save();
 
-  const h = await headers();
-  const ip = (h.get("x-forwarded-for") ?? "").split(",")[0].trim() || null;
-  await db.update(schema.admins).set({ lastLoginAt: new Date(), lastLoginIp: ip }).where(eq(schema.admins.id, admin.id));
+  await db.update(schema.admins).set({ lastLoginAt: new Date(), lastLoginIp: clientIp }).where(eq(schema.admins.id, admin.id));
 
   redirect("/admin");
 }
@@ -105,12 +119,17 @@ export async function deleteProduct(formData: FormData): Promise<void> {
   redirect("/admin/products");
 }
 
-export async function addProductImage(productId: number, url: string): Promise<void> {
+export async function addProductImage(productId: number, url: string): Promise<{ id: number } | { error: string }> {
   await requireAdmin();
+  if (!Number.isInteger(productId) || productId <= 0) return { error: "Neplatný produkt." };
+  if (!/^\/[^\s"'<>]{1,999}$/.test(url)) return { error: "Neplatná adresa obrázku." };
   const max = await db
     .select({ m: sql<number>`coalesce(max(${schema.productImages.displayOrder}), -1)::int` })
     .from(schema.productImages).where(eq(schema.productImages.productId, productId));
-  await db.insert(schema.productImages).values({ productId, imageUrl: url, displayOrder: (max[0]?.m ?? -1) + 1 });
+  const ins = await db.insert(schema.productImages)
+    .values({ productId, imageUrl: url, displayOrder: (max[0]?.m ?? -1) + 1 })
+    .returning({ id: schema.productImages.id });
+  return { id: ins[0].id };
 }
 
 export async function deleteProductImage(imageId: number): Promise<void> {

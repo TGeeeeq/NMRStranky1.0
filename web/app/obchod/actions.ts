@@ -7,7 +7,11 @@ import { countRecentOrdersFromIp } from "@/lib/db/queries";
 
 export async function createOrder(raw: unknown): Promise<{ ok: true; orderNumber: string } | { ok: false; error: string }> {
   const h = await headers();
-  const ip = (h.get("x-forwarded-for") ?? "").split(",")[0].trim() || "0.0.0.0";
+  // Netlify nastavuje x-nf-client-connection-ip z reálného spojení; x-forwarded-for
+  // je klientem podvrhnutelný (útočník by tak obešel rate limit novou „přihrádkou").
+  const ip = (h.get("x-nf-client-connection-ip") ?? "").trim()
+    || (h.get("x-forwarded-for") ?? "").split(",")[0].trim()
+    || "0.0.0.0";
 
   if ((await countRecentOrdersFromIp(ip, 60)) >= 5) {
     return { ok: false, error: "Příliš mnoho požadavků. Zkuste to prosím za chvíli." };

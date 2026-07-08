@@ -1,10 +1,12 @@
 import { asc } from "drizzle-orm";
 import { db, schema } from "@/lib/db";
 import { ProductForm } from "@/components/admin/ProductForm";
+import { requireAdmin } from "@/lib/auth";
 
 export const dynamic = "force-dynamic";
 
 export default async function NewProduct() {
+  await requireAdmin();
   const categories = await db.select({ id: schema.categories.id, name: schema.categories.name })
     .from(schema.categories).orderBy(asc(schema.categories.displayOrder));
   return (

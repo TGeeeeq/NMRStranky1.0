@@ -27,7 +27,14 @@ export const productSchema = z.object({
   price: z.coerce.number().positive(),
   stock_quantity: z.coerce.number().int().min(0).default(0),
   category_id: z.coerce.number().int().positive().nullable().optional(),
-  image_url: z.string().max(1000).optional().default(""),
+  // Jen same-origin relativní cesta (začíná „/"), bez mezer a znaků umožňujících
+  // javascript:/data: nebo injektáž. Prázdná hodnota = bez obrázku.
+  image_url: z
+    .string()
+    .max(1000)
+    .refine((v) => v === "" || /^\/[^\s"'<>]*$/.test(v), "Neplatná adresa obrázku")
+    .optional()
+    .default(""),
   is_active: z.coerce.boolean().default(true),
 });
 export type ProductInput = z.infer<typeof productSchema>;

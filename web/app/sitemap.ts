@@ -1,4 +1,5 @@
 import type { MetadataRoute } from "next";
+import { getActiveProducts } from "@/lib/db/queries";
 
 const BASE = "https://nechmerust.org";
 
@@ -20,10 +21,28 @@ const routes = [
   "/gdpr",
 ];
 
-export default function sitemap(): MetadataRoute.Sitemap {
-  return routes.map((path) => ({
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
+  const now = new Date();
+
+  const staticEntries: MetadataRoute.Sitemap = routes.map((path) => ({
     url: `${BASE}${path}`,
+    lastModified: now,
     changeFrequency: path === "" || path === "/novinky" ? "weekly" : "monthly",
     priority: path === "" ? 1 : 0.7,
   }));
+
+  let productEntries: MetadataRoute.Sitemap = [];
+  try {
+    const products = await getActiveProducts({});
+    productEntries = products.map((p) => ({
+      url: `${BASE}/obchod/${p.slug}`,
+      lastModified: now,
+      changeFrequency: "weekly",
+      priority: 0.6,
+    }));
+  } catch {
+    // Bez DB (např. při buildu bez DATABASE_URL) vrátíme aspoň statické stránky.
+  }
+
+  return [...staticEntries, ...productEntries];
 }

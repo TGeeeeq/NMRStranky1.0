@@ -1,5 +1,5 @@
 import "server-only";
-import { and, eq, sql } from "drizzle-orm";
+import { and, eq, gte, sql } from "drizzle-orm";
 import { db, schema } from "./db";
 import { checkoutSchema } from "./validation";
 import { generateOrderNumber, generateVariableSymbol } from "./payment";
@@ -33,19 +33,26 @@ export async function placeOrder(rawInput: unknown, ip: string): Promise<PlaceOr
       let total = 0;
       const resolved: { productId: number; name: string; quantity: number; unitPrice: string; lineTotal: number }[] = [];
 
+      // Sečti množství podle produktu — klient může poslat stejné product_id vícekrát
+      // a bez agregace by kontrola skladu prošla dvakrát proti stejné skladové hodnotě.
+      const wanted = new Map<number, number>();
       for (const it of input.items) {
+        wanted.set(it.product_id, (wanted.get(it.product_id) ?? 0) + it.quantity);
+      }
+
+      for (const [productId, quantity] of wanted) {
         const rows = await tx
           .select().from(schema.products)
-          .where(and(eq(schema.products.id, it.product_id), eq(schema.products.isActive, true)))
+          .where(and(eq(schema.products.id, productId), eq(schema.products.isActive, true)))
           .for("update");
         const product = rows[0];
         if (!product) throw new OrderError("Některý produkt už není dostupný.");
-        if (it.quantity > product.stockQuantity) {
+        if (quantity > product.stockQuantity) {
           throw new OrderError(`Produkt „${product.name}" není skladem v požadovaném množství.`);
         }
-        const lt = lineTotal(product.price, it.quantity);
+        const lt = lineTotal(product.price, quantity);
         total += lt;
-        resolved.push({ productId: product.id, name: product.name, quantity: it.quantity, unitPrice: product.price, lineTotal: lt });
+        resolved.push({ productId: product.id, name: product.name, quantity, unitPrice: product.price, lineTotal: lt });
       }
       if (resolved.length === 0 || total <= 0) throw new OrderError("Košík je prázdný.");
 
@@ -62,9 +69,12 @@ export async function placeOrder(rawInput: unknown, ip: string): Promise<PlaceOr
           orderId, productId: r.productId, productName: r.name,
           quantity: r.quantity, unitPrice: String(r.unitPrice), totalPrice: String(r.lineTotal),
         });
-        await tx.update(schema.products)
+        // Atomický odečet s pojistkou proti přeprodeji: sníží sklad jen když je dost kusů.
+        const dec = await tx.update(schema.products)
           .set({ stockQuantity: sql`${schema.products.stockQuantity} - ${r.quantity}` })
-          .where(eq(schema.products.id, r.productId));
+          .where(and(eq(schema.products.id, r.productId), gte(schema.products.stockQuantity, r.quantity)))
+          .returning({ id: schema.products.id });
+        if (dec.length === 0) throw new OrderError(`Produkt „${r.name}" není skladem v požadovaném množství.`);
       }
       return { total, items: resolved.map((r) => ({ name: r.name, quantity: r.quantity, lineTotal: r.lineTotal })) };
     });

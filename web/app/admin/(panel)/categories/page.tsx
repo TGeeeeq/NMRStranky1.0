@@ -1,11 +1,13 @@
 import { asc } from "drizzle-orm";
 import { db, schema } from "@/lib/db";
 import { saveCategoryForm, deleteCategory } from "@/app/admin/actions";
+import { requireAdmin } from "@/lib/auth";
 
 export const dynamic = "force-dynamic";
 const field = "w-full rounded-md border border-border bg-surface px-3 py-2 text-sm focus:border-moss focus:outline-none";
 
 export default async function AdminCategories() {
+  await requireAdmin();
   const cats = await db.select().from(schema.categories).orderBy(asc(schema.categories.displayOrder));
   return (
     <div className="max-w-2xl">

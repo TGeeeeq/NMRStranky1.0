@@ -3,6 +3,7 @@ import { eq } from "drizzle-orm";
 import { db, schema } from "@/lib/db";
 import { formatCzk } from "@/lib/money";
 import { updateOrderStatus } from "@/app/admin/actions";
+import { requireAdmin } from "@/lib/auth";
 
 export const dynamic = "force-dynamic";
 const ORDER_STATUSES = ["pending", "paid", "processing", "shipped", "completed", "cancelled"];
@@ -10,8 +11,11 @@ const PAYMENT_STATUSES = ["pending", "completed", "failed", "refunded"];
 const sel = "rounded-md border border-border bg-surface px-3 py-2 text-sm";
 
 export default async function AdminOrderDetail({ params }: { params: Promise<{ id: string }> }) {
+  await requireAdmin();
   const { id } = await params;
-  const rows = await db.select().from(schema.orders).where(eq(schema.orders.id, Number(id)));
+  const numId = Number(id);
+  if (!Number.isInteger(numId)) notFound();
+  const rows = await db.select().from(schema.orders).where(eq(schema.orders.id, numId));
   const order = rows[0];
   if (!order) notFound();
   const items = await db.select().from(schema.orderItems).where(eq(schema.orderItems.orderId, order.id));

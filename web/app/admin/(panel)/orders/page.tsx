@@ -2,10 +2,12 @@ import Link from "next/link";
 import { desc } from "drizzle-orm";
 import { db, schema } from "@/lib/db";
 import { formatCzk } from "@/lib/money";
+import { requireAdmin } from "@/lib/auth";
 
 export const dynamic = "force-dynamic";
 
 export default async function AdminOrders() {
+  await requireAdmin();
   const rows = await db.select().from(schema.orders).orderBy(desc(schema.orders.createdAt));
   return (
     <div>

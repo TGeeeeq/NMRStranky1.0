@@ -3,10 +3,12 @@ import { desc } from "drizzle-orm";
 import { db, schema } from "@/lib/db";
 import { formatCzk } from "@/lib/money";
 import { deleteProduct } from "@/app/admin/actions";
+import { requireAdmin } from "@/lib/auth";
 
 export const dynamic = "force-dynamic";
 
 export default async function AdminProducts() {
+  await requireAdmin();
   const rows = await db.select().from(schema.products).orderBy(desc(schema.products.createdAt));
   return (
     <div>
