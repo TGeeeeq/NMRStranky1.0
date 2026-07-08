@@ -10,7 +10,11 @@ DEST="$(cd "$(dirname "$0")/.." && pwd)/public/loukarun/app"
 
 rm -rf "$DEST"
 mkdir -p "$DEST"
-cp "$SRC/index.html" "$SRC/style.css" "$SRC/manifest.webmanifest" "$SRC/sw.js" "$SRC/soukromi.html" "$DEST/"
+cp "$SRC/style.css" "$SRC/manifest.webmanifest" "$SRC/sw.js" "$SRC/soukromi.html" "$DEST/"
 cp -r "$SRC/js" "$SRC/assets" "$DEST/"
+
+# tester guide belongs to the public testing build; it isn't synced here, so drop its menu link
+sed 's|<a class="privacy-link" href="jak-testovat.html"[^>]*>[^<]*</a> \&nbsp;·\&nbsp; ||' "$SRC/index.html" > "$DEST/index.html"
+grep -q 'jak-testovat' "$DEST/index.html" && { echo 'ERROR: tester link still present — index.html changed?' >&2; exit 1; }
 
 echo "Synced $(du -sh "$DEST" | cut -f1) → $DEST"
