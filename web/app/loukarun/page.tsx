@@ -206,7 +206,7 @@ export default async function LoukaRunPage({
                 Brzy i jako aplikace na Google Play
               </h2>
               <p className="mt-4 text-text-muted">
-                Už velmi brzy vyjde plná verze pro Android — jednorázově za 150 Kč, bez reklam,
+                Už velmi brzy vyjde plná verze pro Android — jednorázově za 200 Kč, bez reklam,
                 bez sledování a bez nákupů ve hře. Celý výtěžek jde zvířatům.
                 Verze pro iPhone (App Store) bude následovat, schvalování tam trvá déle.
               </p>
