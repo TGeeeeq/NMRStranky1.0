@@ -83,7 +83,7 @@ export default async function LoukaRunPage({
       <HeroScene hasAccess={hasAccess} />
 
       {/* brána / spuštění */}
-      <section id="hrat" className="scroll-mt-24 bg-surface-alt py-16 sm:py-20">
+      <section id="hrat" className="scroll-mt-24 overflow-x-clip bg-surface-alt py-16 sm:py-20">
         <Container>
           <Reveal className="mx-auto max-w-2xl text-center">
             {hasAccess ? (
@@ -133,7 +133,7 @@ export default async function LoukaRunPage({
       </section>
 
       {/* postavy */}
-      <section id="zvirata" className="scroll-mt-24 py-16 sm:py-20">
+      <section id="zvirata" className="scroll-mt-24 overflow-x-clip py-16 sm:py-20">
         <Container>
           <SectionHeader
             eyebrow="Běžci z Louky"
@@ -157,7 +157,7 @@ export default async function LoukaRunPage({
       </section>
 
       {/* svět hry */}
-      <section className="bg-moss-deep py-16 text-cream sm:py-20">
+      <section className="overflow-x-clip bg-moss-deep py-16 text-cream sm:py-20">
         <Container>
           <Reveal className="mx-auto max-w-2xl text-center">
             <h2 className="font-serif text-3xl font-semibold">Šest světů, žádná prohra</h2>
@@ -174,7 +174,7 @@ export default async function LoukaRunPage({
       </section>
 
       {/* Google Play teaser */}
-      <section className="py-16 sm:py-20">
+      <section className="overflow-x-clip py-16 sm:py-20">
         <Container>
           <Reveal className="mx-auto flex max-w-4xl flex-col items-center gap-10 rounded-lg border border-border bg-gradient-to-b from-[#8ed4f7]/20 to-surface p-8 sm:flex-row sm:p-12">
             {/* mockup telefonu */}

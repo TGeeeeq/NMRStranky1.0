@@ -66,7 +66,7 @@ export function HeroScene({ hasAccess }: { hasAccess: boolean }) {
     <section ref={ref} className="relative overflow-hidden bg-gradient-to-b from-[#8ed4f7] via-[#a8e0f9] to-[#c8ecfb]">
       {/* obloha */}
       <motion.div aria-hidden className="pointer-events-none absolute inset-0" style={{ y: skyFloat }}>
-        <div className="lr-sun absolute right-[10%] top-8 h-24 w-24 rounded-full bg-[#fff3b0] blur-[2px] sm:right-[12%] sm:h-36 sm:w-36" />
+        <div className="lr-sun absolute right-[6%] top-5 h-16 w-16 rounded-full bg-[#fff3b0] blur-[2px] sm:right-[12%] sm:top-8 sm:h-36 sm:w-36" />
         <Cloud className="top-14 w-44 opacity-90" duration={95} />
         <Cloud className="top-36 w-28 opacity-70" duration={70} delay={-30} />
         <Cloud className="top-6 w-24 opacity-50" duration={120} delay={-70} />
