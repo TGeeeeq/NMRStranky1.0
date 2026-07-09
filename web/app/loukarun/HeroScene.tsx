@@ -52,7 +52,9 @@ function Flyer({ top, duration, delay, swallow }: { top: string; duration: numbe
   );
 }
 
-const TITLE = "Louka Run".split("");
+// Písmena naskakují po jednom, ale slova se nesmí zlomit uprostřed —
+// každé slovo drží pohromadě ve whitespace-nowrap obalu.
+const TITLE_WORDS = "Louka Run".split(" ").map((w) => w.split(""));
 
 export function HeroScene({ hasAccess }: { hasAccess: boolean }) {
   const ref = useRef<HTMLElement>(null);
@@ -84,32 +86,44 @@ export function HeroScene({ hasAccess }: { hasAccess: boolean }) {
           Hra azylu Nech mě růst
         </motion.p>
 
-        <h1 className="font-serif text-6xl font-bold leading-none text-moss-deep drop-shadow-[0_4px_16px_rgba(255,255,255,0.5)] sm:text-7xl lg:text-8xl">
+        <h1 className="font-serif text-[clamp(2.9rem,16vw,3.75rem)] font-bold leading-none text-moss-deep drop-shadow-[0_4px_16px_rgba(255,255,255,0.5)] sm:text-7xl lg:text-8xl">
           <span className="sr-only">Louka Run</span>
           <span aria-hidden>
-            {TITLE.map((ch, i) => (
-              <motion.span
-                key={i}
-                className="inline-block"
-                initial={{ opacity: 0, y: reduced ? 0 : 38, rotate: reduced ? 0 : -6 }}
-                animate={{ opacity: 1, y: 0, rotate: 0 }}
-                transition={{ duration: 0.55, delay: 0.12 + i * 0.055, type: "spring", bounce: 0.45 }}
-              >
-                {ch === " " ? " " : ch}
-              </motion.span>
-            ))}
+            {TITLE_WORDS.map((word, wi) => {
+              const offset = TITLE_WORDS.slice(0, wi).reduce((n, w) => n + w.length, 0);
+              return (
+                <span key={wi}>
+                  {wi > 0 ? " " : null}
+                  <span className="inline-block whitespace-nowrap">
+                    {word.map((ch, i) => (
+                      <motion.span
+                        key={i}
+                        className="inline-block"
+                        initial={{ opacity: 0, y: reduced ? 0 : 38, rotate: reduced ? 0 : -6 }}
+                        animate={{ opacity: 1, y: 0, rotate: 0 }}
+                        transition={{ duration: 0.55, delay: 0.12 + (offset + i) * 0.055, type: "spring", bounce: 0.45 }}
+                      >
+                        {ch}
+                      </motion.span>
+                    ))}
+                    {wi === TITLE_WORDS.length - 1 ? (
+                      <motion.svg
+                        aria-hidden
+                        viewBox="0 0 24 34"
+                        className="ml-2 inline-block h-[0.55em] w-auto align-baseline"
+                        initial={{ opacity: 0, scale: 0, rotate: 120 }}
+                        animate={{ opacity: 1, scale: 1, rotate: -12 }}
+                        transition={{ duration: 0.6, delay: 0.75, type: "spring", bounce: 0.5 }}
+                      >
+                        <path d="M4 8 L12 32 L20 8 Z" fill="#e8833a" />
+                        <path d="M7 6 Q9 -2 12 5 Q14 -3 17 6" stroke="#4a7c4e" strokeWidth="3" fill="none" strokeLinecap="round" />
+                      </motion.svg>
+                    ) : null}
+                  </span>
+                </span>
+              );
+            })}
           </span>
-          <motion.svg
-            aria-hidden
-            viewBox="0 0 24 34"
-            className="ml-2 inline-block h-[0.55em] w-auto align-baseline"
-            initial={{ opacity: 0, scale: 0, rotate: 120 }}
-            animate={{ opacity: 1, scale: 1, rotate: -12 }}
-            transition={{ duration: 0.6, delay: 0.75, type: "spring", bounce: 0.5 }}
-          >
-            <path d="M4 8 L12 32 L20 8 Z" fill="#e8833a" />
-            <path d="M7 6 Q9 -2 12 5 Q14 -3 17 6" stroke="#4a7c4e" strokeWidth="3" fill="none" strokeLinecap="round" />
-          </motion.svg>
         </h1>
 
         <motion.p

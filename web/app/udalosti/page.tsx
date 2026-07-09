@@ -21,7 +21,10 @@ type Event = {
   description: string;
   href?: string;
   date?: string;
+  motto?: string;
 };
+
+const LOUKADA_MOTTO = "Přijeď makat, louka ti poděkuje.";
 
 const events: Event[] = [
   {
@@ -30,6 +33,7 @@ const events: Event[] = [
     kind: "Víkend na Louce",
     location: "Louka — azyl Nech mě růst",
     date: "21.–23. 8. 2026",
+    motto: LOUKADA_MOTTO,
     description:
       "Loukáda je náš společný víkend přímo na Louce — čas strávený mezi zvířaty, přírodou a dobrými lidmi. Přijďte poznat každodenní život na azylu, potkat se se zvířecími obyvateli a načerpat klid v souznění s přírodou. Podrobnosti k programu upřesníme.",
   },
@@ -39,6 +43,7 @@ const events: Event[] = [
     kind: "Víkend na Louce",
     location: "Louka — azyl Nech mě růst",
     date: "4.–6. 9. 2026",
+    motto: LOUKADA_MOTTO,
     description:
       "Další zářijový termín naší Loukády — víkendu plného setkání se zvířaty, společné práce i odpočinku přímo na Louce. Srdečně zveme všechny, kdo si chtějí užít čas v přírodě a poznat život na azylu. Podrobnosti k programu upřesníme.",
   },
@@ -95,7 +100,7 @@ export default function Udalosti() {
 
           <div className="space-y-6">
             {events.map((e, i) => (
-              <Reveal key={e.title} delay={i * 0.06}>
+              <Reveal key={`${e.title}-${e.date ?? i}`} delay={i * 0.06}>
                 <article className="rounded-lg border border-border bg-surface p-7 shadow-soft sm:p-8">
                   <div className="flex flex-wrap items-center gap-3">
                     <span className="rounded-pill bg-accent/40 px-3 py-1 text-xs font-semibold text-moss-deep">
@@ -104,6 +109,12 @@ export default function Udalosti() {
                     <span className="text-sm font-medium text-moss-soft">{e.kind}</span>
                   </div>
                   <h2 className="mt-3 font-serif text-2xl font-semibold text-moss-deep">{e.title}</h2>
+                  {e.motto ? (
+                    <p className="mt-1.5 inline-flex items-baseline gap-2 font-serif text-lg italic leading-snug text-terracotta">
+                      <span aria-hidden className="h-px w-6 self-center bg-terracotta/50" />
+                      „{e.motto}“
+                    </p>
+                  ) : null}
                   <div className="mt-3 flex flex-wrap gap-x-6 gap-y-1.5 text-sm text-text-muted">
                     <span className="inline-flex items-center gap-1.5">
                       <CalendarDays size={16} aria-hidden /> {e.date ?? "Termín bude upřesněn"}
