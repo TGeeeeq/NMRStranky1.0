@@ -32,7 +32,7 @@ export function CharacterCard({ character: c }: { character: Character }) {
     >
       <span className="lr-flip-inner block h-full">
         {/* přední strana — sprite */}
-        <span className={`lr-flip-face flex h-full flex-col overflow-hidden rounded-lg border border-border bg-surface shadow-sm transition-shadow hover:shadow-lg ${running ? "is-running" : ""}`}>
+        <span className={`lr-flip-face lr-flip-front flex h-full flex-col overflow-hidden rounded-lg border border-border bg-surface shadow-sm transition-shadow hover:shadow-lg ${running ? "is-running" : ""}`}>
           <span className="relative flex aspect-[4/3] items-end justify-center overflow-hidden bg-gradient-to-b from-[#bce4f9] via-[#dff2e4] to-[#9ec49a]">
             <svg aria-hidden className="absolute bottom-0 left-0 w-full" viewBox="0 0 400 60" preserveAspectRatio="none">
               <path d="M0 30 Q 100 12 200 26 T 400 22 V60 H0 Z" fill="#4a7c4e" opacity="0.7" />

@@ -96,16 +96,27 @@
 .run-leg-a, .run-leg-b { transform-origin: 50% 10%; }
 .lr-flyer .lr-wing { transform-origin: 50% 30%; }
 
-/* Flip karty běžců */
+/* Flip karty běžců.
+   iOS/WebKit neumí spolehlivě backface-visibility (u pozicovaných dětí ji
+   ignoruje — WebKit bug 54988 — a sprite pak prosvítal přes fotku), proto se
+   strany navíc přepínají přes visibility v půlce otočky. Flip tak funguje
+   i tam, kde 3D vykreslování selže. */
 .lr-flip { perspective: 1100px; }
 .lr-flip-inner {
   position: relative;
   transform-style: preserve-3d;
+  -webkit-transform-style: preserve-3d;
   transition: transform 0.55s cubic-bezier(0.22, 1, 0.36, 1);
 }
 .lr-flip[aria-pressed="true"] .lr-flip-inner { transform: rotateY(180deg); }
-.lr-flip-face { backface-visibility: hidden; }
-.lr-flip-back { position: absolute; inset: 0; transform: rotateY(180deg); }
+.lr-flip-face {
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  transition: visibility 0s 0.18s;
+}
+.lr-flip-back { position: absolute; inset: 0; transform: rotateY(180deg); visibility: hidden; }
+.lr-flip[aria-pressed="true"] .lr-flip-front { visibility: hidden; }
+.lr-flip[aria-pressed="true"] .lr-flip-back { visibility: visible; }
 
 @media (prefers-reduced-motion: reduce) {
   .karel-eyelid, .karel-ear-l, .karel-ear-r, .karel-tail, .karel-hop,
@@ -117,4 +128,5 @@
     animation: none;
   }
   .lr-flip-inner { transition: none; }
+  .lr-flip-face { transition: none; }
 }

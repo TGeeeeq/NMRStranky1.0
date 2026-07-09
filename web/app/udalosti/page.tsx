@@ -5,6 +5,7 @@ import { SectionHeader } from "@/components/SectionHeader";
 import { Reveal } from "@/components/Reveal";
 import { PageHero } from "@/components/PageHero";
 import { SocialSection } from "@/components/SocialSection";
+import { EventPhotos, type EventPhoto } from "./EventPhotos";
 
 export const metadata: Metadata = {
   title: "Události",
@@ -22,6 +23,7 @@ type Event = {
   href?: string;
   date?: string;
   motto?: string;
+  photos: EventPhoto[];
 };
 
 const LOUKADA_MOTTO = "Přijeď makat, louka ti poděkuje.";
@@ -36,6 +38,10 @@ const events: Event[] = [
     motto: LOUKADA_MOTTO,
     description:
       "Loukáda je náš společný víkend přímo na Louce — čas strávený mezi zvířaty, přírodou a dobrými lidmi. Přijďte poznat každodenní život na azylu, potkat se se zvířecími obyvateli a načerpat klid v souznění s přírodou. Podrobnosti k programu upřesníme.",
+    photos: [
+      { src: "/assets/loukada1.webp", alt: "Společná práce na Louce" },
+      { src: "/assets/louka9.webp", alt: "S ovečkami na Louce" },
+    ],
   },
   {
     title: "Loukáda",
@@ -46,6 +52,10 @@ const events: Event[] = [
     motto: LOUKADA_MOTTO,
     description:
       "Další zářijový termín naší Loukády — víkendu plného setkání se zvířaty, společné práce i odpočinku přímo na Louce. Srdečně zveme všechny, kdo si chtějí užít čas v přírodě a poznat život na azylu. Podrobnosti k programu upřesníme.",
+    photos: [
+      { src: "/assets/louka5.webp", alt: "Setkání s oslem Karlem" },
+      { src: "/assets/louka12.webp", alt: "Zvířecí obyvatelé u přístřešku" },
+    ],
   },
   {
     title: "Spolu Mezi Lesy",
@@ -56,6 +66,10 @@ const events: Event[] = [
     description:
       "Třídenní víkend na pomezí retreatu a festivalu přímo na Louce — příroda, zvířata, intuitivní umění, pohyb a živá hudba. Akce se přesunula na nový zářijový termín. Podrobný program a přihlášení najdete na facebookové události.",
     href: "https://facebook.com/events/s/spolu-mezi-lesy-presunuto-na-z/2298157060995232/",
+    photos: [
+      { src: "/assets/mezilesy.jpg", alt: "Plakát festivalu Spolu Mezi Lesy" },
+      { src: "/assets/louka3.webp", alt: "Odpočinek se zvířaty na Louce" },
+    ],
   },
   {
     title: "Společná procházka",
@@ -65,6 +79,10 @@ const events: Event[] = [
     date: "26.–27. 9. 2026",
     description:
       "Vydejte se s námi na společnou procházku ve společnosti našich zvířecích přátel. Užijeme si čas v přírodě, mazlení se zvířaty i příjemnou atmosféru mezi dobrými lidmi. Sraz a podrobnosti upřesníme.",
+    photos: [
+      { src: "/assets/walk1.webp", alt: "Procházka se zvířaty podzimní krajinou" },
+      { src: "/assets/walk2.webp", alt: "Se zvířecími přáteli na lesní cestě" },
+    ],
   },
   {
     title: "Toulky se zvířaty",
@@ -74,6 +92,10 @@ const events: Event[] = [
     description:
       "Dvoudenní putování středočeskou krajinou ve společnosti psů, osla, muflona a dalších zvířecích přátel. Termín bude upřesněn.",
     href: "https://www.facebook.com/share/1BDFbAxfFf/",
+    photos: [
+      { src: "/assets/toulky1.webp", alt: "Putování s ovečkami a dalšími zvířaty" },
+      { src: "/assets/toulky2.webp", alt: "Ovečky na cestě středočeskou krajinou" },
+    ],
   },
 ];
 
@@ -124,6 +146,7 @@ export default function Udalosti() {
                     </span>
                   </div>
                   <p className="mt-4 leading-relaxed text-text">{e.description}</p>
+                  <EventPhotos photos={e.photos} title={e.title} />
                   {e.href ? (
                     <a
                       href={e.href}
