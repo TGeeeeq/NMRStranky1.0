@@ -162,8 +162,8 @@ export default async function LoukaRunPage({
       <section className="overflow-x-clip bg-moss-deep py-16 text-cream sm:py-20">
         <Container>
           <Reveal className="mx-auto max-w-2xl text-center">
-            <h2 className="font-serif text-3xl font-semibold">Šest světů, žádná prohra</h2>
-            <p className="mt-4 text-cream/80">
+            <h2 className="font-serif text-3xl font-semibold text-cream">Šest světů, žádná prohra</h2>
+            <p className="mt-4 text-cream/90">
               Poběžíš rozkvetlou loukou i hvězdnou nocí. A protože jsme azyl, nikdy
               neprohráváš — každý běh končí dobře, veselou historkou tvého běžce.
             </p>

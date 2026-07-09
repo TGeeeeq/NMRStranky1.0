@@ -36,6 +36,21 @@ type Article = {
 
 const articles: Article[] = [
   {
+    title: "🎮 Louka Run je tady — naše vlastní hra!",
+    date: "9. 7. 2026",
+    image: "/assets/karel.webp",
+    imageAlt: "Osel Karel — hlavní hrdina hry Louka Run",
+    imageHref: "/loukarun",
+    badge: "Nová hra",
+    blocks: [
+      { type: "p", text: "Máme obrovskou radost — spustili jsme na našem webu vlastní hru Louka Run! Je to endless runner, ve kterém běháte za naše skutečné zvířecí obyvatele: osla Karla, ovečku Pogo, krávu Avalu, prasátko Flíčka, muflona Yakula i krávu Květu. Každá postava má schopnosti podle své opravdové povahy a každý běh končí dobře — jsme přece azyl. Přístup ke hře získáte darem pro zvířata, takže si zaběháte a zároveň pomůžete." },
+      { type: "p", text: "A to není všechno! Hra už čeká na schválení na Google Play. Jakmile bude aplikace venku, uspořádáme velkou soutěž: kdo doběhne nejdál, vyhraje krásnou cenu z naší ruční výroby. Tak trénujte — a sledujte nás, ať vám start soutěže neuteče!" },
+    ],
+    links: [
+      { label: "Hrát Louka Run →", href: "/loukarun" },
+    ],
+  },
+  {
     title: "🐑 Vítejte, Malvíno a Rozárko!",
     date: "6. 7. 2026",
     image: "/assets/malvina-rozarka.webp",
