@@ -63,7 +63,7 @@ export type GalleryAnimal = {
  */
 export const galleryAnimals: GalleryAnimal[] = [
   { name: "Život na Louce", base: "louka", count: 32 },
-  { name: "Procházky", base: "walk", count: 19 },
+  { name: "Procházky", base: "walk", count: 18 },
   { name: "Karel", base: "karel", count: 5 },
   { name: "Yakul", base: "yakul", count: 4 },
   { name: "Avala", base: "avala", count: 8 },
@@ -82,6 +82,7 @@ export const galleryAnimals: GalleryAnimal[] = [
   { name: "Lucinka", base: "lucinka", count: 4 },
   { name: "Anaya", base: "anaya", count: 2 },
   { name: "Malvína a Rozárka", base: "malvina", count: 4 },
+  { name: "Zorka", base: "zorka", count: 1 },
   { name: "Roman", base: "roman", count: 5 },
   { name: "Máša", base: "masa", count: 3 },
   { name: "Lotka", base: "lotka", count: 3 },

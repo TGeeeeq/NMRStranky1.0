@@ -38,8 +38,8 @@ const articles: Article[] = [
   {
     title: "🕊️ Vzpomínáme na Zorku",
     date: "10. 7. 2026",
-    image: "/assets/zorkaodchod.webp",
-    imageAlt: "Kobylka Zorka na zasněžené lesní cestě se ohlíží zpět",
+    image: "/assets/zorka1.webp",
+    imageAlt: "Kobylka Zorka kráčí zasněženou strání",
     badge: "Vzpomínka",
     blocks: [
       { type: "p", text: "Blíží se den, kdy nás opustila naše kobylka Zorka. Byla tu s námi úplně od začátku — patřila k úplně prvním obyvatelům Louky a společně s ní se celý náš azyl učil růst." },
@@ -47,7 +47,7 @@ const articles: Article[] = [
       { type: "p", text: "Vzpomínáme na ni s láskou a s klidem v srdci. Víme, že Zorka už je dávno, dávno dál a zažívá další zkušenost. Šťastnou cestu, Zorko. Jednou zas společně vyrazíme." },
     ],
     links: [
-      { label: "Prohlédnout galerii →", href: "/galerie" },
+      { label: "Zorka v galerii →", href: "/galerie?zvire=Zorka" },
     ],
   },
   {
