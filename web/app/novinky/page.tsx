@@ -36,6 +36,21 @@ type Article = {
 
 const articles: Article[] = [
   {
+    title: "🕊️ Vzpomínáme na Zorku",
+    date: "10. 7. 2026",
+    image: "/assets/zorkaodchod.webp",
+    imageAlt: "Kobylka Zorka na zasněžené lesní cestě se ohlíží zpět",
+    badge: "Vzpomínka",
+    blocks: [
+      { type: "p", text: "Blíží se den, kdy nás opustila naše kobylka Zorka. Byla tu s námi úplně od začátku — patřila k úplně prvním obyvatelům Louky a společně s ní se celý náš azyl učil růst." },
+      { type: "p", text: "Zažili jsme spolu krásné časy, ale i ty náročné, co se péče týče. Zorka nás naučila trpělivosti a pokoře víc než kdokoli jiný. Za všechny společné chvíle — na pastvě, na cestách i v tichu večerní Louky — jí patří obrovský dík." },
+      { type: "p", text: "Vzpomínáme na ni s láskou a s klidem v srdci. Víme, že Zorka už je dávno, dávno dál a zažívá další zkušenost. Šťastnou cestu, Zorko. Jednou zas společně vyrazíme." },
+    ],
+    links: [
+      { label: "Prohlédnout galerii →", href: "/galerie" },
+    ],
+  },
+  {
     title: "🎮 Louka Run je tady — naše vlastní hra!",
     date: "9. 7. 2026",
     image: "/assets/karel.webp",
