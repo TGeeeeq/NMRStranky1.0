@@ -56,7 +56,7 @@ const characters: Character[] = [
   {
     id: "yakul",
     name: "Muflon Yakul",
-    image: "/assets/yakul1.webp",
+    image: "/assets/yakul3.webp",
     tagline: "Rozverný mladík, který právě zjišťuje, k čemu má rohy.",
     perk: "Beranidlo — pětkrát za běh prorazí překážku bez ztráty energie.",
   },
