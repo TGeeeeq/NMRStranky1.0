@@ -30,8 +30,9 @@ export default function VirtualniAdopce() {
   return (
     <>
       <PageHero
-        image="/assets/adoption-hero.webp"
-        imageAlt="Virtuální adopce"
+        image="/assets/kveta7.webp"
+        imageAlt="Tomáš objímá krávu Květu v lese"
+        objectPosition="object-[50%_30%]"
         eyebrow="Adoptujte na dálku"
         title="Virtuální adopce"
         subtitle="Staňte se patronem zvířete, které si oblíbíte."

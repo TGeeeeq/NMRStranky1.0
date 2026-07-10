@@ -103,8 +103,9 @@ export default function Udalosti() {
   return (
     <>
       <PageHero
-        image="/assets/hero-image.webp"
-        imageAlt="Události na Louce"
+        image="/assets/walk17.webp"
+        imageAlt="Společné setkání lidí a krávy Květy v lese"
+        objectPosition="object-[50%_35%]"
         eyebrow="Pojďte mezi nás"
         title="Události"
         subtitle="Zúčastněte se některé z událostí a poznejte život na Louce."

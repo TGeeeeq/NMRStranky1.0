@@ -401,8 +401,8 @@ export default function VyrocniZprava2025() {
   return (
     <>
       <PageHero
-        image="/assets/about-hero.webp"
-        imageAlt="Rok na Louce"
+        image="/assets/vyrocni-hero.webp"
+        imageAlt="Východ slunce nad polem u Louky"
         eyebrow="Výroční zpráva 2025"
         title="Rok 2025 na Louce"
         subtitle="Měsíc po měsíci — příchody i odchody, brigády, sbírky a naděje. Tohle je náš společný rok."

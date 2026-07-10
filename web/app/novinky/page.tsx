@@ -364,8 +364,8 @@ export default function Novinky() {
   return (
     <>
       <PageHero
-        image="/assets/about-hero.webp"
-        imageAlt="Novinky z Louky"
+        image="/assets/novinky-hero.webp"
+        imageAlt="Krávy na zelené pastvě na Louce"
         eyebrow="Co je nového"
         title="Novinky z Louky"
         subtitle="Přečtěte si, co je u nás nového, radostného i náročného v životě našich zvířecích obyvatel."

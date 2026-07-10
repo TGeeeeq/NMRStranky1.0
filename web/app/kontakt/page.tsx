@@ -26,8 +26,8 @@ export default function Kontakt() {
   return (
     <>
       <PageHero
-        image="/assets/contact-hero.webp"
-        imageAlt="Kontakt"
+        image="/assets/karel5.webp"
+        imageAlt="Osel Karel s kamarádkou v lese"
         eyebrow="Ozvěte se nám"
         title="Kontakt"
         subtitle="Spojte se s námi a navštivte naši Louku."

@@ -33,8 +33,8 @@ export default function PutovaniSeZviraty() {
   return (
     <>
       <PageHero
-        image="/assets/hero-image.webp"
-        imageAlt="Putování se zvířaty"
+        image="/assets/walk16.webp"
+        imageAlt="Stádo oveček putuje lesní cestou spolu s lidmi"
         eyebrow="Dobrodružství"
         title="Putování se zvířaty"
         subtitle="Třídenní dobrodružství, které vám poskytne prostor pro sdílení a plynutí života."

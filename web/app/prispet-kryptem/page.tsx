@@ -55,8 +55,8 @@ export default function PrispetKryptem() {
   return (
     <>
       <PageHero
-        image="/assets/hero-image.webp"
-        imageAlt="Přispět kryptem"
+        image="/assets/krypto-hero.webp"
+        imageAlt="Krávy na pastvě pod prosvětlenou oblohou"
         eyebrow="Moderní podpora"
         title="Přispět kryptoměnou"
         subtitle="Podpořte nás libovolnou z těchto kryptoměn."

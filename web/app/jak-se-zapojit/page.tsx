@@ -96,8 +96,8 @@ export default function JakSeZapojit() {
   return (
     <>
       <PageHero
-        image="/assets/about-hero.webp"
-        imageAlt="Podpora projektu"
+        image="/assets/zapojit-hero.webp"
+        imageAlt="Dobrovolníci při práci se dřevem na Louce"
         eyebrow="Pomozte s námi"
         title="Jak se zapojit"
         subtitle="Každá pomoc se počítá. Vyberte si způsob podpory, který je vám nejbližší, a staňte se součástí našeho příběhu."

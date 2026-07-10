@@ -30,8 +30,8 @@ export default async function Obchod({
   return (
     <>
       <PageHero
-        image="/assets/animals-hero.webp"
-        imageAlt="Luční obchůdek"
+        image="/assets/obchod-hero.webp"
+        imageAlt="Košíky čerstvě natrhaných třešní z Louky"
         eyebrow="Podpořte nás nákupem"
         title="Luční obchůdek"
         subtitle="Ručně vyráběné kousky z Louky. Každý nákup putuje přímo na péči o zvířata."
