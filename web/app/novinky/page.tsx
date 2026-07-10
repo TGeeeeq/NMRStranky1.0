@@ -28,6 +28,8 @@ type Article = {
   imageHref?: string;
   /** CSS object-position for the cropped card image (defaults to center). */
   imagePosition?: string;
+  /** Special card design for remembering departed residents: whole portrait photo, warm framing. */
+  memorial?: boolean;
   badge?: string;
   blocks: Block[];
   links?: CtaLink[];
@@ -40,6 +42,7 @@ const articles: Article[] = [
     date: "10. 7. 2026",
     image: "/assets/zorka1.webp",
     imageAlt: "Kobylka Zorka kráčí zasněženou strání",
+    memorial: true,
     badge: "Vzpomínka",
     blocks: [
       { type: "p", text: "Blíží se den, kdy nás opustila naše kobylka Zorka. Byla tu s námi úplně od začátku — patřila k úplně prvním obyvatelům Louky a společně s ní se celý náš azyl učil růst." },
@@ -261,7 +264,59 @@ function ArticleLink({ link }: { link: CtaLink }) {
   );
 }
 
+function MemorialCard({ a }: { a: Article }) {
+  return (
+    <article className="overflow-hidden rounded-lg border border-accent/60 bg-gradient-to-br from-surface-alt via-surface to-accent/15 shadow-soft">
+      {/* Jemný barevný proužek — poznávací znamení vzpomínkové karty */}
+      <div className="h-1.5 bg-gradient-to-r from-moss via-accent to-terracotta" aria-hidden />
+      <div className="flex flex-col items-center gap-8 p-6 sm:p-8 md:flex-row md:items-start">
+        {/* Celá fotka na výšku, jako památeční fotografie z alba */}
+        <figure className="w-full max-w-[260px] shrink-0 sm:max-w-[280px]">
+          <div className="-rotate-2 rounded-md bg-cream p-3 pb-2 shadow-soft ring-1 ring-border transition-transform duration-300 hover:rotate-0">
+            <Image
+              src={a.image!}
+              alt={a.imageAlt ?? a.title}
+              width={1050}
+              height={1400}
+              sizes="280px"
+              className="rounded-sm"
+            />
+            <figcaption className="py-2 text-center font-serif text-sm italic text-moss-soft">
+              Zorka ✿ navždy v našich srdcích
+            </figcaption>
+          </div>
+        </figure>
+        <div className="min-w-0 text-center md:text-left">
+          <div className="flex flex-wrap items-center justify-center gap-3 text-sm md:justify-start">
+            <span className="font-medium text-moss-soft">📅 {a.date}</span>
+            {a.badge ? (
+              <span className="rounded-pill bg-accent/40 px-3 py-0.5 text-xs font-semibold text-moss-deep">{a.badge}</span>
+            ) : null}
+          </div>
+          <h2 className="mt-2 font-serif text-2xl font-semibold text-moss-deep">{a.title}</h2>
+          <div className="mt-4 space-y-4 text-left text-text">
+            {a.blocks.map((b, i) => (
+              <p key={i} className="leading-relaxed">{b.type === "p" ? b.text : null}</p>
+            ))}
+          </div>
+          <p className="mt-5 text-center font-serif text-lg italic text-terracotta md:text-left" aria-hidden>
+            ❀ ❀ ❀
+          </p>
+          {a.links?.length ? (
+            <div className="mt-4 flex flex-wrap justify-center gap-3 md:justify-start">
+              {a.links.map((l) => (
+                <ArticleLink key={l.label} link={l} />
+              ))}
+            </div>
+          ) : null}
+        </div>
+      </div>
+    </article>
+  );
+}
+
 function ArticleCard({ a }: { a: Article }) {
+  if (a.memorial && a.image) return <MemorialCard a={a} />;
   return (
     <article className="overflow-hidden rounded-lg border border-border bg-surface shadow-soft">
       {a.image ? (
