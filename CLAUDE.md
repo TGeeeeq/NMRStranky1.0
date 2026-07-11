@@ -12,9 +12,12 @@ If a task/harness forces work onto a `claude/*` (or any non-`main`) branch, trea
 
 Website for **Nech mě růst z.s.**, a Czech non-profit (nechmerust.org) — an animal sanctuary ("the Louka"). It includes public marketing pages, an e-shop, an admin panel, and an Instagram-carousel "studio" tool.
 
-The site is a **Next.js 16 (App Router) application written in TypeScript and React 19**, styled with **Tailwind CSS v4**. The whole app lives in `web/`. Data is stored in **PostgreSQL (Neon)** via **Drizzle ORM**, product images live in **Netlify Blobs**, and the site is **deployed to Netlify** (base directory `web`, `@netlify/plugin-nextjs`).
+The site is a **Next.js 16 (App Router) application written in TypeScript and React 19**, styled with **Tailwind CSS v4**. The whole app lives in `web/`. Data is stored in **PostgreSQL (Neon)** via **Drizzle ORM**, product images live in **Netlify Blobs**, and the site is **deployed to Vercel** (project root directory `web`; the DNS for nechmerust.org is managed at Forpsi and points to Vercel).
 
-> **History:** This used to be a static HTML + PHP/MySQL site served from a `www/` directory on Forpsi shared hosting. **That PHP site no longer exists** — it has been fully rewritten as the Next.js app described here. There is no `www/`, no PHP, no Apache `.htaccess`, and no `build.py` step anymore. If you find references to any of that (in old skills, comments, or memory), they are stale.
+> **Hosting history — read this before touching deploy config:**
+> 1. The original site was static HTML + PHP/MySQL served from a `www/` directory on Forpsi shared hosting. **That PHP site no longer exists** — no `www/`, no PHP, no `.htaccess`, no `build.py`. Any references to those are stale (`deploy.sh` in the repo root is a leftover from this era and does nothing useful).
+> 2. The Next.js rewrite was briefly deployed to **Netlify** (project `nechmerustorg`). That is **no longer the production host** — the free-plan credits ran out in July 2026 and DNS points to Vercel anyway. The Netlify account is kept **only for Netlify Blobs** (product images). `web/netlify.toml` deliberately contains `ignore = "exit 0"` so Netlify skips all builds; don't remove it.
+> 3. **Production today: Vercel.** Every push to `main` auto-deploys production; pushes to other branches create preview deployments.
 
 ## Layout
 
@@ -28,6 +31,7 @@ Everything is under `web/`. Run all commands from there.
 - `web/scripts/` — one-off Node/Python scripts: `create-admin.mts` (create an admin user), `migrate-from-forpsi.mts` + `export-forpsi.py` (the original data migration).
 - `web/data/forpsi-export/` — JSON + image snapshot of the old shop data, used by the migration script.
 - `web/public/assets/` — `.webp` images for animals, heroes, partners, etc.
+- `web/public/loukarun/app/` — the **Louka Run game** (static PWA), a verbatim copy synced from its own repo (`TGeeeeq/loukarun`) via `bash web/scripts/sync-loukarun.sh <path-to-loukarun-repo>`. Never edit these files by hand — fix the game in its repo and re-sync. Access is gated by `middleware.ts` (invitation cookie; landing page at `app/loukarun/`).
 - `web/tests/` — Vitest unit/integration tests and Playwright e2e specs.
 
 ## Architecture
@@ -57,7 +61,7 @@ Everything is under `web/`. Run all commands from there.
 
 ### Config & secrets
 - All env access goes through `lib/env.ts` (`req()` throws if a required var is missing; `opt()` has fallbacks). Don't read `process.env` directly elsewhere.
-- Required: `DATABASE_URL`, `SESSION_SECRET`. Optional/with-fallbacks: `SMTP_*`, `BANK_*`, `ORDER_PREFIX`, `ADMIN_NOTIFICATION_EMAIL`, `NETLIFY_SITE_ID`, `NETLIFY_AUTH_TOKEN`.
+- Required: `DATABASE_URL`, `SESSION_SECRET`. Optional/with-fallbacks: `SMTP_*`, `BANK_*`, `ORDER_PREFIX`, `ADMIN_NOTIFICATION_EMAIL`. `NETLIFY_SITE_ID` + `NETLIFY_AUTH_TOKEN` are **required in production (Vercel)** — without them `lib/storage.ts` can't reach Netlify Blobs and product images break; on the old Netlify hosting they were implicit.
 - Secrets live in `web/.env.local` (gitignored). Never print, log, or commit them. `lib/db/`, `lib/auth.ts`, `lib/env.ts`, `lib/storage.ts` are all `import "server-only"` — keep secret-touching code server-side.
 
 ## Database
@@ -75,7 +79,7 @@ All from `web/`:
 - **Lint**: `npm run lint`. **Typecheck**: `npx tsc --noEmit`.
 - **Tests**: `npm test` (Vitest unit/integration), `npm run test:e2e` (Playwright). Add/maintain tests for shop, cart, payment, validation, and order logic.
 - **Build**: `npm run build`. Note: the production build collects page data and will fail without `DATABASE_URL` set (e.g. on `/obchod/cart-data`) — that's an env requirement, not a code error.
-- **Deploy**: push to `main`; Netlify builds from base directory `web` (see `netlify.toml`).
+- **Deploy**: push to `main`; **Vercel** builds and ships production automatically (root directory `web`). Pushes to any other branch produce Vercel preview deployments. Netlify does **not** build anymore (`netlify.toml` has `ignore = "exit 0"`; the account only hosts Netlify Blobs).
 
 ## Conventions when adding pages or endpoints
 

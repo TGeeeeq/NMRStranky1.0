@@ -1,9 +1,12 @@
-# Netlify reads this from the site's base directory (set Base directory = "web").
-# The Next.js Runtime must be declared explicitly — server-side builds did NOT
-# auto-attach it, so no SSR function was bundled and every route 404'd.
+# The site is NOT hosted on Netlify anymore — production is on Vercel (see
+# CLAUDE.md). The Netlify account is kept only for Netlify Blobs (product
+# images, store "product-images"). The `ignore` script below makes Netlify
+# skip every build so pushes to main don't burn account credits.
+# To ever build on Netlify again, delete the `ignore` line.
 [build]
   command = "npm run build"
   publish = ".next"
+  ignore = "exit 0"
 
 [[plugins]]
   package = "@netlify/plugin-nextjs"
