@@ -24,6 +24,17 @@ export const metadata: Metadata = {
 
 export const dynamic = "force-dynamic";
 
+const GOOGLE_PLAY_URL =
+  "https://play.google.com/store/apps/details?id=org.nechmerust.loukarun";
+
+function GooglePlayIcon({ className }: { className?: string }) {
+  return (
+    <svg viewBox="0 0 24 24" fill="currentColor" className={className} aria-hidden="true">
+      <path d="M22.018 13.298l-3.919 2.218-3.515-3.493 3.543-3.521 3.891 2.202a1.49 1.49 0 0 1 0 2.594zM1.337.924a1.486 1.486 0 0 0-.112.568v21.017c0 .217.045.419.124.6l11.155-11.087L1.337.924zm12.207 10.065l3.258-3.238L3.45.195a1.466 1.466 0 0 0-.946-.179l11.04 10.973zm0 2.067l-11 10.933c.298.036.612-.016.906-.183l13.324-7.54-3.23-3.21z" />
+    </svg>
+  );
+}
+
 const characters: Character[] = [
   {
     id: "karel",
@@ -82,6 +93,26 @@ export default async function LoukaRunPage({
     <>
       <HeroScene hasAccess={hasAccess} />
 
+      {/* oznámení — hra je venku na Google Play */}
+      <section className="overflow-x-clip bg-moss-deep">
+        <Container>
+          <div className="flex flex-col items-center justify-center gap-4 py-5 text-center sm:flex-row sm:gap-6">
+            <p className="text-base font-semibold text-cream sm:text-lg">
+              🎉 Je to venku! Louka Run si teď stáhneš jako aplikaci pro Android.
+            </p>
+            <a
+              href={GOOGLE_PLAY_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex shrink-0 items-center gap-2.5 rounded-pill bg-cream px-6 py-2.5 text-sm font-semibold text-moss-deep shadow-md transition hover:-translate-y-0.5 hover:bg-white"
+            >
+              <GooglePlayIcon className="h-4 w-4" />
+              Stáhnout na Google Play
+            </a>
+          </div>
+        </Container>
+      </section>
+
       {/* brána / spuštění */}
       <section id="hrat" className="scroll-mt-24 overflow-x-clip bg-surface-alt py-16 sm:py-20">
         <Container>
@@ -101,7 +132,16 @@ export default async function LoukaRunPage({
               <>
                 <h2 className="font-serif text-3xl font-semibold text-moss-deep">Hra za dar zvířatům</h2>
                 <p className="mx-auto mt-4 max-w-xl text-text-muted">
-                  Louka Run brzy vyjde jako aplikace — u nás na webu ji ale získáš
+                  Louka Run už je venku jako{" "}
+                  <a
+                    className="text-moss underline"
+                    href={GOOGLE_PLAY_URL}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    aplikace na Google Play
+                  </a>
+                  {" "}— u nás na webu ji ale získáš
                   na pozvání. Podpoř azyl <strong>darem od 200 Kč</strong> a my ti
                   pošleme pozvánkový kód. Hra pak běží v prohlížeči na všech tvých
                   zařízeních a každá koruna jde na krmení a péči o zvířata, která
@@ -175,7 +215,7 @@ export default async function LoukaRunPage({
         </Container>
       </section>
 
-      {/* Google Play teaser */}
+      {/* Google Play — hra je venku */}
       <section className="overflow-x-clip py-16 sm:py-20">
         <Container>
           <Reveal className="mx-auto flex max-w-4xl flex-col items-center gap-10 rounded-lg border border-border bg-gradient-to-b from-[#8ed4f7]/20 to-surface p-8 sm:flex-row sm:p-12">
@@ -202,18 +242,29 @@ export default async function LoukaRunPage({
             </div>
 
             <div className="text-center sm:text-left">
-              <h2 className="font-serif text-2xl font-semibold text-moss-deep sm:text-3xl">
-                Brzy i jako aplikace na Google Play
+              <p className="inline-flex items-center gap-2 rounded-pill bg-moss/10 px-4 py-1.5 text-sm font-semibold text-moss-deep">
+                🎉 Novinka
+              </p>
+              <h2 className="mt-3 font-serif text-2xl font-semibold text-moss-deep sm:text-3xl">
+                Už je venku na Google Play!
               </h2>
               <p className="mt-4 text-text-muted">
-                Už velmi brzy vyjde plná verze pro Android — jednorázově za 200 Kč, bez reklam,
+                Plná verze pro Android je oficiálně v obchodě — bez reklam,
                 bez sledování a bez nákupů ve hře. Celý výtěžek jde zvířatům.
                 Verze pro iPhone (App Store) bude následovat, schvalování tam trvá déle.
               </p>
-              <p className="mt-3 text-sm text-text-muted">
-                Chceš pomoct s testováním? Napiš nám na{" "}
-                <a className="text-moss underline" href="mailto:info@nechmerust.org?subject=Louka%20Run%20—%20testování">info@nechmerust.org</a>.
-              </p>
+              <a
+                href={GOOGLE_PLAY_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="mt-6 inline-flex items-center gap-3 rounded-lg bg-[#2b2b2b] px-6 py-3 text-cream shadow-md transition hover:-translate-y-0.5 hover:bg-black"
+              >
+                <GooglePlayIcon className="h-6 w-6" />
+                <span className="text-left leading-tight">
+                  <span className="block text-[0.65rem] uppercase tracking-wide opacity-80">Stáhnout na</span>
+                  <span className="block text-lg font-semibold">Google Play</span>
+                </span>
+              </a>
               <KarelGuide section="play" className="mt-8" />
             </div>
           </Reveal>

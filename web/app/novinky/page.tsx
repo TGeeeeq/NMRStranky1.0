@@ -38,6 +38,22 @@ type Article = {
 
 const articles: Article[] = [
   {
+    title: "📱 Louka Run je na Google Play!",
+    date: "12. 7. 2026",
+    image: "/assets/karel.webp",
+    imageAlt: "Osel Karel — hlavní hrdina hry Louka Run",
+    imageHref: "/loukarun",
+    badge: "Google Play",
+    blocks: [
+      { type: "p", text: "Máme obrovskou radost — naše hra Louka Run je oficiálně venku na Google Play! Schvalování je za námi a aplikaci pro Android si teď můžete stáhnout přímo z obchodu. Bez reklam, bez sledování a bez nákupů ve hře — a celý výtěžek jde na péči o zvířata, za která ve hře běháte." },
+      { type: "p", text: "A jak jsme slibovali: brzy vyhlásíme velkou soutěž o krásnou cenu z naší ruční výroby pro toho, kdo doběhne nejdál. Tak stahujte, běhejte a trénujte — a sledujte nás, ať vám start soutěže neuteče!" },
+    ],
+    links: [
+      { label: "Stáhnout na Google Play →", href: "https://play.google.com/store/apps/details?id=org.nechmerust.loukarun", external: true },
+      { label: "Hrát na webu →", href: "/loukarun" },
+    ],
+  },
+  {
     title: "🕊️ Vzpomínáme na Zorku",
     date: "10. 7. 2026",
     image: "/assets/zorka1.webp",

@@ -24,9 +24,9 @@ export const KAREL_QUOTES: Record<KarelSection, string[]> = {
     "Prohrát tu nejde. Zařídil jsem to. Není zač.",
   ],
   play: [
-    "Prý budu i v mobilu. Doufám, že tam budou dobíjet mrkve.",
-    "150 korun, žádné reklamy. Reklamy bych stejně okousal.",
-    "Až budu v mobilu, budu ti hýkat z kapsy. Těš se.",
+    "Tak jsem oficiálně v mobilu. Google mě schválil. Rozumný chlapík.",
+    "Žádné reklamy ve hře. Reklamy bych stejně okousal.",
+    "Stáhni si mě. Budu ti hýkat z kapsy. Není zač.",
   ],
 };
 
