@@ -2,6 +2,8 @@ import Link from "next/link";
 import { Container } from "./Container";
 import AFLogo from "./AFLogo";
 import { CookieSettingsButton } from "./CookieSettingsButton";
+import { GooglePlayIcon } from "./BrandIcons";
+import { LOUKARUN } from "@/lib/site";
 
 export function Footer() {
   return (
@@ -31,6 +33,24 @@ export function Footer() {
             •
           </span>
           <CookieSettingsButton />
+        </p>
+        <p className="mt-6">
+          <a
+            href={LOUKARUN.googlePlay}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="group inline-flex items-center gap-2.5 rounded-pill border border-cream/20 px-4 py-2 text-sm text-cream/70 transition-colors hover:border-cream/40 hover:text-cream"
+          >
+            <GooglePlayIcon
+              size={16}
+              className="text-cream/70 transition-colors group-hover:text-cream"
+            />
+            <span>
+              Zahraj si{" "}
+              <span className="font-serif tracking-wide">Louka&nbsp;Run</span>{" "}
+              na Google&nbsp;Play
+            </span>
+          </a>
         </p>
         <p className="mt-6">
           <a

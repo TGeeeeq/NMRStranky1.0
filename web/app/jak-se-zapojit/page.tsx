@@ -8,7 +8,8 @@ import { Reveal } from "@/components/Reveal";
 import { PageHero } from "@/components/PageHero";
 import { SocialSection } from "@/components/SocialSection";
 import { CopyButton } from "@/components/CopyButton";
-import { BANK } from "@/lib/site";
+import { GooglePlayIcon } from "@/components/BrandIcons";
+import { BANK, LOUKARUN } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "Jak se zapojit",
@@ -172,8 +173,56 @@ export default function JakSeZapojit() {
         </Container>
       </section>
 
-      {/* Partnerské projekty */}
+      {/* Louka Run — hra, která pomáhá */}
       <section className="bg-surface py-20 sm:py-24">
+        <Container>
+          <Reveal className="mx-auto flex max-w-4xl flex-col items-center gap-10 overflow-hidden rounded-lg border border-border bg-gradient-to-b from-[#8ed4f7]/20 to-surface-alt p-8 shadow-soft sm:flex-row sm:p-12">
+            <div className="flex h-24 w-24 shrink-0 items-center justify-center rounded-pill bg-moss/10 text-moss">
+              <GooglePlayIcon size={44} />
+            </div>
+            <div className="text-center sm:text-left">
+              <p className="inline-flex items-center gap-2 rounded-pill bg-moss/10 px-4 py-1.5 text-sm font-semibold text-moss-deep">
+                🎮 Podpořte nás hrou
+              </p>
+              <h2 className="mt-3 font-serif text-2xl font-semibold text-moss-deep sm:text-3xl">
+                Zahrajte si Louka&nbsp;Run
+              </h2>
+              <p className="mt-4 text-text-muted">
+                Naše vlastní hra, ve které běháte za skutečná zvířata z azylu.
+                Je venku na Google&nbsp;Play pro Android — bez reklam, bez
+                sledování a bez nákupů ve hře. Celý výtěžek jde na krmení a
+                péči o zvířata, která ve hře potkáte. Další milý způsob, jak nás
+                můžete podpořit a přitom se pobavit.
+              </p>
+              <div className="mt-6 flex flex-wrap justify-center gap-3 sm:justify-start">
+                <Link
+                  href={LOUKARUN.page}
+                  className="inline-flex items-center rounded-pill bg-moss px-5 py-2.5 text-sm font-medium text-cream transition-colors hover:bg-moss-deep"
+                >
+                  Více o hře
+                </Link>
+                <a
+                  href={LOUKARUN.googlePlay}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-3 rounded-pill bg-[#2b2b2b] px-5 py-2.5 text-cream shadow-md transition hover:-translate-y-0.5 hover:bg-black"
+                >
+                  <GooglePlayIcon size={22} />
+                  <span className="text-left leading-tight">
+                    <span className="block text-[0.65rem] uppercase tracking-wide opacity-80">
+                      Stáhnout na
+                    </span>
+                    <span className="block text-sm font-semibold">Google Play</span>
+                  </span>
+                </a>
+              </div>
+            </div>
+          </Reveal>
+        </Container>
+      </section>
+
+      {/* Partnerské projekty */}
+      <section className="bg-surface-alt py-20 sm:py-24">
         <Container>
           <Reveal>
             <SectionHeader
@@ -199,7 +248,7 @@ export default function JakSeZapojit() {
         </Container>
       </section>
 
-      <SocialSection tone="alt" />
+      <SocialSection />
     </>
   );
 }

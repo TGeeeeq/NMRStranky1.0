@@ -22,3 +22,9 @@ export const SOCIAL = {
   facebook: "https://www.facebook.com/share/1BDFbAxfFf/",
   email: "mailto:info@nechmerust.org",
 } as const;
+
+export const LOUKARUN = {
+  page: "/loukarun",
+  googlePlay:
+    "https://play.google.com/store/apps/details?id=org.nechmerust.loukarun",
+} as const;
