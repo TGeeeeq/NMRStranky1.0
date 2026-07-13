@@ -9,6 +9,7 @@ import { CartProvider } from "@/components/shop/CartProvider";
 import { LeaveCartGuard } from "@/components/LeaveCartGuard";
 import { CookieConsent } from "@/components/CookieConsent";
 import { Analytics } from "@vercel/analytics/next";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://nechmerust.org"),
@@ -70,6 +71,7 @@ export default function RootLayout({
           </CartProvider>
         </MotionProvider>
         <Analytics />
+        <SpeedInsights />
       </body>
     </html>
   );
