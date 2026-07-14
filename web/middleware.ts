@@ -7,9 +7,18 @@ export const config = {
   matcher: ["/loukarun/app/:path*"],
 };
 
+// Soubory, které musí zůstat veřejné i bez pozvánkového kódu:
+// - soukromi.html: URL pro Google Play listing
+// - sw.js / manifest: service worker a manifest se nesmí přesměrovat, jinak
+//   prohlížeč odmítne aktualizaci SW a hráč navždy uvízne na staré cache
+const PUBLIC_PATHS = new Set([
+  "/loukarun/app/soukromi.html",
+  "/loukarun/app/sw.js",
+  "/loukarun/app/manifest.webmanifest",
+]);
+
 export async function middleware(req: NextRequest) {
-  // Zásady soukromí musí zůstat veřejné (URL pro Google Play listing).
-  if (req.nextUrl.pathname === "/loukarun/app/soukromi.html") {
+  if (PUBLIC_PATHS.has(req.nextUrl.pathname)) {
     return NextResponse.next();
   }
 
