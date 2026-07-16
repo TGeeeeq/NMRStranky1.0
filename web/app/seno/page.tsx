@@ -9,6 +9,7 @@ import { SectionHeader } from "@/components/SectionHeader";
 import { SocialSection } from "@/components/SocialSection";
 import { CopyButton } from "@/components/CopyButton";
 import { HayMeter } from "@/components/HayMeter";
+import { ShareButtons } from "@/components/ShareButtons";
 import { BANK, SITE } from "@/lib/site";
 import { SENO_CAMPAIGN } from "@/lib/campaign";
 
@@ -52,6 +53,7 @@ const otherWays = [
     title: "Sdílejte sbírku",
     text: "Nemůžete přispět? Pošlete odkaz nechmerust.org/seno dál — každé sdílení nám může přivézt další balík.",
     cta: null,
+    share: true,
   },
 ];
 
@@ -215,6 +217,7 @@ export default function Seno() {
                         </Link>
                       )
                     ) : null}
+                    {"share" in c && c.share ? <ShareButtons /> : null}
                   </article>
                 </Reveal>
               ))}
