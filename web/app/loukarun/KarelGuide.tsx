@@ -2,7 +2,7 @@
 
 import { useRef, useState } from "react";
 import { motion } from "motion/react";
-import { KarelSvg } from "./KarelSvg";
+import { KarelSvg } from "@/components/karel/KarelSvg";
 import { KAREL_QUOTES, KAREL_RANDOM, type KarelSection } from "./karel";
 
 /** Karel-průvodce: vjede do sekce s trefnou hláškou, kliknutím vyhodí
