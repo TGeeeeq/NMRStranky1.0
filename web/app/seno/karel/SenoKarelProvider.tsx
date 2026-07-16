@@ -20,6 +20,7 @@ import {
   KAREL_ASK,
   KAREL_BLOCKS,
   KAREL_COMMENTARY,
+  KAREL_CREDIT,
   KAREL_DECLINE,
   KAREL_FINALE,
   KAREL_IDLE,
@@ -225,7 +226,7 @@ export function SenoKarelProvider({ children }: { children: ReactNode }) {
     const dx = left - r.left;
     const dy = top - r.top;
     if (Math.abs(dx) > 12) setFacing(dx > 0 ? "right" : "left");
-    const dur = clamp(Math.hypot(dx, dy) / 420, 0.45, 1.3);
+    const dur = clamp(Math.hypot(dx, dy) / 300, 0.6, 1.8);
     setPos((p) => ({ x: p.x + dx, y: p.y + dy, dur }));
     return dur * 1000;
   }, []);
@@ -236,18 +237,34 @@ export function SenoKarelProvider({ children }: { children: ReactNode }) {
     setPos({ x: 0, y: 0, dur });
   }, []);
 
+  /** Škrt podpisu autora v patičce + Karlův podpis (a zpět). Patička žije
+   *  v layoutu mimo React strom /seno, proto přes DOM. */
+  const setCreditStruck = useCallback((struck: boolean) => {
+    const credit = document.querySelector<HTMLElement>("[data-karel-credit]");
+    if (!credit) return;
+    if (struck && !credit.querySelector(".karel-credit-sig")) {
+      const sig = document.createElement("span");
+      sig.className = "karel-credit-sig";
+      sig.textContent = KAREL_CREDIT.signature;
+      credit.appendChild(sig);
+    }
+    credit.classList.toggle("karel-credit-struck", struck);
+  }, []);
+
   // --- choreografie ---------------------------------------------------------
 
   const finishTakeover = useCallback(() => {
     runSeq.current += 1;
     setSwapped(new Set(BLOCK_ORDER));
     setRestored(false);
+    setCreditStruck(true);
     setPhase("karel");
     setPose("graze");
     moveHome(0.4);
+    window.scrollTo({ top: 0, behavior: reduced ? "auto" : "smooth" });
     saveKarelStore({ choice: "accepted" });
     showBubble(KAREL_FINALE, 9000);
-  }, [moveHome, showBubble]);
+  }, [moveHome, reduced, setCreditStruck, showBubble]);
 
   const runTakeover = useCallback(
     async (fast: boolean) => {
@@ -292,7 +309,7 @@ export function SenoKarelProvider({ children }: { children: ReactNode }) {
           await wait(travel + 100);
           if (runSeq.current !== run) return;
           setPose("chomp");
-          await wait(850);
+          await wait(1000);
           if (runSeq.current !== run) return;
         }
 
@@ -306,7 +323,7 @@ export function SenoKarelProvider({ children }: { children: ReactNode }) {
           setPose("idle");
           const commentary = KAREL_COMMENTARY[id];
           if (commentary) showBubble(commentary);
-          await wait(commentary ? 1400 : 500);
+          await wait(commentary ? 2800 : 600);
         } else {
           await wait(fast && !reduced ? 250 : 120);
         }
@@ -314,17 +331,64 @@ export function SenoKarelProvider({ children }: { children: ReactNode }) {
       }
 
       if (!fast && !reduced) {
-        // spokojený návrat domů
+        // úplně poslední zásah: škrt podpisu autora v patičce
+        const credit = document.querySelector<HTMLElement>("[data-karel-credit]");
+        if (credit) {
+          setBubble(null);
+          credit.scrollIntoView({ behavior: "smooth", block: "center" });
+          setPose("walking");
+          await wait(650);
+          if (runSeq.current !== run) return;
+
+          let travel = 500;
+          const rect = credit.getBoundingClientRect();
+          const box = karelBoxRef.current?.getBoundingClientRect();
+          if (box) {
+            const left = clamp(rect.left - box.width - 12, 8, window.innerWidth - box.width - 8);
+            const top = clamp(
+              rect.top + rect.height / 2 - box.height,
+              72,
+              window.innerHeight - box.height - 8,
+            );
+            travel = moveTo(left, top);
+          }
+          await wait(travel + 100);
+          if (runSeq.current !== run) return;
+          setPose("chomp");
+          await wait(1000);
+          if (runSeq.current !== run) return;
+          setCreditStruck(true);
+          setPose("idle");
+          showBubble(KAREL_CREDIT.commentary);
+          await wait(3000);
+          if (runSeq.current !== run) return;
+        }
+
+        // doběhne zpátky nahoru na začátek stránky…
         setBubble(null);
         setPose("walking");
-        moveHome(0.9);
-        await wait(950);
+        window.scrollTo({ top: 0, behavior: "smooth" });
+        const box = karelBoxRef.current?.getBoundingClientRect();
+        if (box) {
+          const travel = moveTo(
+            clamp(window.innerWidth * 0.4 - box.width / 2, 8, window.innerWidth - box.width - 8),
+            76,
+          );
+          await wait(Math.max(travel, 900) + 250);
+        } else {
+          await wait(900);
+        }
+        if (runSeq.current !== run) return;
+
+        // …a spokojeně na své místo
+        moveHome(1.1);
+        await wait(1150);
         if (runSeq.current !== run) return;
       }
 
       finishTakeover();
     },
-    [finishTakeover, moveHome, moveTo, reduced, showBubble],
+    [finishTakeover, moveHome, moveTo, reduced, setCreditStruck, showBubble],
   );
 
   const bray = useCallback(() => {
@@ -494,20 +558,23 @@ export function SenoKarelProvider({ children }: { children: ReactNode }) {
     return () => window.clearInterval(timer);
   }, [showBubble]);
 
-  // Úklid při odchodu ze stránky
+  // Úklid při odchodu ze stránky — patička je sdílená s celým webem,
+  // škrt podpisu nesmí přežít client-side navigaci jinam.
   useEffect(
     () => () => {
       runSeq.current += 1;
       if (bubbleTimer.current) window.clearTimeout(bubbleTimer.current);
+      setCreditStruck(false);
     },
-    [],
+    [setCreditStruck],
   );
 
   const toggleRestore = useCallback(() => {
     const wasRestored = restoredRef.current;
     setRestored(!wasRestored);
+    setCreditStruck(wasRestored);
     showBubble(wasRestored ? KAREL_UNRESTORE : KAREL_RESTORE, 6000);
-  }, [showBubble]);
+  }, [setCreditStruck, showBubble]);
 
   const quip = useCallback(() => sayQuote(KAREL_IDLE), [sayQuote]);
 

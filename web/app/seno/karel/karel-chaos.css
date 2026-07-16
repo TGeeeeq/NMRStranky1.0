@@ -200,6 +200,30 @@
     -2px 4px 0 -1.5px var(--color-moss-soft);
 }
 
+/* --- Škrt autora v patičce — Karlův úplně poslední zásah ----------------------
+   Třídu .karel-credit-struck přidává/odebírá SenoKarelProvider na element
+   s data-karel-credit; podpis „přesto Karel" je do něj vložený jednou a
+   viditelný jen se škrtem, takže přepínač verzí vrací i patičku. */
+
+.karel-credit-struck [data-karel-credit-name] {
+  text-decoration: line-through;
+  text-decoration-style: wavy;
+  text-decoration-color: var(--karel-pink);
+  text-decoration-thickness: 2px;
+}
+.karel-credit-sig {
+  display: none;
+}
+.karel-credit-struck .karel-credit-sig {
+  display: inline-block;
+  margin-left: 0.6rem;
+  transform: rotate(-2.5deg);
+  color: var(--karel-pink);
+  font-family: var(--font-serif, serif);
+  font-size: 1rem;
+  font-style: italic;
+}
+
 @media (prefers-reduced-motion: reduce) {
   .karel-drool { animation: none; }
 }

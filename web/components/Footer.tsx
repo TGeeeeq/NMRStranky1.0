@@ -61,7 +61,8 @@ export function Footer() {
             </span>
           </a>
         </p>
-        <p className="mt-6">
+        {/* data-karel-credit: na /seno si podpis „překope" osel Karel (SenoKarelProvider) */}
+        <p className="mt-6" data-karel-credit>
           <a
             href="https://www.antoninfigueroa.cz"
             target="_blank"
@@ -74,7 +75,10 @@ export function Footer() {
             />
             <span>
               web vytvořil{" "}
-              <span className="font-serif tracking-wide group-hover:text-cream">
+              <span
+                data-karel-credit-name
+                className="font-serif tracking-wide group-hover:text-cream"
+              >
                 Antonín Figueroa
               </span>
             </span>

@@ -66,6 +66,12 @@ export const KAREL_STICKERS = {
   payment: "Roh jsem ochutnal. Papír průměrný, QR výborný.",
 } as const;
 
+/** Úplně poslední zásah: škrt podpisu autora v patičce. */
+export const KAREL_CREDIT = {
+  commentary: "A podpis dole? Škrt. Web vytvořil Antonín, budiž — ale překopal ho Karel.",
+  signature: "…přesto Karel",
+} as const;
+
 /** Reakce na kliknutí — klíče odpovídají data-karel-react atributům. */
 export const KAREL_REACTIONS: Record<string, string[]> = {
   ucet: [

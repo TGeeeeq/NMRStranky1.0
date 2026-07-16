@@ -2,6 +2,7 @@ import { describe, it, expect } from "vitest";
 import {
   BLOCK_ORDER,
   KAREL_COMMENTARY,
+  KAREL_CREDIT,
   KAREL_HERO,
   KAREL_IDLE,
   KAREL_REACTIONS,
@@ -70,6 +71,11 @@ describe("Karlova verze /seno — fakta sbírky zůstávají", () => {
     for (const way of KAREL_WAY_TEXTS) {
       expect(way.sticker.trim().length).toBeGreaterThan(0);
     }
+  });
+
+  it("škrt podpisu má hlášku i Karlův podpis", () => {
+    expect(KAREL_CREDIT.commentary.trim().length).toBeGreaterThan(0);
+    expect(KAREL_CREDIT.signature).toContain("Karel");
   });
 });
 
