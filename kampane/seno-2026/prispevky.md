@@ -4,8 +4,10 @@
 **Odkaz kampaně:** https://nechmerust.org/seno
 **Platba:** QR na stránce, transparentní účet 2002645872/2010, VS 20260716, nebo Darujme.cz.
 
-> ⚠️ **Před publikací zkontrolovat čísla označená [OVĚŘIT]** — jsou to odhady.
-> Potvrzeno uživatelem: balík letos stojí **minimálně 800 Kč**.
+**Potvrzená čísla (od spolku):**
+- menší balík (manipulace v jednom člověku): loni **500 Kč**, letos odhad **800–1 000 Kč i víc**; velké balíky byly loni ~700 Kč
+- spotřeba: **2 mladé krávy à ~15 kg/den**, **oslík Karel ~10 kg/den**, 8 ovcí + 2 letošní jehňata, muflon Yakul, prasátka, králíci
+- bonus: dar **200 Kč a víc** = po napsání na info@nechmerust.org přístup ke hře **Louka Run**
 
 ---
 
@@ -15,9 +17,9 @@
 
 > Louka letos nevydala. 🌾
 >
-> Nejhorší sucho v historii měření nám vzalo úrodu sena — tráva, ze které jindy sklízíme zásobu na celou zimu, letos prostě nevyrostla. A tak seno sháníme, kde se dá. Jenže málo ho je v celém kraji a cena vyletěla: jeden balík stojí minimálně 800 Kč, loni to byla zhruba polovina [OVĚŘIT loňskou cenu].
+> Nejhorší sucho v historii měření nám vzalo úrodu sena — tráva, ze které jindy sklízíme zásobu na celou zimu, letos prostě nevyrostla. A tak seno sháníme, kde se dá. Jenže málo ho je v celém kraji a cena vyletěla: balík, který jsme loni kupovali za 500 Kč, letos stojí 800 až 1 000 korun — a možná i víc.
 >
-> Oslík Karel, krávy Avala a Květa, ovce Pogo a Lucinka a všichni ostatní ale musí žrát celou zimu — ať je seno za kolik chce.
+> A stádo má apetit: krávy Avala a Květa spořádají každá kolem 15 kilo sena denně, oslík Karel dalších deset. K tomu osm ovcí, dvě letošní jehňátka, muflon Yakul, prasátka i králíci — všichni musí žrát celou zimu, ať je seno za kolik chce.
 >
 > Proto spouštíme sbírku **Seno pro Louku**. Vybíráme 100 000 Kč, tedy zhruba 125 balíků. Každá koruna projde naším transparentním účtem přímo na seno.
 >
@@ -50,7 +52,7 @@ Hashtagy: #nechmerust #senoprolouku #sucho #sbirka #pomoczviratum #zvireciazyl #
 
 > Víte, kolik sena spořádá jeden oslík za zimu? 🫏
 >
-> Karel zvládne zhruba 10 kg denně [OVĚŘIT] — a to je jen jeden z obyvatel Louky. Jenže letošní sucho nám úrodu sena vzalo a dokupovat znamená platit minimálně 800 Kč za balík.
+> Karel zvládne zhruba 10 kg denně — a naše dvě mladé krávy každá ještě o pět kilo víc. Jenže letošní sucho nám úrodu sena vzalo a dokupovat znamená platit 800 až 1 000 Kč za balík, který loni stál pětistovku.
 >
 > Proto vybíráme 100 000 Kč na zimní zásobu: nechmerust.org/seno
 >
@@ -73,13 +75,15 @@ Tip: Stories 1–4 uložit do výběru (highlight) „Seno 2026".
 
 > Tohle je Karel. 🫏
 >
-> Hravý oslík s velkým srdcem, který miluje drbání ve stínu. Karel toho po nás moc nechce — stín, vodu a v zimě pořádnou porci sena. Denně zvládne zhruba 10 kg [OVĚŘIT], za zimu tedy sní přes 15 balíků [OVĚŘIT].
+> Hravý oslík s velkým srdcem, který miluje drbání ve stínu. Karel toho po nás moc nechce — stín, vodu a v zimě pořádnou porci sena. Denně spořádá zhruba 10 kilo; přes celou zimu je to víc než tuna sena. A to je jen jeden obyvatel Louky.
 >
-> Jenže letos je seno vzácné. Sucho zničilo úrodu a balík stojí minimálně 800 Kč.
+> Jenže letos je seno vzácné. Sucho zničilo úrodu a balík, který loni stál 500 Kč, letos vyjde na 800 až 1 000 korun.
 >
-> 800 Kč = balík sena = zhruba týden Karlova zimního menu.
+> 800 Kč = jeden balík sena navíc ve stodole.
 >
 > Pomůžete Karlovi (a celému stádu) naplnit stodolu? → nechmerust.org/seno 💚
+>
+> P.S. Za dar 200 Kč a víc vám rádi dáme přístup k naší hře Louka Run — stačí nám napsat. Karel v ní běhá taky. 🎮
 
 Hashtagy: #nechmerust #senoprolouku #osel #karel #sbirka #pomoczviratum
 
@@ -121,3 +125,4 @@ Hashtagy: #nechmerust #senoprolouku #osel #karel #sbirka #pomoczviratum
 - Přidat odkaz nechmerust.org/seno do bia na Instagramu i Facebooku.
 - Poprosit fanoušky Louka Run a odběratele newsletteru (pokud existuje) o sdílení.
 - Při každé navážce sena natočit krátké video/reels — reálné záběry táhnou víc než grafika.
+- Komunikovat bonus: **dar 200 Kč a víc = přístup ke hře Louka Run** (dárce napíše na info@nechmerust.org). Hra je i na Google Play — koupě hry je další forma podpory.

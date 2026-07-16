@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Image from "next/image";
-import { Landmark, HeartHandshake, Share2 } from "lucide-react";
+import Link from "next/link";
+import { Landmark, HeartHandshake, Share2, Gamepad2 } from "lucide-react";
 import { Container } from "@/components/Container";
 import { PageHero } from "@/components/PageHero";
 import { Reveal } from "@/components/Reveal";
@@ -41,12 +42,22 @@ const otherWays = [
     cta: { label: "Zobrazit pohyby", href: BANK.transparentUrl },
   },
   {
+    icon: Gamepad2,
+    title: "Zahrajte si Louka Run",
+    text: "Podpořit nás můžete i naší vlastní hrou se zvířaty z Louky — na Google Play nebo u nás na webu. A když do sbírky přispějete 200 Kč a víc, napište nám a přístup ke hře od nás dostanete jako poděkování.",
+    cta: { label: "Více o hře", href: "/loukarun" },
+  },
+  {
     icon: Share2,
     title: "Sdílejte sbírku",
     text: "Nemůžete přispět? Pošlete odkaz nechmerust.org/seno dál — každé sdílení nám může přivézt další balík.",
     cta: null,
   },
 ];
+
+function isExternal(href: string) {
+  return href.startsWith("http");
+}
 
 export default function Seno() {
   return (
@@ -78,17 +89,24 @@ export default function Seno() {
             </p>
             <p>
               Seno teď sháníme, kde se dá — a nejsme sami. Sena je letos málo
-              v celém kraji, a tak jeho cena vyletěla nahoru: jeden velký
-              balík stojí minimálně 800&nbsp;Kč, ještě loni jsme přitom
-              kupovali za zhruba polovinu. Oslík Karel, krávy Avala a Květa,
-              ovce Pogo a Lucinka i všichni ostatní obyvatelé Louky ale musí
-              žrát celou zimu, ať je seno za kolik chce.
+              v celém kraji a jeho cena letí nahoru. Menší balíky, které
+              kupujeme, aby se s nimi dalo hýbat i v jednom člověku, jsme
+              loni brali za 500&nbsp;Kč. Letos se jejich cena odhaduje na
+              800 až 1&nbsp;000&nbsp;Kč — a možná vyšplhá ještě výš.
+            </p>
+            <p>
+              A stádo má pořádný apetit. Naše dvě mladé krávy Avala a Květa
+              spořádají každá kolem 15&nbsp;kilo sena denně, oslík Karel
+              dalších deset. K tomu osm ovcí a dvě letošní jehňátka, muflon
+              Yakul, prasátka — a něco málo si uzobnou i králíci. Přes zimu,
+              kdy pastva nedá nic, jede všechno ze stodoly.
             </p>
             <p>
               Loni jste nám se senem pomohli a zvládli jsme to. Letos je
               situace vážnější, a proto vybíráme <strong className="text-text">100&nbsp;000&nbsp;Kč</strong> —
-              to je zhruba 125 balíků, zimní zásoba pro celé stádo. Každá
-              koruna půjde přes transparentní účet přímo na seno.
+              to je při letošních cenách zimní zásoba zhruba 125 balíků pro
+              celé stádo. Každá koruna půjde přes transparentní účet přímo
+              na seno.
             </p>
           </Reveal>
         </Container>
@@ -179,14 +197,23 @@ export default function Seno() {
                     <h3 className="font-serif text-xl font-semibold text-moss-deep">{c.title}</h3>
                     <p className="mb-5 mt-2 text-text-muted">{c.text}</p>
                     {c.cta ? (
-                      <a
-                        href={c.cta.href}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="mt-auto inline-flex w-fit items-center rounded-pill bg-moss px-5 py-2.5 text-sm font-medium text-cream transition-colors hover:bg-moss-deep"
-                      >
-                        {c.cta.label}
-                      </a>
+                      isExternal(c.cta.href) ? (
+                        <a
+                          href={c.cta.href}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="mt-auto inline-flex w-fit items-center rounded-pill bg-moss px-5 py-2.5 text-sm font-medium text-cream transition-colors hover:bg-moss-deep"
+                        >
+                          {c.cta.label}
+                        </a>
+                      ) : (
+                        <Link
+                          href={c.cta.href}
+                          className="mt-auto inline-flex w-fit items-center rounded-pill bg-moss px-5 py-2.5 text-sm font-medium text-cream transition-colors hover:bg-moss-deep"
+                        >
+                          {c.cta.label}
+                        </Link>
+                      )
                     ) : null}
                   </article>
                 </Reveal>

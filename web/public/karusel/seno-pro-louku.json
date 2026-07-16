@@ -18,7 +18,7 @@
       "type": "fact",
       "eyebrow": "Co se stalo",
       "title": "Sucho v číslech",
-      "body": "Tráva, ze které jindy sklízíme seno na celou zimu, letos nevyrostla. Sena je málo v celém kraji a jeden balík stojí minimálně 800 Kč — loni to byla zhruba polovina. Naše stádo přitom potřebuje na zimu kolem 125 balíků."
+      "body": "Tráva, ze které jindy sklízíme seno na celou zimu, letos nevyrostla. Sena je málo v celém kraji: balík, který jsme loni kupovali za 500 Kč, letos stojí 800 až 1 000 korun. Naše stádo přitom potřebuje na zimu kolem 125 balíků."
     },
     {
       "type": "plant",
@@ -26,7 +26,7 @@
       "name": "Karel",
       "latin": "Hravý oslík s velkým srdcem",
       "fact": "Karel spořádá denně kolem 10 kg sena. Přes zimu, kdy pastva nic nedá, je seno jeho hlavní jídelníček — a letos je ho zoufale málo.",
-      "use": "800 Kč = jeden balík sena. Karlovi vystačí zhruba na týden zimního krmení.",
+      "use": "800 Kč = jeden balík sena navíc ve stodole. Přes zimu Karel spořádá víc než tunu.",
       "warning": null
     },
     {
@@ -39,7 +39,7 @@
       "status": "Krávy",
       "name": "Avala a Květa",
       "latin": "Naše dámy ze stáda",
-      "fact": "Krávy jsou největší jedlíci Louky — přes zimu spotřebují nejvíc sena z celého stáda. Bez plné stodoly se zima zvládnout nedá.",
+      "fact": "Avala s Květou spořádají každá kolem 15 kilo sena denně — nejvíc z celého stáda. A přidávají se ovce, jehňátka, muflon Yakul i prasátka. Bez plné stodoly se zima zvládnout nedá.",
       "use": "1 600 Kč = dva balíky sena, které dámám vystačí na pořádný kus zimy.",
       "warning": null
     },
@@ -58,7 +58,7 @@
       "type": "tip",
       "eyebrow": "Jak můžeš pomoct ty",
       "title": "Tři cesty k plné stodole",
-      "body": "1) QR platba nebo převod na transparentní účet — vše na nechmerust.org/seno. 2) Dar kartou přes Darujme.cz. 3) Sdílej tenhle příspěvek — i sdílení nám může přivézt balík."
+      "body": "1) QR platba nebo převod na transparentní účet — vše na nechmerust.org/seno. 2) Dar kartou přes Darujme.cz. 3) Sdílej tenhle příspěvek. Bonus: za dar 200 Kč a víc ti po napsání dáme přístup k naší hře Louka Run. 🎮"
     },
     {
       "type": "outro",
@@ -71,7 +71,7 @@
   "captions": [
     {
       "label": "Varianta A — vyprávěcí",
-      "text": "Louka letos nevydala. 🌾\n\nNejhorší sucho v historii měření nám vzalo úrodu sena. Karel, Avala, Květa a všichni ostatní ale musí žrát celou zimu — ať je seno za kolik chce. A letos stojí balík minimálně 800 Kč.\n\nProto spouštíme sbírku Seno pro Louku: vybíráme 100 000 Kč na zimní zásobu (~125 balíků).\n\n🌾 800 Kč = balík sena\n💚 nechmerust.org/seno (odkaz v biu)\n🔁 Sdílení pomáhá taky!",
+      "text": "Louka letos nevydala. 🌾\n\nNejhorší sucho v historii měření nám vzalo úrodu sena. Karel, Avala, Květa a všichni ostatní ale musí žrát celou zimu — ať je seno za kolik chce. A balík, který loni stál 500 Kč, letos vyjde na 800 až 1 000 korun.\n\nProto spouštíme sbírku Seno pro Louku: vybíráme 100 000 Kč na zimní zásobu (~125 balíků).\n\n🌾 800 Kč = balík sena\n💚 nechmerust.org/seno (odkaz v biu)\n🔁 Sdílení pomáhá taky!",
       "hashtags": ["#nechmerust", "#senoprolouku", "#sucho", "#sbirka", "#pomoczviratum", "#louka", "#zvireciazyl", "#seno"]
     },
     {
@@ -81,7 +81,7 @@
     },
     {
       "label": "Varianta C — příběh Karla",
-      "text": "Tohle je Karel. 🫏\n\nChce toho po nás málo: stín, vodu, drbání — a v zimě pořádnou porci sena. Denně ho spořádá kolem 10 kg. Jenže letošní sucho nám úrodu vzalo a seno zdražilo na min. 800 Kč za balík.\n\n800 Kč = balík = týden Karlova zimního menu.\n\nPomůžeš Karlovi naplnit stodolu? → nechmerust.org/seno 💚",
+      "text": "Tohle je Karel. 🫏\n\nChce toho po nás málo: stín, vodu, drbání — a v zimě pořádnou porci sena. Denně ho spořádá kolem 10 kg, za zimu víc než tunu. Jenže letošní sucho nám úrodu vzalo a balík zdražil z 500 na 800 až 1 000 Kč.\n\n800 Kč = jeden balík sena navíc ve stodole.\n\nPomůžeš Karlovi naplnit stodolu? → nechmerust.org/seno 💚",
       "hashtags": ["#nechmerust", "#senoprolouku", "#osel", "#karel", "#sbirka", "#pomoczviratum", "#louka"]
     }
   ]
