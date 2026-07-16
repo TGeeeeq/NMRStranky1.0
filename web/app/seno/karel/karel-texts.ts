@@ -28,7 +28,7 @@ export const KAREL_DECLINE =
   "Fajn. Tak si to čti v nudném. Já budu tamhle za rohem. Uraženej.";
 
 export const KAREL_FINALE =
-  "Tak. Teď to má šťávu. QR kód je tamhle — 800 korun, jeden balík, jeden spokojenej osel. I-ááá!";
+  "Tak. Teď to má šťávu i barvy. QR kód je tamhle — 800 korun, jeden balík, jeden spokojenej osel. I-ááá!";
 
 export const KAREL_RETURN = "Vítej zpátky. Nechal jsem to tu po svém. Neděkuj.";
 
@@ -38,11 +38,11 @@ export const KAREL_UNRESTORE = "Věděl jsem, že se vrátíš. Vkus máš.";
 
 /** Komentáře během proměny — po „ukousnutí" daného bloku. */
 export const KAREL_COMMENTARY: Partial<Record<SenoBlockId, string>> = {
-  hero: "Tak nejdřív ten nadpis. Moje jméno tam chybělo.",
+  hero: "Tak nejdřív ten nadpis. Moje jméno tam chybělo. A razítko — bez razítka to není úřední.",
   "story-text": "Tenhle odstavec chutnal jak sláma. Teda… to je vlastně kompliment.",
   "meter-header": "Ukazatel nechávám. Čísla nežeru. Zatím.",
-  "payment-card": "QR kód nechávám taky. Ten je důležitej. Velmi důležitej.",
-  ways: "A tyhle kartičky… křup. Hotovo.",
+  "payment-card": "QR kód nechávám. Ten je důležitej. Roh karty jsem ale ochutnal. Kontrola kvality.",
+  ways: "A tyhle kartičky… křup. Rohy jsou nejlepší. A barvy jsem vybral osobně.",
 };
 
 export const KAREL_IDLE: string[] = [
@@ -54,7 +54,17 @@ export const KAREL_IDLE: string[] = [
   "Tahle stránka je teď o 100 % lepší. Měřil jsem to.",
   "Zima se blíží. Můj žaludek to ví první.",
   "Sdílení je zadarmo. Seno bohužel ne.",
+  "Ty okousané rohy? Kontrola kvality. Všechno prošlo.",
+  "To mokré na kartách je ochranný lak. Oslí lak. Neptej se.",
+  "Barvy jsem vybíral podle chuti. Růžová chutná nejlíp.",
 ];
+
+/** Nálepky, podpisy a razítka, které Karel nalepí na svou verzi stránky. */
+export const KAREL_STICKERS = {
+  hero: "Převzato · ředitel všeho",
+  story: "— Přečteno. Schváleno. Karel, ředitel všeho",
+  payment: "Roh jsem ochutnal. Papír průměrný, QR výborný.",
+} as const;
 
 /** Reakce na kliknutí — klíče odpovídají data-karel-react atributům. */
 export const KAREL_REACTIONS: Record<string, string[]> = {
@@ -136,23 +146,27 @@ export const KAREL_WAY_TEXTS = [
     title: "Darujme.cz",
     text: "Nevěříš čtvercům z pixelů? Chápu. Darujme.cz je ověřený portál — karta nebo převod, a moje seno je zase o kus blíž.",
     ctaLabel: "Darovat online",
+    sticker: "Prověřeno čumákem. ✓",
   },
   {
     key: "transparentni",
     title: "Transparentní účet",
     text: "Každou korunu vidíš. Pohyby na účtu u Fio banky jsou veřejné a já je hlídám osobně. Běž se přesvědčit.",
     ctaLabel: "Zobrazit pohyby",
+    sticker: "Čísla nežeru. Jen hlídám.",
   },
   {
     key: "hra",
     title: "Zahraj si Louka Run",
     text: "Hra o mně. Konečně. Běhám v ní za mrkvemi po naší Louce — a když do sbírky přispěješ 200 Kč a víc, napiš nám a přístup ke hře dostaneš jako poděkování.",
     ctaLabel: "Více o hře",
+    sticker: "V hlavní roli: já!",
   },
   {
     key: "share",
     title: "Sdílej sbírku",
     text: "Nemůžeš přispět? Pošli nechmerust.org/seno dál. Hýkat na celý internet sám nestíhám.",
     ctaLabel: null,
+    sticker: "Pardon, slintanec. — K.",
   },
 ] as const;

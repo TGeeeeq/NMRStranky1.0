@@ -5,6 +5,7 @@ import {
   KAREL_HERO,
   KAREL_IDLE,
   KAREL_REACTIONS,
+  KAREL_STICKERS,
   KAREL_STORY,
   KAREL_TIP_TEXTS,
   KAREL_WAY_TEXTS,
@@ -59,6 +60,15 @@ describe("Karlova verze /seno — fakta sbírky zůstávají", () => {
   it("reakce mají neprázdné pooly", () => {
     for (const pool of Object.values(KAREL_REACTIONS)) {
       expect(pool.length).toBeGreaterThan(0);
+    }
+  });
+
+  it("nálepky mají text — razítka i každá karta podpory", () => {
+    for (const sticker of Object.values(KAREL_STICKERS)) {
+      expect(sticker.trim().length).toBeGreaterThan(0);
+    }
+    for (const way of KAREL_WAY_TEXTS) {
+      expect(way.sticker.trim().length).toBeGreaterThan(0);
     }
   });
 });

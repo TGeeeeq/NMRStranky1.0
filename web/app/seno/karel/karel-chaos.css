@@ -1,0 +1,205 @@
+/* Karlův chaos na /seno — okousané rohy karet, slintance, nálepky, razítka
+   a barvy, které by design systém nikdy neschválil. Ředitel všeho je schválil.
+   Používá se jen v Karlově verzi bloků (seno-karel-content.tsx).
+   Záměrně bez @layer: pravidla tak přebijí Tailwind utility na kartách. */
+
+:root {
+  --karel-pink: #e0559b;
+  --karel-sky: #3fa7d6;
+  --karel-purple: #8f5fd6;
+  --karel-lime: #8fb832;
+}
+
+/* Barevné palety — nastavují --kc/--kc-deep pro .karel-card a .karel-h. */
+.karel-c-pink { --kc: var(--karel-pink); --kc-deep: #b23a78; }
+.karel-c-sky { --kc: var(--karel-sky); --kc-deep: #2b7ba6; }
+.karel-c-purple { --kc: var(--karel-purple); --kc-deep: #6f42ad; }
+.karel-c-lime { --kc: var(--karel-lime); --kc-deep: #5d7d1d; }
+
+/* --- Okousané rohy ----------------------------------------------------------
+   Maska = průnik vrstev; každá vrstva je plná kromě jednoho „zubu", průnikem
+   vznikne vykousnutý oblouček. Maska ořízne i box-shadow, proto ho nahrazuje
+   drop-shadow — ten kousnutí kopíruje. */
+
+.karel-bite-tr,
+.karel-bite-tl,
+.karel-bite-bl,
+.karel-bite-r {
+  box-shadow: none;
+  filter: drop-shadow(0 10px 18px rgba(31, 61, 42, 0.16));
+}
+
+.karel-bite-tr {
+  mask-image:
+    radial-gradient(circle 16px at calc(100% - 36px) 0, transparent 15px, #000 16px),
+    radial-gradient(circle 19px at calc(100% - 10px) 10px, transparent 18px, #000 19px),
+    radial-gradient(circle 13px at 100% 36px, transparent 12px, #000 13px);
+  mask-composite: intersect;
+}
+.karel-bite-tl {
+  mask-image:
+    radial-gradient(circle 15px at 34px 0, transparent 14px, #000 15px),
+    radial-gradient(circle 18px at 8px 12px, transparent 17px, #000 18px),
+    radial-gradient(circle 12px at 0 36px, transparent 11px, #000 12px);
+  mask-composite: intersect;
+}
+.karel-bite-bl {
+  mask-image:
+    radial-gradient(circle 15px at 30px 100%, transparent 14px, #000 15px),
+    radial-gradient(circle 18px at 6px calc(100% - 12px), transparent 17px, #000 18px),
+    radial-gradient(circle 12px at 0 calc(100% - 38px), transparent 11px, #000 12px);
+  mask-composite: intersect;
+}
+.karel-bite-r {
+  mask-image:
+    radial-gradient(circle 13px at 100% 32%, transparent 12px, #000 13px),
+    radial-gradient(circle 16px at calc(100% + 2px) calc(32% + 24px), transparent 15px, #000 16px),
+    radial-gradient(circle 11px at 100% calc(32% + 46px), transparent 10px, #000 11px);
+  mask-composite: intersect;
+}
+
+/* --- Šílené barvy karet ------------------------------------------------------ */
+
+.karel-card {
+  border-width: 2px;
+  border-color: var(--kc);
+  background:
+    radial-gradient(at 100% 0%, color-mix(in oklab, var(--kc) 14%, transparent), transparent 60%)
+    var(--color-surface);
+}
+.karel-card h3 {
+  color: var(--kc-deep);
+  text-decoration: underline wavy var(--kc);
+  text-decoration-thickness: 2px;
+  text-underline-offset: 6px;
+}
+.karel-card > div:first-child {
+  background: color-mix(in oklab, var(--kc) 16%, var(--color-surface));
+  color: var(--kc-deep);
+}
+.karel-card .bg-moss { background-color: var(--kc-deep); }
+.karel-card .bg-moss:hover { background-color: var(--kc); }
+
+/* --- Nadpisy sekcí s vlnovkou ------------------------------------------------ */
+
+.karel-h > p:first-child { color: var(--kc); }
+.karel-h h2 {
+  color: var(--kc-deep);
+  text-decoration: underline wavy var(--kc);
+  text-decoration-thickness: 3px;
+  text-underline-offset: 10px;
+}
+
+/* --- Zvýrazňovač v textu ------------------------------------------------------ */
+
+.karel-mark {
+  display: inline-block;
+  transform: rotate(-1.2deg);
+  padding: 0 0.28em;
+  border-radius: 0.35em 0.5em 0.3em 0.55em;
+  background: var(--color-accent);
+  color: var(--color-ink);
+  font-weight: 650;
+}
+.karel-mark-pink { background: var(--karel-pink); color: #fff; }
+.karel-mark-sky { background: var(--karel-sky); color: #fff; }
+
+/* --- Nálepky a razítko -------------------------------------------------------- */
+
+.karel-sticker {
+  position: absolute;
+  z-index: 10;
+  max-width: 14rem;
+  padding: 0.4rem 0.75rem;
+  border-radius: 2px 12px 4px 14px;
+  background: var(--color-accent);
+  color: var(--color-ink);
+  box-shadow: 0 8px 18px -8px rgba(31, 61, 42, 0.45);
+  font-size: 0.8rem;
+  line-height: 1.3;
+  font-style: italic;
+  pointer-events: none;
+}
+.karel-sticker-pink { background: var(--karel-pink); color: var(--color-cream); }
+.karel-sticker-sky { background: var(--karel-sky); color: var(--color-cream); }
+
+.karel-stamp {
+  position: absolute;
+  z-index: 10;
+  max-width: calc(100vw - 2rem);
+  padding: 0.45rem 0.9rem;
+  border: 3px solid var(--karel-pink);
+  border-radius: 10px;
+  box-shadow: inset 0 0 0 1.5px color-mix(in srgb, var(--karel-pink) 60%, transparent);
+  color: var(--karel-pink);
+  background: rgba(255, 255, 255, 0.14);
+  backdrop-filter: blur(2px);
+  font-size: 0.8rem;
+  font-weight: 800;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  text-align: center;
+  pointer-events: none;
+}
+
+/* --- Slintanec a drobky -------------------------------------------------------- */
+
+.karel-drool {
+  position: absolute;
+  z-index: 10;
+  width: 26px;
+  height: 42px;
+  pointer-events: none;
+  background: linear-gradient(
+    180deg,
+    color-mix(in oklab, var(--karel-sky) 45%, #fff) 0%,
+    color-mix(in oklab, var(--karel-sky) 20%, #fff) 100%
+  );
+  opacity: 0.65;
+  border-radius: 46% 54% 42% 58% / 18% 22% 80% 78%;
+  transform-origin: 50% 0%;
+  animation: karel-drool-stretch 4.5s ease-in-out infinite;
+}
+.karel-drool::before {
+  content: "";
+  position: absolute;
+  top: 7px;
+  left: 5px;
+  width: 5px;
+  height: 13px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.85);
+}
+.karel-drool::after {
+  content: "";
+  position: absolute;
+  bottom: -12px;
+  left: 45%;
+  width: 9px;
+  height: 13px;
+  border-radius: 50% 50% 58% 42% / 35% 35% 82% 78%;
+  background: inherit;
+}
+@keyframes karel-drool-stretch {
+  0%, 100% { transform: scaleY(1); }
+  55% { transform: scaleY(1.14); }
+}
+
+.karel-crumbs {
+  position: absolute;
+  z-index: 10;
+  width: 5px;
+  height: 4px;
+  pointer-events: none;
+  border-radius: 60% 40% 55% 45%;
+  background: var(--color-amber);
+  box-shadow:
+    12px 7px 0 -1px var(--color-terracotta),
+    -7px 14px 0 0 var(--color-amber),
+    5px 21px 0 -1.5px var(--karel-pink),
+    -2px 4px 0 -1.5px var(--color-moss-soft);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .karel-drool { animation: none; }
+}
