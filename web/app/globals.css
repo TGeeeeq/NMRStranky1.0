@@ -195,27 +195,40 @@
 }
 
 /* --- Aurora: drifting multi-stop gradient mesh in brand colors.
-   Use as a low-opacity overlay layer or section background. -------- */
+   Use as a low-opacity overlay layer or section background.
+   The gradient sits on an oversized ::after driven by a transform, so the
+   drift runs on the compositor — animating background-position instead
+   would repaint the whole layer every frame. -------- */
 .bg-aurora {
+  overflow: hidden;
+}
+.bg-aurora::after {
+  content: "";
+  position: absolute;
+  top: -40%;
+  left: 0;
+  width: 180%;
+  height: 180%;
   background-image:
     radial-gradient(at 18% 28%, color-mix(in oklab, var(--color-moss) 45%, transparent) 0px, transparent 55%),
     radial-gradient(at 82% 18%, color-mix(in oklab, var(--color-accent) 38%, transparent) 0px, transparent 50%),
     radial-gradient(at 72% 82%, color-mix(in oklab, var(--color-moss-deep) 55%, transparent) 0px, transparent 55%),
     radial-gradient(at 30% 75%, color-mix(in oklab, var(--color-moss-soft) 35%, transparent) 0px, transparent 50%);
-  background-size: 180% 180%;
-  background-position: 0% 50%;
+  will-change: transform;
 }
 @media (prefers-reduced-motion: no-preference) {
-  .bg-aurora {
+  .bg-aurora::after {
     animation: aurora-drift 22s ease-in-out infinite alternate;
   }
 }
 @keyframes aurora-drift {
   0% {
-    background-position: 0% 50%;
+    transform: translate3d(0, 0, 0);
   }
   100% {
-    background-position: 100% 50%;
+    /* Shift the 180%-wide layer so its right edge meets the container's:
+       -80% of the container = -80/180 ≈ -44.4% of the layer itself. */
+    transform: translate3d(-44.4%, 0, 0);
   }
 }
 
@@ -261,19 +274,20 @@
 @media (prefers-reduced-motion: no-preference) {
   .blob-morph {
     animation: blob-morph 26s ease-in-out infinite alternate;
+    will-change: transform;
   }
 }
+/* Transform-only morph: animating border-radius here would force the
+   blur(52px) to re-rasterize every frame; under that much blur the radius
+   change is imperceptible anyway, while rotate/scale ride the compositor. */
 @keyframes blob-morph {
   0% {
-    border-radius: 42% 58% 63% 37% / 41% 44% 56% 59%;
     transform: rotate(0deg) scale(1);
   }
   50% {
-    border-radius: 58% 42% 37% 63% / 56% 59% 41% 44%;
     transform: rotate(8deg) scale(1.06);
   }
   100% {
-    border-radius: 42% 58% 63% 37% / 41% 44% 56% 59%;
     transform: rotate(0deg) scale(1);
   }
 }

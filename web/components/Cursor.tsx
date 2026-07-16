@@ -50,8 +50,10 @@ export function Cursor() {
       className="pointer-events-none fixed left-0 top-0 z-[60]"
       style={{ x: sx, y: sy }}
     >
+      {/* No backdrop-filter/mix-blend here — both force the browser to
+          re-sample the pixels beneath the ring on every mousemove frame. */}
       <motion.span
-        className="block -translate-x-1/2 -translate-y-1/2 rounded-pill border border-moss/50 bg-moss/5 mix-blend-multiply backdrop-blur-[1px]"
+        className="block -translate-x-1/2 -translate-y-1/2 rounded-pill border border-moss/50 bg-moss/5"
         animate={{
           width: hovering ? 48 : 26,
           height: hovering ? 48 : 26,

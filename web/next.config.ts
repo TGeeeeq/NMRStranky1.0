@@ -14,6 +14,13 @@ const nextConfig: NextConfig = {
     root: path.join(__dirname),
   },
 
+  // Default deviceSizes go up to 3840, so retina desktops pull a ~640 kB hero
+  // variant. 2048px upscaled is indistinguishable under the hero overlays and
+  // roughly halves the LCP payload on those screens.
+  images: {
+    deviceSizes: [640, 750, 828, 1080, 1200, 1920, 2048],
+  },
+
   async headers() {
     return [{ source: "/:path*", headers: securityHeaders }];
   },

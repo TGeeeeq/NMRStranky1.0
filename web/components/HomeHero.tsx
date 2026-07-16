@@ -66,9 +66,11 @@ export function HomeHero() {
   const cueOpacity = useTransform(scrollYProgress, [0, 0.08], [1, 0]);
   // The "settle": photo insets + rounds over the last stretch, so the framed
   // panel reads as a hand-off to the About section rather than a hard cut.
+  // Done with clip-path (paint-only) — animating padding/border-radius here
+  // would trigger layout + repaint of the whole hero on every scroll frame.
   const frameRadius = useTransform(scrollYProgress, [0.5, 1], [0, 24]);
-  const frameInset = useTransform(scrollYProgress, [0.5, 1], [0, 2.4]);
-  const framePad = useMotionTemplate`${frameInset}rem`;
+  const frameInset = useTransform(scrollYProgress, [0.5, 1], [0, 38]);
+  const frameClip = useMotionTemplate`inset(${frameInset}px round ${frameRadius}px)`;
 
   // ── Cursor reactivity (fine pointer only) ──
   const px = useMotionValue(0); // normalized -0.5..0.5 within the section
@@ -119,16 +121,12 @@ export function HomeHero() {
       <motion.div
         aria-hidden
         className="absolute inset-0 -z-30"
-        style={motionOn ? { padding: framePad } : undefined}
+        style={motionOn ? { clipPath: frameClip } : undefined}
       >
         {/* Settle + dolly */}
         <motion.div
           className="relative h-full w-full overflow-hidden will-change-transform"
-          style={
-            motionOn
-              ? { borderRadius: frameRadius, scale: photoScale, y: photoY }
-              : undefined
-          }
+          style={motionOn ? { scale: photoScale, y: photoY } : undefined}
         >
           {/* Cursor tilt/pan — transformPerspective avoids the ancestor-perspective gotcha */}
           <motion.div
