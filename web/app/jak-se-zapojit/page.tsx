@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
-import { Landmark, HeartHandshake, Bitcoin, PawPrint, ShoppingBag } from "lucide-react";
+import { Landmark, HeartHandshake, Bitcoin, PawPrint, ShoppingBag, Wheat } from "lucide-react";
 import { Container } from "@/components/Container";
 import { SectionHeader } from "@/components/SectionHeader";
 import { Reveal } from "@/components/Reveal";
@@ -19,6 +19,12 @@ export const metadata: Metadata = {
 };
 
 const financial = [
+  {
+    icon: Wheat,
+    title: "Sbírka Seno pro Louku",
+    text: "Letošní sucho zničilo úrodu sena. Vybíráme 100 000 Kč na zimní zásobu pro naše zvířata — přispějte QR platbou nebo převodem.",
+    cta: { label: "Podpořit sbírku", href: "/seno" },
+  },
   {
     icon: Landmark,
     title: "Transparentní účet",
@@ -110,7 +116,7 @@ export default function JakSeZapojit() {
           <Reveal>
             <SectionHeader eyebrow="Přispějte" title="Finanční podpora" />
           </Reveal>
-          <div className="grid gap-6 lg:grid-cols-3">
+          <div className="grid gap-6 sm:grid-cols-2">
             {financial.map((c, i) => (
               <Reveal key={c.title} delay={i * 0.06}>
                 <article className="group flex h-full flex-col rounded-lg border border-border bg-surface p-7 shadow-soft transition-[box-shadow,border-color,transform] duration-300 hover:-translate-y-1 hover:border-accent hover:shadow-lift">

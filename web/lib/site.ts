@@ -12,7 +12,7 @@ export const SITE = {
 export const BANK = {
   account: "2002645872 / 2010",
   bank: "Fio banka, a.s.",
-  iban: "CZ49 2010 2002 6400 0000 5872",
+  iban: "CZ98 2010 0000 0020 0264 5872",
   swift: "FIOBCZPP",
   transparentUrl: "https://ib.fio.cz/ib/transparent?a=2002645872",
 } as const;

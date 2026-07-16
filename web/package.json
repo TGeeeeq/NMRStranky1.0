@@ -14,7 +14,8 @@
     "db:migrate": "drizzle-kit migrate",
     "db:studio": "drizzle-kit studio",
     "migrate:forpsi": "node --env-file=.env.local --import tsx scripts/migrate-from-forpsi.mts",
-    "admin:create": "node --env-file=.env.local --import tsx scripts/create-admin.mts"
+    "admin:create": "node --env-file=.env.local --import tsx scripts/create-admin.mts",
+    "campaign:qr": "node --import tsx scripts/generate-seno-qr.mts"
   },
   "dependencies": {
     "@neondatabase/serverless": "^1.1.0",
@@ -48,6 +49,7 @@
     "@types/bcryptjs": "^3.0.0",
     "@types/node": "^20",
     "@types/nodemailer": "^8.0.1",
+    "@types/qrcode": "^1.5.6",
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "@vitejs/plugin-react": "^6.0.2",
@@ -55,6 +57,7 @@
     "drizzle-kit": "^0.31.10",
     "eslint": "^9",
     "eslint-config-next": "16.2.9",
+    "qrcode": "^1.5.4",
     "tailwindcss": "^4",
     "tsx": "^4.22.4",
     "typescript": "^5",

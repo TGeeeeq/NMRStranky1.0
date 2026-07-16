@@ -1,0 +1,88 @@
+{
+  "version": 1,
+  "topic": "Sbírka Seno pro Louku 2026",
+  "kind": "animals",
+  "format": "4:5",
+  "theme": "meadow",
+  "fontScale": 1,
+  "align": "left",
+  "branding": { "csopLogo": true, "publicita": false },
+  "slides": [
+    {
+      "type": "cover",
+      "eyebrow": "Nech mě růst",
+      "title": "Louka letos nevydala seno",
+      "subtitle": "Nejhorší sucho v historii měření nám vzalo úrodu. Spouštíme sbírku Seno pro Louku — pomozte nám naplnit stodolu na zimu."
+    },
+    {
+      "type": "fact",
+      "eyebrow": "Co se stalo",
+      "title": "Sucho v číslech",
+      "body": "Tráva, ze které jindy sklízíme seno na celou zimu, letos nevyrostla. Sena je málo v celém kraji a jeden balík stojí minimálně 800 Kč — loni to byla zhruba polovina. Naše stádo přitom potřebuje na zimu kolem 125 balíků."
+    },
+    {
+      "type": "plant",
+      "status": "Osel",
+      "name": "Karel",
+      "latin": "Hravý oslík s velkým srdcem",
+      "fact": "Karel spořádá denně kolem 10 kg sena. Přes zimu, kdy pastva nic nedá, je seno jeho hlavní jídelníček — a letos je ho zoufale málo.",
+      "use": "800 Kč = jeden balík sena. Karlovi vystačí zhruba na týden zimního krmení.",
+      "warning": null
+    },
+    {
+      "type": "photo",
+      "imageData": "/assets/karel.webp",
+      "imageCaption": "Karel na vyprahlé letní louce — tráva, která měla být senem, letos neurostla."
+    },
+    {
+      "type": "plant",
+      "status": "Krávy",
+      "name": "Avala a Květa",
+      "latin": "Naše dámy ze stáda",
+      "fact": "Krávy jsou největší jedlíci Louky — přes zimu spotřebují nejvíc sena z celého stáda. Bez plné stodoly se zima zvládnout nedá.",
+      "use": "1 600 Kč = dva balíky sena, které dámám vystačí na pořádný kus zimy.",
+      "warning": null
+    },
+    {
+      "type": "photo",
+      "imageData": "/assets/avala.webp",
+      "imageCaption": "Avala s Květou potřebují na zimu desítky balíků — letos je každý z nich vzácný."
+    },
+    {
+      "type": "fact",
+      "eyebrow": "Cíl sbírky",
+      "title": "100 000 Kč = zimní zásoba",
+      "body": "Vybíráme 100 000 Kč, tedy zhruba 125 balíků sena při letošní ceně 800 Kč za balík. Každá koruna projde naším transparentním účtem — dárci vidí všechno."
+    },
+    {
+      "type": "tip",
+      "eyebrow": "Jak můžeš pomoct ty",
+      "title": "Tři cesty k plné stodole",
+      "body": "1) QR platba nebo převod na transparentní účet — vše na nechmerust.org/seno. 2) Dar kartou přes Darujme.cz. 3) Sdílej tenhle příspěvek — i sdílení nám může přivézt balík."
+    },
+    {
+      "type": "outro",
+      "eyebrow": "Děkujeme",
+      "title": "Pomozte nám přezimovat",
+      "body": "Loni jste nám se senem pomohli a zvládli jsme to. Věříme, že se to s vaší pomocí povede i letos. Odkaz najdeš v biu: nechmerust.org/seno",
+      "cta": "Přispět na seno"
+    }
+  ],
+  "captions": [
+    {
+      "label": "Varianta A — vyprávěcí",
+      "text": "Louka letos nevydala. 🌾\n\nNejhorší sucho v historii měření nám vzalo úrodu sena. Karel, Avala, Květa a všichni ostatní ale musí žrát celou zimu — ať je seno za kolik chce. A letos stojí balík minimálně 800 Kč.\n\nProto spouštíme sbírku Seno pro Louku: vybíráme 100 000 Kč na zimní zásobu (~125 balíků).\n\n🌾 800 Kč = balík sena\n💚 nechmerust.org/seno (odkaz v biu)\n🔁 Sdílení pomáhá taky!",
+      "hashtags": ["#nechmerust", "#senoprolouku", "#sucho", "#sbirka", "#pomoczviratum", "#louka", "#zvireciazyl", "#seno"]
+    },
+    {
+      "label": "Varianta B — úderná",
+      "text": "🚨 SPOUŠTÍME SBÍRKU: Seno pro Louku\n\nSucho zničilo úrodu → balík sena stojí min. 800 Kč → stádo potřebuje ~125 balíků na zimu.\n\nCíl: 100 000 Kč. Každá koruna je vidět na transparentním účtu.\n\n🌾 400 Kč = půl balíku\n🌾 800 Kč = celý balík\n🌾 1 600 Kč = dva balíky\n\nOdkaz v biu → nechmerust.org/seno 💚",
+      "hashtags": ["#nechmerust", "#senoprolouku", "#sbirka", "#sucho", "#darujme", "#pomoczviratum"]
+    },
+    {
+      "label": "Varianta C — příběh Karla",
+      "text": "Tohle je Karel. 🫏\n\nChce toho po nás málo: stín, vodu, drbání — a v zimě pořádnou porci sena. Denně ho spořádá kolem 10 kg. Jenže letošní sucho nám úrodu vzalo a seno zdražilo na min. 800 Kč za balík.\n\n800 Kč = balík = týden Karlova zimního menu.\n\nPomůžeš Karlovi naplnit stodolu? → nechmerust.org/seno 💚",
+      "hashtags": ["#nechmerust", "#senoprolouku", "#osel", "#karel", "#sbirka", "#pomoczviratum", "#louka"]
+    }
+  ]
+}

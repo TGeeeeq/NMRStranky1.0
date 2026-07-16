@@ -15,6 +15,15 @@ export function Footer() {
         </p>
         <p className="mt-3 flex flex-wrap items-center justify-center gap-x-3 gap-y-1 text-sm">
           <Link
+            href="/seno"
+            className="text-cream/90 underline-offset-4 hover:underline"
+          >
+            Sbírka na seno
+          </Link>
+          <span aria-hidden="true" className="text-cream/40">
+            •
+          </span>
+          <Link
             href="/gdpr"
             className="text-cream/90 underline-offset-4 hover:underline"
           >
