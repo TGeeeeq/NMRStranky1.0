@@ -11,14 +11,14 @@
     {
       "type": "cover",
       "eyebrow": "Nech mě růst",
-      "title": "Louka letos nevydala seno",
-      "subtitle": "Nejhorší sucho v historii měření nám vzalo úrodu. Spouštíme sbírku Seno pro Louku — pomozte nám naplnit stodolu na zimu."
+      "title": "Seno je letos vzácné",
+      "subtitle": "Po nejhorším suchu v historii měření je sena málo a je drahé. Spouštíme sbírku Seno pro Louku — pomozte nám naplnit stodolu na zimu."
     },
     {
       "type": "fact",
-      "eyebrow": "Co se stalo",
+      "eyebrow": "Jak to letos je",
       "title": "Sucho v číslech",
-      "body": "Tráva, ze které jindy sklízíme seno na celou zimu, letos nevyrostla. Sena je málo v celém kraji: balík, který jsme loni kupovali za 500 Kč, letos stojí 800 až 1 000 korun. Naše stádo přitom potřebuje na zimu kolem 125 balíků."
+      "body": "Seno pro naše stádo každý rok kupujeme. Po letošním suchu ho je ale málo v celém kraji: balík, který jsme loni brali za 500 Kč, letos stojí 800 až 1 000 korun. Naše stádo přitom potřebuje na zimu kolem 125 balíků."
     },
     {
       "type": "plant",
@@ -32,7 +32,7 @@
     {
       "type": "photo",
       "imageData": "/assets/karel.webp",
-      "imageCaption": "Karel na vyprahlé letní louce — tráva, která měla být senem, letos neurostla."
+      "imageCaption": "Karel na vyprahlé letní louce — letošní sucho udělalo ze sena vzácné zboží."
     },
     {
       "type": "plant",
@@ -71,17 +71,17 @@
   "captions": [
     {
       "label": "Varianta A — vyprávěcí",
-      "text": "Louka letos nevydala. 🌾\n\nNejhorší sucho v historii měření nám vzalo úrodu sena. Karel, Avala, Květa a všichni ostatní ale musí žrát celou zimu — ať je seno za kolik chce. A balík, který loni stál 500 Kč, letos vyjde na 800 až 1 000 korun.\n\nProto spouštíme sbírku Seno pro Louku: vybíráme 100 000 Kč na zimní zásobu (~125 balíků).\n\n🌾 800 Kč = balík sena\n💚 nechmerust.org/seno (odkaz v biu)\n🔁 Sdílení pomáhá taky!",
+      "text": "Seno je letos vzácné. 🌾\n\nPo nejhorším suchu v historii měření je sena málo v celém kraji. Seno pro naše stádo každý rok kupujeme — a Karel, Avala, Květa a všichni ostatní musí žrát celou zimu, ať stojí balík kolik chce. Letos je to 800 až 1 000 korun místo loňských pěti set.\n\nProto spouštíme sbírku Seno pro Louku: vybíráme 100 000 Kč na zimní zásobu (~125 balíků) a připravujeme se s předstihem.\n\n🌾 800 Kč = balík sena\n💚 nechmerust.org/seno (odkaz v biu)\n🔁 Sdílení pomáhá taky!",
       "hashtags": ["#nechmerust", "#senoprolouku", "#sucho", "#sbirka", "#pomoczviratum", "#louka", "#zvireciazyl", "#seno"]
     },
     {
       "label": "Varianta B — úderná",
-      "text": "🚨 SPOUŠTÍME SBÍRKU: Seno pro Louku\n\nSucho zničilo úrodu → balík sena stojí min. 800 Kč → stádo potřebuje ~125 balíků na zimu.\n\nCíl: 100 000 Kč. Každá koruna je vidět na transparentním účtu.\n\n🌾 400 Kč = půl balíku\n🌾 800 Kč = celý balík\n🌾 1 600 Kč = dva balíky\n\nOdkaz v biu → nechmerust.org/seno 💚",
+      "text": "🌾 SPOUŠTÍME SBÍRKU: Seno pro Louku\n\nPo letošním suchu je sena málo → balík zdražil z 500 na 800 až 1 000 Kč → stádo potřebuje ~125 balíků na zimu. Připravujeme se s předstihem.\n\nCíl: 100 000 Kč. Každá koruna je vidět na transparentním účtu.\n\n🌾 400 Kč = půl balíku\n🌾 800 Kč = celý balík\n🌾 1 600 Kč = dva balíky\n\nOdkaz v biu → nechmerust.org/seno 💚",
       "hashtags": ["#nechmerust", "#senoprolouku", "#sbirka", "#sucho", "#darujme", "#pomoczviratum"]
     },
     {
       "label": "Varianta C — příběh Karla",
-      "text": "Tohle je Karel. 🫏\n\nChce toho po nás málo: stín, vodu, drbání — a v zimě pořádnou porci sena. Denně ho spořádá kolem 10 kg, za zimu víc než tunu. Jenže letošní sucho nám úrodu vzalo a balík zdražil z 500 na 800 až 1 000 Kč.\n\n800 Kč = jeden balík sena navíc ve stodole.\n\nPomůžeš Karlovi naplnit stodolu? → nechmerust.org/seno 💚",
+      "text": "Tohle je Karel. 🫏\n\nChce toho po nás málo: stín, vodu, drbání — a v zimě pořádnou porci sena. Denně ho spořádá kolem 10 kg, za zimu víc než tunu. Seno pro něj každý rok kupujeme — jenže po letošním suchu balík zdražil z 500 na 800 až 1 000 Kč.\n\n800 Kč = jeden balík sena navíc ve stodole.\n\nPomůžeš Karlovi naplnit stodolu? → nechmerust.org/seno 💚",
       "hashtags": ["#nechmerust", "#senoprolouku", "#osel", "#karel", "#sbirka", "#pomoczviratum", "#louka"]
     }
   ]

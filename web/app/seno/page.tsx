@@ -15,7 +15,7 @@ import { SENO_CAMPAIGN } from "@/lib/campaign";
 export const metadata: Metadata = {
   title: "Seno pro Louku",
   description:
-    "Letošní extrémní sucho zničilo úrodu sena. Pomozte nám vybrat 100 000 Kč na zimní zásobu pro zvířata z Louky — každých 800 Kč je jeden balík.",
+    "Seno je letos kvůli extrémnímu suchu vzácné a drahé. Pomozte nám vybrat 100 000 Kč na zimní zásobu pro zvířata z Louky — každých 800 Kč je jeden balík.",
   alternates: { canonical: "/seno" },
   openGraph: {
     images: ["/assets/karel.webp"],
@@ -67,7 +67,7 @@ export default function Seno() {
         imageAlt="Oslík Karel na vyschlé letní louce"
         eyebrow="Aktuální sbírka"
         title="Seno pro Louku"
-        subtitle="Letošní sucho nás připravilo o úrodu sena. Pomozte nám naskládat do stodoly zásobu, která naše zvířata v klidu převeze přes zimu."
+        subtitle="Seno pro naše stádo každý rok kupujeme — a letos je kvůli suchu vzácné a drahé. Pomozte nám naskládat do stodoly zásobu, která naše zvířata v klidu převeze přes zimu."
       />
 
       {/* Příběh */}
@@ -75,24 +75,24 @@ export default function Seno() {
         <Container className="max-w-3xl">
           <Reveal>
             <SectionHeader
-              eyebrow="Co se stalo"
-              title="Louka letos nevydala"
+              eyebrow="Jak to letos je"
+              title="Seno je letos vzácné"
               align="left"
             />
           </Reveal>
           <Reveal className="space-y-5 text-lg leading-relaxed text-text-muted">
             <p>
-              Letošní rok přinesl nejhorší sucho v historii měření. Tráva, ze
-              které jindy sklízíme seno na celou zimu, na vyprahlé Louce
-              prostě nevyrostla. To, co se nám podařilo posekat, je zlomek
-              toho, co naše stádo potřebuje.
+              Letošní rok přinesl nejhorší sucho v historii měření. Seno si
+              sami nepřipravujeme — každý rok ho pro naše stádo kupujeme.
+              Jenže letos louky nevydaly skoro nikde, sena je málo a shání
+              ho celý kraj.
             </p>
             <p>
-              Seno teď sháníme, kde se dá — a nejsme sami. Sena je letos málo
-              v celém kraji a jeho cena letí nahoru. Menší balíky, které
-              kupujeme, aby se s nimi dalo hýbat i v jednom člověku, jsme
-              loni brali za 500&nbsp;Kč. Letos se jejich cena odhaduje na
-              800 až 1&nbsp;000&nbsp;Kč — a možná vyšplhá ještě výš.
+              Ceny tomu odpovídají. Menší balíky, které kupujeme, aby se
+              s nimi dalo hýbat i v jednom člověku, jsme loni brali za
+              500&nbsp;Kč. Letos se jejich cena odhaduje na 800 až
+              1&nbsp;000&nbsp;Kč — a možná vyšplhá ještě výš. Proto
+              nečekáme a zásobu sháníme už teď, dokud seno k mání je.
             </p>
             <p>
               A stádo má pořádný apetit. Naše dvě mladé krávy Avala a Květa
@@ -102,8 +102,8 @@ export default function Seno() {
               kdy pastva nedá nic, jede všechno ze stodoly.
             </p>
             <p>
-              Loni jste nám se senem pomohli a zvládli jsme to. Letos je
-              situace vážnější, a proto vybíráme <strong className="text-text">100&nbsp;000&nbsp;Kč</strong> —
+              Loni jste nám se senem pomohli a zvládli jsme to. Letos se
+              připravujeme s předstihem a vybíráme <strong className="text-text">100&nbsp;000&nbsp;Kč</strong> —
               to je při letošních cenách zimní zásoba zhruba 125 balíků pro
               celé stádo. Každá koruna půjde přes transparentní účet přímo
               na seno.

@@ -22,7 +22,7 @@ const financial = [
   {
     icon: Wheat,
     title: "Sbírka Seno pro Louku",
-    text: "Letošní sucho zničilo úrodu sena. Vybíráme 100 000 Kč na zimní zásobu pro naše zvířata — přispějte QR platbou nebo převodem.",
+    text: "Seno je letos kvůli suchu vzácné a drahé. Vybíráme 100 000 Kč na zimní zásobu pro naše zvířata — přispějte QR platbou nebo převodem.",
     cta: { label: "Podpořit sbírku", href: "/seno" },
   },
   {

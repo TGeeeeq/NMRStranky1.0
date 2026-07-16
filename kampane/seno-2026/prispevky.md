@@ -15,9 +15,9 @@
 
 ### Varianta A — vyprávěcí (doporučená pro FB)
 
-> Louka letos nevydala. 🌾
+> Seno je letos vzácné. 🌾
 >
-> Nejhorší sucho v historii měření nám vzalo úrodu sena — tráva, ze které jindy sklízíme zásobu na celou zimu, letos prostě nevyrostla. A tak seno sháníme, kde se dá. Jenže málo ho je v celém kraji a cena vyletěla: balík, který jsme loni kupovali za 500 Kč, letos stojí 800 až 1 000 korun — a možná i víc.
+> Letošní rok přinesl nejhorší sucho v historii měření. Seno pro naše stádo každý rok kupujeme — jenže letos ho je málo v celém kraji a cena vyletěla: balík, který jsme loni brali za 500 Kč, letos stojí 800 až 1 000 korun, možná i víc. Proto nečekáme a zásobu sháníme už teď.
 >
 > A stádo má apetit: krávy Avala a Květa spořádají každá kolem 15 kilo sena denně, oslík Karel dalších deset. K tomu osm ovcí, dvě letošní jehňátka, muflon Yakul, prasátka i králíci — všichni musí žrát celou zimu, ať je seno za kolik chce.
 >
@@ -33,9 +33,9 @@ Hashtagy: #nechmerust #senoprolouku #sucho #sbirka #pomoczviratum #louka #azyl #
 
 ### Varianta B — úderná (doporučená pro IG)
 
-> 🚨 SPOUŠTÍME SBÍRKU: Seno pro Louku
+> 🌾 SPOUŠTÍME SBÍRKU: Seno pro Louku
 >
-> Letošní sucho = skoro žádná úroda sena. A to, co se dá koupit, zdražilo na minimálně 800 Kč za balík.
+> Seno pro naše stádo každý rok kupujeme. Po letošním suchu ho je ale málo v celém kraji a balík zdražil z loňských 500 Kč na 800 až 1 000 Kč. Připravujeme se na zimu s předstihem.
 >
 > Naše stádo potřebuje na zimu ~125 balíků. Vybíráme 100 000 Kč.
 >
@@ -52,7 +52,7 @@ Hashtagy: #nechmerust #senoprolouku #sucho #sbirka #pomoczviratum #zvireciazyl #
 
 > Víte, kolik sena spořádá jeden oslík za zimu? 🫏
 >
-> Karel zvládne zhruba 10 kg denně — a naše dvě mladé krávy každá ještě o pět kilo víc. Jenže letošní sucho nám úrodu sena vzalo a dokupovat znamená platit 800 až 1 000 Kč za balík, který loni stál pětistovku.
+> Karel zvládne zhruba 10 kg denně — a naše dvě mladé krávy každá ještě o pět kilo víc. Seno pro ně každý rok kupujeme, jenže po letošním suchu je vzácné: platí se 800 až 1 000 Kč za balík, který loni stál pětistovku.
 >
 > Proto vybíráme 100 000 Kč na zimní zásobu: nechmerust.org/seno
 >
@@ -62,7 +62,7 @@ Hashtagy: #nechmerust #senoprolouku #sucho #sbirka #pomoczviratum #zvireciazyl #
 
 ## 2. Story série (den 1–2, Instagram Stories)
 
-1. **Story 1 — problém:** foto vyprahlé louky (např. z hero fotky Karla). Text: „Letošní sucho nám vzalo úrodu sena. 🌾" + nálepka s otázkou „Věděli jste, že letos je nejhorší sucho v historii měření?"
+1. **Story 1 — situace:** foto vyprahlé louky (např. z hero fotky Karla). Text: „Letošní sucho udělalo ze sena vzácné a drahé zboží. 🌾" + nálepka s otázkou „Věděli jste, že letos je nejhorší sucho v historii měření?"
 2. **Story 2 — dopad:** foto zvířat. Text: „Karel, Avala, Květa, Pogo, Lucinka… všichni potřebují seno na celou zimu. ~125 balíků. Balík letos stojí min. 800 Kč."
 3. **Story 3 — řešení:** obrázek QR kódu (`web/public/assets/seno-qr.png`). Text: „Namiřte fotoaparát bankovní aplikace 👆 nebo odkaz: nechmerust.org/seno" + link nálepka na /seno.
 4. **Story 4 — díky/sdílení:** „Každá koruna je vidět na transparentním účtu. Sdílejte tuhle story — i to pomáhá. 💚"
@@ -77,7 +77,7 @@ Tip: Stories 1–4 uložit do výběru (highlight) „Seno 2026".
 >
 > Hravý oslík s velkým srdcem, který miluje drbání ve stínu. Karel toho po nás moc nechce — stín, vodu a v zimě pořádnou porci sena. Denně spořádá zhruba 10 kilo; přes celou zimu je to víc než tuna sena. A to je jen jeden obyvatel Louky.
 >
-> Jenže letos je seno vzácné. Sucho zničilo úrodu a balík, který loni stál 500 Kč, letos vyjde na 800 až 1 000 korun.
+> Seno pro Karla a spol. každý rok kupujeme. Jenže letos je po suchu vzácné a balík, který loni stál 500 Kč, vyjde na 800 až 1 000 korun.
 >
 > 800 Kč = jeden balík sena navíc ve stodole.
 >
