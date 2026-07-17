@@ -56,7 +56,7 @@ export function EventCard({ event: e }: { event: Event }) {
       </div>
 
       <p className="mt-4 leading-relaxed text-text">{e.teaser}</p>
-      <EventPhotos photos={e.photos} title={e.title} visibleCount={open ? undefined : 1} />
+      <EventPhotos photos={e.photos} title={e.title} />
 
       <div
         id={detailId}

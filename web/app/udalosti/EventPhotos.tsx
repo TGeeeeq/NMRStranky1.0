@@ -7,17 +7,8 @@ import { X, ChevronLeft, ChevronRight, ZoomIn } from "lucide-react";
 export type EventPhoto = { src: string; alt: string };
 
 /** Dvojice fotek u události: malé náhledy (na telefonu menší, na počítači
- *  větší), po kliknutí se otevřou v lightboxu jako v galerii. `visibleCount`
- *  omezí počet náhledů, lightbox ale vždy listuje všemi fotkami. */
-export function EventPhotos({
-  photos,
-  title,
-  visibleCount,
-}: {
-  photos: EventPhoto[];
-  title: string;
-  visibleCount?: number;
-}) {
+ *  větší), po kliknutí se otevřou v lightboxu jako v galerii. */
+export function EventPhotos({ photos, title }: { photos: EventPhoto[]; title: string }) {
   const [active, setActive] = useState<number | null>(null);
   const touchStart = useRef<{ x: number; y: number } | null>(null);
 
@@ -44,7 +35,7 @@ export function EventPhotos({
   return (
     <>
       <div className="mt-5 flex gap-3">
-        {(visibleCount ? photos.slice(0, visibleCount) : photos).map((p, i) => (
+        {photos.map((p, i) => (
           <button
             key={p.src}
             type="button"

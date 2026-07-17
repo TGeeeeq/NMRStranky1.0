@@ -4,7 +4,7 @@ import { SectionHeader } from "@/components/SectionHeader";
 import { Reveal } from "@/components/Reveal";
 import { PageHero } from "@/components/PageHero";
 import { SocialSection } from "@/components/SocialSection";
-import { SITE, SOCIAL } from "@/lib/site";
+import { SOCIAL } from "@/lib/site";
 import { EventCard, type Event } from "./EventCard";
 import type { EventMapData } from "./EventMap";
 
@@ -17,13 +17,14 @@ export const metadata: Metadata = {
 
 const LOUKADA_MOTTO = "Přijeď makat, louka ti poděkuje.";
 
-/** Sdílená mapka Louky na Mapy.com (stejná jako SITE.mapUrl) — po doplnění
- *  vyznačené trasy do sdílené mapy se změna projeví sama. */
+/** Mapa cesty na Louku (sdíleno z Mapy.com: https://mapy.com/s/larokoloza) —
+ *  body parkování, Louka a vlakové stanice Vlkaneč / Nová Ves u Leštiny. */
 const LOUKA_MAP: EventMapData = {
-  embedUrl: "https://mapy.com/cs/?dim=68de390d420f3247b9569126&frame=1",
-  linkUrl: SITE.mapUrl,
+  embedUrl:
+    "https://mapy.com/cs/letecka?vlastni-body&l=1&ut=parkov%C3%A1n%C3%AD&ut=Louka&ut=Vlkane%C4%8D%20vlak&ut=Nov%C3%A1%20Ves%20u%20Le%C5%A1tiny%20vlak&ut=Louka&uc=9ip0jxW6U1e9w0N5W1jCFBO1f43OljsK&ud=49%C2%B047%2737.969%22N%2C%2015%C2%B023%2750.633%22E&ud=49%C2%B047%2735.536%22N%2C%2015%C2%B023%2728.669%22E&ud=49%C2%B048%2715.566%22N%2C%2015%C2%B024%2716.717%22E&ud=49%C2%B047%272.513%22N%2C%2015%C2%B024%2712.480%22E&ud=49%C2%B047%2750.438%22N%2C%2015%C2%B023%2718.939%22E&x=15.3903545&y=49.7958360&z=16&frame=1",
+  linkUrl: "https://mapy.com/s/larokoloza",
   caption:
-    "Parkování na adrese Nová Ves u Leštiny 32 (vyznačené místo) — odtud vede vyznačená trasa až na Louku.",
+    "Na mapě je vyznačené parkování (Nová Ves u Leštiny 32), vlakové stanice Vlkaneč a Nová Ves u Leštiny a cesta k nám na Louku.",
 };
 
 const kontaktniOdkazy = (
