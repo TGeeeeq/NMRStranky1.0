@@ -6,7 +6,6 @@ import { PageHero } from "@/components/PageHero";
 import { SocialSection } from "@/components/SocialSection";
 import { SOCIAL } from "@/lib/site";
 import { EventCard, type Event } from "./EventCard";
-import type { EventMapData } from "./EventMap";
 
 export const metadata: Metadata = {
   title: "Události",
@@ -16,15 +15,6 @@ export const metadata: Metadata = {
 };
 
 const LOUKADA_MOTTO = "Přijeď makat, louka ti poděkuje.";
-
-/** Mapa cesty na Louku — embed vygenerovaný na Mapy.com („Vložit na web“),
- *  body parkování, Louka a vlakové stanice Vlkaneč / Nová Ves u Leštiny. */
-const LOUKA_MAP: EventMapData = {
-  embedUrl: "https://mapy.com/s/lenusudapu",
-  linkUrl: "https://mapy.com/s/larokoloza",
-  caption:
-    "Na mapě je vyznačené parkování (Nová Ves u Leštiny 32), vlakové stanice Vlkaneč a Nová Ves u Leštiny a cesta k nám na Louku.",
-};
 
 const kontaktniOdkazy = (
   <p>
@@ -97,7 +87,7 @@ const events: Event[] = [
       { src: "/assets/loukada1.webp", alt: "Společná práce na Louce" },
       { src: "/assets/louka9.webp", alt: "S ovečkami na Louce" },
     ],
-    map: LOUKA_MAP,
+    showMap: true,
   },
   {
     title: "Loukáda",
@@ -126,7 +116,7 @@ const events: Event[] = [
       { src: "/assets/louka5.webp", alt: "Setkání s oslem Karlem" },
       { src: "/assets/louka12.webp", alt: "Zvířecí obyvatelé u přístřešku" },
     ],
-    map: LOUKA_MAP,
+    showMap: true,
   },
   {
     title: "Spolu Mezi Lesy",

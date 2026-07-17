@@ -1,10 +1,11 @@
 "use client";
 
 import { useId, useState, type ReactNode } from "react";
+import Link from "next/link";
 import { CalendarDays, ChevronDown, MapPin } from "lucide-react";
 import { cn } from "@/lib/cn";
 import { EventPhotos, type EventPhoto } from "./EventPhotos";
-import { EventMap, type EventMapData } from "./EventMap";
+import { LoukaMap } from "@/components/louka-map/LoukaMap";
 
 export type Event = {
   title: string;
@@ -19,15 +20,15 @@ export type Event = {
   date?: string;
   motto?: string;
   photos: EventPhoto[];
-  map?: EventMapData;
+  showMap?: boolean;
 };
 
 /** Karta události: sbalená ukazuje jen krátkou zmínku a první fotku,
  *  po rozbalení celý popis, všechny fotky, mapu a odkazy. */
 export function EventCard({ event: e }: { event: Event }) {
   const [open, setOpen] = useState(false);
-  // Iframe s mapou se poprvé připojí až při rozbalení a pak už zůstává,
-  // aby se sbalené karty nenačítaly zbytečně a mapa se znovu nenahrávala.
+  // Mapa se poprvé připojí až při rozbalení a pak už zůstává,
+  // aby se sbalené karty nevykreslovaly zbytečně.
   const [mapMounted, setMapMounted] = useState(false);
   const detailId = useId();
 
@@ -70,7 +71,21 @@ export function EventCard({ event: e }: { event: Event }) {
           <div className="mt-5 space-y-4 border-t border-border pt-5 leading-relaxed text-text">
             {e.description}
           </div>
-          {e.map && (mapMounted || open) ? <EventMap map={e.map} title={e.title} /> : null}
+          {e.showMap && (mapMounted || open) ? (
+            <figure className="mt-6">
+              <LoukaMap compact />
+              <figcaption className="mt-2 text-xs text-text-muted">
+                Kreslená mapa okolí — celou i s popisem cesty najdete na{" "}
+                <Link
+                  href="/cesta-na-louku"
+                  className="font-medium text-moss underline underline-offset-2 hover:text-moss-deep"
+                >
+                  stránce Cesta na Louku
+                </Link>
+                .
+              </figcaption>
+            </figure>
+          ) : null}
           {e.href ? (
             <a
               href={e.href}

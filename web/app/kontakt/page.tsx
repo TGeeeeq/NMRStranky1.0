@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Image from "next/image";
+import Link from "next/link";
 import { MapPin, Mail, CalendarClock, Check } from "lucide-react";
 import { Container } from "@/components/Container";
 import { SectionHeader } from "@/components/SectionHeader";
@@ -51,6 +52,12 @@ export default function Kontakt() {
                 >
                   {SITE.address}
                 </a>
+                <Link
+                  href="/cesta-na-louku"
+                  className="mt-2 block text-text-muted hover:text-moss"
+                >
+                  Kreslená mapa cesty na Louku
+                </Link>
               </article>
             </Reveal>
             <Reveal delay={0.06}>

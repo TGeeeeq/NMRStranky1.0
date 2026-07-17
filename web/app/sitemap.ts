@@ -11,6 +11,7 @@ const routes = [
   "/novinky",
   "/zvireci-obyvatele",
   "/udalosti",
+  "/cesta-na-louku",
   "/kontakt",
   "/galerie",
   "/loukarun",
