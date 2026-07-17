@@ -1,11 +1,12 @@
 import type { Metadata } from "next";
-import { CalendarDays, MapPin } from "lucide-react";
 import { Container } from "@/components/Container";
 import { SectionHeader } from "@/components/SectionHeader";
 import { Reveal } from "@/components/Reveal";
 import { PageHero } from "@/components/PageHero";
 import { SocialSection } from "@/components/SocialSection";
-import { EventPhotos, type EventPhoto } from "./EventPhotos";
+import { SITE, SOCIAL } from "@/lib/site";
+import { EventCard, type Event } from "./EventCard";
+import type { EventMapData } from "./EventMap";
 
 export const metadata: Metadata = {
   title: "Události",
@@ -14,19 +15,38 @@ export const metadata: Metadata = {
   alternates: { canonical: "/udalosti" },
 };
 
-type Event = {
-  title: string;
-  badge: string;
-  kind: string;
-  location: string;
-  description: string;
-  href?: string;
-  date?: string;
-  motto?: string;
-  photos: EventPhoto[];
+const LOUKADA_MOTTO = "Přijeď makat, louka ti poděkuje.";
+
+/** Sdílená mapka Louky na Mapy.com (stejná jako SITE.mapUrl) — po doplnění
+ *  vyznačené trasy do sdílené mapy se změna projeví sama. */
+const LOUKA_MAP: EventMapData = {
+  embedUrl: "https://mapy.com/cs/?dim=68de390d420f3247b9569126&frame=1",
+  linkUrl: SITE.mapUrl,
+  caption:
+    "Parkování na adrese Nová Ves u Leštiny 32 (vyznačené místo) — odtud vede vyznačená trasa až na Louku.",
 };
 
-const LOUKADA_MOTTO = "Přijeď makat, louka ti poděkuje.";
+const kontaktniOdkazy = (
+  <p>
+    Kdyby vám nebylo něco jasné, pište nám na Instagram{" "}
+    <a
+      href={SOCIAL.instagram}
+      target="_blank"
+      rel="noopener noreferrer"
+      className="font-medium text-moss underline underline-offset-2 hover:text-moss-deep"
+    >
+      @nech_me_rust
+    </a>{" "}
+    nebo na e-mail{" "}
+    <a
+      href="mailto:nechmerust@gmail.com"
+      className="font-medium text-moss underline underline-offset-2 hover:text-moss-deep"
+    >
+      nechmerust@gmail.com
+    </a>
+    .
+  </p>
+);
 
 const events: Event[] = [
   {
@@ -36,12 +56,48 @@ const events: Event[] = [
     location: "Louka — azyl Nech mě růst",
     date: "21.–23. 8. 2026",
     motto: LOUKADA_MOTTO,
-    description:
-      "Loukáda je náš společný víkend přímo na Louce — čas strávený mezi zvířaty, přírodou a dobrými lidmi. Přijďte poznat každodenní život na azylu, potkat se se zvířecími obyvateli a načerpat klid v souznění s přírodou. Podrobnosti k programu upřesníme.",
+    teaser:
+      "Společný víkend přímo na Louce — práce kolem zvířat, staveb a zahrady, večery u ohně a spaní pod širým nebem.",
+    description: (
+      <>
+        <p>
+          Krásný den, Přátelníci, je to tu! Od 21. do 23. srpna se můžeme sejít na Louce a
+          prožít společný čas v malebném prostředí mezi lesy. U té příležitosti přiložíte
+          ruku k dílu, stanete se součástí Louky a zároveň se můžete přiučit manuální práci
+          kolem zvířat, staveb a zahradničení. Já už se moc těším.
+        </p>
+        <p>
+          Letos je celé léto speciální tím, že na Louku přibude nový lidský člen — naše
+          dcera. Pro mě je to velká věc a těším se, až ji s vámi budu moci posdílet.
+        </p>
+        <p>
+          Na Loukádě bude po celý čas zajištěna rostlinná strava. Pokud budete chtít přivézt
+          něco z vaší kuchyně na společný stůl, budeme určitě rádi.
+        </p>
+        <p>Spaní na Louce ve vlastním stanu, nebo u ohně pod širým nebem.</p>
+        <p>
+          Vezměte si určitě pracovní oblečení a na večer něco teplejšího — večery a noci tu
+          bývají chladné.
+        </p>
+        <p>
+          Kdo pojedete autem, parkujte na adrese Nová Ves u Leštiny 32 na vyznačeném místě.
+          Ti z vás, kdo pojedou vlakem, vystoupí ve stanici Vlkaneč nebo Nová Ves u Leštiny
+          — na adresu parkování dojdete cca 0,5 km pěšky a odtud pokračujte po vyznačené
+          trase až k nám na Louku.
+        </p>
+        {kontaktniOdkazy}
+        <p>
+          Přeji vám všem krásné dny, moc se na vás těším a vidíme se na Louce. Nechme sebe a
+          přírodu růst. — TomLuk
+        </p>
+        <p>P.S. Přijeď makat, Louka ti poděkuje. Nebo aspoň sdílej — i to nám moc pomůže. 🙏</p>
+      </>
+    ),
     photos: [
       { src: "/assets/loukada1.webp", alt: "Společná práce na Louce" },
       { src: "/assets/louka9.webp", alt: "S ovečkami na Louce" },
     ],
+    map: LOUKA_MAP,
   },
   {
     title: "Loukáda",
@@ -50,12 +106,27 @@ const events: Event[] = [
     location: "Louka — azyl Nech mě růst",
     date: "4.–6. 9. 2026",
     motto: LOUKADA_MOTTO,
-    description:
-      "Další zářijový termín naší Loukády — víkendu plného setkání se zvířaty, společné práce i odpočinku přímo na Louce. Srdečně zveme všechny, kdo si chtějí užít čas v přírodě a poznat život na azylu. Podrobnosti k programu upřesníme.",
+    teaser:
+      "Další zářijový termín Loukády — setkání se zvířaty, společná práce i odpočinek přímo na Louce.",
+    description: (
+      <>
+        <p>
+          Další zářijový termín naší Loukády — víkendu plného setkání se zvířaty, společné
+          práce i odpočinku přímo na Louce. Srdečně zveme všechny, kdo si chtějí užít čas
+          v přírodě a poznat život na azylu. Podrobnosti k programu upřesníme.
+        </p>
+        <p>
+          Kdo pojedete autem, parkujte na adrese Nová Ves u Leštiny 32 na vyznačeném místě —
+          odtud vás vyznačená trasa dovede až k nám na Louku. Vlakem to jde do stanice
+          Vlkaneč nebo Nová Ves u Leštiny.
+        </p>
+      </>
+    ),
     photos: [
       { src: "/assets/louka5.webp", alt: "Setkání s oslem Karlem" },
       { src: "/assets/louka12.webp", alt: "Zvířecí obyvatelé u přístřešku" },
     ],
+    map: LOUKA_MAP,
   },
   {
     title: "Spolu Mezi Lesy",
@@ -63,8 +134,15 @@ const events: Event[] = [
     kind: "Festival na Louce",
     location: "Louka — azyl Nech mě růst",
     date: "11.–13. 9. 2026",
-    description:
-      "Třídenní víkend na pomezí retreatu a festivalu přímo na Louce — příroda, zvířata, intuitivní umění, pohyb a živá hudba. Akce se přesunula na nový zářijový termín. Podrobný program a přihlášení najdete na facebookové události.",
+    teaser:
+      "Třídenní víkend na pomezí retreatu a festivalu — příroda, zvířata, intuitivní umění, pohyb a živá hudba.",
+    description: (
+      <p>
+        Třídenní víkend na pomezí retreatu a festivalu přímo na Louce — příroda, zvířata,
+        intuitivní umění, pohyb a živá hudba. Akce se přesunula na nový zářijový termín.
+        Podrobný program a přihlášení najdete na facebookové události.
+      </p>
+    ),
     href: "https://facebook.com/events/s/spolu-mezi-lesy-presunuto-na-z/2298157060995232/",
     photos: [
       { src: "/assets/mezilesy.jpg", alt: "Plakát festivalu Spolu Mezi Lesy" },
@@ -77,8 +155,15 @@ const events: Event[] = [
     kind: "Procházka se zvířaty",
     location: "Louka — azyl Nech mě růst",
     date: "26.–27. 9. 2026",
-    description:
-      "Vydejte se s námi na společnou procházku ve společnosti našich zvířecích přátel. Užijeme si čas v přírodě, mazlení se zvířaty i příjemnou atmosféru mezi dobrými lidmi. Sraz a podrobnosti upřesníme.",
+    teaser:
+      "Procházka ve společnosti našich zvířecích přátel — čas v přírodě, mazlení a příjemná atmosféra.",
+    description: (
+      <p>
+        Vydejte se s námi na společnou procházku ve společnosti našich zvířecích přátel.
+        Užijeme si čas v přírodě, mazlení se zvířaty i příjemnou atmosféru mezi dobrými
+        lidmi. Sraz a podrobnosti upřesníme.
+      </p>
+    ),
     photos: [
       { src: "/assets/walk1.webp", alt: "Procházka se zvířaty podzimní krajinou" },
       { src: "/assets/walk2.webp", alt: "Se zvířecími přáteli na lesní cestě" },
@@ -89,8 +174,14 @@ const events: Event[] = [
     badge: "Termín upřesníme",
     kind: "Dvoudenní putování",
     location: "Střední Čechy",
-    description:
-      "Dvoudenní putování středočeskou krajinou ve společnosti psů, osla, muflona a dalších zvířecích přátel. Termín bude upřesněn.",
+    teaser:
+      "Dvoudenní putování středočeskou krajinou se psy, oslem, muflonem a dalšími zvířecími přáteli.",
+    description: (
+      <p>
+        Dvoudenní putování středočeskou krajinou ve společnosti psů, osla, muflona a
+        dalších zvířecích přátel. Termín bude upřesněn.
+      </p>
+    ),
     href: "https://www.facebook.com/share/1BDFbAxfFf/",
     photos: [
       { src: "/assets/toulky1.webp", alt: "Putování s ovečkami a dalšími zvířaty" },
@@ -124,41 +215,7 @@ export default function Udalosti() {
           <div className="space-y-6">
             {events.map((e, i) => (
               <Reveal key={`${e.title}-${e.date ?? i}`} delay={i * 0.06}>
-                <article className="rounded-lg border border-border bg-surface p-7 shadow-soft sm:p-8">
-                  <div className="flex flex-wrap items-center gap-3">
-                    <span className="rounded-pill bg-accent/40 px-3 py-1 text-xs font-semibold text-moss-deep">
-                      {e.badge}
-                    </span>
-                    <span className="text-sm font-medium text-moss-soft">{e.kind}</span>
-                  </div>
-                  <h2 className="mt-3 font-serif text-2xl font-semibold text-moss-deep">{e.title}</h2>
-                  {e.motto ? (
-                    <p className="mt-1.5 inline-flex items-baseline gap-2 font-serif text-lg italic leading-snug text-terracotta">
-                      <span aria-hidden className="h-px w-6 self-center bg-terracotta/50" />
-                      „{e.motto}“
-                    </p>
-                  ) : null}
-                  <div className="mt-3 flex flex-wrap gap-x-6 gap-y-1.5 text-sm text-text-muted">
-                    <span className="inline-flex items-center gap-1.5">
-                      <CalendarDays size={16} aria-hidden /> {e.date ?? "Termín bude upřesněn"}
-                    </span>
-                    <span className="inline-flex items-center gap-1.5">
-                      <MapPin size={16} aria-hidden /> {e.location}
-                    </span>
-                  </div>
-                  <p className="mt-4 leading-relaxed text-text">{e.description}</p>
-                  <EventPhotos photos={e.photos} title={e.title} />
-                  {e.href ? (
-                    <a
-                      href={e.href}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="mt-6 inline-flex items-center rounded-pill bg-moss px-5 py-2.5 text-sm font-medium text-cream transition-colors hover:bg-moss-deep"
-                    >
-                      Facebook událost
-                    </a>
-                  ) : null}
-                </article>
+                <EventCard event={e} />
               </Reveal>
             ))}
           </div>

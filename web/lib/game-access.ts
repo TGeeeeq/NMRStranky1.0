@@ -1,5 +1,4 @@
 import { sealData, unsealData } from "iron-session";
-import { randomBytes } from "crypto";
 
 // Přístup ke hře Louka Run: podepsaná cookie vydaná po uplatnění pozvánkového kódu.
 // Bez next/headers a "server-only", aby unseal fungoval i v middleware (edge runtime).
@@ -34,7 +33,8 @@ export async function unsealGameAccess(seal: string): Promise<GameAccessData | n
 const CODE_ALPHABET = "ABCDEFGHJKMNPQRSTUVWXYZ23456789";
 
 export function generateInviteCode(): string {
-  const bytes = randomBytes(8);
+  // Web Crypto místo node "crypto" — modul se přes middleware dostává do edge runtime.
+  const bytes = crypto.getRandomValues(new Uint8Array(8));
   const chars = Array.from(bytes, (b) => CODE_ALPHABET[b % CODE_ALPHABET.length]);
   return `LOUKA-${chars.slice(0, 4).join("")}-${chars.slice(4).join("")}`;
 }
