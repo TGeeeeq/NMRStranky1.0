@@ -14,6 +14,12 @@ const nextConfig: NextConfig = {
     root: path.join(__dirname),
   },
 
+  // Referenční plakáty pro generátor pozvánek se čtou přes fs ze server action
+  // na stránce /pozvanky — bez explicitního trace by je Vercel do funkce nezabalil.
+  outputFileTracingIncludes: {
+    "/pozvanky": ["./data/pozvanky/**/*"],
+  },
+
   // Default deviceSizes go up to 3840, so retina desktops pull a ~640 kB hero
   // variant. 2048px upscaled is indistinguishable under the hero overlays and
   // roughly halves the LCP payload on those screens.

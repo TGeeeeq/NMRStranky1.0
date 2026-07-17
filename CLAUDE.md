@@ -59,9 +59,14 @@ Everything is under `web/`. Run all commands from there.
 ### Studio
 - `app/studio/` is an internal tool for generating Instagram-carousel slides (client-side canvas + `html-to-image`/`jszip` export). Components in `components/studio/`.
 
+### Pozvánky (event-invitation generator)
+- `app/pozvanky/` is a hidden, **admin-gated** (`requireAdmin()`) tool that generates Instagram event invitations: an AI-generated illustrated background (Google Gemini image model, called server-side from `app/pozvanky/actions.ts`) + Czech text overlaid client-side (`components/pozvanky/invite-canvas.tsx`, inline styles for faithful `html-to-image` export). Exports PNG in 1080×1350 (post) and 1080×1920 (story/reels).
+- Style consistency comes from two reference posters committed at `data/pozvanky/*.jpg`, sent to Gemini with a fixed English style prompt; the Czech event theme is appended. Generated images must contain **no text** — all typography is the overlay's job (Czech diacritics stay correct).
+- `next.config.ts` has `outputFileTracingIncludes` for `/pozvanky` so the reference JPEGs are bundled into the Vercel function.
+
 ### Config & secrets
 - All env access goes through `lib/env.ts` (`req()` throws if a required var is missing; `opt()` has fallbacks). Don't read `process.env` directly elsewhere.
-- Required: `DATABASE_URL`, `SESSION_SECRET`. Optional/with-fallbacks: `SMTP_*`, `BANK_*`, `ORDER_PREFIX`, `ADMIN_NOTIFICATION_EMAIL`. `NETLIFY_SITE_ID` + `NETLIFY_AUTH_TOKEN` are **required in production (Vercel)** — without them `lib/storage.ts` can't reach Netlify Blobs and product images break; on the old Netlify hosting they were implicit.
+- Required: `DATABASE_URL`, `SESSION_SECRET`. Optional/with-fallbacks: `SMTP_*`, `BANK_*`, `ORDER_PREFIX`, `ADMIN_NOTIFICATION_EMAIL`, `GEMINI_API_KEY` + `GEMINI_IMAGE_MODEL` (needed only by the `/pozvanky` generator; key from Google AI Studio, model defaults to `gemini-2.5-flash-image`). `NETLIFY_SITE_ID` + `NETLIFY_AUTH_TOKEN` are **required in production (Vercel)** — without them `lib/storage.ts` can't reach Netlify Blobs and product images break; on the old Netlify hosting they were implicit.
 - Secrets live in `web/.env.local` (gitignored). Never print, log, or commit them. `lib/db/`, `lib/auth.ts`, `lib/env.ts`, `lib/storage.ts` are all `import "server-only"` — keep secret-touching code server-side.
 
 ## Database
