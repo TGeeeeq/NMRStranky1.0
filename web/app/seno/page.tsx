@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { redirect } from "next/navigation";
 import { Landmark, HeartHandshake, Share2, Gamepad2 } from "lucide-react";
 import { Container } from "@/components/Container";
 import { PageHero } from "@/components/PageHero";
@@ -13,11 +14,16 @@ import { SupportCard, type SupportWay } from "./SupportCard";
 import { SenoKarelProvider } from "./karel/SenoKarelProvider";
 import { KarelSwap } from "./karel/KarelSwap";
 
+/** Stránka je dočasně stažená z produkce — texty sbírky se budou překopávat.
+ *  Až bude nová verze hotová, smaž `redirect("/")` v komponentě níže a vrať
+ *  odkazy: CampaignBanner v app/layout.tsx, patička, karta na
+ *  /jak-se-zapojit a /seno v app/sitemap.ts. */
 export const metadata: Metadata = {
   title: "Seno pro Louku",
   description:
     "Seno je letos kvůli extrémnímu suchu vzácné a drahé. Pomozte nám vybrat 100 000 Kč na zimní zásobu pro zvířata z Louky — každých 800 Kč je jeden balík.",
   alternates: { canonical: "/seno" },
+  robots: { index: false, follow: false },
   openGraph: {
     images: ["/assets/karel.webp"],
   },
@@ -62,6 +68,7 @@ const otherWays: SupportWay[] = [
 ];
 
 export default function Seno() {
+  redirect("/");
   return (
     <SenoKarelProvider>
       <KarelSwap id="hero">

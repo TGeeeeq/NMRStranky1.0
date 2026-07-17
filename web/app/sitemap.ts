@@ -5,7 +5,6 @@ const BASE = "https://nechmerust.org";
 
 const routes = [
   "",
-  "/seno",
   "/o-nas",
   "/vyrocni-zprava-2025",
   "/jak-se-zapojit",
@@ -29,9 +28,8 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const staticEntries: MetadataRoute.Sitemap = routes.map((path) => ({
     url: `${BASE}${path}`,
     lastModified: now,
-    changeFrequency:
-      path === "" || path === "/novinky" || path === "/seno" ? "weekly" : "monthly",
-    priority: path === "" ? 1 : path === "/seno" ? 0.9 : 0.7,
+    changeFrequency: path === "" || path === "/novinky" ? "weekly" : "monthly",
+    priority: path === "" ? 1 : 0.7,
   }));
 
   let productEntries: MetadataRoute.Sitemap = [];
