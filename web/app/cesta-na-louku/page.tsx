@@ -41,24 +41,19 @@ export default function CestaNaLouku() {
           <Reveal delay={0.12}>
             <div className="mt-10 space-y-4 leading-relaxed text-text">
               <p>
-                Autem: parkujte na adrese Nová Ves u Leštiny 32 na vyznačeném místě. Odtud vás
-                vyznačená trasa dovede pěšky až na Louku.
+                <strong>Autem:</strong> zaparkujte na vyznačeném parkovišti u trati (najdete tam
+                i baráček našeho hodného souseda Milana). Odtud už je to pěšky kousek dolů na
+                Louku — trasu vám ukáže mapa výše.
               </p>
               <p>
-                Vlakem: vystupte ve stanici Vlkaneč, nebo Nová Ves u Leštiny. Na adresu parkování
-                dojdete cca 0,5 km a dál pokračujete po vyznačené trase.
+                <strong>Vlakem:</strong> vystupte ve stanici Vlkaneč, nebo Nová Ves u Leštiny.
+                Z Nové Vsi můžete jít buď po silnici, nebo luční cestou podél trati; z Vlkanče
+                vede cesta polem kolem třešňové aleje. Na mapě si klikněte, odkud přijdete, a
+                pěší trasa se vám vyznačí.
               </p>
               <p>
-                Pro navigaci v telefonu poslouží{" "}
-                <a
-                  href="https://mapy.com/s/larokoloza"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="font-medium text-moss underline underline-offset-2 hover:text-moss-deep"
-                >
-                  mapa na Mapy.com
-                </a>
-                .
+                Pro navigaci v telefonu použijte tlačítko <em>„Otevřít v Mapy.cz“</em> přímo
+                v mapě výše.
               </p>
             </div>
           </Reveal>
