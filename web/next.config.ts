@@ -47,6 +47,16 @@ const nextConfig: NextConfig = {
       { source: "/mezilesy", destination: "/o-nas", permanent: true },
       { source: "/mezilesy.html", destination: "/o-nas", permanent: true },
 
+      // Přejmenovaná stránka: starý anglický slug GDPR → /gdpr.
+      // Musí být před obecným /:slug.html, jinak by catch-all vedl na
+      // neexistující /gdpr-privacy-policy (404 v Search Console).
+      { source: "/gdpr-privacy-policy.html", destination: "/gdpr", permanent: true },
+      { source: "/gdpr-privacy-policy", destination: "/gdpr", permanent: true },
+
+      // Zaniklý PHP endpoint původního webu. Bez explicitního pravidla by ho
+      // /:slug.php svedl na neexistující /nechmerust_api (404 → v GSC „4xx").
+      { source: "/nechmerust_api.php", destination: "/", permanent: true },
+
       // Obchod – změněná struktura URL
       { source: "/obchod/index.html", destination: "/obchod", permanent: true },
       { source: "/obchod/checkout", destination: "/obchod/pokladna", permanent: true },
