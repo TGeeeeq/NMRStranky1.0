@@ -8,6 +8,10 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 If a task/harness forces work onto a `claude/*` (or any non-`main`) branch, treat that branch as throwaway: when the work is done, fast-forward/merge it into `main`, push `main`, and **delete the feature branch both locally and on the remote**. The end state must always be: only `main` exists, and it holds the newest version of everything.
 
+## Šetrný mód (saving credits)
+
+When the user says they're saving credits ("šetříme", "šetrný/šetřivej mód", "levně"), follow the `setrny-mod` skill (`.claude/skills/setrny-mod/SKILL.md`): the main model only researches and writes a complete, foolproof task spec, a single cheapest agent (Haiku) implements it, and verification is minimal (diff + `tsc --noEmit`, no lint/tests/build unless asked). Skip delegation only when the change is smaller than the spec itself.
+
 ## What this repo is
 
 Website for **Nech mě růst z.s.**, a Czech non-profit (nechmerust.org) — an animal sanctuary ("the Louka"). It includes public marketing pages, an e-shop, an admin panel, and an Instagram-carousel "studio" tool.
