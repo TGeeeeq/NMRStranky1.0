@@ -144,7 +144,7 @@ const events: Event[] = [
     badge: "Novinka",
     kind: "Procházka se zvířaty",
     location: "Louka — azyl Nech mě růst",
-    date: "26.–27. 9. 2026",
+    date: "26.9. 2026",
     teaser:
       "Procházka ve společnosti našich zvířecích přátel — čas v přírodě, mazlení a příjemná atmosféra.",
     description: (
