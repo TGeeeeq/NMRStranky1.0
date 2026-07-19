@@ -11,7 +11,7 @@ import {
   type ReactNode,
 } from "react";
 import Image from "next/image";
-import { ExternalLink, Minus, Plus, RotateCcw, X } from "lucide-react";
+import { ExternalLink, Maximize2, Minimize2, Minus, Plus, RotateCcw, X } from "lucide-react";
 import { cn } from "@/lib/cn";
 import { SITE } from "@/lib/site";
 import {
@@ -71,6 +71,7 @@ export function LoukaMap({ compact = false }: { compact?: boolean }) {
   const [routeId, setRouteId] = useState<RouteId | null>(null);
   const [activePoi, setActivePoi] = useState<PoiId | null>(null);
   const [detailOpen, setDetailOpen] = useState(false);
+  const [fullscreen, setFullscreen] = useState(false);
 
   const activeRoute = routes.find((r) => r.id === routeId) ?? null;
   const poiInfo = pois.find((p) => p.id === activePoi) ?? null;
@@ -105,6 +106,11 @@ export function LoukaMap({ compact = false }: { compact?: boolean }) {
   );
 
   const reset = useCallback(() => setT({ scale: 1, tx: 0, ty: 0 }), []);
+
+  const toggleFullscreen = useCallback(() => {
+    setFullscreen((f) => !f);
+    setT({ scale: 1, tx: 0, ty: 0 });
+  }, []);
 
   const zoomButton = useCallback(
     (factor: number) => {
@@ -239,6 +245,21 @@ export function LoukaMap({ compact = false }: { compact?: boolean }) {
     return () => window.removeEventListener("keydown", onKey);
   }, [detailOpen]);
 
+  // Fullscreen: zámek scrollu + zavření klávesou Esc.
+  useEffect(() => {
+    if (!fullscreen) return;
+    const prev = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") toggleFullscreen();
+    };
+    window.addEventListener("keydown", onKey);
+    return () => {
+      document.body.style.overflow = prev;
+      window.removeEventListener("keydown", onKey);
+    };
+  }, [fullscreen, toggleFullscreen]);
+
   // Konstantní velikost markerů/čar bez ohledu na zoom.
   const k = 1 / t.scale;
 
@@ -247,17 +268,47 @@ export function LoukaMap({ compact = false }: { compact?: boolean }) {
     return [routeId];
   }, [routeId]);
 
+  // Obsah informačního panelu (pod mapou i v overlay na celé obrazovce).
+  const infoContent = poiInfo?.note ? (
+    <div
+      className={cn(
+        "rounded-lg border border-terracotta/40 bg-accent/20 px-4 py-3",
+        compact ? "text-xs" : "text-sm",
+      )}
+    >
+      <p className="font-serif font-semibold text-terracotta">{poiInfo.label}</p>
+      <p className="mt-0.5 text-text">{poiInfo.description ?? poiInfo.note}</p>
+    </div>
+  ) : activeRoute ? (
+    <p className={cn("text-text", compact ? "text-xs" : "text-sm")}>
+      <span className="font-medium text-moss-deep">{activeRoute.label}:</span>{" "}
+      ≈ {activeRoute.km} km pěšky (zhruba {walkingTimeMinutes(activeRoute.km)} min) — trasa
+      je vyznačená terakotově a animovaně.
+    </p>
+  ) : (
+    <p className={cn("italic text-text-muted", compact ? "text-xs" : "text-sm")}>
+      Kudy k nám přijedete? Klikněte na bod v mapě nebo na tlačítko níže. Mapu lze
+      přiblížit, posouvat i zobrazit na celou obrazovku.
+    </p>
+  );
+
   return (
     <div>
       <div
         className={cn(
-          "relative overflow-hidden rounded-lg border border-border bg-[#f3ecda] shadow-soft",
+          "relative overflow-hidden border-border bg-[#f3ecda]",
+          fullscreen
+            ? "fixed inset-0 z-[70] rounded-none"
+            : "rounded-lg border shadow-soft",
         )}
       >
         {/* Výřez se zoomem */}
         <div
           ref={viewportRef}
-          className="relative aspect-square w-full cursor-grab touch-none select-none active:cursor-grabbing"
+          className={cn(
+            "relative w-full cursor-grab touch-none select-none active:cursor-grabbing",
+            fullscreen ? "h-full" : "aspect-square",
+          )}
           onPointerDown={onPointerDown}
           onPointerMove={onPointerMove}
           onPointerUp={endPointer}
@@ -272,23 +323,24 @@ export function LoukaMap({ compact = false }: { compact?: boolean }) {
               transform: `translate(${t.tx}px, ${t.ty}px) scale(${t.scale})`,
             }}
           >
-            {/* Podkladová kreslená mapa */}
-            <Image
-              src={IMG.src}
-              alt="Kreslená mapa okolí Louky u Nové Vsi u Leštiny"
-              fill
-              sizes="(min-width: 768px) 720px, 100vw"
-              className="pointer-events-none object-cover"
-              priority={!compact}
-              draggable={false}
-            />
+            <div className="relative mx-auto aspect-square h-full max-w-full">
+              {/* Podkladová kreslená mapa */}
+              <Image
+                src={IMG.src}
+                alt="Kreslená mapa okolí Louky u Nové Vsi u Leštiny"
+                fill
+                sizes="(min-width: 768px) 720px, 100vw"
+                className="pointer-events-none object-contain"
+                priority={!compact}
+                draggable={false}
+              />
 
-            {/* Interaktivní vrstva */}
-            <svg
-              viewBox={`0 0 ${IMG.w} ${IMG.h}`}
-              className="absolute inset-0 h-full w-full"
-              style={{ pointerEvents: "none" }}
-            >
+              {/* Interaktivní vrstva */}
+              <svg
+                viewBox={`0 0 ${IMG.w} ${IMG.h}`}
+                className="absolute inset-0 h-full w-full"
+                style={{ pointerEvents: "none" }}
+              >
               {/* Trasy */}
               {routes.map((r) => {
                 const isActive = shownRouteIds.includes(r.id);
@@ -326,6 +378,7 @@ export function LoukaMap({ compact = false }: { compact?: boolean }) {
                 return (
                   <g
                     key={p.id}
+                    className="lm-spot"
                     transform={`translate(${p.at[0]},${p.at[1]}) scale(${k})`}
                     style={{ pointerEvents: "auto", cursor: "pointer" }}
                     onClick={() => clickPoi(p.id)}
@@ -397,19 +450,21 @@ export function LoukaMap({ compact = false }: { compact?: boolean }) {
                       </g>
                     )}
                     {/* Popisek pod bodem */}
-                    <text
-                      y={p.kind === "louka" ? 40 : 30}
-                      textAnchor="middle"
-                      fontFamily="var(--font-serif), serif"
-                      fontStyle="italic"
-                      fontSize={p.kind === "louka" ? 17 : 13}
-                      fill={p.kind === "louka" ? "#b3472a" : "#2a3530"}
-                      paintOrder="stroke"
-                      stroke="#f7f2e7"
-                      strokeWidth={4}
-                    >
-                      {p.label}
-                    </text>
+                    <g className={cn("lm-label", isActive && "lm-label-active")}>
+                      <text
+                        y={p.kind === "louka" ? 46 : 34}
+                        textAnchor="middle"
+                        fontFamily="var(--font-serif), serif"
+                        fontStyle="italic"
+                        fontSize={p.kind === "louka" ? 23 : 17}
+                        fill={p.kind === "louka" ? "#b3472a" : "#2a3530"}
+                        paintOrder="stroke"
+                        stroke="#f7f2e7"
+                        strokeWidth={4}
+                      >
+                        {p.label}
+                      </text>
+                    </g>
                   </g>
                 );
               })}
@@ -423,6 +478,7 @@ export function LoukaMap({ compact = false }: { compact?: boolean }) {
                 return (
                   <g
                     key={s.id}
+                    className="lm-spot"
                     transform={`translate(${s.at[0]},${s.at[1]}) scale(${k})`}
                     style={{ pointerEvents: "auto", cursor: "pointer" }}
                     onClick={() => selectStart(s.id)}
@@ -464,28 +520,37 @@ export function LoukaMap({ compact = false }: { compact?: boolean }) {
                         <line x1={-5.5} y1={-10.5} x2={5.5} y2={-10.5} stroke="#2a3530" strokeWidth={1.8} />
                       </g>
                     )}
-                    <text
-                      y={32}
-                      textAnchor="middle"
-                      fontFamily="var(--font-serif), serif"
-                      fontStyle="italic"
-                      fontSize={13}
-                      fill="#2a3530"
-                      paintOrder="stroke"
-                      stroke="#f7f2e7"
-                      strokeWidth={4}
-                    >
-                      {s.label}
-                    </text>
+                    <g className={cn("lm-label", selected && "lm-label-active")}>
+                      <text
+                        y={36}
+                        textAnchor="middle"
+                        fontFamily="var(--font-serif), serif"
+                        fontStyle="italic"
+                        fontSize={17}
+                        fill="#2a3530"
+                        paintOrder="stroke"
+                        stroke="#f7f2e7"
+                        strokeWidth={4}
+                      >
+                        {s.label}
+                      </text>
+                    </g>
                   </g>
                 );
               })}
-            </svg>
+              </svg>
+            </div>
           </div>
         </div>
 
         {/* Ovládání zoomu */}
         <div className="absolute right-3 top-3 flex flex-col gap-1.5">
+          <ZoomBtn
+            label={fullscreen ? "Ukončit celou obrazovku" : "Celá obrazovka"}
+            onClick={toggleFullscreen}
+          >
+            {fullscreen ? <Minimize2 size={17} aria-hidden /> : <Maximize2 size={17} aria-hidden />}
+          </ZoomBtn>
           <ZoomBtn label="Přiblížit" onClick={() => zoomButton(1.4)}>
             <Plus size={18} aria-hidden />
           </ZoomBtn>
@@ -496,25 +561,16 @@ export function LoukaMap({ compact = false }: { compact?: boolean }) {
             <RotateCcw size={16} aria-hidden />
           </ZoomBtn>
         </div>
+
+        {fullscreen ? (
+          <div className="absolute inset-x-0 bottom-0 border-t border-border bg-surface/90 p-3 backdrop-blur">
+            {infoContent}
+          </div>
+        ) : null}
       </div>
 
       {/* Informační řádek / vybraná trasa / vybraný bod */}
-      <div className="mt-3 min-h-[1.5rem]">
-        {poiInfo?.note ? (
-          <p className={cn("text-text", compact ? "text-xs" : "text-sm")}>{poiInfo.note}</p>
-        ) : activeRoute ? (
-          <p className={cn("text-text", compact ? "text-xs" : "text-sm")}>
-            <span className="font-medium text-moss-deep">{activeRoute.label}:</span>{" "}
-            ≈ {activeRoute.km} km pěšky (zhruba {walkingTimeMinutes(activeRoute.km)} min) — trasa
-            je vyznačená terakotově a animovaně.
-          </p>
-        ) : (
-          <p className={cn("italic text-text-muted", compact ? "text-xs" : "text-sm")}>
-            Kudy k nám přijedete? Klikněte na bod v mapě nebo na tlačítko níže. Mapu lze
-            přiblížit a posouvat.
-          </p>
-        )}
-      </div>
+      <div className="mt-3 min-h-[1.5rem]">{infoContent}</div>
 
       {/* Výběr trasy */}
       <div className="mt-3 flex flex-wrap gap-2">
@@ -577,6 +633,11 @@ export function LoukaMap({ compact = false }: { compact?: boolean }) {
               <X size={18} aria-hidden />
             </button>
             <h3 className="font-serif text-2xl font-semibold text-moss-deep">Louka — detail</h3>
+            <p className="mt-2 text-sm text-text">
+              Louka je domovem zvířat zachráněných spolkem Nech mě růst — najdete tu výběhy,
+              pastviny, sad i zázemí spolku. Detailní kreslenou mapu míst na Louce právě
+              připravujeme.
+            </p>
             {loukaDetail.src ? (
               // eslint-disable-next-line @next/next/no-img-element
               <img
@@ -601,8 +662,14 @@ export function LoukaMap({ compact = false }: { compact?: boolean }) {
         .lm-route { animation: lm-march 1.4s linear infinite; }
         .lm-pulse { animation: lm-pulse 2.2s ease-in-out infinite; transform-box: fill-box; transform-origin: center; }
         @keyframes lm-pulse { 0%,100% { opacity: 1; } 50% { opacity: 0.7; } }
+        .lm-label { transform-box: fill-box; transform-origin: center; transition: transform 0.18s ease; }
+        .lm-label-active { transform: scale(1.35); }
+        @media (hover: hover) {
+          .lm-spot:hover .lm-label { transform: scale(1.35); }
+        }
         @media (prefers-reduced-motion: reduce) {
           .lm-route, .lm-pulse { animation: none; }
+          .lm-label { transition: none; }
         }
       `}</style>
     </div>

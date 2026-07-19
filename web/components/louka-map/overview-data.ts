@@ -154,6 +154,8 @@ export const pois: {
   kind: "louka" | "house" | "alley";
   /** Popisek, který se ukáže po kliknutí (mimo Louky, ta otevírá detail). */
   note?: string;
+  /** Delší popis zobrazený v panelu pod mapou po rozkliknutí bodu. */
+  description?: string;
 }[] = [
   {
     id: "louka",
@@ -168,6 +170,7 @@ export const pois: {
     label: "Náš hodný soused",
     kind: "house",
     note: "Baráček u parkoviště — bydlí tu náš hodný soused Milan.",
+    description: "Baráček hned u parkoviště, kde bydlí náš hodný soused Milan. Pokud cestou zabloudíte, rád vám ukáže, kudy dolů na Louku.",
   },
   {
     id: "alej-tresne",
@@ -175,6 +178,7 @@ export const pois: {
     label: "Třešňová alej",
     kind: "alley",
     note: "Třešňová alej — podél cesty od Vlkanče.",
+    description: "Třešňová alej lemuje polní cestu od vlakové stanice Vlkaneč. Na jaře krásně kvete a v létě se cestou dolů můžete občerstvit třešněmi.",
   },
   {
     id: "alej-svestka",
@@ -182,6 +186,7 @@ export const pois: {
     label: "Švestkovo-jablečná alej",
     kind: "alley",
     note: "Švestkovo-jablečná alej — východně u trati.",
+    description: "Švestkovo-jablečná alej roste východně podél trati směrem na Novou Ves. Na podzim tu dozrávají švestky i jablka — klidně ochutnejte.",
   },
 ];
 
