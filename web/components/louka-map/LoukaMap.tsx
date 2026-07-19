@@ -3,7 +3,6 @@
 import {
   useCallback,
   useEffect,
-  useMemo,
   useRef,
   useState,
   type MouseEvent as ReactMouseEvent,
@@ -27,6 +26,15 @@ import {
 
 const MIN_SCALE = 1;
 const MAX_SCALE = 4.5;
+
+/** Barvy tras — luční varianta z Nové Vsi má vlastní barvu, aby byly obě
+ *  varianty vidět najednou. */
+const ROUTE_COLORS: Record<RouteId, string> = {
+  parking: "#b3472a",
+  vlkanec: "#b3472a",
+  "novaves-silnice": "#b3472a",
+  "novaves-luka": "#4a6b34",
+};
 
 /** Catmull-Rom → plynulá bezierová křivka (hezčí než lomená čára). */
 function smoothPath(points: XY[]): string {
@@ -68,12 +76,13 @@ type Transform = { scale: number; tx: number; ty: number };
 export function LoukaMap({ compact = false }: { compact?: boolean }) {
   const viewportRef = useRef<HTMLDivElement>(null);
   const [t, setT] = useState<Transform>({ scale: 1, tx: 0, ty: 0 });
-  const [routeId, setRouteId] = useState<RouteId | null>(null);
+  const [routeIds, setRouteIds] = useState<RouteId[]>([]);
   const [activePoi, setActivePoi] = useState<PoiId | null>(null);
   const [detailOpen, setDetailOpen] = useState(false);
   const [fullscreen, setFullscreen] = useState(false);
 
-  const activeRoute = routes.find((r) => r.id === routeId) ?? null;
+  const shownRoutes = routes.filter((r) => routeIds.includes(r.id));
+  const activeRoute = shownRoutes.length === 1 ? shownRoutes[0] : null;
   const poiInfo = pois.find((p) => p.id === activePoi) ?? null;
 
   // --- Zoom / pan ------------------------------------------------------------
@@ -214,15 +223,17 @@ export function LoukaMap({ compact = false }: { compact?: boolean }) {
 
   // --- Interakce s body ------------------------------------------------------
 
-  /** Klik na start: parkoviště/Vlkaneč vyberou trasu; Nová Ves přepíná
-   *  mezi svými dvěma variantami. */
+  /** Klik na start: parkoviště/Vlkaneč vyberou trasu; Nová Ves ukáže
+   *  obě své varianty najednou. */
   const selectStart = (id: string) => {
     if (id === "novaves") {
-      setRouteId((cur) =>
-        cur === "novaves-silnice" ? "novaves-luka" : "novaves-silnice",
+      setRouteIds((cur) =>
+        cur.includes("novaves-silnice") || cur.includes("novaves-luka")
+          ? []
+          : ["novaves-silnice", "novaves-luka"],
       );
     } else {
-      setRouteId((cur) => (cur === id ? null : (id as RouteId)));
+      setRouteIds((cur) => (cur.length === 1 && cur[0] === id ? [] : [id as RouteId]));
     }
     setActivePoi(null);
   };
@@ -263,10 +274,7 @@ export function LoukaMap({ compact = false }: { compact?: boolean }) {
   // Konstantní velikost markerů/čar bez ohledu na zoom.
   const k = 1 / t.scale;
 
-  const shownRouteIds = useMemo(() => {
-    if (!routeId) return [];
-    return [routeId];
-  }, [routeId]);
+  const shownRouteIds = routeIds;
 
   // Obsah informačního panelu (pod mapou i v overlay na celé obrazovce).
   const infoContent = poiInfo?.note ? (
@@ -279,11 +287,40 @@ export function LoukaMap({ compact = false }: { compact?: boolean }) {
       <p className="font-serif font-semibold text-terracotta">{poiInfo.label}</p>
       <p className="mt-0.5 text-text">{poiInfo.description ?? poiInfo.note}</p>
     </div>
+  ) : shownRoutes.length > 1 ? (
+    <div
+      className={cn(
+        "rounded-lg border border-terracotta/40 bg-accent/20 px-4 py-3",
+        compact ? "text-xs" : "text-sm",
+      )}
+    >
+      <p className="font-medium text-moss-deep">
+        Z Nové Vsi u Leštiny vedou dvě trasy — obě jsou vyznačené v mapě:
+      </p>
+      <div className="mt-2 flex flex-wrap gap-2">
+        {shownRoutes.map((r) => (
+          <button
+            key={r.id}
+            type="button"
+            onClick={() => setRouteIds([r.id])}
+            className="inline-flex items-center gap-2 rounded-pill border border-border bg-surface-alt px-3 py-1.5 font-medium text-moss-deep transition-colors hover:bg-sand/60"
+          >
+            <span
+              aria-hidden
+              className="h-2.5 w-2.5 shrink-0 rounded-full"
+              style={{ backgroundColor: ROUTE_COLORS[r.id] }}
+            />
+            {r.label} — ≈ {r.km} km ({walkingTimeMinutes(r.km)} min)
+          </button>
+        ))}
+      </div>
+      <p className="mt-1.5 italic text-text-muted">Klepnutím na trasu vyberete jen jednu.</p>
+    </div>
   ) : activeRoute ? (
     <p className={cn("text-text", compact ? "text-xs" : "text-sm")}>
       <span className="font-medium text-moss-deep">{activeRoute.label}:</span>{" "}
       ≈ {activeRoute.km} km pěšky (zhruba {walkingTimeMinutes(activeRoute.km)} min) — trasa
-      je vyznačená terakotově a animovaně.
+      je v mapě vyznačená animovanou čárkovanou čarou.
     </p>
   ) : (
     <p className={cn("italic text-text-muted", compact ? "text-xs" : "text-sm")}>
@@ -344,7 +381,7 @@ export function LoukaMap({ compact = false }: { compact?: boolean }) {
               {/* Trasy */}
               {routes.map((r) => {
                 const isActive = shownRouteIds.includes(r.id);
-                if (routeId && !isActive) return null;
+                if (shownRouteIds.length > 0 && !isActive) return null;
                 return (
                   <g key={r.id}>
                     {/* Světlá „aura" pod trasou */}
@@ -361,7 +398,7 @@ export function LoukaMap({ compact = false }: { compact?: boolean }) {
                     <path
                       d={smoothPath(r.points)}
                       fill="none"
-                      stroke="#b3472a"
+                      stroke={ROUTE_COLORS[r.id]}
                       strokeWidth={4.5 * k}
                       strokeDasharray={`${13 * k} ${9 * k}`}
                       strokeLinecap="round"
@@ -471,10 +508,7 @@ export function LoukaMap({ compact = false }: { compact?: boolean }) {
 
               {/* Startovní body (parkoviště, vlaky) */}
               {starts.map((s) => {
-                const selected =
-                  activeRoute?.from === s.id ||
-                  (s.id === "novaves" &&
-                    (routeId === "novaves-silnice" || routeId === "novaves-luka"));
+                const selected = shownRoutes.some((r) => r.from === s.id);
                 return (
                   <g
                     key={s.id}
@@ -575,13 +609,13 @@ export function LoukaMap({ compact = false }: { compact?: boolean }) {
       {/* Výběr trasy */}
       <div className="mt-3 flex flex-wrap gap-2">
         {routes.map((r) => {
-          const selected = routeId === r.id;
+          const selected = routeIds.includes(r.id);
           return (
             <button
               key={r.id}
               type="button"
               onClick={() => {
-                setRouteId(selected ? null : r.id);
+                setRouteIds(selected && routeIds.length === 1 ? [] : [r.id]);
                 setActivePoi(null);
               }}
               aria-pressed={selected}
