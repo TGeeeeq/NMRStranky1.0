@@ -17,7 +17,7 @@ import { RunnerSprite } from "./RunnerSprite";
 import "./loukarun.css";
 
 export const metadata: Metadata = {
-  title: "Louka Run — hra ze skutečné louky",
+  title: "LoukaRun — hra ze skutečné Louky",
   description:
     "Endless runner se zachráněnými zvířaty z azylu Nech mě růst. Běhej za Karla, Pogo, Avalu, Flíčka, Yakula nebo Květu. Přístup ke hře získáš darem pro útulek.",
   alternates: { canonical: "/loukarun" },
