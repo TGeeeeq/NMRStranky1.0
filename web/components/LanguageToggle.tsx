@@ -1,5 +1,6 @@
 "use client";
 
+import { useId } from "react";
 import { motion } from "motion/react";
 import { useLocale } from "@/components/LocaleProvider";
 import { LOCALES, dict, pick, type Locale } from "@/lib/i18n";
@@ -21,6 +22,9 @@ export function LanguageToggle({
   className?: string;
 }) {
   const { locale, setLocale } = useLocale();
+  // Unique per instance so the desktop and mobile toggles don't share a
+  // layout-animation id (both can be mounted at once).
+  const pillId = useId();
 
   return (
     <div
@@ -50,7 +54,7 @@ export function LanguageToggle({
           >
             {active ? (
               <motion.span
-                layoutId="lang-toggle-pill"
+                layoutId={`lang-toggle-pill-${pillId}`}
                 className="absolute inset-0 -z-10 rounded-pill bg-moss shadow-soft"
                 transition={{ type: "spring", stiffness: 420, damping: 32 }}
               />
