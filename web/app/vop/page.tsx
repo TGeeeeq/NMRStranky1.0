@@ -150,11 +150,11 @@ export default async function Vop() {
             <>
               <h2>1. Úvodní ustanovení</h2>
               <p>
-                Tyto všeobecné obchodní podmínky (dále jen „obchodní podmínky") spolku{" "}
+                Tyto všeobecné obchodní podmínky (dále jen „obchodní podmínky“) spolku{" "}
                 <strong>Nech mě růst, z.s.</strong>, se sídlem Dandova 2619/13, Horní Počernice, 193 00
-                Praha, IČ: 19602529 (dále jen „prodávající"), upravují vzájemná práva a povinnosti
+                Praha, IČ: 19602529 (dále jen „prodávající“), upravují vzájemná práva a povinnosti
                 vzniklé v souvislosti nebo na základě kupní smlouvy uzavírané mezi prodávajícím a jinou
-                fyzickou či právnickou osobou (dále jen „kupující") prostřednictvím internetového obchodu
+                fyzickou či právnickou osobou (dále jen „kupující“) prostřednictvím internetového obchodu
                 prodávajícího.
               </p>
 

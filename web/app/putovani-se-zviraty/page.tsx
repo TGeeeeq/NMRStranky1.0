@@ -87,25 +87,25 @@ export default async function PutovaniSeZviraty() {
             {locale === "en" ? (
               <>
                 <p>
-                  Hi friends! On this Wandering with the Animals we'll set out on a two-day journey
+                  Hi friends! On this Wandering with the Animals we’ll set out on a two-day journey
                   through the Central Bohemian countryside around our Meadow. Joining us will be
                   dogs, a donkey, a mouflon and maybe even a little gang of sheep? 😂
                 </p>
                 <p>
                   This lovely adventure will give us a wonderful time and space for sharing and
-                  letting life flow. We'll travel light and sleep under the open sky in the company
+                  letting life flow. We’ll travel light and sleep under the open sky in the company
                   of our animal fellow-travellers :)
                 </p>
                 <p>
-                  In the evening there'll be dinner cooked over the fire with live music :) In the
-                  morning there's the chance of a kung-fu-style warm-up. Doesn't that sound simply
+                  In the evening there’ll be dinner cooked over the fire with live music :) In the
+                  morning there’s the chance of a kung-fu-style warm-up. Doesn’t that sound simply
                   wonderful?
                 </p>
                 <p>
-                  If this appeals to you, we'll be looking forward to seeing you on the 24th at the
+                  If this appeals to you, we’ll be looking forward to seeing you on the 24th at the
                   Meadow for the opening circle to get to know one another, dinner included :) After
-                  the opening we'll spend the night at the Meadow and set off early the next day.
-                  We'll finish our journey on Sunday towards evening. We'll share something good to
+                  the opening we’ll spend the night at the Meadow and set off early the next day.
+                  We’ll finish our journey on Sunday towards evening. We’ll share something good to
                   say goodbye, form a sharing circle and part ways.
                 </p>
               </>

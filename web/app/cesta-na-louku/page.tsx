@@ -14,7 +14,7 @@ export async function generateMetadata(): Promise<Metadata> {
     title: pick(locale, { cs: "Cesta na Louku", en: "Getting to the Meadow" }),
     description: pick(locale, {
       cs: "Kreslená mapa cesty na Louku — vyberte, kudy přijedete, a mapa vám ukáže pěší trasu od parkoviště nebo od vlaku.",
-      en: "An illustrated map of the way to the Meadow — choose how you're arriving and the map shows the walking route from the car park or the station.",
+      en: "An illustrated map of the way to the Meadow — choose how you’re arriving and the map shows the walking route from the car park or the station.",
     }),
     alternates: { canonical: "/cesta-na-louku" },
   };
@@ -34,7 +34,7 @@ export default async function CestaNaLouku() {
         title={pick(locale, { cs: "Cesta na Louku", en: "Getting to the Meadow" })}
         subtitle={pick(locale, {
           cs: "Vyberte, kudy přijedete, a mapa vám ukáže cestu.",
-          en: "Choose how you're arriving and the map will show you the way.",
+          en: "Choose how you’re arriving and the map will show you the way.",
         })}
       />
 
@@ -60,15 +60,15 @@ export default async function CestaNaLouku() {
               {locale === "en" ? (
                 <>
                   <p>
-                    <strong>By car:</strong> park in the marked car park by the railway (you'll
-                    also spot the little house of our kind neighbour Milan). From there it's a
+                    <strong>By car:</strong> park in the marked car park by the railway (you’ll
+                    also spot the little house of our kind neighbour Milan). From there it’s a
                     short walk down to the Meadow — the map above shows the way.
                   </p>
                   <p>
                     <strong>By train:</strong> get off at Vlkaneč or Nová Ves u Leštiny station.
                     From Nová Ves you can go either along the road or by the meadow path beside
                     the railway; from Vlkaneč the path leads across the field past the cherry
-                    avenue. Click on the map to show where you're coming from and your walking
+                    avenue. Click on the map to show where you’re coming from and your walking
                     route will be marked.
                   </p>
                   <p>

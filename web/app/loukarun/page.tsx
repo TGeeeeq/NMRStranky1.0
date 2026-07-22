@@ -65,7 +65,7 @@ const characters: LocalizedCharacter[] = [
     name: { cs: "Ovečka Pogo", en: "Pogo the sheep" },
     tagline: {
       cs: "Energická ovčí kamarádka, která skáče jako na pružině.",
-      en: "An energetic sheep friend who bounces like she's on springs.",
+      en: "An energetic sheep friend who bounces like she’s on springs.",
     },
     perk: {
       cs: "Vlněný polštář — náraz jí ubere jen půlku energie a skáče o kousek výš.",
@@ -117,7 +117,7 @@ const characters: LocalizedCharacter[] = [
     name: { cs: "Kráva Květa", en: "Květa the cow" },
     tagline: {
       cs: "Klidná a tichá duše, věrná parťačka Avaly.",
-      en: "A calm, quiet soul and Avala's loyal companion.",
+      en: "A calm, quiet soul and Avala’s loyal companion.",
     },
     perk: {
       cs: "Klid v duši — energie jí ubývá o čtvrtinu pomaleji.",
@@ -147,7 +147,7 @@ export default async function LoukaRunPage({
             <p className="text-base font-semibold text-cream sm:text-lg">
               {pick(locale, {
                 cs: "🎉 Je to venku! Louka Run si teď stáhneš jako aplikaci pro Android.",
-                en: "🎉 It's out! You can now download Louka Run as an Android app.",
+                en: "🎉 It’s out! You can now download Louka Run as an Android app.",
               })}
             </p>
             <a
@@ -223,7 +223,7 @@ export default async function LoukaRunPage({
                         </a>
                         {" "}— but here on our site you get it
                         by invitation. Support the sanctuary with a{" "}
-                        <strong>donation from 200 Kč</strong> and we'll send you an
+                        <strong>donation from 200 Kč</strong> and we’ll send you an
                         invite code. The game then runs in your browser on all your
                         devices, and every koruna goes toward feeding and caring for the
                         animals you meet in the game.
@@ -254,7 +254,7 @@ export default async function LoukaRunPage({
                             <>
                               <li>Send a donation of at least 200 Kč to account <strong className="whitespace-nowrap">{BANK.account}</strong>.</li>
                               <li>Write to us at <a className="text-moss underline" href="mailto:info@nechmerust.org?subject=Louka%20Run%20—%20kód">info@nechmerust.org</a>.</li>
-                              <li>We'll send you a code right back — it lasts forever, on all your devices.</li>
+                              <li>We’ll send you a code right back — it lasts forever, on all your devices.</li>
                             </>
                           ),
                         })}
@@ -278,7 +278,7 @@ export default async function LoukaRunPage({
         <Container>
           <SectionHeader
             eyebrow={pick(locale, { cs: "Běžci z Louky", en: "Runners from the Meadow" })}
-            title={pick(locale, { cs: "Všichni jsou skuteční", en: "They're all real" })}
+            title={pick(locale, { cs: "Všichni jsou skuteční", en: "They’re all real" })}
             description={pick(locale, {
               cs: "Každá postava ve hře žije v našem azylu. Schopnosti mají podle své opravdové povahy. Otoč si kartu a porovnej sprite se skutečností.",
               en: "Every character in the game lives at our sanctuary. Their abilities reflect their real personalities. Flip a card and compare the sprite with reality.",
@@ -318,7 +318,7 @@ export default async function LoukaRunPage({
             <p className="mt-4 text-cream/90">
               {pick(locale, {
                 cs: "Poběžíš rozkvetlou loukou i hvězdnou nocí. A protože jsme azyl, nikdy neprohráváš — každý běh končí dobře, veselou historkou tvého běžce.",
-                en: "You'll run through a meadow in bloom and a starry night. And because we're a sanctuary, you never lose — every run ends well, with a cheerful tale about your runner.",
+                en: "You’ll run through a meadow in bloom and a starry night. And because we’re a sanctuary, you never lose — every run ends well, with a cheerful tale about your runner.",
               })}
             </p>
           </Reveal>

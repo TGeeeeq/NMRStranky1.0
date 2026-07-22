@@ -64,17 +64,17 @@ const buildEvents = (locale: Locale): Event[] => [
       <>
         <p>
           Lovely day to you, dear Friends — the time has come! From 21 to 23 August we can gather
-          at the Meadow and spend time together in a picturesque setting among the forests. You'll
+          at the Meadow and spend time together in a picturesque setting among the forests. You’ll
           lend a hand, become part of the Meadow, and along the way you can learn some hands-on work
-          around the animals, buildings and gardening. I'm already really looking forward to it.
+          around the animals, buildings and gardening. I’m already really looking forward to it.
         </p>
         <p>
           This whole summer is special because the Meadow is gaining a new human member — our
-          daughter. For me that's a big thing, and I'm looking forward to sharing her with you.
+          daughter. For me that’s a big thing, and I’m looking forward to sharing her with you.
         </p>
         <p>
-          Plant-based food will be provided throughout the Loukáda. If you'd like to bring something
-          from your own kitchen for the shared table, we'll certainly be glad.
+          Plant-based food will be provided throughout the Loukáda. If you’d like to bring something
+          from your own kitchen for the shared table, we’ll certainly be glad.
         </p>
         <p>Sleeping at the Meadow in your own tent, or by the fire under the open sky.</p>
         <p>
@@ -83,14 +83,14 @@ const buildEvents = (locale: Locale): Event[] => [
         </p>
         <p>
           Those coming by car, park at the address Nová Ves u Leštiny 32 in the marked spot. Those
-          of you coming by train will get off at Vlkaneč or Nová Ves u Leštiny station — it's about
+          of you coming by train will get off at Vlkaneč or Nová Ves u Leštiny station — it’s about
           0.5 km on foot to the parking address, and from there follow the marked route all the way
           to us at the Meadow.
         </p>
         {kontaktniOdkazy(locale)}
         <p>
-          I wish you all lovely days, I'm very much looking forward to seeing you, and see you at
-          the Meadow. Let's let ourselves and nature grow. — TomLuk
+          I wish you all lovely days, I’m very much looking forward to seeing you, and see you at
+          the Meadow. Let’s let ourselves and nature grow. — TomLuk
         </p>
         <p>P.S. Come and pitch in, the Meadow will thank you. Or at least share this — that helps us a lot too. 🙏</p>
       </>
@@ -150,7 +150,7 @@ const buildEvents = (locale: Locale): Event[] => [
       <>
         <p>
           Another September date for our Loukáda — a weekend full of time with the animals, working
-          together and resting right at the Meadow. We warmly invite everyone who'd like to enjoy
+          together and resting right at the Meadow. We warmly invite everyone who’d like to enjoy
           time in nature and get to know life at the sanctuary. Details of the programme to follow.
         </p>
         <p>
@@ -193,7 +193,7 @@ const buildEvents = (locale: Locale): Event[] => [
       <p>
         A three-day weekend somewhere between a retreat and a festival, right at the Meadow —
         nature, animals, intuitive art, movement and live music. The event has been moved to a
-        new September date. You'll find the full programme and sign-up on the Facebook event.
+        new September date. You’ll find the full programme and sign-up on the Facebook event.
       </p>
     ) : (
       <p>
@@ -220,7 +220,7 @@ const buildEvents = (locale: Locale): Event[] => [
     }),
     description: locale === "en" ? (
       <p>
-        Come along with us for a walk in the company of our animal friends. We'll enjoy time in
+        Come along with us for a walk in the company of our animal friends. We’ll enjoy time in
         nature, cuddles with the animals and a lovely atmosphere among good people. Meeting point
         and details to follow.
       </p>
