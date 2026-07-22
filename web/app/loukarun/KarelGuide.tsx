@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { motion } from "motion/react";
 import { KarelSvg } from "@/components/karel/KarelSvg";
 import { KAREL_QUOTES, KAREL_RANDOM, type KarelSection } from "./karel";
@@ -20,14 +20,20 @@ export function KarelGuide({
   className?: string;
 }) {
   const { locale } = useLocale();
-  const [quote, setQuote] = useState(() => KAREL_QUOTES[section][0]);
+  const [quote, setQuote] = useState(() => KAREL_QUOTES[locale][section][0]);
   const [hopping, setHopping] = useState(false);
   const lastRef = useRef<string | null>(null);
 
+  // Reset to the section's default line when the visitor switches language.
+  useEffect(() => {
+    setQuote(KAREL_QUOTES[locale][section][0]);
+  }, [locale, section]);
+
   function nextQuote() {
+    const pool = KAREL_RANDOM[locale];
     let next = quote;
     while (next === quote || next === lastRef.current) {
-      next = KAREL_RANDOM[Math.floor(Math.random() * KAREL_RANDOM.length)];
+      next = pool[Math.floor(Math.random() * pool.length)];
     }
     lastRef.current = quote;
     setQuote(next);

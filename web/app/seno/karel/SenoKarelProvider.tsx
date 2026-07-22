@@ -19,18 +19,8 @@ import { pick } from "@/lib/i18n";
 import { loadKarelStore, saveKarelStore, pickQuote } from "./karel-store";
 import {
   BLOCK_ORDER,
-  KAREL_ASK,
-  KAREL_BLOCKS,
-  KAREL_COMMENTARY,
-  KAREL_CREDIT,
-  KAREL_DECLINE,
-  KAREL_FINALE,
-  KAREL_IDLE,
-  KAREL_PEEK_ASK,
-  KAREL_REACTIONS,
-  KAREL_RESTORE,
-  KAREL_RETURN,
-  KAREL_UNRESTORE,
+  buildKarelBlocks,
+  getKarelTexts,
   type SenoBlockId,
 } from "./seno-karel-content";
 
@@ -155,6 +145,7 @@ function SceneBubble({
 
 export function SenoKarelProvider({ children }: { children: ReactNode }) {
   const { locale } = useLocale();
+  const kt = getKarelTexts(locale);
   const reduced = useReducedMotion() ?? false;
 
   const [phase, setPhase] = useState<Phase>("hidden");
@@ -178,10 +169,14 @@ export function SenoKarelProvider({ children }: { children: ReactNode }) {
   const phaseRef = useRef(phase);
   const bubbleRef = useRef(bubble);
   const restoredRef = useRef(restored);
+  // Karlovy texty ve zvoleném jazyce — přes ref, aby je async choreografie
+  // četla vždy aktuální bez re-subscribu callbacků.
+  const ktRef = useRef(kt);
   useEffect(() => {
     phaseRef.current = phase;
     bubbleRef.current = bubble;
     restoredRef.current = restored;
+    ktRef.current = kt;
   });
 
   const registerBlock = useCallback(
@@ -199,7 +194,10 @@ export function SenoKarelProvider({ children }: { children: ReactNode }) {
     [restored, swapped],
   );
 
-  const karelVariant = useCallback((id: SenoBlockId) => KAREL_BLOCKS[id](), []);
+  const karelVariant = useCallback(
+    (id: SenoBlockId) => buildKarelBlocks(locale)[id](),
+    [locale],
+  );
 
   const showBubble = useCallback((content: ReactNode, hideAfterMs?: number) => {
     if (bubbleTimer.current) window.clearTimeout(bubbleTimer.current);
@@ -248,7 +246,7 @@ export function SenoKarelProvider({ children }: { children: ReactNode }) {
     if (struck && !credit.querySelector(".karel-credit-sig")) {
       const sig = document.createElement("span");
       sig.className = "karel-credit-sig";
-      sig.textContent = KAREL_CREDIT.signature;
+      sig.textContent = ktRef.current.credit.signature;
       credit.appendChild(sig);
     }
     credit.classList.toggle("karel-credit-struck", struck);
@@ -266,7 +264,7 @@ export function SenoKarelProvider({ children }: { children: ReactNode }) {
     moveHome(0.4);
     window.scrollTo({ top: 0, behavior: reduced ? "auto" : "smooth" });
     saveKarelStore({ choice: "accepted" });
-    showBubble(KAREL_FINALE, 9000);
+    showBubble(ktRef.current.finale, 9000);
   }, [moveHome, reduced, setCreditStruck, showBubble]);
 
   const runTakeover = useCallback(
@@ -324,7 +322,7 @@ export function SenoKarelProvider({ children }: { children: ReactNode }) {
 
         if (!fast && !reduced) {
           setPose("idle");
-          const commentary = KAREL_COMMENTARY[id];
+          const commentary = ktRef.current.commentary[id];
           if (commentary) showBubble(commentary);
           await wait(commentary ? 2800 : 600);
         } else {
@@ -362,7 +360,7 @@ export function SenoKarelProvider({ children }: { children: ReactNode }) {
           if (runSeq.current !== run) return;
           setCreditStruck(true);
           setPose("idle");
-          showBubble(KAREL_CREDIT.commentary);
+          showBubble(ktRef.current.credit.commentary);
           await wait(3000);
           if (runSeq.current !== run) return;
         }
@@ -417,7 +415,7 @@ export function SenoKarelProvider({ children }: { children: ReactNode }) {
     const run = ++runSeq.current;
     saveKarelStore({ choice: "declined" });
     setPose("shake-no");
-    showBubble(KAREL_DECLINE);
+    showBubble(ktRef.current.decline);
     await wait(2400);
     if (runSeq.current !== run) return;
     setBubble(null);
@@ -442,14 +440,14 @@ export function SenoKarelProvider({ children }: { children: ReactNode }) {
             onClick={accept}
             className="rounded-pill bg-moss px-4 py-2 text-sm font-medium text-cream transition-colors hover:bg-moss-deep"
           >
-            {KAREL_ASK.yes}
+            {ktRef.current.ask.yes}
           </button>
           <button
             type="button"
             onClick={decline}
             className="rounded-pill border border-border bg-surface px-4 py-2 text-sm font-medium text-text transition-colors hover:bg-surface-alt"
           >
-            {KAREL_ASK.no}
+            {ktRef.current.ask.no}
           </button>
         </div>
       </div>
@@ -462,7 +460,7 @@ export function SenoKarelProvider({ children }: { children: ReactNode }) {
     setPose("idle");
     setFacing("left");
     setPos({ x: 0, y: 0, dur: reduced ? 0 : 0.6 });
-    showBubble(askBubble(KAREL_PEEK_ASK));
+    showBubble(askBubble(ktRef.current.peekAsk));
   }, [askBubble, reduced, showBubble]);
 
   const begin = useCallback(async () => {
@@ -483,13 +481,13 @@ export function SenoKarelProvider({ children }: { children: ReactNode }) {
     setPose("idle");
 
     if (stored.choice === "accepted") {
-      showBubble(KAREL_RETURN);
+      showBubble(ktRef.current.return);
       await wait(1800);
       if (runSeq.current !== run) return;
       void runTakeover(true);
     } else {
       setPhase("asking");
-      showBubble(askBubble(KAREL_ASK.text));
+      showBubble(askBubble(ktRef.current.ask.text));
     }
   }, [askBubble, reduced, runTakeover, showBubble]);
 
@@ -539,7 +537,7 @@ export function SenoKarelProvider({ children }: { children: ReactNode }) {
       if (p !== "karel" && p !== "asking") return;
       const now = Date.now();
       if (now - lastReactionAt.current < 8000) return;
-      const pool = KAREL_REACTIONS[target.getAttribute("data-karel-react") ?? ""];
+      const pool = ktRef.current.reactions[target.getAttribute("data-karel-react") ?? ""];
       if (!pool) return;
       lastReactionAt.current = now;
       const quote = pickQuote(pool, lastQuote.current);
@@ -554,7 +552,7 @@ export function SenoKarelProvider({ children }: { children: ReactNode }) {
   useEffect(() => {
     const timer = window.setInterval(() => {
       if (phaseRef.current !== "karel" || bubbleRef.current != null) return;
-      const quote = pickQuote(KAREL_IDLE, lastQuote.current);
+      const quote = pickQuote(ktRef.current.idle, lastQuote.current);
       lastQuote.current = quote;
       showBubble(quote, 6500);
     }, 45000);
@@ -576,10 +574,10 @@ export function SenoKarelProvider({ children }: { children: ReactNode }) {
     const wasRestored = restoredRef.current;
     setRestored(!wasRestored);
     setCreditStruck(wasRestored);
-    showBubble(wasRestored ? KAREL_UNRESTORE : KAREL_RESTORE, 6000);
+    showBubble(wasRestored ? ktRef.current.unrestore : ktRef.current.restore, 6000);
   }, [setCreditStruck, showBubble]);
 
-  const quip = useCallback(() => sayQuote(KAREL_IDLE), [sayQuote]);
+  const quip = useCallback(() => sayQuote(ktRef.current.idle), [sayQuote]);
 
   const onKarelClick =
     phase === "peek" ? reAsk : phase === "karel" || phase === "asking" ? quip : undefined;
