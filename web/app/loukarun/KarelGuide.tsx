@@ -4,6 +4,8 @@ import { useRef, useState } from "react";
 import { motion } from "motion/react";
 import { KarelSvg } from "@/components/karel/KarelSvg";
 import { KAREL_QUOTES, KAREL_RANDOM, type KarelSection } from "./karel";
+import { useLocale } from "@/components/LocaleProvider";
+import { pick } from "@/lib/i18n";
 
 /** Karel-průvodce: vjede do sekce s trefnou hláškou, kliknutím vyhodí
  *  náhodnou hlášku z poolu a poskočí. Index 0 je i SSR výchozí stav,
@@ -17,6 +19,7 @@ export function KarelGuide({
   align?: "left" | "right";
   className?: string;
 }) {
+  const { locale } = useLocale();
   const [quote, setQuote] = useState(() => KAREL_QUOTES[section][0]);
   const [hopping, setHopping] = useState(false);
   const lastRef = useRef<string | null>(null);
@@ -44,8 +47,8 @@ export function KarelGuide({
       <button
         type="button"
         onClick={nextQuote}
-        aria-label="Karel — klikni pro další hlášku"
-        title="Klikni na Karla"
+        aria-label={pick(locale, { cs: "Karel — klikni pro další hlášku", en: "Karel — click for another line" })}
+        title={pick(locale, { cs: "Klikni na Karla", en: "Click Karel" })}
         className="group relative min-h-11 min-w-11 shrink-0 cursor-pointer rounded-full focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-moss"
       >
         <span

@@ -3,6 +3,8 @@
 import { useState } from "react";
 import Image from "next/image";
 import { RunnerSprite, type RunnerId } from "./RunnerSprite";
+import { useLocale } from "@/components/LocaleProvider";
+import { pick } from "@/lib/i18n";
 
 export type Character = {
   id: RunnerId;
@@ -15,6 +17,7 @@ export type Character = {
 /** Flip karta běžce: vpředu herní sprite (na hover/focus se rozběhne),
  *  po kliknutí se otočí na skutečnou fotku s perkem. */
 export function CharacterCard({ character: c }: { character: Character }) {
+  const { locale } = useLocale();
   const [flipped, setFlipped] = useState(false);
   const [running, setRunning] = useState(false);
 
@@ -28,7 +31,7 @@ export function CharacterCard({ character: c }: { character: Character }) {
       onFocus={() => setRunning(true)}
       onBlur={() => setRunning(false)}
       className="lr-flip block h-full w-full cursor-pointer text-left focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-moss"
-      aria-label={`${c.name} — otočit kartu`}
+      aria-label={`${c.name} — ${pick(locale, { cs: "otočit kartu", en: "flip the card" })}`}
     >
       <span className="lr-flip-inner block h-full">
         {/* přední strana — sprite */}
@@ -44,7 +47,7 @@ export function CharacterCard({ character: c }: { character: Character }) {
             <span className="font-serif text-xl font-semibold text-moss-deep">{c.name}</span>
             <span className="mt-2 text-sm text-text-muted">{c.tagline}</span>
             <span className="mt-auto pt-3 text-xs font-medium uppercase tracking-wide text-moss/70">
-              Otočit — jak vypadá doopravdy →
+              {pick(locale, { cs: "Otočit — jak vypadá doopravdy →", en: "Flip — see the real thing →" })}
             </span>
           </span>
         </span>
@@ -64,7 +67,7 @@ export function CharacterCard({ character: c }: { character: Character }) {
             <span className="font-serif text-xl font-semibold text-moss-deep">{c.name}</span>
             <span className="mt-2 text-sm text-text-muted">{c.perk}</span>
             <span className="mt-auto pt-3 text-xs font-medium uppercase tracking-wide text-moss/70">
-              ← Zpátky ke spritu
+              {pick(locale, { cs: "← Zpátky ke spritu", en: "← Back to the sprite" })}
             </span>
           </span>
         </span>

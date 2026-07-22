@@ -9,34 +9,53 @@ import { StatsBand } from "@/components/StatsBand";
 import { SectionDivider } from "@/components/SectionDivider";
 import { ValueCard } from "@/components/ValueCard";
 import { InstagramIcon, FacebookIcon } from "@/components/BrandIcons";
+import { getLocale } from "@/lib/i18n.server";
+import { pick, type Locale } from "@/lib/i18n";
 
-export const metadata: Metadata = {
-  title: "Domů",
-  description:
-    "Nech mě růst z.s. je nezisková organizace s vizí tvorby rodového statku, kde žijeme v harmonii s přírodou, zvířaty i sebou navzájem.",
-  alternates: { canonical: "/" },
-};
+export async function generateMetadata(): Promise<Metadata> {
+  const locale = await getLocale();
+  return {
+    title: pick(locale, { cs: "Domů", en: "Home" }),
+    description: pick(locale, {
+      cs: "Nech mě růst z.s. je nezisková organizace s vizí tvorby rodového statku, kde žijeme v harmonii s přírodou, zvířaty i sebou navzájem.",
+      en: "Nech mě růst z.s. is a non-profit with a vision of a homestead where we live in harmony with nature, animals and one another.",
+    }),
+    alternates: { canonical: "/" },
+  };
+}
 
 const values = [
   {
     icon: Heart,
-    title: "Péče o zvířata",
-    text: "Poskytování bezpečného a láskyplného domova pro zvířata.",
+    title: { cs: "Péče o zvířata", en: "Care for animals" },
+    text: {
+      cs: "Poskytování bezpečného a láskyplného domova pro zvířata.",
+      en: "Providing a safe and loving home for animals.",
+    },
   },
   {
     icon: Sprout,
-    title: "Soběstačnost",
-    text: "Aktivní usilování o udržitelný a soběstačný způsob života.",
+    title: { cs: "Soběstačnost", en: "Self-sufficiency" },
+    text: {
+      cs: "Aktivní usilování o udržitelný a soběstačný způsob života.",
+      en: "Actively pursuing a sustainable, self-sufficient way of life.",
+    },
   },
   {
     icon: Users,
-    title: "Komunita",
-    text: "Budování silné a podporující komunity kolem naší Louky.",
+    title: { cs: "Komunita", en: "Community" },
+    text: {
+      cs: "Budování silné a podporující komunity kolem naší Louky.",
+      en: "Building a strong, supportive community around our Meadow.",
+    },
   },
   {
     icon: Leaf,
-    title: "Soulad s přírodou",
-    text: "Láskyplné propojení s přírodou a cesta života v jejím rytmu.",
+    title: { cs: "Soulad s přírodou", en: "Harmony with nature" },
+    text: {
+      cs: "Láskyplné propojení s přírodou a cesta života v jejím rytmu.",
+      en: "A loving connection with nature and a life lived to its rhythm.",
+    },
   },
 ];
 
@@ -46,7 +65,42 @@ const socials = [
   { icon: Mail, label: "Email", href: "mailto:info@nechmerust.org", external: false },
 ];
 
-export default function Home() {
+const t = {
+  cs: {
+    aboutEyebrow: "Kdo jsme",
+    aboutTitle: "O projektu",
+    about1:
+      "Na Louce žijí zvířata, která jsme přijali do péče, a která u nás nacházejí bezpečný domov, dostatek krmiva a čisté, teplé místo k odpočinku. Každé zvíře má svůj příběh a my se snažíme zajistit jim co nejlepší život.",
+    about2:
+      "Věříme, že způsob, jakým žijeme a jak zacházíme se světem kolem nás, má hluboký dopad na naše blaho i na zdraví celé planety. Proto se snažíme žít vědomě, s úctou k tradičním hodnotám, ale i s otevřeností k novým, udržitelným přístupům.",
+    about3:
+      "Naším posláním je nejen vytvářet takové prostředí pro nás samotné, ale také inspirovat ostatní, sdílet naše zkušenosti a znalosti, a tím přispívat k širší společenské transformaci směrem k harmoničtějšímu vztahu s naším prostředím.",
+    aboutAlt: "Zvířata na louce",
+    valuesEyebrow: "Co nás vede",
+    valuesTitle: "Naše hodnoty",
+    socialEyebrow: "Buďte v kontaktu",
+    socialTitle: "Sledujte nás",
+  },
+  en: {
+    aboutEyebrow: "Who we are",
+    aboutTitle: "About the project",
+    about1:
+      "The Meadow is home to animals we have taken into our care, where they find a safe home, plenty of food and a clean, warm place to rest. Every animal has its story, and we do our best to give them the finest life possible.",
+    about2:
+      "We believe that the way we live and treat the world around us has a profound impact on our well-being and on the health of the whole planet. That is why we strive to live consciously — with respect for traditional values, yet open to new, sustainable approaches.",
+    about3:
+      "Our mission is not only to create such an environment for ourselves, but also to inspire others, to share our experience and knowledge, and thereby contribute to a wider social shift toward a more harmonious relationship with our surroundings.",
+    aboutAlt: "Animals in the meadow",
+    valuesEyebrow: "What drives us",
+    valuesTitle: "Our values",
+    socialEyebrow: "Stay in touch",
+    socialTitle: "Follow us",
+  },
+} satisfies Record<Locale, Record<string, string>>;
+
+export default async function Home() {
+  const locale = await getLocale();
+  const c = t[locale];
   return (
     <>
       {/* Hero */}
@@ -60,33 +114,18 @@ export default function Home() {
         />
         <Container>
           <Reveal>
-            <SectionHeader eyebrow="Kdo jsme" title="O projektu" />
+            <SectionHeader eyebrow={c.aboutEyebrow} title={c.aboutTitle} />
           </Reveal>
           <div className="grid items-center gap-10 lg:grid-cols-2">
             <Reveal className="space-y-5 text-lg leading-relaxed text-text">
-              <p>
-                Na Louce žijí zvířata, která jsme přijali do péče, a která u nás
-                nacházejí bezpečný domov, dostatek krmiva a čisté, teplé místo
-                k odpočinku. Každé zvíře má svůj příběh a my se snažíme zajistit
-                jim co nejlepší život.
-              </p>
-              <p>
-                Věříme, že způsob, jakým žijeme a jak zacházíme se světem kolem
-                nás, má hluboký dopad na naše blaho i na zdraví celé planety.
-                Proto se snažíme žít vědomě, s úctou k tradičním hodnotám, ale
-                i s otevřeností k novým, udržitelným přístupům.
-              </p>
-              <p>
-                Naším posláním je nejen vytvářet takové prostředí pro nás
-                samotné, ale také inspirovat ostatní, sdílet naše zkušenosti
-                a znalosti, a tím přispívat k širší společenské transformaci
-                směrem k harmoničtějšímu vztahu s naším prostředím.
-              </p>
+              <p>{c.about1}</p>
+              <p>{c.about2}</p>
+              <p>{c.about3}</p>
             </Reveal>
             <Reveal delay={0.1}>
               <Image
                 src="/assets/about-image.webp"
-                alt="Zvířata na louce"
+                alt={c.aboutAlt}
                 width={760}
                 height={560}
                 className="w-full rounded-lg object-cover shadow-soft"
@@ -111,15 +150,15 @@ export default function Home() {
         />
         <Container>
           <Reveal>
-            <SectionHeader eyebrow="Co nás vede" title="Naše hodnoty" />
+            <SectionHeader eyebrow={c.valuesEyebrow} title={c.valuesTitle} />
           </Reveal>
           <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
             {values.map((v, i) => (
-              <Reveal key={v.title} delay={i * 0.06}>
+              <Reveal key={v.title.cs} delay={i * 0.06}>
                 <ValueCard
                   icon={<v.icon size={26} aria-hidden />}
-                  title={v.title}
-                  text={v.text}
+                  title={pick(locale, v.title)}
+                  text={pick(locale, v.text)}
                 />
               </Reveal>
             ))}
@@ -133,7 +172,7 @@ export default function Home() {
       <section className="bg-surface py-20 sm:py-24">
         <Container>
           <Reveal>
-            <SectionHeader eyebrow="Buďte v kontaktu" title="Sledujte nás" />
+            <SectionHeader eyebrow={c.socialEyebrow} title={c.socialTitle} />
           </Reveal>
           <div className="flex flex-wrap items-center justify-center gap-4">
             {socials.map((s) => (

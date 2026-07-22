@@ -4,6 +4,8 @@ import { useEffect, useRef, useState } from "react";
 import { usePathname, useRouter } from "next/navigation";
 import { ShoppingBag, X } from "lucide-react";
 import { useCart } from "@/components/shop/CartProvider";
+import { useLocale } from "@/components/LocaleProvider";
+import { pick, type Locale } from "@/lib/i18n";
 
 /**
  * Hlídá odchod z obchodu s rozpracovaným košíkem. Když má návštěvník něco
@@ -13,7 +15,8 @@ import { useCart } from "@/components/shop/CartProvider";
  * Interceptace běží v capture fázi na document, takže zachytí i klik na
  * <Link> dřív, než stačí proběhnout klientská navigace Next.js.
  */
-function itemsWord(n: number): string {
+function itemsWord(n: number, locale: Locale): string {
+  if (locale === "en") return n === 1 ? "item" : "items";
   if (n === 1) return "položku";
   if (n >= 2 && n <= 4) return "položky";
   return "položek";
@@ -21,6 +24,7 @@ function itemsWord(n: number): string {
 
 export function LeaveCartGuard() {
   const { count } = useCart();
+  const { locale } = useLocale();
   const pathname = usePathname();
   const router = useRouter();
   const [pending, setPending] = useState<string | null>(null);
@@ -107,7 +111,7 @@ export function LeaveCartGuard() {
       >
         <button
           type="button"
-          aria-label="Zavřít"
+          aria-label={pick(locale, { cs: "Zavřít", en: "Close" })}
           onClick={() => setPending(null)}
           className="absolute right-3 top-3 inline-flex h-9 w-9 items-center justify-center rounded-md text-text-muted transition-colors hover:bg-surface-alt hover:text-text"
         >
@@ -119,11 +123,13 @@ export function LeaveCartGuard() {
         </div>
 
         <h2 id="leave-cart-title" className="font-serif text-2xl font-semibold text-moss-deep">
-          Máte rozpracovaný nákup
+          {pick(locale, { cs: "Máte rozpracovaný nákup", en: "You have a purchase in progress" })}
         </h2>
         <p className="mt-2 leading-relaxed text-text-muted">
-          V košíku máte {count} {itemsWord(count)}. Když teď odejdete z obchodu, nákup
-          nedokončíte. Chcete se vrátit do košíku?
+          {pick(locale, {
+            cs: `V košíku máte ${count} ${itemsWord(count, locale)}. Když teď odejdete z obchodu, nákup nedokončíte. Chcete se vrátit do košíku?`,
+            en: `You have ${count} ${itemsWord(count, locale)} in your cart. If you leave the shop now, you won't complete your purchase. Would you like to go back to the cart?`,
+          })}
         </p>
 
         <div className="mt-6 flex flex-col gap-3 sm:flex-row-reverse">
@@ -132,14 +138,14 @@ export function LeaveCartGuard() {
             onClick={toCart}
             className="inline-flex flex-1 items-center justify-center gap-2 rounded-pill bg-moss px-5 py-3 font-medium text-cream shadow-soft transition-transform hover:-translate-y-0.5"
           >
-            <ShoppingBag size={18} aria-hidden /> Zpět do košíku
+            <ShoppingBag size={18} aria-hidden /> {pick(locale, { cs: "Zpět do košíku", en: "Back to the cart" })}
           </button>
           <button
             type="button"
             onClick={leave}
             className="inline-flex flex-1 items-center justify-center rounded-pill border border-border px-5 py-3 font-medium text-text transition-colors hover:bg-surface-alt"
           >
-            Přesto odejít
+            {pick(locale, { cs: "Přesto odejít", en: "Leave anyway" })}
           </button>
         </div>
       </div>

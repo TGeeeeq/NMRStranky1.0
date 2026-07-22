@@ -1,19 +1,27 @@
 import { Container } from "@/components/Container";
 import { Reveal } from "@/components/Reveal";
 import { CountUp } from "@/components/CountUp";
+import { getLocale } from "@/lib/i18n.server";
+import { pick } from "@/lib/i18n";
 
 /**
  * Impact strip with count-up numbers.
  * Client-confirmed marketing figures — edit here.
  */
-const stats: { to: number; suffix?: string; prefix?: string; label: string }[] = [
-  { to: 100, suffix: "+", label: "zvířecích lučních obyvatel" },
-  { to: 5, suffix: "", label: "let na Louce" },
-  { to: 60, suffix: "+", label: "společných procházek, festivalů a Loukád" },
-  { to: 100, suffix: " %", label: "transparentní financování" },
+const stats: {
+  to: number;
+  suffix?: string;
+  prefix?: string;
+  label: { cs: string; en: string };
+}[] = [
+  { to: 100, suffix: "+", label: { cs: "zvířecích lučních obyvatel", en: "animal residents of the meadow" } },
+  { to: 5, suffix: "", label: { cs: "let na Louce", en: "years at the Meadow" } },
+  { to: 60, suffix: "+", label: { cs: "společných procházek, festivalů a Loukád", en: "shared walks, festivals and Meadow gatherings" } },
+  { to: 100, suffix: " %", label: { cs: "transparentní financování", en: "transparent funding" } },
 ];
 
-export function StatsBand() {
+export async function StatsBand() {
+  const locale = await getLocale();
   return (
     <section className="grain-overlay grain-strong relative isolate overflow-hidden bg-moss-deep py-16 sm:py-20">
       <div
@@ -28,8 +36,8 @@ export function StatsBand() {
         <Reveal>
           <dl className="grid grid-cols-2 gap-x-6 gap-y-10 text-center lg:grid-cols-4">
             {stats.map((s) => (
-              <div key={s.label}>
-                <dt className="sr-only">{s.label}</dt>
+              <div key={s.label.cs}>
+                <dt className="sr-only">{pick(locale, s.label)}</dt>
                 <dd>
                   <CountUp
                     to={s.to}
@@ -38,7 +46,7 @@ export function StatsBand() {
                     className="block font-serif text-5xl font-semibold text-accent sm:text-6xl"
                   />
                   <span className="mt-2 block text-sm font-medium uppercase tracking-[0.12em] text-cream/80">
-                    {s.label}
+                    {pick(locale, s.label)}
                   </span>
                 </dd>
               </div>

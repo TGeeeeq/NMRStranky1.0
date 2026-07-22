@@ -4,6 +4,8 @@ import Image from "next/image";
 import Link from "next/link";
 import { motion } from "motion/react";
 import { Price } from "./Price";
+import { useLocale } from "@/components/LocaleProvider";
+import { pick } from "@/lib/i18n";
 
 export type ProductCardData = {
   slug: string; name: string; price: string;
@@ -11,6 +13,7 @@ export type ProductCardData = {
 };
 
 export function ProductCard({ product }: { product: ProductCardData }) {
+  const { locale } = useLocale();
   const soldOut = product.stockQuantity <= 0;
   return (
     <motion.article
@@ -31,7 +34,7 @@ export function ProductCard({ product }: { product: ProductCardData }) {
           ) : null}
           {soldOut ? (
             <span className="absolute left-3 top-3 rounded-pill bg-text-muted px-3 py-1 text-xs font-semibold text-cream">
-              Vyprodáno
+              {pick(locale, { cs: "Vyprodáno", en: "Sold out" })}
             </span>
           ) : null}
         </div>

@@ -4,6 +4,8 @@ import { useRef } from "react";
 import { motion, useReducedMotion, useScroll, useTransform } from "motion/react";
 import { RunnerSprite } from "./RunnerSprite";
 import { KarelGuide } from "./KarelGuide";
+import { useLocale } from "@/components/LocaleProvider";
+import { pick } from "@/lib/i18n";
 
 function Carrot({ className, size = 24, rot = 0 }: { className?: string; size?: number; rot?: number }) {
   return (
@@ -57,6 +59,7 @@ function Flyer({ top, duration, delay, swallow }: { top: string; duration: numbe
 const TITLE_WORDS = "Louka Run".split(" ").map((w) => w.split(""));
 
 export function HeroScene({ hasAccess }: { hasAccess: boolean }) {
+  const { locale } = useLocale();
   const ref = useRef<HTMLElement>(null);
   const reduced = useReducedMotion();
   const { scrollYProgress } = useScroll({ target: ref, offset: ["start start", "end start"] });
@@ -83,7 +86,10 @@ export function HeroScene({ hasAccess }: { hasAccess: boolean }) {
           transition={{ duration: 0.5 }}
           className="mb-3 text-sm font-semibold uppercase tracking-[0.25em] text-moss-deep/70"
         >
-          Hra azylu Nech mě růst
+          {pick(locale, {
+            cs: "Hra azylu Nech mě růst",
+            en: "A game by the Nech mě růst sanctuary",
+          })}
         </motion.p>
 
         <h1 className="font-serif text-[clamp(2.9rem,16vw,3.75rem)] font-bold leading-none text-moss-deep drop-shadow-[0_4px_16px_rgba(255,255,255,0.5)] sm:text-7xl lg:text-8xl">
@@ -132,8 +138,10 @@ export function HeroScene({ hasAccess }: { hasAccess: boolean }) {
           transition={{ duration: 0.5, delay: 0.5 }}
           className="mt-6 max-w-xl text-balance text-lg font-medium text-moss-deep sm:text-xl"
         >
-          Endless runner ze skutečné louky. Běhej, skákej a sbírej mrkve za šest
-          zachráněných zvířat z našeho azylu.
+          {pick(locale, {
+            cs: "Endless runner ze skutečné louky. Běhej, skákej a sbírej mrkve za šest zachráněných zvířat z našeho azylu.",
+            en: "An endless runner set on a real meadow. Run, jump and collect carrots as one of six rescued animals from our sanctuary.",
+          })}
         </motion.p>
 
         <motion.div
@@ -146,13 +154,15 @@ export function HeroScene({ hasAccess }: { hasAccess: boolean }) {
             href={hasAccess ? "/loukarun/app/index.html" : "#hrat"}
             className="rounded-pill bg-moss px-10 py-4 text-lg font-semibold text-cream shadow-lg transition hover:-translate-y-0.5 hover:bg-moss-deep"
           >
-            ▶ {hasAccess ? "Hrát" : "Chci hrát"}
+            ▶ {hasAccess
+              ? pick(locale, { cs: "Hrát", en: "Play" })
+              : pick(locale, { cs: "Chci hrát", en: "I want to play" })}
           </a>
           <a
             href="#zvirata"
             className="rounded-pill border-2 border-moss-deep/30 bg-white/50 px-8 py-4 text-lg font-semibold text-moss-deep backdrop-blur transition hover:bg-white/80"
           >
-            Poznej běžce
+            {pick(locale, { cs: "Poznej běžce", en: "Meet the runners" })}
           </a>
         </motion.div>
 

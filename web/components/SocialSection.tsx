@@ -5,6 +5,8 @@ import { Reveal } from "@/components/Reveal";
 import { InstagramIcon, FacebookIcon } from "@/components/BrandIcons";
 import { SOCIAL } from "@/lib/site";
 import { cn } from "@/lib/cn";
+import { getLocale } from "@/lib/i18n.server";
+import { dict, pick } from "@/lib/i18n";
 
 const links = [
   { icon: InstagramIcon, label: "Instagram", href: SOCIAL.instagram, external: true },
@@ -13,7 +15,8 @@ const links = [
 ];
 
 /** Reusable "Sledujte nás" block used at the bottom of every page. */
-export function SocialSection({ tone = "light" }: { tone?: "light" | "alt" }) {
+export async function SocialSection({ tone = "light" }: { tone?: "light" | "alt" }) {
+  const locale = await getLocale();
   return (
     <section
       className={cn(
@@ -27,7 +30,10 @@ export function SocialSection({ tone = "light" }: { tone?: "light" | "alt" }) {
       />
       <Container>
         <Reveal>
-          <SectionHeader eyebrow="Buďte v kontaktu" title="Sledujte nás" />
+          <SectionHeader
+            eyebrow={pick(locale, dict.stayInTouch)}
+            title={pick(locale, dict.followUs)}
+          />
         </Reveal>
         <div className="flex flex-wrap items-center justify-center gap-4">
           {links.map((s) => (

@@ -3,6 +3,8 @@
 import { useState } from "react";
 import Image from "next/image";
 import { Play } from "lucide-react";
+import { useLocale } from "@/components/LocaleProvider";
+import { pick } from "@/lib/i18n";
 
 /**
  * Lazy video facade: shows a 16:9 poster + play button, and mounts the YouTube
@@ -19,6 +21,7 @@ export function VideoFacade({
   title: string;
 }) {
   const [playing, setPlaying] = useState(false);
+  const { locale } = useLocale();
 
   if (playing && youtubeId) {
     return (
@@ -38,7 +41,7 @@ export function VideoFacade({
     <button
       type="button"
       onClick={() => youtubeId && setPlaying(true)}
-      aria-label={youtubeId ? `Přehrát: ${title}` : title}
+      aria-label={youtubeId ? `${pick(locale, { cs: "Přehrát", en: "Play" })}: ${title}` : title}
       className="group relative block aspect-video w-full overflow-hidden rounded-lg shadow-lift"
     >
       <Image

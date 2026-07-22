@@ -1,14 +1,20 @@
 import type { Metadata } from "next";
 import { Container } from "@/components/Container";
 import { CartContents } from "@/components/shop/CartContents";
+import { getLocale } from "@/lib/i18n.server";
+import { pick } from "@/lib/i18n";
 
-export const metadata: Metadata = { title: "Košík", robots: { index: false } };
+export async function generateMetadata(): Promise<Metadata> {
+  const locale = await getLocale();
+  return { title: pick(locale, { cs: "Košík", en: "Cart" }), robots: { index: false } };
+}
 
-export default function KosikPage() {
+export default async function KosikPage() {
+  const locale = await getLocale();
   return (
     <section className="bg-surface py-16 sm:py-20">
       <Container className="max-w-4xl">
-        <h1 className="mb-8 font-serif text-3xl font-semibold text-moss-deep sm:text-4xl">Košík</h1>
+        <h1 className="mb-8 font-serif text-3xl font-semibold text-moss-deep sm:text-4xl">{pick(locale, { cs: "Košík", en: "Cart" })}</h1>
         <CartContents />
       </Container>
     </section>

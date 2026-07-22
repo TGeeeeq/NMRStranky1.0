@@ -1,6 +1,9 @@
 /** Šest světů hry jako SVG mini-scény. Server-safe, animace jen přes CSS třídy. */
 
-type World = { id: string; name: string; scene: React.ReactNode };
+import { getLocale } from "@/lib/i18n.server";
+import { pick, type Locale } from "@/lib/i18n";
+
+type World = { id: string; name: Record<Locale, string>; scene: React.ReactNode };
 
 function Sky({ id, stops }: { id: string; stops: [string, string] }) {
   return (
@@ -16,7 +19,7 @@ function Sky({ id, stops }: { id: string; stops: [string, string] }) {
 const WORLDS: World[] = [
   {
     id: "louka",
-    name: "Rozkvetlá louka",
+    name: { cs: "Rozkvetlá louka", en: "Meadow in bloom" },
     scene: (
       <>
         <Sky id="louka" stops={["#8ed4f7", "#d6f0fb"]} />
@@ -38,7 +41,7 @@ const WORLDS: World[] = [
   },
   {
     id: "sad",
-    name: "Ovocný sad",
+    name: { cs: "Ovocný sad", en: "Orchard" },
     scene: (
       <>
         <Sky id="sad" stops={["#aee0f2", "#e9f6d8"]} />
@@ -58,7 +61,7 @@ const WORLDS: World[] = [
   },
   {
     id: "les",
-    name: "Pohádkový les",
+    name: { cs: "Pohádkový les", en: "Enchanted forest" },
     scene: (
       <>
         <Sky id="les" stops={["#2f5f63", "#183b40"]} />
@@ -88,7 +91,7 @@ const WORLDS: World[] = [
   },
   {
     id: "vesnice",
-    name: "Veselá vesnice",
+    name: { cs: "Veselá vesnice", en: "Merry village" },
     scene: (
       <>
         <Sky id="vesnice" stops={["#9fd8f2", "#f4e9cf"]} />
@@ -112,7 +115,7 @@ const WORLDS: World[] = [
   },
   {
     id: "zapad",
-    name: "Zlatá hodinka",
+    name: { cs: "Zlatá hodinka", en: "Golden hour" },
     scene: (
       <>
         <Sky id="zapad" stops={["#f6b352", "#e8833a"]} />
@@ -125,7 +128,7 @@ const WORLDS: World[] = [
   },
   {
     id: "noc",
-    name: "Hvězdná noc",
+    name: { cs: "Hvězdná noc", en: "Starry night" },
     scene: (
       <>
         <Sky id="noc" stops={["#1c2952", "#0e1631"]} />
@@ -151,15 +154,16 @@ const WORLDS: World[] = [
   },
 ];
 
-export function WorldScenes() {
+export async function WorldScenes() {
+  const locale = await getLocale();
   return (
     <div className="mt-10 grid grid-cols-2 gap-4 sm:gap-5 lg:grid-cols-3">
       {WORLDS.map((w) => (
         <figure key={w.id} className="overflow-hidden rounded-lg border border-cream/20 bg-cream/5 transition hover:-translate-y-1 hover:shadow-lg">
-          <svg viewBox="0 0 200 120" className="block w-full" role="img" aria-label={w.name}>
+          <svg viewBox="0 0 200 120" className="block w-full" role="img" aria-label={pick(locale, w.name)}>
             {w.scene}
           </svg>
-          <figcaption className="px-4 py-3 text-sm font-medium text-cream">{w.name}</figcaption>
+          <figcaption className="px-4 py-3 text-sm font-medium text-cream">{pick(locale, w.name)}</figcaption>
         </figure>
       ))}
     </div>

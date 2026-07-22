@@ -4,6 +4,8 @@ import { headers } from "next/headers";
 import { placeOrder } from "@/lib/orders";
 import { sendOrderEmails } from "@/lib/email";
 import { countRecentOrdersFromIp } from "@/lib/db/queries";
+import { getLocale } from "@/lib/i18n.server";
+import { pick } from "@/lib/i18n";
 
 export async function createOrder(raw: unknown): Promise<{ ok: true; orderNumber: string } | { ok: false; error: string }> {
   const h = await headers();
@@ -14,7 +16,8 @@ export async function createOrder(raw: unknown): Promise<{ ok: true; orderNumber
     || "0.0.0.0";
 
   if ((await countRecentOrdersFromIp(ip, 60)) >= 5) {
-    return { ok: false, error: "Příliš mnoho požadavků. Zkuste to prosím za chvíli." };
+    const locale = await getLocale();
+    return { ok: false, error: pick(locale, { cs: "Příliš mnoho požadavků. Zkuste to prosím za chvíli.", en: "Too many requests. Please try again in a moment." }) };
   }
 
   const res = await placeOrder(raw, ip);

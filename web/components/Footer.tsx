@@ -4,21 +4,21 @@ import AFLogo from "./AFLogo";
 import { CookieSettingsButton } from "./CookieSettingsButton";
 import { GooglePlayIcon } from "./BrandIcons";
 import { LOUKARUN } from "@/lib/site";
+import { getLocale } from "@/lib/i18n.server";
+import { dict, pick } from "@/lib/i18n";
 
-export function Footer() {
+export async function Footer() {
+  const locale = await getLocale();
   return (
     <footer className="bg-moss-deep text-cream">
       <Container className="py-10 text-center">
-        <p className="text-sm text-cream/80">
-          © 2026 Nech mě růst z.s. Všechna práva vyhrazena. • Napsáno s láskou
-          k přírodě a zvířatům.
-        </p>
+        <p className="text-sm text-cream/80">{pick(locale, dict.rightsReserved)}</p>
         <p className="mt-3 flex flex-wrap items-center justify-center gap-x-3 gap-y-1 text-sm">
           <Link
             href="/gdpr"
             className="text-cream/90 underline-offset-4 hover:underline"
           >
-            Zásady ochrany osobních údajů
+            {pick(locale, dict.privacyPolicy)}
           </Link>
           <span aria-hidden="true" className="text-cream/40">
             •
@@ -27,7 +27,7 @@ export function Footer() {
             href="/vop"
             className="text-cream/90 underline-offset-4 hover:underline"
           >
-            Obchodní podmínky
+            {pick(locale, dict.terms)}
           </Link>
           <span aria-hidden="true" className="text-cream/40">
             •
@@ -46,9 +46,9 @@ export function Footer() {
               className="text-cream/70 transition-colors group-hover:text-cream"
             />
             <span>
-              Zahraj si{" "}
+              {pick(locale, dict.playPrefix)}{" "}
               <span className="font-serif tracking-wide">Louka&nbsp;Run</span>{" "}
-              na Google&nbsp;Play
+              {pick(locale, dict.playSuffix)}
             </span>
           </a>
         </p>
@@ -65,7 +65,7 @@ export function Footer() {
               className="ring-1 ring-[#d4a45a]/20 transition duration-500 ease-out group-hover:scale-105 group-hover:ring-[#d4a45a]/45 group-hover:shadow-[0_0_22px_rgba(212,164,90,0.28)]"
             />
             <span>
-              web vytvořil{" "}
+              {pick(locale, dict.madeBy)}{" "}
               <span
                 data-karel-credit-name
                 className="font-serif tracking-wide group-hover:text-cream"

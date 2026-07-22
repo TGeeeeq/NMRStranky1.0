@@ -15,6 +15,8 @@ import {
 import { Container } from "@/components/Container";
 import { FloatingParticles } from "@/components/FloatingParticles";
 import { staggerContainer, staggerItem } from "@/lib/variants";
+import { useLocale } from "@/components/LocaleProvider";
+import { pick } from "@/lib/i18n";
 
 // Mutable tuple (not `as const`) so it satisfies motion's `number[]` easing type.
 const EASE: [number, number, number, number] = [0.22, 1, 0.36, 1];
@@ -41,6 +43,7 @@ const lineChild: Variants = {
  * on unless reduced-motion) and `fx` (cursor effects, desktop fine-pointer only).
  */
 export function HomeHero() {
+  const { locale } = useLocale();
   const sectionRef = useRef<HTMLElement>(null);
 
   const [motionOn, setMotionOn] = useState(false);
@@ -146,7 +149,10 @@ export function HomeHero() {
             >
               <Image
                 src="/assets/home-hero.webp"
-                alt="Pár se zvířaty na louce – osel, dva psi a muflon ve večerním světle"
+                alt={pick(locale, {
+                  cs: "Pár se zvířaty na louce – osel, dva psi a muflon ve večerním světle",
+                  en: "A couple with animals in the meadow – a donkey, two dogs and a mouflon in the evening light",
+                })}
                 fill
                 preload
                 sizes="100vw"
@@ -204,15 +210,26 @@ export function HomeHero() {
               variants={lineParent}
               className="text-balance font-serif text-[2.6rem] font-semibold leading-[1.05] text-cream sm:text-6xl lg:text-7xl"
             >
-              <Line>Tvoříme prostor pro růst</Line>
-              <Line>duše, srdce i přírody</Line>
+              {locale === "en" ? (
+                <>
+                  <Line>We create space to grow —</Line>
+                  <Line>soul, heart and nature</Line>
+                </>
+              ) : (
+                <>
+                  <Line>Tvoříme prostor pro růst</Line>
+                  <Line>duše, srdce i přírody</Line>
+                </>
+              )}
             </motion.h1>
             <motion.p
               variants={staggerItem}
               className="mx-auto mt-6 max-w-xl text-lg text-cream/85"
             >
-              Nezisková organizace s vizí tvorby rodového statku, kde žijeme
-              v harmonii s přírodou, zvířaty i sebou navzájem.
+              {pick(locale, {
+                cs: "Nezisková organizace s vizí tvorby rodového statku, kde žijeme v harmonii s přírodou, zvířaty i sebou navzájem.",
+                en: "A non-profit with a vision of a homestead where we live in harmony with nature, animals and one another.",
+              })}
             </motion.p>
             <motion.div
               variants={staggerItem}
@@ -222,13 +239,13 @@ export function HomeHero() {
                 href="/jak-se-zapojit"
                 className="rounded-pill bg-accent px-7 py-3 font-semibold text-moss-deep shadow-lift transition-transform hover:-translate-y-0.5"
               >
-                Jak se zapojit
+                {pick(locale, { cs: "Jak se zapojit", en: "Get involved" })}
               </Link>
               <Link
                 href="/o-nas"
                 className="rounded-pill border border-cream/40 px-7 py-3 font-medium text-cream backdrop-blur-sm transition-colors hover:bg-cream/10"
               >
-                Více o nás
+                {pick(locale, { cs: "Více o nás", en: "More about us" })}
               </Link>
             </motion.div>
           </motion.div>

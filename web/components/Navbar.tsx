@@ -14,9 +14,13 @@ import { Menu, X, Heart } from "lucide-react";
 import { navItems } from "@/lib/nav";
 import { cn } from "@/lib/cn";
 import { CartButton } from "@/components/shop/CartButton";
+import { LanguageToggle } from "@/components/LanguageToggle";
+import { useLocale } from "@/components/LocaleProvider";
+import { dict, navLabels, pick } from "@/lib/i18n";
 
 export function Navbar() {
   const pathname = usePathname();
+  const { locale } = useLocale();
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
 
@@ -36,13 +40,13 @@ export function Navbar() {
       )}
     >
       <nav
-        aria-label="Hlavní navigace"
+        aria-label={pick(locale, dict.mainNav)}
         className={cn(
           "mx-auto flex max-w-[1180px] items-center justify-between px-5 transition-[height] duration-300 sm:px-6 lg:px-8",
           scrolled ? "h-[60px]" : "h-[70px]",
         )}
       >
-        <Link href="/" aria-label="Nech mě růst – domů" className="flex items-center">
+        <Link href="/" aria-label={pick(locale, dict.home)} className="flex items-center">
           <Image
             src="/assets/logo.png"
             alt="Nech mě růst"
@@ -70,7 +74,7 @@ export function Navbar() {
                     active && "text-moss",
                   )}
                 >
-                  {item.label}
+                  {pick(locale, navLabels[item.href])}
                   {active ? (
                     <motion.span
                       layoutId="nav-underline"
@@ -86,15 +90,16 @@ export function Navbar() {
 
         <div className="flex items-center gap-3">
           {pathname.startsWith("/obchod") ? <CartButton /> : null}
+          <LanguageToggle className="hidden sm:inline-flex" />
           <Link
             href="/jak-se-zapojit"
             className="hidden items-center gap-2 rounded-pill bg-moss px-5 py-2 text-sm font-medium text-cream shadow-soft transition-transform hover:-translate-y-0.5 sm:inline-flex"
           >
-            <Heart size={16} aria-hidden /> Přispět
+            <Heart size={16} aria-hidden /> {pick(locale, dict.donate)}
           </Link>
           <button
             type="button"
-            aria-label="Otevřít menu"
+            aria-label={pick(locale, open ? dict.closeMenu : dict.openMenu)}
             aria-expanded={open}
             aria-controls="mobile-nav"
             onClick={() => setOpen((v) => !v)}
@@ -131,17 +136,23 @@ export function Navbar() {
                         : "border-l-4 border-transparent pl-2 text-text hover:bg-surface-alt",
                     )}
                   >
-                    {item.label}
+                    {pick(locale, navLabels[item.href])}
                   </Link>
                 </li>
               ))}
+              <li className="flex items-center justify-between gap-3 px-3 pt-4">
+                <span className="text-sm font-medium text-text-muted">
+                  {pick(locale, dict.switchLanguage)}
+                </span>
+                <LanguageToggle size="md" />
+              </li>
               <li className="pt-3">
                 <Link
                   href="/jak-se-zapojit"
                   onClick={() => setOpen(false)}
                   className="inline-flex w-full items-center justify-center gap-2 rounded-pill bg-moss px-5 py-3 font-medium text-cream"
                 >
-                  <Heart size={16} aria-hidden /> Přispět
+                  <Heart size={16} aria-hidden /> {pick(locale, dict.donate)}
                 </Link>
               </li>
             </ul>

@@ -3,8 +3,11 @@
 import { useState } from "react";
 import Image from "next/image";
 import { cn } from "@/lib/cn";
+import { useLocale } from "@/components/LocaleProvider";
+import { pick } from "@/lib/i18n";
 
 export function ProductGallery({ images, alt }: { images: string[]; alt: string }) {
+  const { locale } = useLocale();
   const [active, setActive] = useState(0);
   const list = images.length ? images : [];
   return (
@@ -26,7 +29,7 @@ export function ProductGallery({ images, alt }: { images: string[]; alt: string 
                 i === active ? "border-moss" : "border-border",
               )}
             >
-              <Image src={src} alt={`${alt} – náhled ${i + 1}`} fill sizes="80px" className="object-cover" />
+              <Image src={src} alt={pick(locale, { cs: `${alt} – náhled ${i + 1}`, en: `${alt} – preview ${i + 1}` })} fill sizes="80px" className="object-cover" />
             </button>
           ))}
         </div>

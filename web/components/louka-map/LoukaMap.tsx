@@ -13,6 +13,8 @@ import Image from "next/image";
 import { ExternalLink, Maximize2, Minimize2, Minus, Plus, RotateCcw, X } from "lucide-react";
 import { cn } from "@/lib/cn";
 import { SITE } from "@/lib/site";
+import { useLocale } from "@/components/LocaleProvider";
+import { pick } from "@/lib/i18n";
 import {
   IMG,
   starts,
@@ -74,6 +76,7 @@ function clamp(v: number, lo: number, hi: number) {
 type Transform = { scale: number; tx: number; ty: number };
 
 export function LoukaMap({ compact = false }: { compact?: boolean }) {
+  const { locale } = useLocale();
   const viewportRef = useRef<HTMLDivElement>(null);
   const [t, setT] = useState<Transform>({ scale: 1, tx: 0, ty: 0 });
   const [routeIds, setRouteIds] = useState<RouteId[]>([]);
@@ -295,7 +298,10 @@ export function LoukaMap({ compact = false }: { compact?: boolean }) {
       )}
     >
       <p className="font-medium text-moss-deep">
-        Z Nové Vsi u Leštiny vedou dvě trasy — obě jsou vyznačené v mapě:
+        {pick(locale, {
+          cs: "Z Nové Vsi u Leštiny vedou dvě trasy — obě jsou vyznačené v mapě:",
+          en: "Two routes lead from Nová Ves u Leštiny — both are marked on the map:",
+        })}
       </p>
       <div className="mt-2 flex flex-wrap gap-2">
         {shownRoutes.map((r) => (
@@ -314,18 +320,29 @@ export function LoukaMap({ compact = false }: { compact?: boolean }) {
           </button>
         ))}
       </div>
-      <p className="mt-1.5 italic text-text-muted">Klepnutím na trasu vyberete jen jednu.</p>
+      <p className="mt-1.5 italic text-text-muted">{pick(locale, { cs: "Klepnutím na trasu vyberete jen jednu.", en: "Tap a route to pick just one." })}</p>
     </div>
   ) : activeRoute ? (
     <p className={cn("text-text", compact ? "text-xs" : "text-sm")}>
       <span className="font-medium text-moss-deep">{activeRoute.label}:</span>{" "}
-      ≈ {activeRoute.km} km pěšky (zhruba {walkingTimeMinutes(activeRoute.km)} min) — trasa
-      je v mapě vyznačená animovanou čárkovanou čarou.
+      {locale === "en" ? (
+        <>
+          ≈ {activeRoute.km} km on foot (about {walkingTimeMinutes(activeRoute.km)} min) — the route
+          is marked on the map with an animated dashed line.
+        </>
+      ) : (
+        <>
+          ≈ {activeRoute.km} km pěšky (zhruba {walkingTimeMinutes(activeRoute.km)} min) — trasa
+          je v mapě vyznačená animovanou čárkovanou čarou.
+        </>
+      )}
     </p>
   ) : (
     <p className={cn("italic text-text-muted", compact ? "text-xs" : "text-sm")}>
-      Kudy k nám přijedete? Klikněte na bod v mapě nebo na tlačítko níže. Mapu lze
-      přiblížit, posouvat i zobrazit na celou obrazovku.
+      {pick(locale, {
+        cs: "Kudy k nám přijedete? Klikněte na bod v mapě nebo na tlačítko níže. Mapu lze přiblížit, posouvat i zobrazit na celou obrazovku.",
+        en: "How will you get to us? Click a point on the map or the button below. You can zoom, pan and view the map in fullscreen.",
+      })}
     </p>
   );
 
@@ -352,7 +369,10 @@ export function LoukaMap({ compact = false }: { compact?: boolean }) {
           onPointerCancel={endPointer}
           onDoubleClick={onDoubleClick}
           role="application"
-          aria-label="Interaktivní kreslená mapa cesty na Louku — táhnutím posunete, kolečkem přiblížíte"
+          aria-label={pick(locale, {
+            cs: "Interaktivní kreslená mapa cesty na Louku — táhnutím posunete, kolečkem přiblížíte",
+            en: "Interactive illustrated map of the way to the Meadow — drag to pan, scroll to zoom",
+          })}
         >
           <div
             className="absolute inset-0 origin-top-left"
@@ -364,7 +384,10 @@ export function LoukaMap({ compact = false }: { compact?: boolean }) {
               {/* Podkladová kreslená mapa */}
               <Image
                 src={IMG.src}
-                alt="Kreslená mapa okolí Louky u Nové Vsi u Leštiny"
+                alt={pick(locale, {
+                  cs: "Kreslená mapa okolí Louky u Nové Vsi u Leštiny",
+                  en: "Illustrated map of the area around the Meadow near Nová Ves u Leštiny",
+                })}
                 fill
                 sizes="(min-width: 768px) 720px, 100vw"
                 className="pointer-events-none object-contain"
@@ -580,18 +603,20 @@ export function LoukaMap({ compact = false }: { compact?: boolean }) {
         {/* Ovládání zoomu */}
         <div className="absolute right-3 top-3 flex flex-col gap-1.5">
           <ZoomBtn
-            label={fullscreen ? "Ukončit celou obrazovku" : "Celá obrazovka"}
+            label={fullscreen
+              ? pick(locale, { cs: "Ukončit celou obrazovku", en: "Exit fullscreen" })
+              : pick(locale, { cs: "Celá obrazovka", en: "Fullscreen" })}
             onClick={toggleFullscreen}
           >
             {fullscreen ? <Minimize2 size={17} aria-hidden /> : <Maximize2 size={17} aria-hidden />}
           </ZoomBtn>
-          <ZoomBtn label="Přiblížit" onClick={() => zoomButton(1.4)}>
+          <ZoomBtn label={pick(locale, { cs: "Přiblížit", en: "Zoom in" })} onClick={() => zoomButton(1.4)}>
             <Plus size={18} aria-hidden />
           </ZoomBtn>
-          <ZoomBtn label="Oddálit" onClick={() => zoomButton(1 / 1.4)}>
+          <ZoomBtn label={pick(locale, { cs: "Oddálit", en: "Zoom out" })} onClick={() => zoomButton(1 / 1.4)}>
             <Minus size={18} aria-hidden />
           </ZoomBtn>
-          <ZoomBtn label="Výchozí pohled" onClick={reset}>
+          <ZoomBtn label={pick(locale, { cs: "Výchozí pohled", en: "Reset view" })} onClick={reset}>
             <RotateCcw size={16} aria-hidden />
           </ZoomBtn>
         </div>
@@ -641,7 +666,7 @@ export function LoukaMap({ compact = false }: { compact?: boolean }) {
           className="inline-flex items-center gap-2 rounded-pill bg-moss px-5 py-2.5 text-sm font-medium text-cream transition-colors hover:bg-moss-deep"
         >
           <ExternalLink size={16} aria-hidden />
-          Otevřít v Mapy.cz — navigace
+          {pick(locale, { cs: "Otevřít v Mapy.cz — navigace", en: "Open in Mapy.cz — navigation" })}
         </a>
       </div>
 
@@ -651,7 +676,7 @@ export function LoukaMap({ compact = false }: { compact?: boolean }) {
           className="fixed inset-0 z-50 flex items-center justify-center bg-moss-deep/70 p-4"
           role="dialog"
           aria-modal="true"
-          aria-label="Detailní mapa Louky"
+          aria-label={pick(locale, { cs: "Detailní mapa Louky", en: "Detailed map of the Meadow" })}
           onClick={() => setDetailOpen(false)}
         >
           <div
@@ -661,16 +686,17 @@ export function LoukaMap({ compact = false }: { compact?: boolean }) {
             <button
               type="button"
               onClick={() => setDetailOpen(false)}
-              aria-label="Zavřít"
+              aria-label={pick(locale, { cs: "Zavřít", en: "Close" })}
               className="absolute right-4 top-4 rounded-full border border-border bg-surface-alt p-1.5 text-moss-deep transition-colors hover:bg-sand/60"
             >
               <X size={18} aria-hidden />
             </button>
-            <h3 className="font-serif text-2xl font-semibold text-moss-deep">Louka — detail</h3>
+            <h3 className="font-serif text-2xl font-semibold text-moss-deep">{pick(locale, { cs: "Louka — detail", en: "The Meadow — detail" })}</h3>
             <p className="mt-2 text-sm text-text">
-              Louka je domovem zvířat zachráněných spolkem Nech mě růst — najdete tu výběhy,
-              pastviny, sad i zázemí spolku. Detailní kreslenou mapu míst na Louce právě
-              připravujeme.
+              {pick(locale, {
+                cs: "Louka je domovem zvířat zachráněných spolkem Nech mě růst — najdete tu výběhy, pastviny, sad i zázemí spolku. Detailní kreslenou mapu míst na Louce právě připravujeme.",
+                en: "The Meadow is home to animals rescued by the Nech mě růst association — you'll find enclosures, pastures, an orchard and the association's facilities here. We're currently preparing a detailed illustrated map of the places at the Meadow.",
+              })}
             </p>
             {loukaDetail.src ? (
               // eslint-disable-next-line @next/next/no-img-element
@@ -682,8 +708,10 @@ export function LoukaMap({ compact = false }: { compact?: boolean }) {
             ) : (
               <div className="mt-4 rounded-lg border border-dashed border-border bg-surface-alt p-8 text-center">
                 <p className="text-text">
-                  Detailní kreslená mapa Louky se připravuje — brzy tu bude s vyznačenými místy,
-                  třešňovou i švestkovo-jablečnou alejí.
+                  {pick(locale, {
+                    cs: "Detailní kreslená mapa Louky se připravuje — brzy tu bude s vyznačenými místy, třešňovou i švestkovo-jablečnou alejí.",
+                    en: "A detailed illustrated map of the Meadow is in the works — it'll be here soon with the places marked, including the cherry and the plum-and-apple avenues.",
+                  })}
                 </p>
               </div>
             )}

@@ -1,8 +1,10 @@
 import { CountUp } from "@/components/CountUp";
 import { campaignProgress } from "@/lib/campaign";
+import { getLocale } from "@/lib/i18n.server";
+import { pick } from "@/lib/i18n";
 
 /** Ukazatel průběhu sbírky — vybraná částka vs. cíl. */
-export function HayMeter({
+export async function HayMeter({
   goal,
   raised,
   updatedAt,
@@ -11,6 +13,7 @@ export function HayMeter({
   raised: number;
   updatedAt: string;
 }) {
+  const locale = await getLocale();
   const pct = campaignProgress(raised, goal);
 
   return (
@@ -19,7 +22,7 @@ export function HayMeter({
         <p className="font-serif text-3xl font-semibold text-moss-deep sm:text-4xl">
           <CountUp to={raised} suffix=" Kč" />{" "}
           <span className="font-sans text-base font-normal text-text-muted">
-            z {goal.toLocaleString("cs-CZ")} Kč
+            {pick(locale, { cs: "z", en: "of" })} {goal.toLocaleString("cs-CZ")} Kč
           </span>
         </p>
         <span className="text-sm font-semibold text-terracotta">{pct} %</span>
@@ -29,7 +32,10 @@ export function HayMeter({
         aria-valuenow={pct}
         aria-valuemin={0}
         aria-valuemax={100}
-        aria-label={`Postup sbírky Seno pro Louku: vybráno ${pct} % cíle`}
+        aria-label={pick(locale, {
+          cs: `Postup sbírky Seno pro Louku: vybráno ${pct} % cíle`,
+          en: `Hay for the Meadow fundraiser progress: ${pct} % of the goal raised`,
+        })}
         className="h-4 w-full overflow-hidden rounded-pill border border-border bg-surface-alt"
       >
         <div
@@ -37,7 +43,9 @@ export function HayMeter({
           style={{ width: `${Math.max(pct, 1)}%` }}
         />
       </div>
-      <p className="mt-2 text-xs text-text-muted">Aktualizováno {updatedAt}</p>
+      <p className="mt-2 text-xs text-text-muted">
+        {pick(locale, { cs: "Aktualizováno", en: "Updated" })} {updatedAt}
+      </p>
     </div>
   );
 }

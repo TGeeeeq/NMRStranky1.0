@@ -6,19 +6,29 @@ import { PageHero } from "@/components/PageHero";
 import { SocialSection } from "@/components/SocialSection";
 import { SOCIAL } from "@/lib/site";
 import { EventCard, type Event } from "./EventCard";
+import { getLocale } from "@/lib/i18n.server";
+import { pick, type Locale } from "@/lib/i18n";
 
-export const metadata: Metadata = {
-  title: "Události",
-  description:
-    "Zúčastněte se některé z událostí a poznejte život na Louce — brigády, festivaly a setkání se zvířaty.",
-  alternates: { canonical: "/udalosti" },
+export async function generateMetadata(): Promise<Metadata> {
+  const locale = await getLocale();
+  return {
+    title: pick(locale, { cs: "Události", en: "Events" }),
+    description: pick(locale, {
+      cs: "Zúčastněte se některé z událostí a poznejte život na Louce — brigády, festivaly a setkání se zvířaty.",
+      en: "Join one of our events and get to know life at the Meadow — work weekends, festivals and gatherings with the animals.",
+    }),
+    alternates: { canonical: "/udalosti" },
+  };
+}
+
+const LOUKADA_MOTTO = {
+  cs: "Přijeď makat, louka ti poděkuje.",
+  en: "Come and pitch in — the meadow will thank you.",
 };
 
-const LOUKADA_MOTTO = "Přijeď makat, louka ti poděkuje.";
-
-const kontaktniOdkazy = (
+const kontaktniOdkazy = (locale: Locale) => (
   <p>
-    Kdyby vám nebylo něco jasné, pište nám na Instagram{" "}
+    {locale === "en" ? "If anything is unclear, message us on Instagram" : "Kdyby vám nebylo něco jasné, pište nám na Instagram"}{" "}
     <a
       href={SOCIAL.instagram}
       target="_blank"
@@ -27,7 +37,7 @@ const kontaktniOdkazy = (
     >
       @nech_me_rust
     </a>{" "}
-    nebo na e-mail{" "}
+    {locale === "en" ? "or by e-mail at" : "nebo na e-mail"}{" "}
     <a
       href="mailto:nechmerust@gmail.com"
       className="font-medium text-moss underline underline-offset-2 hover:text-moss-deep"
@@ -38,17 +48,53 @@ const kontaktniOdkazy = (
   </p>
 );
 
-const events: Event[] = [
+const buildEvents = (locale: Locale): Event[] => [
   {
     title: "Loukáda",
-    badge: "Novinka",
-    kind: "Víkend na Louce",
-    location: "Louka — azyl Nech mě růst",
+    badge: pick(locale, { cs: "Novinka", en: "New" }),
+    kind: pick(locale, { cs: "Víkend na Louce", en: "Weekend at the Meadow" }),
+    location: pick(locale, { cs: "Louka — azyl Nech mě růst", en: "The Meadow — Nech mě růst sanctuary" }),
     date: "21.–23. 8. 2026",
-    motto: LOUKADA_MOTTO,
-    teaser:
-      "Společný víkend přímo na Louce — práce kolem zvířat, staveb a zahrady, večery u ohně a spaní pod širým nebem.",
-    description: (
+    motto: pick(locale, LOUKADA_MOTTO),
+    teaser: pick(locale, {
+      cs: "Společný víkend přímo na Louce — práce kolem zvířat, staveb a zahrady, večery u ohně a spaní pod širým nebem.",
+      en: "A weekend together right at the Meadow — work around the animals, buildings and garden, evenings by the fire and sleeping under the open sky.",
+    }),
+    description: locale === "en" ? (
+      <>
+        <p>
+          Lovely day to you, dear Friends — the time has come! From 21 to 23 August we can gather
+          at the Meadow and spend time together in a picturesque setting among the forests. You'll
+          lend a hand, become part of the Meadow, and along the way you can learn some hands-on work
+          around the animals, buildings and gardening. I'm already really looking forward to it.
+        </p>
+        <p>
+          This whole summer is special because the Meadow is gaining a new human member — our
+          daughter. For me that's a big thing, and I'm looking forward to sharing her with you.
+        </p>
+        <p>
+          Plant-based food will be provided throughout the Loukáda. If you'd like to bring something
+          from your own kitchen for the shared table, we'll certainly be glad.
+        </p>
+        <p>Sleeping at the Meadow in your own tent, or by the fire under the open sky.</p>
+        <p>
+          Do bring work clothes and something warmer for the evening — the evenings and nights here
+          tend to be chilly.
+        </p>
+        <p>
+          Those coming by car, park at the address Nová Ves u Leštiny 32 in the marked spot. Those
+          of you coming by train will get off at Vlkaneč or Nová Ves u Leštiny station — it's about
+          0.5 km on foot to the parking address, and from there follow the marked route all the way
+          to us at the Meadow.
+        </p>
+        {kontaktniOdkazy(locale)}
+        <p>
+          I wish you all lovely days, I'm very much looking forward to seeing you, and see you at
+          the Meadow. Let's let ourselves and nature grow. — TomLuk
+        </p>
+        <p>P.S. Come and pitch in, the Meadow will thank you. Or at least share this — that helps us a lot too. 🙏</p>
+      </>
+    ) : (
       <>
         <p>
           Krásný den, Přátelníci, je to tu! Od 21. do 23. srpna se můžeme sejít na Louce a
@@ -75,7 +121,7 @@ const events: Event[] = [
           — na adresu parkování dojdete cca 0,5 km pěšky a odtud pokračujte po vyznačené
           trase až k nám na Louku.
         </p>
-        {kontaktniOdkazy}
+        {kontaktniOdkazy(locale)}
         <p>
           Přeji vám všem krásné dny, moc se na vás těším a vidíme se na Louce. Nechme sebe a
           přírodu růst. — TomLuk
@@ -84,21 +130,36 @@ const events: Event[] = [
       </>
     ),
     photos: [
-      { src: "/assets/loukada1.webp", alt: "Společná práce na Louce" },
-      { src: "/assets/louka9.webp", alt: "S ovečkami na Louce" },
+      { src: "/assets/loukada1.webp", alt: pick(locale, { cs: "Společná práce na Louce", en: "Working together at the Meadow" }) },
+      { src: "/assets/louka9.webp", alt: pick(locale, { cs: "S ovečkami na Louce", en: "With the sheep at the Meadow" }) },
     ],
     showMap: true,
   },
   {
     title: "Loukáda",
-    badge: "Novinka",
-    kind: "Víkend na Louce",
-    location: "Louka — azyl Nech mě růst",
+    badge: pick(locale, { cs: "Novinka", en: "New" }),
+    kind: pick(locale, { cs: "Víkend na Louce", en: "Weekend at the Meadow" }),
+    location: pick(locale, { cs: "Louka — azyl Nech mě růst", en: "The Meadow — Nech mě růst sanctuary" }),
     date: "4.–6. 9. 2026",
-    motto: LOUKADA_MOTTO,
-    teaser:
-      "Další zářijový termín Loukády — setkání se zvířaty, společná práce i odpočinek přímo na Louce.",
-    description: (
+    motto: pick(locale, LOUKADA_MOTTO),
+    teaser: pick(locale, {
+      cs: "Další zářijový termín Loukády — setkání se zvířaty, společná práce i odpočinek přímo na Louce.",
+      en: "Another September date for the Loukáda — time with the animals, working together and resting right at the Meadow.",
+    }),
+    description: locale === "en" ? (
+      <>
+        <p>
+          Another September date for our Loukáda — a weekend full of time with the animals, working
+          together and resting right at the Meadow. We warmly invite everyone who'd like to enjoy
+          time in nature and get to know life at the sanctuary. Details of the programme to follow.
+        </p>
+        <p>
+          Those coming by car, park at the address Nová Ves u Leštiny 32 in the marked spot — from
+          there the marked route will lead you all the way to us at the Meadow. By train you can
+          reach Vlkaneč or Nová Ves u Leštiny station.
+        </p>
+      </>
+    ) : (
       <>
         <p>
           Další zářijový termín naší Loukády — víkendu plného setkání se zvířaty, společné
@@ -113,20 +174,28 @@ const events: Event[] = [
       </>
     ),
     photos: [
-      { src: "/assets/louka5.webp", alt: "Setkání s oslem Karlem" },
-      { src: "/assets/louka12.webp", alt: "Zvířecí obyvatelé u přístřešku" },
+      { src: "/assets/louka5.webp", alt: pick(locale, { cs: "Setkání s oslem Karlem", en: "Meeting Karel the donkey" }) },
+      { src: "/assets/louka12.webp", alt: pick(locale, { cs: "Zvířecí obyvatelé u přístřešku", en: "The animals by the shelter" }) },
     ],
     showMap: true,
   },
   {
     title: "Spolu Mezi Lesy",
-    badge: "Nový termín",
-    kind: "Festival na Louce",
-    location: "Louka — azyl Nech mě růst",
+    badge: pick(locale, { cs: "Nový termín", en: "New date" }),
+    kind: pick(locale, { cs: "Festival na Louce", en: "Festival at the Meadow" }),
+    location: pick(locale, { cs: "Louka — azyl Nech mě růst", en: "The Meadow — Nech mě růst sanctuary" }),
     date: "11.–13. 9. 2026",
-    teaser:
-      "Třídenní víkend na pomezí retreatu a festivalu — příroda, zvířata, intuitivní umění, pohyb a živá hudba.",
-    description: (
+    teaser: pick(locale, {
+      cs: "Třídenní víkend na pomezí retreatu a festivalu — příroda, zvířata, intuitivní umění, pohyb a živá hudba.",
+      en: "A three-day weekend somewhere between a retreat and a festival — nature, animals, intuitive art, movement and live music.",
+    }),
+    description: locale === "en" ? (
+      <p>
+        A three-day weekend somewhere between a retreat and a festival, right at the Meadow —
+        nature, animals, intuitive art, movement and live music. The event has been moved to a
+        new September date. You'll find the full programme and sign-up on the Facebook event.
+      </p>
+    ) : (
       <p>
         Třídenní víkend na pomezí retreatu a festivalu přímo na Louce — příroda, zvířata,
         intuitivní umění, pohyb a živá hudba. Akce se přesunula na nový zářijový termín.
@@ -135,19 +204,27 @@ const events: Event[] = [
     ),
     href: "https://facebook.com/events/s/spolu-mezi-lesy-presunuto-na-z/2298157060995232/",
     photos: [
-      { src: "/assets/mezilesy.jpg", alt: "Plakát festivalu Spolu Mezi Lesy" },
-      { src: "/assets/louka3.webp", alt: "Odpočinek se zvířaty na Louce" },
+      { src: "/assets/mezilesy.jpg", alt: pick(locale, { cs: "Plakát festivalu Spolu Mezi Lesy", en: "Poster for the Spolu Mezi Lesy festival" }) },
+      { src: "/assets/louka3.webp", alt: pick(locale, { cs: "Odpočinek se zvířaty na Louce", en: "Resting with the animals at the Meadow" }) },
     ],
   },
   {
-    title: "Společná procházka",
-    badge: "Novinka",
-    kind: "Procházka se zvířaty",
-    location: "Louka — azyl Nech mě růst",
+    title: pick(locale, { cs: "Společná procházka", en: "A walk together" }),
+    badge: pick(locale, { cs: "Novinka", en: "New" }),
+    kind: pick(locale, { cs: "Procházka se zvířaty", en: "A walk with the animals" }),
+    location: pick(locale, { cs: "Louka — azyl Nech mě růst", en: "The Meadow — Nech mě růst sanctuary" }),
     date: "26.9. 2026",
-    teaser:
-      "Procházka ve společnosti našich zvířecích přátel — čas v přírodě, mazlení a příjemná atmosféra.",
-    description: (
+    teaser: pick(locale, {
+      cs: "Procházka ve společnosti našich zvířecích přátel — čas v přírodě, mazlení a příjemná atmosféra.",
+      en: "A walk in the company of our animal friends — time in nature, cuddles and a lovely atmosphere.",
+    }),
+    description: locale === "en" ? (
+      <p>
+        Come along with us for a walk in the company of our animal friends. We'll enjoy time in
+        nature, cuddles with the animals and a lovely atmosphere among good people. Meeting point
+        and details to follow.
+      </p>
+    ) : (
       <p>
         Vydejte se s námi na společnou procházku ve společnosti našich zvířecích přátel.
         Užijeme si čas v přírodě, mazlení se zvířaty i příjemnou atmosféru mezi dobrými
@@ -155,18 +232,25 @@ const events: Event[] = [
       </p>
     ),
     photos: [
-      { src: "/assets/walk1.webp", alt: "Procházka se zvířaty podzimní krajinou" },
-      { src: "/assets/walk2.webp", alt: "Se zvířecími přáteli na lesní cestě" },
+      { src: "/assets/walk1.webp", alt: pick(locale, { cs: "Procházka se zvířaty podzimní krajinou", en: "A walk with the animals through the autumn landscape" }) },
+      { src: "/assets/walk2.webp", alt: pick(locale, { cs: "Se zvířecími přáteli na lesní cestě", en: "With animal friends on a forest path" }) },
     ],
   },
   {
-    title: "Toulky se zvířaty",
-    badge: "Termín upřesníme",
-    kind: "Dvoudenní putování",
-    location: "Střední Čechy",
-    teaser:
-      "Dvoudenní putování středočeskou krajinou se psy, oslem, muflonem a dalšími zvířecími přáteli.",
-    description: (
+    title: pick(locale, { cs: "Toulky se zvířaty", en: "Wandering with the animals" }),
+    badge: pick(locale, { cs: "Termín upřesníme", en: "Date to be confirmed" }),
+    kind: pick(locale, { cs: "Dvoudenní putování", en: "Two-day journey" }),
+    location: pick(locale, { cs: "Střední Čechy", en: "Central Bohemia" }),
+    teaser: pick(locale, {
+      cs: "Dvoudenní putování středočeskou krajinou se psy, oslem, muflonem a dalšími zvířecími přáteli.",
+      en: "A two-day journey through the Central Bohemian countryside with dogs, a donkey, a mouflon and other animal friends.",
+    }),
+    description: locale === "en" ? (
+      <p>
+        A two-day journey through the Central Bohemian countryside in the company of dogs, a donkey,
+        a mouflon and other animal friends. The date will be confirmed.
+      </p>
+    ) : (
       <p>
         Dvoudenní putování středočeskou krajinou ve společnosti psů, osla, muflona a
         dalších zvířecích přátel. Termín bude upřesněn.
@@ -174,31 +258,42 @@ const events: Event[] = [
     ),
     href: "https://www.facebook.com/share/1BDFbAxfFf/",
     photos: [
-      { src: "/assets/toulky1.webp", alt: "Putování s ovečkami a dalšími zvířaty" },
-      { src: "/assets/toulky2.webp", alt: "Ovečky na cestě středočeskou krajinou" },
+      { src: "/assets/toulky1.webp", alt: pick(locale, { cs: "Putování s ovečkami a dalšími zvířaty", en: "Wandering with sheep and other animals" }) },
+      { src: "/assets/toulky2.webp", alt: pick(locale, { cs: "Ovečky na cestě středočeskou krajinou", en: "Sheep on a path through the Central Bohemian countryside" }) },
     ],
   },
 ];
 
-export default function Udalosti() {
+export default async function Udalosti() {
+  const locale = await getLocale();
+  const events = buildEvents(locale);
   return (
     <>
       <PageHero
         image="/assets/udalosti-hero.webp"
-        imageAlt="Společná procházka lidí s krávami prosluněným lesem"
+        imageAlt={pick(locale, {
+          cs: "Společná procházka lidí s krávami prosluněným lesem",
+          en: "People walking together with cows through a sunlit forest",
+        })}
         objectPosition="object-[38%_50%]"
-        eyebrow="Pojďte mezi nás"
-        title="Události"
-        subtitle="Zúčastněte se některé z událostí a poznejte život na Louce."
+        eyebrow={pick(locale, { cs: "Pojďte mezi nás", en: "Come and join us" })}
+        title={pick(locale, { cs: "Události", en: "Events" })}
+        subtitle={pick(locale, {
+          cs: "Zúčastněte se některé z událostí a poznejte život na Louce.",
+          en: "Join one of our events and get to know life at the Meadow.",
+        })}
       />
 
       <section className="bg-surface py-16 sm:py-20">
         <Container className="max-w-3xl">
           <Reveal>
             <SectionHeader
-              eyebrow="Kalendář"
-              title="Nadcházející události"
-              description="Pravidelně pořádáme brigády, festivaly a setkání se zvířaty na Louce. Přijďte poznat náš každodenní život v souznění s přírodou."
+              eyebrow={pick(locale, { cs: "Kalendář", en: "Calendar" })}
+              title={pick(locale, { cs: "Nadcházející události", en: "Upcoming events" })}
+              description={pick(locale, {
+                cs: "Pravidelně pořádáme brigády, festivaly a setkání se zvířaty na Louce. Přijďte poznat náš každodenní život v souznění s přírodou.",
+                en: "We regularly hold work weekends, festivals and gatherings with the animals at the Meadow. Come and discover our everyday life in harmony with nature.",
+              })}
             />
           </Reveal>
 

@@ -6,6 +6,8 @@ import { CalendarDays, ChevronDown, MapPin } from "lucide-react";
 import { cn } from "@/lib/cn";
 import { EventPhotos, type EventPhoto } from "./EventPhotos";
 import { LoukaMap } from "@/components/louka-map/LoukaMap";
+import { useLocale } from "@/components/LocaleProvider";
+import { pick } from "@/lib/i18n";
 
 export type Event = {
   title: string;
@@ -26,6 +28,7 @@ export type Event = {
 /** Karta události: sbalená ukazuje jen krátkou zmínku a první fotku,
  *  po rozbalení celý popis, všechny fotky, mapu a odkazy. */
 export function EventCard({ event: e }: { event: Event }) {
+  const { locale } = useLocale();
   const [open, setOpen] = useState(false);
   // Mapa se poprvé připojí až při rozbalení a pak už zůstává,
   // aby se sbalené karty nevykreslovaly zbytečně.
@@ -49,7 +52,7 @@ export function EventCard({ event: e }: { event: Event }) {
       ) : null}
       <div className="mt-3 flex flex-wrap gap-x-6 gap-y-1.5 text-sm text-text-muted">
         <span className="inline-flex items-center gap-1.5">
-          <CalendarDays size={16} aria-hidden /> {e.date ?? "Termín bude upřesněn"}
+          <CalendarDays size={16} aria-hidden /> {e.date ?? pick(locale, { cs: "Termín bude upřesněn", en: "Date to be confirmed" })}
         </span>
         <span className="inline-flex items-center gap-1.5">
           <MapPin size={16} aria-hidden /> {e.location}
@@ -75,14 +78,29 @@ export function EventCard({ event: e }: { event: Event }) {
             <figure className="mt-6">
               <LoukaMap compact />
               <figcaption className="mt-2 text-xs text-text-muted">
-                Kreslená mapa okolí — celou i s popisem cesty najdete na{" "}
-                <Link
-                  href="/cesta-na-louku"
-                  className="font-medium text-moss underline underline-offset-2 hover:text-moss-deep"
-                >
-                  stránce Cesta na Louku
-                </Link>
-                .
+                {locale === "en" ? (
+                  <>
+                    An illustrated map of the area — the full version with directions is on the{" "}
+                    <Link
+                      href="/cesta-na-louku"
+                      className="font-medium text-moss underline underline-offset-2 hover:text-moss-deep"
+                    >
+                      Getting to the Meadow
+                    </Link>{" "}
+                    page.
+                  </>
+                ) : (
+                  <>
+                    Kreslená mapa okolí — celou i s popisem cesty najdete na{" "}
+                    <Link
+                      href="/cesta-na-louku"
+                      className="font-medium text-moss underline underline-offset-2 hover:text-moss-deep"
+                    >
+                      stránce Cesta na Louku
+                    </Link>
+                    .
+                  </>
+                )}
               </figcaption>
             </figure>
           ) : null}
@@ -93,7 +111,7 @@ export function EventCard({ event: e }: { event: Event }) {
               rel="noopener noreferrer"
               className="mt-6 inline-flex items-center rounded-pill bg-moss px-5 py-2.5 text-sm font-medium text-cream transition-colors hover:bg-moss-deep"
             >
-              Facebook událost
+              {pick(locale, { cs: "Facebook událost", en: "Facebook event" })}
             </a>
           ) : null}
         </div>
@@ -109,7 +127,7 @@ export function EventCard({ event: e }: { event: Event }) {
         aria-controls={detailId}
         className="mt-5 inline-flex items-center gap-1.5 rounded-pill border border-border bg-surface-alt px-5 py-2 text-sm font-medium text-moss-deep transition-colors hover:bg-sand/60"
       >
-        {open ? "Zobrazit méně" : "Zobrazit více"}
+        {open ? pick(locale, { cs: "Zobrazit méně", en: "Show less" }) : pick(locale, { cs: "Zobrazit více", en: "Show more" })}
         <ChevronDown size={16} aria-hidden className={cn("transition-transform", open && "rotate-180")} />
       </button>
     </article>

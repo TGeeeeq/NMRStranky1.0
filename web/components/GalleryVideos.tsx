@@ -3,6 +3,8 @@ import { SectionHeader } from "@/components/SectionHeader";
 import { Reveal } from "@/components/Reveal";
 import { VideoFacade } from "@/components/VideoFacade";
 import { cn } from "@/lib/cn";
+import { getLocale } from "@/lib/i18n.server";
+import { pick } from "@/lib/i18n";
 
 type GalleryVideo = { youtubeId: string; poster: string; title: string };
 
@@ -22,9 +24,10 @@ const videos: GalleryVideo[] = [
   },
 ];
 
-export function GalleryVideos({ embedded = false }: { embedded?: boolean }) {
+export async function GalleryVideos({ embedded = false }: { embedded?: boolean }) {
   if (videos.length === 0) return null;
   const single = videos.length === 1;
+  const locale = await getLocale();
 
   const grid = (
     <div
@@ -54,9 +57,12 @@ export function GalleryVideos({ embedded = false }: { embedded?: boolean }) {
       <Container>
         <Reveal>
           <SectionHeader
-            eyebrow="Ze života Louky"
-            title="Videa"
-            description="Pusťte si, jak to u nás na Louce žije."
+            eyebrow={pick(locale, { cs: "Ze života Louky", en: "Life at the Meadow" })}
+            title={pick(locale, { cs: "Videa", en: "Videos" })}
+            description={pick(locale, {
+              cs: "Pusťte si, jak to u nás na Louce žije.",
+              en: "See what life at the Meadow is really like.",
+            })}
           />
         </Reveal>
         {grid}

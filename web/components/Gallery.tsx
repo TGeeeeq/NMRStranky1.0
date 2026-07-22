@@ -6,8 +6,11 @@ import { X, ChevronLeft, ChevronRight, Camera, Video } from "lucide-react";
 import { galleryAnimals, galleryImages } from "@/lib/animals";
 import { Container } from "@/components/Container";
 import { cn } from "@/lib/cn";
+import { useLocale } from "@/components/LocaleProvider";
+import { pick } from "@/lib/i18n";
 
 export function Gallery({ videos }: { videos?: ReactNode }) {
+  const { locale } = useLocale();
   const [view, setView] = useState<"fotky" | "video">("fotky");
   const [filter, setFilter] = useState<string>("Vše");
   const [query, setQuery] = useState("");
@@ -73,7 +76,7 @@ export function Gallery({ videos }: { videos?: ReactNode }) {
                     : "text-text hover:text-moss-deep",
                 )}
               >
-                <Camera size={16} aria-hidden /> Fotky
+                <Camera size={16} aria-hidden /> {pick(locale, { cs: "Fotky", en: "Photos" })}
               </button>
               <button
                 type="button"
@@ -89,7 +92,7 @@ export function Gallery({ videos }: { videos?: ReactNode }) {
                     : "text-text hover:text-moss-deep",
                 )}
               >
-                <Video size={16} aria-hidden /> Video
+                <Video size={16} aria-hidden /> {pick(locale, { cs: "Video", en: "Video" })}
               </button>
             </div>
           </div>
@@ -105,8 +108,8 @@ export function Gallery({ videos }: { videos?: ReactNode }) {
             type="search"
             value={query}
             onChange={(e) => setQuery(e.target.value)}
-            placeholder="Hledat zvíře..."
-            aria-label="Hledat zvíře"
+            placeholder={pick(locale, { cs: "Hledat zvíře...", en: "Search animals..." })}
+            aria-label={pick(locale, { cs: "Hledat zvíře", en: "Search animals" })}
             className="w-full rounded-pill border border-border bg-surface px-4 py-2.5 text-sm text-text shadow-soft outline-none focus:border-moss focus:ring-2 focus:ring-moss/30 sm:px-5 sm:py-3 sm:text-base"
           />
         </div>
@@ -125,14 +128,14 @@ export function Gallery({ videos }: { videos?: ReactNode }) {
                   : "border-border bg-surface text-text hover:bg-surface-alt",
               )}
             >
-              {name}
+              {name === "Vše" ? pick(locale, { cs: "Vše", en: "All" }) : name}
             </button>
           ))}
         </div>
 
         {/* Grid */}
         {filtered.length === 0 ? (
-          <p className="py-12 text-center text-text-muted">Nic nenalezeno.</p>
+          <p className="py-12 text-center text-text-muted">{pick(locale, { cs: "Nic nenalezeno.", en: "Nothing found." })}</p>
         ) : (
           <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-4">
             {filtered.map((img, i) => (
@@ -141,7 +144,7 @@ export function Gallery({ videos }: { videos?: ReactNode }) {
                 type="button"
                 onClick={() => setActive(i)}
                 className="group relative aspect-square overflow-hidden rounded-lg shadow-soft"
-                aria-label={`Otevřít fotku: ${img.animal}`}
+                aria-label={`${pick(locale, { cs: "Otevřít fotku", en: "Open photo" })}: ${img.animal}`}
               >
                 <Image
                   src={img.src}
@@ -171,7 +174,7 @@ export function Gallery({ videos }: { videos?: ReactNode }) {
           className="fixed inset-0 z-[100] flex touch-pan-y items-center justify-center bg-moss-deep/90 p-4"
           role="dialog"
           aria-modal="true"
-          aria-label={`Fotka: ${current.animal}`}
+          aria-label={`${pick(locale, { cs: "Fotka", en: "Photo" })}: ${current.animal}`}
           onClick={() => setActive(null)}
           onTouchStart={(e) => {
             const t = e.touches[0];
@@ -192,7 +195,7 @@ export function Gallery({ videos }: { videos?: ReactNode }) {
         >
           <button
             type="button"
-            aria-label="Zavřít"
+            aria-label={pick(locale, { cs: "Zavřít", en: "Close" })}
             onClick={() => setActive(null)}
             className="absolute right-4 top-4 flex h-11 w-11 items-center justify-center rounded-pill bg-cream/15 text-cream hover:bg-cream/25"
           >
@@ -200,7 +203,7 @@ export function Gallery({ videos }: { videos?: ReactNode }) {
           </button>
           <button
             type="button"
-            aria-label="Předchozí"
+            aria-label={pick(locale, { cs: "Předchozí", en: "Previous" })}
             onClick={(e) => {
               e.stopPropagation();
               prev();
@@ -221,7 +224,7 @@ export function Gallery({ videos }: { videos?: ReactNode }) {
           </div>
           <button
             type="button"
-            aria-label="Další"
+            aria-label={pick(locale, { cs: "Další", en: "Next" })}
             onClick={(e) => {
               e.stopPropagation();
               next();

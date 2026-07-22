@@ -3,12 +3,15 @@
 import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import { X, ChevronLeft, ChevronRight, ZoomIn } from "lucide-react";
+import { useLocale } from "@/components/LocaleProvider";
+import { pick } from "@/lib/i18n";
 
 export type EventPhoto = { src: string; alt: string };
 
 /** Dvojice fotek u události: malé náhledy (na telefonu menší, na počítači
  *  větší), po kliknutí se otevřou v lightboxu jako v galerii. */
 export function EventPhotos({ photos, title }: { photos: EventPhoto[]; title: string }) {
+  const { locale } = useLocale();
   const [active, setActive] = useState<number | null>(null);
   const touchStart = useRef<{ x: number; y: number } | null>(null);
 
@@ -40,7 +43,7 @@ export function EventPhotos({ photos, title }: { photos: EventPhoto[]; title: st
             key={p.src}
             type="button"
             onClick={() => setActive(i)}
-            aria-label={`Otevřít fotku: ${p.alt}`}
+            aria-label={`${pick(locale, { cs: "Otevřít fotku", en: "Open photo" })}: ${p.alt}`}
             className="group relative aspect-[4/3] w-28 shrink-0 overflow-hidden rounded-lg border border-border shadow-soft focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-moss sm:w-44"
           >
             <Image
@@ -67,7 +70,7 @@ export function EventPhotos({ photos, title }: { photos: EventPhoto[]; title: st
           className="fixed inset-0 z-[100] flex touch-pan-y items-center justify-center bg-moss-deep/90 p-4"
           role="dialog"
           aria-modal="true"
-          aria-label={`Fotka: ${current.alt}`}
+          aria-label={`${pick(locale, { cs: "Fotka", en: "Photo" })}: ${current.alt}`}
           onClick={() => setActive(null)}
           onTouchStart={(e) => {
             const t = e.touches[0];
@@ -87,7 +90,7 @@ export function EventPhotos({ photos, title }: { photos: EventPhoto[]; title: st
         >
           <button
             type="button"
-            aria-label="Zavřít"
+            aria-label={pick(locale, { cs: "Zavřít", en: "Close" })}
             onClick={() => setActive(null)}
             className="absolute right-4 top-4 flex h-11 w-11 items-center justify-center rounded-pill bg-cream/15 text-cream hover:bg-cream/25"
           >
@@ -96,7 +99,7 @@ export function EventPhotos({ photos, title }: { photos: EventPhoto[]; title: st
           {photos.length > 1 ? (
             <button
               type="button"
-              aria-label="Předchozí"
+              aria-label={pick(locale, { cs: "Předchozí", en: "Previous" })}
               onClick={(e) => {
                 e.stopPropagation();
                 prev();
@@ -121,7 +124,7 @@ export function EventPhotos({ photos, title }: { photos: EventPhoto[]; title: st
           {photos.length > 1 ? (
             <button
               type="button"
-              aria-label="Další"
+              aria-label={pick(locale, { cs: "Další", en: "Next" })}
               onClick={(e) => {
                 e.stopPropagation();
                 next();

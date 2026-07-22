@@ -14,6 +14,8 @@ import {
 } from "react";
 import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 import { KarelActor, type KarelPose } from "@/components/karel/KarelActor";
+import { useLocale } from "@/components/LocaleProvider";
+import { pick } from "@/lib/i18n";
 import { loadKarelStore, saveKarelStore, pickQuote } from "./karel-store";
 import {
   BLOCK_ORDER,
@@ -152,6 +154,7 @@ function SceneBubble({
 }
 
 export function SenoKarelProvider({ children }: { children: ReactNode }) {
+  const { locale } = useLocale();
   const reduced = useReducedMotion() ?? false;
 
   const [phase, setPhase] = useState<Phase>("hidden");
@@ -601,7 +604,12 @@ export function SenoKarelProvider({ children }: { children: ReactNode }) {
               size="h-20 sm:h-28"
               onKarelClick={onKarelClick}
               karelLabel={
-                phase === "peek" ? "Karel se uraženě schovává — klikni a udobři ho" : "Osel Karel"
+                phase === "peek"
+                  ? pick(locale, {
+                      cs: "Karel se uraženě schovává — klikni a udobři ho",
+                      en: "Karel is sulking and hiding — click to make peace with him",
+                    })
+                  : pick(locale, { cs: "Osel Karel", en: "Karel the donkey" })
               }
             />
           </motion.div>
@@ -618,7 +626,7 @@ export function SenoKarelProvider({ children }: { children: ReactNode }) {
           onClick={finishTakeover}
           className="fixed bottom-4 left-4 z-[95] rounded-pill border border-border bg-surface/95 px-4 py-2 text-sm font-medium text-text shadow-lift backdrop-blur transition-colors hover:bg-surface-alt"
         >
-          Přeskočit ⏭
+          {pick(locale, { cs: "Přeskočit", en: "Skip" })} ⏭
         </button>
       )}
 
@@ -629,7 +637,9 @@ export function SenoKarelProvider({ children }: { children: ReactNode }) {
           onClick={toggleRestore}
           className="fixed bottom-4 left-4 z-[95] rounded-pill border border-border bg-surface/95 px-4 py-2 text-sm font-medium text-text shadow-lift backdrop-blur transition-colors hover:bg-surface-alt"
         >
-          {restored ? "Zpět na Karlovu verzi" : "Vrátit původní verzi"}
+          {restored
+            ? pick(locale, { cs: "Zpět na Karlovu verzi", en: "Back to Karel’s version" })
+            : pick(locale, { cs: "Vrátit původní verzi", en: "Restore the original version" })}
         </button>
       )}
     </SenoKarelContext.Provider>

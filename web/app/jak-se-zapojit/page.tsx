@@ -10,47 +10,69 @@ import { SocialSection } from "@/components/SocialSection";
 import { CopyButton } from "@/components/CopyButton";
 import { GooglePlayIcon } from "@/components/BrandIcons";
 import { BANK, LOUKARUN } from "@/lib/site";
+import { getLocale } from "@/lib/i18n.server";
+import { pick, type Locale } from "@/lib/i18n";
 
-export const metadata: Metadata = {
-  title: "Jak se zapojit",
-  description:
-    "Každá pomoc se počítá. Podpořte nás finančně, virtuální adopcí, nákupem v obchůdku nebo přes naše partnerské projekty.",
-  alternates: { canonical: "/jak-se-zapojit" },
-};
+export async function generateMetadata(): Promise<Metadata> {
+  const locale = await getLocale();
+  return {
+    title: pick(locale, { cs: "Jak se zapojit", en: "Get involved" }),
+    description: pick(locale, {
+      cs: "Každá pomoc se počítá. Podpořte nás finančně, virtuální adopcí, nákupem v obchůdku nebo přes naše partnerské projekty.",
+      en: "Every bit of help counts. Support us with a donation, a virtual adoption, a purchase in our little shop or through our partner projects.",
+    }),
+    alternates: { canonical: "/jak-se-zapojit" },
+  };
+}
 
 const financial = [
   {
     icon: Landmark,
-    title: "Transparentní účet",
-    text: "Příspěvek můžete zaslat přímo na náš transparentní účet u Fio banky. Děkujeme za jakoukoliv částku.",
-    cta: { label: "Zobrazit pohyby", href: BANK.transparentUrl },
+    title: { cs: "Transparentní účet", en: "Transparent account" },
+    text: {
+      cs: "Příspěvek můžete zaslat přímo na náš transparentní účet u Fio banky. Děkujeme za jakoukoliv částku.",
+      en: "You can send a contribution directly to our transparent account at Fio banka. Thank you for any amount.",
+    },
+    cta: { label: { cs: "Zobrazit pohyby", en: "View transactions" }, href: BANK.transparentUrl },
   },
   {
     icon: HeartHandshake,
-    title: "Darujme.cz",
-    text: "Bezpečný a rychlý způsob, jak přispět online platební kartou nebo bankovním převodem přes portál Darujme.cz.",
-    cta: { label: "Darovat online", href: "https://www.darujme.cz/projekt/1208852" },
+    title: { cs: "Darujme.cz", en: "Darujme.cz" },
+    text: {
+      cs: "Bezpečný a rychlý způsob, jak přispět online platební kartou nebo bankovním převodem přes portál Darujme.cz.",
+      en: "A safe and fast way to donate online by card or bank transfer through the Darujme.cz portal.",
+    },
+    cta: { label: { cs: "Darovat online", en: "Donate online" }, href: "https://www.darujme.cz/projekt/1208852" },
   },
   {
     icon: Bitcoin,
-    title: "Kryptoměny",
-    text: "Jdeme s dobou. Pokud dáváte přednost kryptoměnám, můžete podpořit náš spolek i touto formou.",
-    cta: { label: "Darovat krypto", href: "/prispet-kryptem" },
+    title: { cs: "Kryptoměny", en: "Cryptocurrencies" },
+    text: {
+      cs: "Jdeme s dobou. Pokud dáváte přednost kryptoměnám, můžete podpořit náš spolek i touto formou.",
+      en: "We move with the times. If you prefer cryptocurrencies, you can support our association this way too.",
+    },
+    cta: { label: { cs: "Darovat krypto", en: "Donate crypto" }, href: "/prispet-kryptem" },
   },
 ];
 
 const longterm = [
   {
     icon: PawPrint,
-    title: "Virtuální adopce",
-    text: "Nemůžete si vzít zvířátko domů? Nevadí! Staňte se virtuálním rodičem jednoho z našich zvířecích obyvatel a přispívejte na jeho péči.",
-    cta: { label: "Adoptovat na dálku", href: "/virtualni-adopce" },
+    title: { cs: "Virtuální adopce", en: "Virtual adoption" },
+    text: {
+      cs: "Nemůžete si vzít zvířátko domů? Nevadí! Staňte se virtuálním rodičem jednoho z našich zvířecích obyvatel a přispívejte na jeho péči.",
+      en: "Can't take an animal home? No problem! Become the virtual parent of one of our animals and help cover the cost of its care.",
+    },
+    cta: { label: { cs: "Adoptovat na dálku", en: "Adopt from afar" }, href: "/virtualni-adopce" },
   },
   {
     icon: ShoppingBag,
-    title: "Luční obchůdek",
-    text: "Udělejte radost sobě nebo svým blízkým nákupem v našem dobročinném obchůdku. Výtěžek putuje přímo na podporu zvířat.",
-    cta: { label: "Navštívit obchůdek", href: "/obchod" },
+    title: { cs: "Luční obchůdek", en: "The Meadow shop" },
+    text: {
+      cs: "Udělejte radost sobě nebo svým blízkým nákupem v našem dobročinném obchůdku. Výtěžek putuje přímo na podporu zvířat.",
+      en: "Treat yourself or your loved ones with a purchase from our charity shop. The proceeds go straight to supporting the animals.",
+    },
+    cta: { label: { cs: "Navštívit obchůdek", en: "Visit the shop" }, href: "/obchod" },
   },
 ];
 
@@ -58,20 +80,29 @@ const partners = [
   {
     title: "Nakrm nás",
     logo: "/assets/nakrmnas.png",
-    text: "Přes portál Nakrmnas.cz nám můžete koupit konkrétní krmivo, které naše zvířata potřebují. Balíček nám dorazí přímo do azylu.",
-    cta: { label: "Koupit krmivo", href: "https://www.nakrmnas.cz/nech-me-rust/" },
+    text: {
+      cs: "Přes portál Nakrmnas.cz nám můžete koupit konkrétní krmivo, které naše zvířata potřebují. Balíček nám dorazí přímo do azylu.",
+      en: "Through the Nakrmnas.cz portal you can buy us the specific feed our animals need. The package is delivered straight to the sanctuary.",
+    },
+    cta: { label: { cs: "Koupit krmivo", en: "Buy feed" }, href: "https://www.nakrmnas.cz/nech-me-rust/" },
   },
   {
     title: "Click and Feed",
     logo: "/assets/click-and-feed.png",
-    text: "Pomoc, která nic nestojí! Stačí jeden klik na webu Click and Feed a partneři projektu naplní misku v útulcích a azylech.",
-    cta: { label: "Kliknout pro pomoc", href: "https://www.clickandfeed.cz" },
+    text: {
+      cs: "Pomoc, která nic nestojí! Stačí jeden klik na webu Click and Feed a partneři projektu naplní misku v útulcích a azylech.",
+      en: "Help that costs nothing! Just one click on the Click and Feed website and the project's partners fill a bowl in shelters and sanctuaries.",
+    },
+    cta: { label: { cs: "Kliknout pro pomoc", en: "Click to help" }, href: "https://www.clickandfeed.cz" },
   },
   {
     title: "Farma Jamboz",
     logo: "/assets/jamboz.png",
-    text: "Rodinná farma Jamboz z Čáslavi nám pravidelně věnuje vyřazenou zeleninu a ovoce, která putuje přímo do tlapek, zobáčků a zubů našich zvířátek. Jedete nás navštívit? Stavte se cestou u Jamboz a přivezte nějakou dobrotu – zvířátka vás za to odmění nadšeným přivítáním! 🐾",
-    cta: { label: "Navštívit Jamboz", href: "https://www.jamboz.cz" },
+    text: {
+      cs: "Rodinná farma Jamboz z Čáslavi nám pravidelně věnuje vyřazenou zeleninu a ovoce, která putuje přímo do tlapek, zobáčků a zubů našich zvířátek. Jedete nás navštívit? Stavte se cestou u Jamboz a přivezte nějakou dobrotu – zvířátka vás za to odmění nadšeným přivítáním! 🐾",
+      en: "The family-run Jamboz farm from Čáslav regularly donates surplus vegetables and fruit that go straight to the paws, beaks and teeth of our animals. Coming to visit us? Stop by Jamboz on the way and bring a treat — the animals will reward you with an enthusiastic welcome! 🐾",
+    },
+    cta: { label: { cs: "Navštívit Jamboz", en: "Visit Jamboz" }, href: "https://www.jamboz.cz" },
   },
 ];
 
@@ -93,33 +124,86 @@ function Cta({ href, label }: { href: string; label: string }) {
   );
 }
 
-export default function JakSeZapojit() {
+const t = {
+  cs: {
+    heroImageAlt: "Dobrovolníci při práci se dřevem na Louce",
+    heroEyebrow: "Pomozte s námi",
+    heroTitle: "Jak se zapojit",
+    heroSubtitle:
+      "Každá pomoc se počítá. Vyberte si způsob podpory, který je vám nejbližší, a staňte se součástí našeho příběhu.",
+    financialEyebrow: "Přispějte",
+    financialTitle: "Finanční podpora",
+    bankTitle: "Bankovní spojení",
+    bankAccount: "Číslo účtu",
+    bankBank: "Banka",
+    copy: "Kopírovat",
+    longtermEyebrow: "Buďte u toho dlouhodobě",
+    longtermTitle: "Dlouhodobá podpora a nákupy",
+    gameBadge: "🎮 Podpořte nás hrou",
+    gameText:
+      "Naše vlastní hra, ve které běháte za skutečná zvířata z azylu. Je venku na Google Play pro Android — bez reklam, bez sledování a bez nákupů ve hře. Celý výtěžek jde na krmení a péči o zvířata, která ve hře potkáte. Další milý způsob, jak nás můžete podpořit a přitom se pobavit.",
+    gameMore: "Více o hře",
+    gameDownloadOn: "Stáhnout na",
+    partnersEyebrow: "Spolupracujeme",
+    partnersTitle: "Partnerské projekty",
+    partnersDescription:
+      "Podpořit nás můžete i nákupem krmiva nebo jednoduchým kliknutím u našich partnerů.",
+  },
+  en: {
+    heroImageAlt: "Volunteers working with wood at the Meadow",
+    heroEyebrow: "Help us out",
+    heroTitle: "Get involved",
+    heroSubtitle:
+      "Every bit of help counts. Choose the way of supporting us that feels closest to you and become part of our story.",
+    financialEyebrow: "Donate",
+    financialTitle: "Financial support",
+    bankTitle: "Bank details",
+    bankAccount: "Account number",
+    bankBank: "Bank",
+    copy: "Copy",
+    longtermEyebrow: "Be with us for the long run",
+    longtermTitle: "Long-term support and shopping",
+    gameBadge: "🎮 Support us by playing",
+    gameText:
+      "Our very own game in which you run as real animals from the sanctuary. It's out now on Google Play for Android — no ads, no tracking and no in-game purchases. All the proceeds go to feeding and caring for the animals you meet in the game. Another lovely way to support us while having fun.",
+    gameMore: "More about the game",
+    gameDownloadOn: "Download on",
+    partnersEyebrow: "We collaborate",
+    partnersTitle: "Partner projects",
+    partnersDescription:
+      "You can also support us by buying feed or with a simple click at our partners.",
+  },
+} satisfies Record<Locale, Record<string, string>>;
+
+export default async function JakSeZapojit() {
+  const locale = await getLocale();
+  const c = t[locale];
   return (
     <>
       <PageHero
         image="/assets/zapojit-hero.webp"
-        imageAlt="Dobrovolníci při práci se dřevem na Louce"
-        eyebrow="Pomozte s námi"
-        title="Jak se zapojit"
-        subtitle="Každá pomoc se počítá. Vyberte si způsob podpory, který je vám nejbližší, a staňte se součástí našeho příběhu."
+        imageAlt={c.heroImageAlt}
+        eyebrow={c.heroEyebrow}
+        title={c.heroTitle}
+        subtitle={c.heroSubtitle}
       />
 
       {/* Finanční podpora */}
       <section className="bg-surface py-20 sm:py-24">
         <Container>
           <Reveal>
-            <SectionHeader eyebrow="Přispějte" title="Finanční podpora" />
+            <SectionHeader eyebrow={c.financialEyebrow} title={c.financialTitle} />
           </Reveal>
           <div className="grid gap-6 sm:grid-cols-2">
-            {financial.map((c, i) => (
-              <Reveal key={c.title} delay={i * 0.06}>
+            {financial.map((card, i) => (
+              <Reveal key={card.title.cs} delay={i * 0.06}>
                 <article className="group flex h-full flex-col rounded-lg border border-border bg-surface p-7 shadow-soft transition-[box-shadow,border-color,transform] duration-300 hover:-translate-y-1 hover:border-accent hover:shadow-lift">
                   <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-pill bg-moss/10 p-3 text-moss">
-                    <c.icon size={24} aria-hidden />
+                    <card.icon size={24} aria-hidden />
                   </div>
-                  <h3 className="font-serif text-xl font-semibold text-moss-deep">{c.title}</h3>
-                  <p className="mb-5 mt-2 text-text-muted">{c.text}</p>
-                  <Cta {...c.cta} />
+                  <h3 className="font-serif text-xl font-semibold text-moss-deep">{pick(locale, card.title)}</h3>
+                  <p className="mb-5 mt-2 text-text-muted">{pick(locale, card.text)}</p>
+                  <Cta href={card.cta.href} label={pick(locale, card.cta.label)} />
                 </article>
               </Reveal>
             ))}
@@ -127,22 +211,22 @@ export default function JakSeZapojit() {
 
           {/* Bank details block */}
           <Reveal className="mx-auto mt-8 max-w-2xl rounded-lg border border-border bg-surface-alt p-7 shadow-soft">
-            <h3 className="font-serif text-lg font-semibold text-moss-deep">Bankovní spojení</h3>
+            <h3 className="font-serif text-lg font-semibold text-moss-deep">{c.bankTitle}</h3>
             <dl className="mt-4 space-y-2 text-sm text-text">
               <div className="flex flex-wrap items-center justify-between gap-2">
-                <dt className="text-text-muted">Číslo účtu</dt>
-                <dd className="flex items-center gap-3 font-medium">{BANK.account} <CopyButton value="2002645872/2010" label="Kopírovat" /></dd>
+                <dt className="text-text-muted">{c.bankAccount}</dt>
+                <dd className="flex items-center gap-3 font-medium">{BANK.account} <CopyButton value="2002645872/2010" label={c.copy} /></dd>
               </div>
               <div className="flex flex-wrap items-center justify-between gap-2">
                 <dt className="text-text-muted">IBAN</dt>
-                <dd className="flex items-center gap-3 font-medium">{BANK.iban} <CopyButton value={BANK.iban.replace(/\s/g, "")} label="Kopírovat" /></dd>
+                <dd className="flex items-center gap-3 font-medium">{BANK.iban} <CopyButton value={BANK.iban.replace(/\s/g, "")} label={c.copy} /></dd>
               </div>
               <div className="flex flex-wrap items-center justify-between gap-2">
                 <dt className="text-text-muted">SWIFT</dt>
                 <dd className="font-medium">{BANK.swift}</dd>
               </div>
               <div className="flex flex-wrap items-center justify-between gap-2">
-                <dt className="text-text-muted">Banka</dt>
+                <dt className="text-text-muted">{c.bankBank}</dt>
                 <dd className="font-medium">{BANK.bank}</dd>
               </div>
             </dl>
@@ -154,18 +238,18 @@ export default function JakSeZapojit() {
       <section className="bg-surface-alt py-20 sm:py-24">
         <Container>
           <Reveal>
-            <SectionHeader eyebrow="Buďte u toho dlouhodobě" title="Dlouhodobá podpora a nákupy" />
+            <SectionHeader eyebrow={c.longtermEyebrow} title={c.longtermTitle} />
           </Reveal>
           <div className="mx-auto grid max-w-3xl gap-6 sm:grid-cols-2">
-            {longterm.map((c, i) => (
-              <Reveal key={c.title} delay={i * 0.06}>
+            {longterm.map((card, i) => (
+              <Reveal key={card.title.cs} delay={i * 0.06}>
                 <article className="group flex h-full flex-col rounded-lg border border-border bg-surface p-7 shadow-soft transition-[box-shadow,border-color,transform] duration-300 hover:-translate-y-1 hover:border-accent hover:shadow-lift">
                   <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-pill bg-moss/10 p-3 text-moss">
-                    <c.icon size={24} aria-hidden />
+                    <card.icon size={24} aria-hidden />
                   </div>
-                  <h3 className="font-serif text-xl font-semibold text-moss-deep">{c.title}</h3>
-                  <p className="mb-5 mt-2 text-text-muted">{c.text}</p>
-                  <Cta {...c.cta} />
+                  <h3 className="font-serif text-xl font-semibold text-moss-deep">{pick(locale, card.title)}</h3>
+                  <p className="mb-5 mt-2 text-text-muted">{pick(locale, card.text)}</p>
+                  <Cta href={card.cta.href} label={pick(locale, card.cta.label)} />
                 </article>
               </Reveal>
             ))}
@@ -182,24 +266,20 @@ export default function JakSeZapojit() {
             </div>
             <div className="text-center sm:text-left">
               <p className="inline-flex items-center gap-2 rounded-pill bg-moss/10 px-4 py-1.5 text-sm font-semibold text-moss-deep">
-                🎮 Podpořte nás hrou
+                {c.gameBadge}
               </p>
               <h2 className="mt-3 font-serif text-2xl font-semibold text-moss-deep sm:text-3xl">
-                Zahrajte si Louka&nbsp;Run
+                {pick(locale, { cs: <>Zahrajte si Louka&nbsp;Run</>, en: <>Play Louka&nbsp;Run</> })}
               </h2>
               <p className="mt-4 text-text-muted">
-                Naše vlastní hra, ve které běháte za skutečná zvířata z azylu.
-                Je venku na Google&nbsp;Play pro Android — bez reklam, bez
-                sledování a bez nákupů ve hře. Celý výtěžek jde na krmení a
-                péči o zvířata, která ve hře potkáte. Další milý způsob, jak nás
-                můžete podpořit a přitom se pobavit.
+                {c.gameText}
               </p>
               <div className="mt-6 flex flex-wrap justify-center gap-3 sm:justify-start">
                 <Link
                   href={LOUKARUN.page}
                   className="inline-flex items-center rounded-pill bg-moss px-5 py-2.5 text-sm font-medium text-cream transition-colors hover:bg-moss-deep"
                 >
-                  Více o hře
+                  {c.gameMore}
                 </Link>
                 <a
                   href={LOUKARUN.googlePlay}
@@ -210,7 +290,7 @@ export default function JakSeZapojit() {
                   <GooglePlayIcon size={22} />
                   <span className="text-left leading-tight">
                     <span className="block text-[0.65rem] uppercase tracking-wide opacity-80">
-                      Stáhnout na
+                      {c.gameDownloadOn}
                     </span>
                     <span className="block text-sm font-semibold">Google Play</span>
                   </span>
@@ -226,21 +306,21 @@ export default function JakSeZapojit() {
         <Container>
           <Reveal>
             <SectionHeader
-              eyebrow="Spolupracujeme"
-              title="Partnerské projekty"
-              description="Podpořit nás můžete i nákupem krmiva nebo jednoduchým kliknutím u našich partnerů."
+              eyebrow={c.partnersEyebrow}
+              title={c.partnersTitle}
+              description={c.partnersDescription}
             />
           </Reveal>
           <div className="grid gap-6 lg:grid-cols-3">
-            {partners.map((c, i) => (
-              <Reveal key={c.title} delay={i * 0.06}>
+            {partners.map((card, i) => (
+              <Reveal key={card.title} delay={i * 0.06}>
                 <article className="group flex h-full flex-col rounded-lg border border-border bg-surface p-7 shadow-soft transition-[box-shadow,border-color,transform] duration-300 hover:-translate-y-1 hover:border-accent hover:shadow-lift">
                   <div className="flex h-16 items-center justify-start">
-                    <Image src={c.logo} alt={`Logo ${c.title}`} width={140} height={64} className="max-h-14 w-auto object-contain" />
+                    <Image src={card.logo} alt={`Logo ${card.title}`} width={140} height={64} className="max-h-14 w-auto object-contain" />
                   </div>
-                  <h3 className="mt-4 font-serif text-xl font-semibold text-moss-deep">{c.title}</h3>
-                  <p className="mb-5 mt-2 text-text-muted">{c.text}</p>
-                  <Cta {...c.cta} />
+                  <h3 className="mt-4 font-serif text-xl font-semibold text-moss-deep">{card.title}</h3>
+                  <p className="mb-5 mt-2 text-text-muted">{pick(locale, card.text)}</p>
+                  <Cta href={card.cta.href} label={pick(locale, card.cta.label)} />
                 </article>
               </Reveal>
             ))}

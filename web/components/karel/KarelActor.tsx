@@ -3,6 +3,8 @@
 import type { ReactNode } from "react";
 import { AnimatePresence, motion } from "motion/react";
 import { KarelSvg } from "./KarelSvg";
+import { useLocale } from "@/components/LocaleProvider";
+import { pick } from "@/lib/i18n";
 
 export type KarelPose = "idle" | "walking" | "chomp" | "shake-no" | "graze";
 
@@ -22,7 +24,7 @@ export function KarelActor({
   size = "h-24 sm:h-28",
   bubble,
   onKarelClick,
-  karelLabel = "Osel Karel",
+  karelLabel,
   className = "",
 }: {
   pose?: KarelPose;
@@ -35,6 +37,9 @@ export function KarelActor({
   karelLabel?: string;
   className?: string;
 }) {
+  const { locale } = useLocale();
+  const label =
+    karelLabel ?? pick(locale, { cs: "Osel Karel", en: "Karel the donkey" });
   return (
     <div className={`flex flex-col items-end gap-2 ${POSE_CLASS[pose]} ${className}`}>
       <AnimatePresence>
@@ -57,8 +62,12 @@ export function KarelActor({
       <button
         type="button"
         onClick={onKarelClick}
-        aria-label={karelLabel}
-        title={onKarelClick ? "Klikni na Karla" : undefined}
+        aria-label={label}
+        title={
+          onKarelClick
+            ? pick(locale, { cs: "Klikni na Karla", en: "Click on Karel" })
+            : undefined
+        }
         className={`group relative min-h-11 min-w-11 rounded-full focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-moss ${
           onKarelClick ? "cursor-pointer" : "cursor-default"
         }`}

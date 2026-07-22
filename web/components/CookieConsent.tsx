@@ -4,6 +4,8 @@ import { useCallback, useEffect, useState, useSyncExternalStore } from "react";
 import Link from "next/link";
 import Script from "next/script";
 import { Cookie } from "lucide-react";
+import { useLocale } from "@/components/LocaleProvider";
+import { dict, pick } from "@/lib/i18n";
 
 /**
  * Nenápadná cookie lišta. Web sám o sobě potřebuje jen nezbytné cookies
@@ -52,6 +54,7 @@ function subscribeConsent(callback: () => void) {
 const consentServerSnapshot = (): Consent => null;
 
 export function CookieConsent() {
+  const { locale } = useLocale();
   const consent = useSyncExternalStore(
     subscribeConsent,
     readConsent,
@@ -96,7 +99,7 @@ export function CookieConsent() {
       {open && (
         <div
           role="region"
-          aria-label="Souhlas s používáním cookies"
+          aria-label={pick(locale, dict.cookieRegion)}
           className="fixed inset-x-0 bottom-0 z-[100] p-3 sm:p-4 motion-safe:animate-[cookie-rise_0.5s_var(--ease-out)_both]"
         >
           <div className="mx-auto flex w-full max-w-[1180px] flex-col gap-4 rounded-lg border border-border bg-surface/95 p-5 shadow-lift backdrop-blur-md sm:flex-row sm:items-center sm:gap-6 sm:p-6">
@@ -108,13 +111,12 @@ export function CookieConsent() {
                 <Cookie size={20} />
               </span>
               <p className="text-sm leading-relaxed text-text-muted">
-                Používáme nezbytné cookies pro chod webu. S vaším souhlasem také
-                analytické cookies, díky kterým web zlepšujeme. Více v{" "}
+                {pick(locale, dict.cookieBodyPre)}
                 <Link
                   href="/gdpr"
                   className="font-medium text-moss underline underline-offset-4 hover:text-moss-deep"
                 >
-                  zásadách ochrany osobních údajů
+                  {pick(locale, dict.cookieBodyLink)}
                 </Link>
                 .
               </p>
@@ -126,14 +128,14 @@ export function CookieConsent() {
                 onClick={() => decide("rejected")}
                 className="inline-flex items-center justify-center rounded-pill border border-border px-5 py-2.5 text-sm font-medium text-text transition-colors hover:bg-surface-alt"
               >
-                Jen nezbytné
+                {pick(locale, dict.cookieNecessaryOnly)}
               </button>
               <button
                 type="button"
                 onClick={() => decide("accepted")}
                 className="inline-flex items-center justify-center rounded-pill bg-moss px-6 py-2.5 text-sm font-medium text-cream shadow-soft transition-transform hover:-translate-y-0.5"
               >
-                Přijmout vše
+                {pick(locale, dict.cookieAcceptAll)}
               </button>
             </div>
           </div>
