@@ -14,8 +14,7 @@
     "db:migrate": "drizzle-kit migrate",
     "db:studio": "drizzle-kit studio",
     "migrate:forpsi": "node --env-file=.env.local --import tsx scripts/migrate-from-forpsi.mts",
-    "admin:create": "node --env-file=.env.local --import tsx scripts/create-admin.mts",
-    "campaign:qr": "node --import tsx scripts/generate-seno-qr.mts"
+    "admin:create": "node --env-file=.env.local --import tsx scripts/create-admin.mts"
   },
   "dependencies": {
     "@neondatabase/serverless": "^1.1.0",

@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "topic": "Sbírka Seno pro Louku 2026",
+  "topic": "Sbírka na seno a slámu — zima 2026/2027",
   "kind": "animals",
   "format": "4:5",
   "theme": "meadow",
@@ -11,78 +11,78 @@
     {
       "type": "cover",
       "eyebrow": "Nech mě růst",
-      "title": "Seno je letos vzácné",
-      "subtitle": "Po nejhorším suchu v historii měření je sena málo a je drahé. Spouštíme sbírku Seno pro Louku — pomozte nám naplnit stodolu na zimu."
+      "title": "Seník zeje prázdnotou",
+      "subtitle": "Zima se neúprosně blíží a ceny sena se letos zdvojnásobily. Spouštíme sbírku na seno a slámu — pomozte nám naplnit seník na zimu 2026/2027."
     },
     {
       "type": "fact",
       "eyebrow": "Jak to letos je",
-      "title": "Sucho v číslech",
-      "body": "Seno pro naše stádo každý rok kupujeme. Po letošním suchu ho je ale málo v celém kraji: balík, který jsme loni brali za 500 Kč, letos stojí 800 až 1 000 korun. Naše stádo přitom potřebuje na zimu kolem 125 balíků."
+      "title": "Seno letos stojí dvojnásobek",
+      "body": "Seno pro naše stádo každý rok kupujeme. Letos ale ceny vyskočily na dvojnásobek — balík, který loni stál kolem 500 Kč, vyjde na 800 až 1 000 korun. A protože v okolí seno k mání není, musíme ho vozit zdaleka, což prodražuje i dopravu."
     },
     {
       "type": "plant",
       "status": "Osel",
       "name": "Karel",
       "latin": "Hravý oslík s velkým srdcem",
-      "fact": "Karel spořádá denně kolem 10 kg sena. Přes zimu, kdy pastva nic nedá, je seno jeho hlavní jídelníček — a letos je ho zoufale málo.",
-      "use": "800 Kč = jeden balík sena navíc ve stodole. Přes zimu Karel spořádá víc než tunu.",
+      "fact": "Karel spořádá denně kolem 10 kg sena. Přes zimu, kdy pastva nic nedá, je seno jeho hlavní jídelníček — a k tomu potřebuje čerstvou slámu na podestýlku.",
+      "use": "Každý dar znamená další balík v seníku — Karel jich za zimu spořádá víc než tunu.",
       "warning": null
     },
     {
       "type": "photo",
       "imageData": "/assets/karel.webp",
-      "imageCaption": "Karel na vyprahlé letní louce — letošní sucho udělalo ze sena vzácné zboží."
+      "imageCaption": "Karel na letní louce — jeho zimní jídelníček teď leží v prázdném seníku."
     },
     {
       "type": "plant",
       "status": "Krávy",
       "name": "Avala a Květa",
       "latin": "Naše dámy ze stáda",
-      "fact": "Avala s Květou spořádají každá kolem 15 kilo sena denně — nejvíc z celého stáda. A přidávají se ovce, jehňátka, muflon Yakul i prasátka. Bez plné stodoly se zima zvládnout nedá.",
-      "use": "1 600 Kč = dva balíky sena, které dámám vystačí na pořádný kus zimy.",
+      "fact": "Avala s Květou spořádají každá kolem 15 kilo sena denně — nejvíc z celého stáda. A přidávají se ovce, muflon Yakul, prasátka i drobotina. O zimu se na Louce dělí kolem 93 zachráněných zvířat.",
+      "use": "Bez plného seníku se zima zvládnout nedá — a naše dámy to vědí nejlíp.",
       "warning": null
     },
     {
       "type": "photo",
       "imageData": "/assets/avala.webp",
-      "imageCaption": "Avala s Květou potřebují na zimu desítky balíků — letos je každý z nich vzácný."
+      "imageCaption": "Avala s Květou potřebují na zimu desítky balíků — letos je každý dvakrát dražší."
     },
     {
       "type": "fact",
       "eyebrow": "Cíl sbírky",
-      "title": "100 000 Kč = zimní zásoba",
-      "body": "Vybíráme 100 000 Kč, tedy zhruba 125 balíků sena při letošní ceně 800 Kč za balík. Každá koruna projde naším transparentním účtem — dárci vidí všechno."
+      "title": "100 000 Kč = seno a sláma na zimu",
+      "body": "Vybíráme 100 000 Kč: zhruba 85 000 Kč padne na seno a slámu pro celé stádo, zbytek na dopravu, protože zásoby vozíme zdaleka. Sbírka běží na ověřeném portálu Darujme.cz, který provozuje Nadace Via."
     },
     {
       "type": "tip",
       "eyebrow": "Jak můžeš pomoct ty",
-      "title": "Tři cesty k plné stodole",
-      "body": "1) QR platba nebo převod na transparentní účet — vše na nechmerust.org/seno. 2) Dar kartou přes Darujme.cz. 3) Sdílej tenhle příspěvek. Bonus: za dar 200 Kč a víc ti po napsání dáme přístup k naší hře Louka Run. 🎮"
+      "title": "Dvě cesty k plnému seníku",
+      "body": "1) Přispěj platební kartou nebo převodem přes Darujme.cz — odkaz najdeš v biu (nechmerust.org/seno). 2) Sdílej tenhle příspěvek — čím víc lidí sbírku uvidí, tím dřív bude seník plný. 💚"
     },
     {
       "type": "outro",
       "eyebrow": "Děkujeme",
       "title": "Pomozte nám přezimovat",
-      "body": "Loni jste nám se senem pomohli a zvládli jsme to. Věříme, že se to s vaší pomocí povede i letos. Odkaz najdeš v biu: nechmerust.org/seno",
-      "cta": "Přispět na seno"
+      "body": "Loni jste nám se senem pomohli a zvládli jsme to. Věříme, že se to s vaší pomocí povede i letos. Odkaz v biu: nechmerust.org/seno → Darujme.cz",
+      "cta": "Přispět na Darujme.cz"
     }
   ],
   "captions": [
     {
       "label": "Varianta A — vyprávěcí",
-      "text": "Seno je letos vzácné. 🌾\n\nPo nejhorším suchu v historii měření je sena málo v celém kraji. Seno pro naše stádo každý rok kupujeme — a Karel, Avala, Květa a všichni ostatní musí žrát celou zimu, ať stojí balík kolik chce. Letos je to 800 až 1 000 korun místo loňských pěti set.\n\nProto spouštíme sbírku Seno pro Louku: vybíráme 100 000 Kč na zimní zásobu (~125 balíků) a připravujeme se s předstihem.\n\n🌾 800 Kč = balík sena\n💚 nechmerust.org/seno (odkaz v biu)\n🔁 Sdílení pomáhá taky!",
-      "hashtags": ["#nechmerust", "#senoprolouku", "#sucho", "#sbirka", "#pomoczviratum", "#louka", "#zvireciazyl", "#seno"]
+      "text": "Seník zeje prázdnotou a zima se neúprosně blíží. 🌾\n\nSeno pro naše stádo každý rok kupujeme — jenže letos se jeho cena zdvojnásobila a vozit ho musíme zdaleka. Na Louce přitom přezimuje kolem 93 zachráněných zvířat: krávy, ovce, oslík Karel, muflon, prasátka, králíci, psi, kočky i drůbež.\n\nProto spouštíme sbírku na seno a slámu na zimu 2026/2027: vybíráme 100 000 Kč (zhruba 85 000 Kč na seno a slámu, zbytek na dopravu) přes ověřený portál Darujme.cz, který provozuje Nadace Via.\n\n💚 Odkaz v biu → nechmerust.org/seno\n🔁 Sdílení pomáhá taky!",
+      "hashtags": ["#nechmerust", "#senoprolouku", "#sbirka", "#darujme", "#pomoczviratum", "#louka", "#zvireciazyl", "#seno"]
     },
     {
       "label": "Varianta B — úderná",
-      "text": "🌾 SPOUŠTÍME SBÍRKU: Seno pro Louku\n\nPo letošním suchu je sena málo → balík zdražil z 500 na 800 až 1 000 Kč → stádo potřebuje ~125 balíků na zimu. Připravujeme se s předstihem.\n\nCíl: 100 000 Kč. Každá koruna je vidět na transparentním účtu.\n\n🌾 400 Kč = půl balíku\n🌾 800 Kč = celý balík\n🌾 1 600 Kč = dva balíky\n\nOdkaz v biu → nechmerust.org/seno 💚",
-      "hashtags": ["#nechmerust", "#senoprolouku", "#sbirka", "#sucho", "#darujme", "#pomoczviratum"]
+      "text": "🌾 SPOUŠTÍME SBÍRKU: seno a sláma na zimu 2026/2027\n\nCeny sena se letos zdvojnásobily → balík stojí 800 až 1 000 Kč → a náš seník zeje prázdnotou. O zimu se na Louce dělí ~93 zachráněných zvířat.\n\nCíl: 100 000 Kč (≈ 85 000 Kč seno a sláma + doprava). Darovat můžeš kartou i převodem přes Darujme.cz — portál Nadace Via.\n\nOdkaz v biu → nechmerust.org/seno 💚",
+      "hashtags": ["#nechmerust", "#senoprolouku", "#sbirka", "#darujme", "#seno", "#pomoczviratum"]
     },
     {
       "label": "Varianta C — příběh Karla",
-      "text": "Tohle je Karel. 🫏\n\nChce toho po nás málo: stín, vodu, drbání — a v zimě pořádnou porci sena. Denně ho spořádá kolem 10 kg, za zimu víc než tunu. Seno pro něj každý rok kupujeme — jenže po letošním suchu balík zdražil z 500 na 800 až 1 000 Kč.\n\n800 Kč = jeden balík sena navíc ve stodole.\n\nPomůžeš Karlovi naplnit stodolu? → nechmerust.org/seno 💚",
-      "hashtags": ["#nechmerust", "#senoprolouku", "#osel", "#karel", "#sbirka", "#pomoczviratum", "#louka"]
+      "text": "Tohle je Karel. 🫏\n\nChce toho po nás málo: stín, vodu, drbání — a v zimě pořádnou porci sena a čerstvou slámu na spaní. Denně spořádá kolem 10 kg sena, za zimu víc než tunu. Jenže letos se ceny sena zdvojnásobily a seník zatím zeje prázdnotou.\n\nPomůžeš Karlovi a dalším 92 zvířatům z Louky naplnit seník? Přispět můžeš kartou i převodem přes Darujme.cz.\n\n→ nechmerust.org/seno (odkaz v biu) 💚",
+      "hashtags": ["#nechmerust", "#senoprolouku", "#osel", "#karel", "#sbirka", "#darujme", "#pomoczviratum"]
     }
   ]
 }

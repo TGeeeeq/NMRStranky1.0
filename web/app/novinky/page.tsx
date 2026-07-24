@@ -45,6 +45,21 @@ type Article = {
 
 const buildArticles = (locale: Locale): Article[] => [
   {
+    title: pick(locale, { cs: "🌾 Spouštíme sbírku na seno a slámu na zimu", en: "🌾 We're launching a hay & straw winter fundraiser" }),
+    date: "24. 7. 2026",
+    image: "/assets/karel.webp",
+    imageAlt: pick(locale, { cs: "Oslík Karel — zimní zásoba sena je i pro něj", en: "Karel the donkey — the winter hay supply is for him too" }),
+    badge: pick(locale, { cs: "Sbírka", en: "Fundraiser" }),
+    blocks: [
+      { type: "p", text: pick(locale, { cs: "Zima se neúprosně blíží a náš seník zeje prázdnotou. Ceny sena se letos zdvojnásobily a zásoby musíme vozit zdaleka, což prodražuje i dopravu. Na Louce přitom žije kolem 93 zachráněných zvířat — krávy, ovce, oslík Karel, muflon, prasátka, králíci, psi, kočky i drůbež — a přes zimu, kdy pastva nedá nic, jede všechno ze seníku. Proto spouštíme sbírku na seno a slámu na zimu 2026/2027: vybíráme 100 000 Kč, z toho zhruba 85 000 Kč na seno a slámu a zbytek na dopravu.", en: "Winter is approaching relentlessly and our hay barn stands empty. Hay prices have doubled this year and we have to haul supplies from far away, which makes transport more expensive too. The Meadow is home to around 93 rescued animals — cows, sheep, Karel the donkey, a mouflon, pigs, rabbits, dogs, cats and poultry — and through the winter, when the pasture gives nothing, everything comes from the hay barn. That's why we're launching a hay and straw fundraiser for the winter of 2026/2027: we're raising 100,000 Kč, of which roughly 85,000 Kč goes to hay and straw and the rest to transport." }) },
+      { type: "p", text: pick(locale, { cs: "Přispět můžete platební kartou i bankovním převodem přes Darujme.cz — ověřený dárcovský portál, který provozuje Nadace Via. A pokud teď přispět nemůžete, moc pomůže i sdílení sbírky. Děkujeme, že nám pomáháte naplnit seník!", en: "You can donate by card or bank transfer through Darujme.cz — a trusted donation portal operated by the Via Foundation. And if you can't donate right now, sharing the fundraiser helps a lot too. Thank you for helping us fill the hay barn!" }) },
+    ],
+    links: [
+      { label: pick(locale, { cs: "Přispět na Darujme.cz →", en: "Donate on Darujme.cz →" }), href: "https://www.darujme.cz/vyzva/1205543", external: true },
+      { label: pick(locale, { cs: "Další způsoby podpory →", en: "More ways to support us →" }), href: "/jak-se-zapojit" },
+    ],
+  },
+  {
     title: pick(locale, { cs: "📱 Louka Run je na Google Play!", en: "📱 Louka Run is on Google Play!" }),
     date: "12. 7. 2026",
     image: "/assets/karel.webp",

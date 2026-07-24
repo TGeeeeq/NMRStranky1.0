@@ -2,7 +2,7 @@
 
 import { useRef, useState } from "react";
 import { KarelActor } from "./KarelActor";
-import { pickQuote } from "@/app/seno/karel/karel-store";
+import { pickQuote } from "./karel-store";
 import { useLocale } from "@/components/LocaleProvider";
 import { pick, type Locale } from "@/lib/i18n";
 

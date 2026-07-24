@@ -1,36 +1,32 @@
 "use client";
 
 import { useState } from "react";
-import Link from "next/link";
 import { X } from "lucide-react";
-import { SENO_CAMPAIGN, campaignProgress } from "@/lib/campaign";
 import { useLocale } from "@/components/LocaleProvider";
 import { pick } from "@/lib/i18n";
 
-/** Proužek na všech stránkách upozorňující na běžící sbírku. Zavření platí po dobu
- *  návštěvy (layout přežívá klientské navigace), resetuje se hard reloadem. */
+/** Proužek na všech stránkách upozorňující na běžící sbírku na Darujme.cz.
+ *  Zavření platí po dobu návštěvy (layout přežívá klientské navigace),
+ *  resetuje se hard reloadem. */
 export function CampaignBanner() {
   const { locale } = useLocale();
   const [dismissed, setDismissed] = useState(false);
   if (dismissed) return null;
 
-  const pct = campaignProgress(SENO_CAMPAIGN.raised, SENO_CAMPAIGN.goal);
-
   return (
     <div className="relative bg-terracotta px-12 py-2 text-center text-sm font-medium text-cream">
-      <Link href="/seno" className="underline-offset-4 hover:underline">
+      <a
+        href="https://www.darujme.cz/vyzva/1205543"
+        target="_blank"
+        rel="noopener"
+        className="underline-offset-4 hover:underline"
+      >
         {locale === "en" ? (
-          <>
-            🌾 “Hay for the Meadow” fundraiser — {pct}&nbsp;% of 100&nbsp;000&nbsp;Kč
-            raised. Help us stock up for winter&nbsp;→
-          </>
+          <>🌾 Hay &amp; straw winter fundraiser — donate via Darujme.cz&nbsp;→</>
         ) : (
-          <>
-            🌾 Sbírka „Seno pro Louku“ — vybráno {pct}&nbsp;% ze 100&nbsp;000&nbsp;Kč.
-            Pomozte nám sehnat zásobu na zimu&nbsp;→
-          </>
+          <>🌾 Sbírka na seno a slámu na zimu — přispějte přes Darujme.cz&nbsp;→</>
         )}
-      </Link>
+      </a>
       <button
         type="button"
         aria-label={pick(locale, {

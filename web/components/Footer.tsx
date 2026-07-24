@@ -52,8 +52,7 @@ export async function Footer() {
             </span>
           </a>
         </p>
-        {/* data-karel-credit: na /seno si podpis „překope" osel Karel (SenoKarelProvider) */}
-        <p className="mt-6" data-karel-credit>
+        <p className="mt-6">
           <a
             href="https://www.antoninfigueroa.cz"
             target="_blank"
@@ -66,10 +65,7 @@ export async function Footer() {
             />
             <span>
               {pick(locale, dict.madeBy)}{" "}
-              <span
-                data-karel-credit-name
-                className="font-serif tracking-wide group-hover:text-cream"
-              >
+              <span className="font-serif tracking-wide group-hover:text-cream">
                 Antonín Figueroa
               </span>
             </span>

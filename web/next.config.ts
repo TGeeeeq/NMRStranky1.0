@@ -79,6 +79,10 @@ const nextConfig: NextConfig = {
       { source: "/obchod/product-detail", destination: "/obchod", permanent: true },
       { source: "/obchod/product-detail.html", destination: "/obchod", permanent: true },
 
+      // Zrušená stránka sbírky /seno — odkaz nechmerust.org/seno koloval po
+      // sítích, teď vede přímo na aktuální výzvu na Darujme.cz.
+      { source: "/seno", destination: "https://www.darujme.cz/vyzva/1205543", permanent: false },
+
       // Obecná pravidla pro marketingové stránky: /<slug>.html a /<slug>.php → /<slug>
       // (o-nas, kontakt, galerie, gdpr, jak-se-zapojit, novinky, prispet-kryptem,
       //  putovani-se-zviraty, udalosti, virtualni-adopce, vop, zvireci-obyvatele).

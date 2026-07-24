@@ -8,6 +8,7 @@ import { MotionProvider } from "@/components/MotionProvider";
 import { CartProvider } from "@/components/shop/CartProvider";
 import { LeaveCartGuard } from "@/components/LeaveCartGuard";
 import { CookieConsent } from "@/components/CookieConsent";
+import { CampaignBanner } from "@/components/CampaignBanner";
 import { LocaleProvider } from "@/components/LocaleProvider";
 import { getLocale } from "@/lib/i18n.server";
 import { dict, pick } from "@/lib/i18n";
@@ -72,6 +73,7 @@ export default async function RootLayout({
                 {pick(locale, dict.skipToContent)}
               </a>
               <Navbar />
+              <CampaignBanner />
               <main id="main-content" className="flex-1">
                 {children}
               </main>

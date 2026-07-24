@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
-import { Landmark, HeartHandshake, Bitcoin, PawPrint, ShoppingBag } from "lucide-react";
+import { Landmark, HeartHandshake, Bitcoin, PawPrint, ShoppingBag, Wheat } from "lucide-react";
 import { Container } from "@/components/Container";
 import { SectionHeader } from "@/components/SectionHeader";
 import { Reveal } from "@/components/Reveal";
@@ -27,6 +27,15 @@ export async function generateMetadata(): Promise<Metadata> {
 
 const financial = [
   {
+    icon: Wheat,
+    title: { cs: "Sbírka na seno a slámu", en: "Hay & straw fundraiser" },
+    text: {
+      cs: "Zima se blíží a náš seník zeje prázdnotou. Vybíráme 100 000 Kč na zimní zásobu sena a slámy pro zhruba 93 zvířat z Louky.",
+      en: "Winter is coming and our hay barn stands empty. We're raising 100,000 Kč for the winter supply of hay and straw for the Meadow's roughly 93 animals.",
+    },
+    cta: { label: { cs: "Přispět na Darujme.cz", en: "Donate on Darujme.cz" }, href: "https://www.darujme.cz/vyzva/1205543" },
+  },
+  {
     icon: Landmark,
     title: { cs: "Transparentní účet", en: "Transparent account" },
     text: {
@@ -39,8 +48,8 @@ const financial = [
     icon: HeartHandshake,
     title: { cs: "Darujme.cz", en: "Darujme.cz" },
     text: {
-      cs: "Bezpečný a rychlý způsob, jak přispět online platební kartou nebo bankovním převodem přes portál Darujme.cz.",
-      en: "A safe and fast way to donate online by card or bank transfer through the Darujme.cz portal.",
+      cs: "Bezpečný a rychlý způsob, jak přispět online platební kartou nebo bankovním převodem přes portál Darujme.cz, který provozuje Nadace Via.",
+      en: "A safe and fast way to donate online by card or bank transfer through the Darujme.cz portal, operated by the Via Foundation.",
     },
     cta: { label: { cs: "Darovat online", en: "Donate online" }, href: "https://www.darujme.cz/projekt/1208852" },
   },
@@ -230,6 +239,26 @@ export default async function JakSeZapojit() {
                 <dd className="font-medium">{BANK.bank}</dd>
               </div>
             </dl>
+          </Reveal>
+
+          {/* Co je Darujme.cz */}
+          <Reveal className="mx-auto mt-8 max-w-2xl rounded-lg border border-border bg-surface-alt p-7 shadow-soft">
+            <h3 className="font-serif text-lg font-semibold text-moss-deep">
+              {pick(locale, { cs: "Co je Darujme.cz?", en: "What is Darujme.cz?" })}
+            </h3>
+            <p className="mt-3 text-sm text-text-muted">
+              {pick(locale, {
+                cs: "Darujme.cz je největší český dárcovský portál, který provozuje Nadace Via. Sdružuje pouze ověřené neziskové organizace a darovat přes něj můžete bezpečně platební kartou i bankovním převodem.",
+                en: "Darujme.cz is the largest Czech donation portal, operated by the Via Foundation. It brings together only verified non-profits, and you can donate through it safely by card or bank transfer.",
+              })}
+            </p>
+            <p className="mt-3 text-sm">
+              <a href="https://www.darujme.cz" target="_blank" rel="noopener" className="font-medium text-moss underline underline-offset-4 hover:text-moss-deep">www.darujme.cz</a>
+              <span className="text-text-muted"> · </span>
+              <a href="https://www.nadacevia.cz" target="_blank" rel="noopener" className="font-medium text-moss underline underline-offset-4 hover:text-moss-deep">Nadace Via</a>
+              <span className="text-text-muted"> · </span>
+              <a href="https://www.darujme.cz/projekt/1208852" target="_blank" rel="noopener" className="font-medium text-moss underline underline-offset-4 hover:text-moss-deep">{pick(locale, { cs: "náš profil na Darujme.cz", en: "our Darujme.cz profile" })}</a>
+            </p>
           </Reveal>
         </Container>
       </section>
