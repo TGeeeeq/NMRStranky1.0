@@ -47,8 +47,9 @@ const buildArticles = (locale: Locale): Article[] => [
   {
     title: pick(locale, { cs: "🌾 Spouštíme sbírku na seno a slámu na zimu", en: "🌾 We're launching a hay & straw winter fundraiser" }),
     date: "24. 7. 2026",
-    image: "/assets/karel.webp",
-    imageAlt: pick(locale, { cs: "Oslík Karel — zimní zásoba sena je i pro něj", en: "Karel the donkey — the winter hay supply is for him too" }),
+    image: "/assets/sbirka-seno-2026.webp",
+    imageAlt: pick(locale, { cs: "Kravka od nás z Louky nakukuje přes krmelec — zimní zásoba sena je i pro ni", en: "One of the Meadow's cows peeking over the hay feeder — the winter hay supply is for her too" }),
+    imagePosition: "center 35%",
     badge: pick(locale, { cs: "Sbírka", en: "Fundraiser" }),
     blocks: [
       { type: "p", text: pick(locale, { cs: "Zima se neúprosně blíží a náš seník zeje prázdnotou. Ceny sena se letos zdvojnásobily a zásoby musíme vozit zdaleka, což prodražuje i dopravu. Na Louce přitom žije kolem 93 zachráněných zvířat — krávy, ovce, oslík Karel, muflon, prasátka, králíci, psi, kočky i drůbež — a přes zimu, kdy pastva nedá nic, jede všechno ze seníku. Proto spouštíme sbírku na seno a slámu na zimu 2026/2027: vybíráme 100 000 Kč, z toho zhruba 85 000 Kč na seno a slámu a zbytek na dopravu.", en: "Winter is approaching relentlessly and our hay barn stands empty. Hay prices have doubled this year and we have to haul supplies from far away, which makes transport more expensive too. The Meadow is home to around 93 rescued animals — cows, sheep, Karel the donkey, a mouflon, pigs, rabbits, dogs, cats and poultry — and through the winter, when the pasture gives nothing, everything comes from the hay barn. That's why we're launching a hay and straw fundraiser for the winter of 2026/2027: we're raising 100,000 Kč, of which roughly 85,000 Kč goes to hay and straw and the rest to transport." }) },
